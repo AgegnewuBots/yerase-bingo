@@ -1,0 +1,60 @@
+{
+  "users": {
+    "1234567890": {
+      "user_id": "1234567890",
+      "first_name": "Player 7890",
+      "username": "@player_7890",
+      "phone": "1234567890",
+      "password": "",
+      "play_balance": 50,
+      "main_balance": 250,
+      "games_played": 0,
+      "games_won": 0,
+      "total_won": 0,
+      "invited": 0,
+      "is_vip": false,
+      "current_streak": 0,
+      "highest_streak": 0,
+      "status": "active",
+      "ban_reason": "",
+      "created_at": "2026-10-24T04:53:07.508Z"
+    },
+    "test_player_01": {
+      "user_id": "test_player_01",
+      "first_name": "Player r_01",
+      "username": "@player_r_01",
+      "phone": "test_player_01",
+      "password": "",
+      "play_balance": 50,
+      "main_balance": 350,
+      "games_played": 0,
+      "games_won": 0,
+      "total_won": 0,
+      "invited": 0,
+      "is_vip": false,
+      "current_streak": 0,
+      "highest_streak": 0,
+      "status": "active",
+      "ban_reason": "",
+      "created_at": "2026-10-24T04:59:31.542Z"
+    }
+  },
+  "transactions": {
+    "dep_mvlxj49sqhlgf": {
+      "id": "dep_mvlxj49sqhlgf",
+      "user_id": "test_player_01",
+      "type": "deposit",
+      "amount": 100,
+      "ref_phone": "0911223344",
+      "status": "Completed",
+      "time": "2026-10-24T04:59:31.552Z"
+    }
+  },
+  "game_history": {},
+  "system_settings": {
+    "maintenance": false,
+    "min_withdraw": 150,
+    "bot_link": "https://t.me/yerase_bingo_bot",
+    "support_link": "https://t.me/one_day_82"
+  }
+}

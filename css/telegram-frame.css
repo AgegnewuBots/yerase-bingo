@@ -1,0 +1,105 @@
+/* ==========================================================================
+   Telegram Mini App Simulator Frame Mode
+   ========================================================================== */
+
+.telegram-frame-wrapper {
+  display: none;
+}
+
+body.telegram-sim-active {
+  background: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+body.telegram-sim-active .app-container {
+  width: 100%;
+  max-width: 420px;
+  height: 860px;
+  max-height: 94vh;
+  background: var(--bg-deep);
+  border: 12px solid #1E232F;
+  border-radius: 44px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  box-shadow: 0 25px 70px rgba(0, 0, 0, 0.9), 0 0 40px rgba(0, 229, 255, 0.2);
+  padding: 12px 14px 28px;
+  position: relative;
+}
+
+/* Telegram Simulated Top Navigation Bar */
+.telegram-sim-header {
+  display: none;
+}
+
+body.telegram-sim-active .telegram-sim-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 12px 14px;
+  border-bottom: 1px solid var(--border-subtle);
+  margin-bottom: 12px;
+}
+
+.telegram-bot-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.telegram-bot-avatar {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: var(--gold-gradient);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 900;
+  color: #000;
+  font-size: 14px;
+}
+
+.telegram-bot-names h5 {
+  font-size: 13px;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.telegram-verified-icon {
+  color: #0088CC;
+  font-size: 12px;
+}
+
+.telegram-bot-names span {
+  font-size: 10px;
+  color: var(--text-muted);
+}
+
+.telegram-controls {
+  display: flex;
+  gap: 8px;
+  font-size: 16px;
+  color: var(--text-secondary);
+}
+
+body.telegram-sim-active .main-header {
+  padding: 8px 12px;
+  margin-bottom: 14px;
+}
+
+body.telegram-sim-active .brand-titles h1 {
+  font-size: 18px;
+}
+
+body.telegram-sim-active .game-arena-grid {
+  grid-template-columns: 1fr;
+}
+
+body.telegram-sim-active .activity-panel {
+  height: 320px;
+}
