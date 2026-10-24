@@ -26,8 +26,8 @@ except ImportError:
 # Replace with your Telegram Bot Token from @BotFather
 BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN", "YOUR_TELEGRAM_BOT_TOKEN_HERE")
 
-# Replace with your deployed WebApp URL (or local ngrok HTTPS URL for testing)
-WEBAPP_URL = os.getenv("BINGO_WEBAPP_URL", "http://localhost:3000/")
+# Replace with your deployed WebApp URL
+WEBAPP_URL = os.getenv("BINGO_WEBAPP_URL", "https://yerase-bingo.onrender.com/")
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     user_name = update.effective_user.first_name if update.effective_user else "ተጫዋች"
