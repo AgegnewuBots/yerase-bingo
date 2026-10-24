@@ -1295,6 +1295,391 @@ button:active, .card-cell:active, .cc:active, .nav-btn:active {
   text-shadow: 0 0 12px rgba(56, 189, 248, 0.8) !important;
 }
 
+
+/* ============================================================================
+   ADVANCED TELEGRAM MINI APP PRO CASINO DESIGN SYSTEM
+   ============================================================================ */
+
+:root {
+  --topbar-height: 64px;
+  --bottomnav-height: 66px;
+  --silver-glow: 0 0 20px rgba(226, 232, 240, 0.4);
+  --gold-glow: 0 0 24px rgba(251, 191, 36, 0.45);
+}
+
+/* Telegram Mini App & Responsive Body */
+body {
+  font-family: 'Outfit', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
+  background: var(--bg) !important;
+  color: var(--text) !important;
+  overflow-x: hidden !important;
+  min-height: 100vh !important;
+  -webkit-touch-callout: none !important;
+  -webkit-font-smoothing: antialiased !important;
+}
+
+.app {
+  max-width: 540px !important;
+  width: 100% !important;
+  margin: 0 auto !important;
+  min-height: 100vh !important;
+  display: flex !important;
+  flex-direction: column !important;
+  position: relative !important;
+  padding-top: calc(var(--topbar-height) + 12px) !important;
+  padding-bottom: calc(var(--bottomnav-height) + 18px) !important;
+  box-sizing: border-box !important;
+}
+
+.app.in-game-mode {
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+/* FIXED TOP BAR - Anchored Permanently */
+.home-topbar-card {
+  position: fixed !important;
+  top: 0 !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+  width: 100% !important;
+  max-width: 540px !important;
+  height: var(--topbar-height) !important;
+  margin: 0 auto !important;
+  z-index: 1000 !important;
+  background: rgba(11, 15, 25, 0.94) !important;
+  backdrop-filter: blur(24px) !important;
+  -webkit-backdrop-filter: blur(24px) !important;
+  border-bottom: 1.5px solid rgba(226, 232, 240, 0.2) !important;
+  border-radius: 0 0 20px 20px !important;
+  padding: 8px 14px !important;
+  padding-top: max(8px, env(safe-area-inset-top)) !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.6) !important;
+  box-sizing: border-box !important;
+}
+
+/* FIXED BOTTOM NAV - Anchored Permanently */
+.bottom-nav {
+  position: fixed !important;
+  bottom: 0 !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+  width: 100% !important;
+  max-width: 540px !important;
+  margin: 0 auto !important;
+  height: var(--bottomnav-height) !important;
+  background: rgba(11, 15, 25, 0.96) !important;
+  backdrop-filter: blur(25px) !important;
+  -webkit-backdrop-filter: blur(25px) !important;
+  border-top: 1.5px solid rgba(226, 232, 240, 0.22) !important;
+  border-left: 1px solid rgba(226, 232, 240, 0.12) !important;
+  border-right: 1px solid rgba(226, 232, 240, 0.12) !important;
+  border-radius: 24px 24px 0 0 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-around !important;
+  z-index: 1000 !important;
+  padding: 4px 12px max(8px, env(safe-area-inset-bottom)) !important;
+  box-shadow: 0 -8px 32px rgba(0, 0, 0, 0.8), 0 0 25px rgba(226, 232, 240, 0.08) !important;
+  box-sizing: border-box !important;
+}
+
+@media (max-width: 380px) {
+  .home-user-name { max-width: 80px !important; font-size: 11.5px !important; }
+  .home-wallet-pill { padding: 4px 7px !important; gap: 5px !important; }
+  #home-bal-display { font-size: 11.5px !important; }
+  .home-role-btn { padding: 4px 6px !important; }
+  .home-avatar-container, .home-avatar-img, .home-avatar-letter { width: 34px !important; height: 34px !important; font-size: 14px !important; }
+}
+
+.nav-btn {
+  flex: 1 !important;
+  height: 100% !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  background: transparent !important;
+  border: none !important;
+  color: #64748B !important;
+  cursor: pointer !important;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  padding: 4px 0 !important;
+  gap: 3px !important;
+}
+
+.nav-btn .nav-icon {
+  font-size: 18px !important;
+  transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), color 0.2s ease !important;
+}
+
+.nav-btn .nav-text {
+  font-size: 10.5px !important;
+  font-weight: 800 !important;
+  letter-spacing: 0.4px !important;
+  text-transform: uppercase !important;
+}
+
+.nav-btn.active {
+  color: #FFFFFF !important;
+}
+
+.nav-btn.active .nav-icon {
+  color: #38BDF8 !important;
+  transform: translateY(-2px) scale(1.15) !important;
+  filter: drop-shadow(0 0 8px rgba(56, 189, 248, 0.7)) !important;
+}
+
+.nav-btn.active .nav-text {
+  color: #38BDF8 !important;
+}
+
+/* SCREEN CONTAINER & BUTTERY SMOOTH TRANSITIONS */
+.screen {
+  flex: 1 !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+  padding: 4px 12px 16px !important;
+  animation: screenFadeIn 0.22s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+@keyframes screenFadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* HERO BRANDING IN STAKE SCREEN */
+.stake-hero-brand {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 12px auto 18px;
+  text-align: center;
+}
+
+.stake-emblem-wrap {
+  position: relative;
+  width: 82px;
+  height: 82px;
+  margin-bottom: 10px;
+}
+
+.stake-emblem-img {
+  width: 82px;
+  height: 82px;
+  border-radius: 50%;
+  border: 2px solid rgba(226, 232, 240, 0.7);
+  box-shadow: 0 0 24px rgba(226, 232, 240, 0.35), 0 0 10px rgba(255, 255, 255, 0.5);
+  display: block;
+}
+
+.stake-brand-title {
+  font-size: 26px;
+  font-weight: 900;
+  letter-spacing: 1px;
+  color: #FFFFFF;
+  text-shadow: 0 2px 14px rgba(255, 255, 255, 0.3);
+  margin-bottom: 2px;
+}
+
+.stake-brand-amharic {
+  font-size: 14px;
+  font-weight: 800;
+  color: #38BDF8;
+  letter-spacing: 0.5px;
+  margin-bottom: 4px;
+}
+
+.stake-brand-tagline {
+  font-size: 12px;
+  color: var(--muted);
+  font-weight: 600;
+}
+
+/* THE 2 FLAGSHIP ROOMS - FOCUSED, BOLD, PRO */
+.stake-box {
+  width: 100% !important;
+  max-width: 860px !important;
+  margin: 0 auto 15px !important;
+  display: grid !important;
+  grid-template-columns: 1fr 1fr !important;
+  gap: 16px !important;
+}
+
+@media (max-width: 640px) {
+  .stake-box {
+    grid-template-columns: 1fr !important;
+    gap: 12px !important;
+  }
+}
+
+.stake-card-room {
+  background: linear-gradient(145deg, rgba(25, 34, 52, 0.9) 0%, rgba(13, 18, 30, 0.98) 100%) !important;
+  border: 1.5px solid rgba(226, 232, 240, 0.3) !important;
+  border-radius: 20px !important;
+  padding: 20px 18px !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: space-between !important;
+  text-align: center !important;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.6) !important;
+  cursor: pointer !important;
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.2s ease, box-shadow 0.2s ease !important;
+}
+
+.stake-card-room:hover {
+  transform: translateY(-4px) !important;
+  border-color: rgba(226, 232, 240, 0.7) !important;
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.8), 0 0 25px rgba(226, 232, 240, 0.2) !important;
+}
+
+.stake-card-room:active {
+  transform: scale(0.98) !important;
+}
+
+.stake-card-room.silver-room {
+  border-color: rgba(226, 232, 240, 0.35) !important;
+}
+
+.stake-card-room.gold-room {
+  border-color: rgba(251, 191, 36, 0.45) !important;
+  background: linear-gradient(145deg, rgba(38, 32, 18, 0.9) 0%, rgba(18, 15, 10, 0.98) 100%) !important;
+}
+
+.stake-card-room.gold-room:hover {
+  border-color: #FBBF24 !important;
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.8), 0 0 30px rgba(251, 191, 36, 0.35) !important;
+}
+
+.stake-room-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.stake-room-tag {
+  font-size: 11px;
+  font-weight: 800;
+  padding: 4px 10px;
+  border-radius: 99px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.silver-tag {
+  background: rgba(226, 232, 240, 0.15);
+  color: #FFFFFF;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.gold-tag {
+  background: rgba(251, 191, 36, 0.15);
+  color: #FBBF24;
+  border: 1px solid rgba(251, 191, 36, 0.4);
+}
+
+.stake-room-players {
+  font-size: 12px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.silver-players { color: #38BDF8; }
+.gold-players { color: #FBBF24; }
+
+.stake-room-price {
+  margin-bottom: 12px;
+}
+
+.stake-price-num {
+  font-size: 38px;
+  font-weight: 900;
+  line-height: 1;
+  color: #FFFFFF;
+  letter-spacing: -0.5px;
+}
+
+.stake-price-num.gold-num {
+  color: #FBBF24;
+  text-shadow: 0 0 18px rgba(251, 191, 36, 0.4);
+}
+
+.stake-price-cur {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--muted);
+  margin-left: 4px;
+}
+
+.stake-room-pot-box {
+  background: rgba(0, 0, 0, 0.45);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 14px;
+  padding: 10px;
+  margin-bottom: 16px;
+}
+
+.gold-pot-box {
+  border-color: rgba(251, 191, 36, 0.25);
+}
+
+.stake-pot-lbl {
+  font-size: 10px;
+  color: var(--muted);
+  text-transform: uppercase;
+  font-weight: 800;
+  letter-spacing: 0.6px;
+}
+
+.stake-pot-val {
+  font-size: 22px;
+  font-weight: 900;
+  color: #CBD5E1;
+  text-shadow: 0 0 10px rgba(226, 232, 240, 0.5);
+  margin-top: 2px;
+}
+
+.stake-pot-val.gold-pot {
+  color: #FBBF24;
+  text-shadow: 0 0 12px rgba(251, 191, 36, 0.6);
+}
+
+.stake-cta-btn {
+  width: 100%;
+  padding: 14px;
+  border-radius: 14px;
+  font-size: 14px;
+  font-weight: 900;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  cursor: pointer;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.silver-cta {
+  background: linear-gradient(135deg, #FFFFFF 0%, #E2E8F0 50%, #94A3B8 100%);
+  color: #0B0F19;
+  box-shadow: 0 4px 18px rgba(226, 232, 240, 0.4);
+}
+
+.gold-cta {
+  background: linear-gradient(135deg, #F59E0B 0%, #D97706 100%);
+  color: #FFFFFF;
+  box-shadow: 0 4px 18px rgba(245, 158, 11, 0.45);
+}
+
 </style>
 <script src="/socket.io/socket.io.js"></script>
 </head>
@@ -1323,97 +1708,105 @@ button:active, .card-cell:active, .cc:active, .nav-btn:active {
     </div>
   </div>
 
-  <div class="screen active" id="screen-stake">
-    <div class="stake-container">
-      <!-- Ultra-Responsive Redesigned Homepage Top Bar -->
-      <div class="home-topbar-card" id="home-topbar-card">
-        <div class="home-user-profile" onclick="navTo('profile')" title="View Profile">
-          <div class="home-avatar-container">
-            <img id="home-avatar-img" src="" class="home-avatar-img" style="display:none;" alt="Profile Picture">
-            <div id="home-avatar-letter" class="home-avatar-letter">?</div>
-            <div class="home-online-dot"></div>
+      <!-- Permanent Fixed Top Bar across screens -->
+    <header class="home-topbar-card" id="home-topbar-card">
+      <div class="home-user-profile" onclick="navTo('profile')" title="View Profile">
+        <div class="home-avatar-container">
+          <img id="home-avatar-img" src="" class="home-avatar-img" style="display:none;" alt="Profile Picture">
+          <div id="home-avatar-letter" class="home-avatar-letter">?</div>
+          <div class="home-online-dot"></div>
+        </div>
+        <div class="home-user-info">
+          <div class="home-user-name-row">
+            <span id="home-user-name" class="home-user-name">Player</span>
+            <span id="home-user-nickname" class="home-user-nickname">@nickname</span>
           </div>
-          <div class="home-user-info">
-            <div class="home-user-name-row">
-              <span id="home-user-name" class="home-user-name">Player</span>
-              <span id="home-user-nickname" class="home-user-nickname">@nickname</span>
-            </div>
-            <div class="home-user-id-row">
-              <span>ID: <strong id="home-user-id-val" style="color:#fff;">—</strong></span>
-              <button class="home-copy-id-btn" onclick="event.stopPropagation(); copyUserId();" title="Copy ID">
-                <i class="fa-solid fa-copy"></i>
-              </button>
-            </div>
+          <div class="home-user-id-row">
+            <span>ID: <strong id="home-user-id-val" style="color:#fff;"></strong></span>
+            <button class="home-copy-id-btn" onclick="event.stopPropagation(); copyUserId();" title="Copy ID">
+              <i class="fa-solid fa-copy"></i>
+            </button>
           </div>
         </div>
+      </div>
 
-        
-        <div class="home-wallet-pill" onclick="navTo('wallet')" style="display:flex; align-items:center; gap:8px; background:rgba(255,255,255,0.06); border:1px solid rgba(226,232,240,0.25); border-radius:12px; padding:6px 12px; cursor:pointer;" title="View Wallet">
-          <i class="fa-solid fa-wallet" style="color:var(--green); font-size:14px;"></i>
-          <span style="font-size:13px; font-weight:800; color:#fff;" id="home-bal-display">250.00 Br</span>
-          <button onclick="event.stopPropagation(); openClientDepositModal();" style="background:linear-gradient(135deg, #10b981 0%, #059669 100%); color:#fff; border:none; border-radius:8px; padding:4px 8px; font-size:11px; font-weight:800; cursor:pointer; display:flex; align-items:center; gap:4px; box-shadow:0 2px 8px rgba(16,185,129,0.3);" title="Deposit">
-            <i class="fa-solid fa-plus"></i>
-          </button>
-        </div>
-
-        <button class="home-role-btn" onclick="openRoleModal()" id="home-role-btn" title="User Role Information">
-          <i class="fa-solid fa-user-shield" style="color:var(--orange);"></i>
-          <span>ROLE:</span>
-          <span class="home-role-badge-tag" id="home-user-role-badge">PLAYER</span>
+      <div class="home-wallet-pill" onclick="navTo('wallet')" style="display:flex; align-items:center; gap:8px; background:rgba(255,255,255,0.06); border:1px solid rgba(226,232,240,0.25); border-radius:12px; padding:6px 12px; cursor:pointer;" title="View Wallet">
+        <i class="fa-solid fa-wallet" style="color:var(--green); font-size:14px;"></i>
+        <span style="font-size:13px; font-weight:800; color:#fff;" id="home-bal-display">250.00 Br</span>
+        <button onclick="event.stopPropagation(); openClientDepositModal();" style="background:linear-gradient(135deg, #10b981 0%, #059669 100%); color:#fff; border:none; border-radius:8px; padding:4px 8px; font-size:11px; font-weight:800; cursor:pointer; display:flex; align-items:center; gap:4px; box-shadow:0 2px 8px rgba(16,185,129,0.3);" title="Deposit">
+          <i class="fa-solid fa-plus"></i>
         </button>
       </div>
 
-      <!-- Shifted Down Title & Buttons shown for Web Users -->
-      <img id="stake-center-logo-img" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' stop-color='%23FFFFFF'/%3E%3Cstop offset='50%25' stop-color='%23CBD5E1'/%3E%3Cstop offset='100%25' stop-color='%2364748B'/%3E%3C/linearGradient%3E%3C/defs%3E%3Ccircle cx='50' cy='50' r='46' fill='url(%23g)' stroke='%23FFFFFF' stroke-width='3'/%3E%3Ccircle cx='50' cy='50' r='38' fill='%230B0F19'/%3E%3Ctext x='50' y='63' font-size='42' font-family='sans-serif' font-weight='900' fill='%23FFFFFF' text-anchor='middle'%3E%E1%8B%A8%3C/text%3E%3C/svg%3E" style="width: 80px; height: 80px; border-radius: 50%; border: 2.5px solid var(--orange); object-fit: cover; margin-bottom: 12px; box-shadow: 0 0 15px rgba(255,107,0,0.4);" alt="Yerase Bingo Logo">
-      <div id="stake-center-logo-title" class="stake-logo">YERASE BINGO</div>
-      <div id="stake-center-logo-sub" class="stake-sub" style="font-size:14px; color:var(--muted);">Choose Your Stake & Win Big!</div>
+      <button class="home-role-btn" onclick="openRoleModal()" id="home-role-btn" title="User Role Information">
+        <i class="fa-solid fa-user-shield" style="color:var(--orange);"></i>
+        <span>ROLE:</span>
+        <span class="home-role-badge-tag" id="home-user-role-badge">PLAYER</span>
+      </button>
+    </header>
+
+  <div class="screen active" id="screen-stake">
+    <div class="stake-container">
+      <!-- Centered Pro Hero Branding -->
+      <div class="stake-hero-brand">
+        <div class="stake-emblem-wrap">
+          <img id="stake-center-logo-img" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' stop-color='%23FFFFFF'/%3E%3Cstop offset='50%25' stop-color='%23CBD5E1'/%3E%3Cstop offset='100%25' stop-color='%2364748B'/%3E%3C/linearGradient%3E%3C/defs%3E%3Ccircle cx='50' cy='50' r='46' fill='url(%23g)' stroke='%23FFFFFF' stroke-width='3'/%3E%3Ccircle cx='50' cy='50' r='38' fill='%230B0F19'/%3E%3Ctext x='50' y='63' font-size='42' font-family='sans-serif' font-weight='900' fill='%23FFFFFF' text-anchor='middle'%3E%E1%8B%A8%3C/text%3E%3C/svg%3E" class="stake-emblem-img" alt="Yerase Bingo">
+        </div>
+        <div class="stake-brand-title">YERASE BINGO</div>
+        <div class="stake-brand-amharic">የራሴ ቢንጎ • የቀጥታ ጨዋታ</div>
+        <div class="stake-brand-tagline">Choose your room to play & win instantly!</div>
+      </div>
+
+      <!-- The 2 Flagship Rooms: Play 10 Birr and Play 20 Birr -->
       <div class="stake-box">
         <!-- Room 1: 10 Birr Silver Room -->
         <div class="stake-card-room silver-room" onclick="selectStake(10)">
-          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:14px;">
-            <span style="font-size:11px; font-weight:800; background:rgba(226,232,240,0.15); color:#FFFFFF; border:1px solid rgba(255,255,255,0.3); padding:4px 12px; border-radius:99px; text-transform:uppercase; letter-spacing:0.5px;">
-              <i class="fa-solid fa-shield-halved" style="margin-right:4px; color:#CBD5E1;"></i> SILVER ROOM • ሲልቨር
+          <div class="stake-room-top">
+            <span class="stake-room-tag silver-tag">
+              <i class="fa-solid fa-shield-halved"></i> SILVER • ሲልቨር
             </span>
-            <span style="font-size:12px; color:var(--blue); font-weight:700;"><i class="fa-solid fa-users"></i> <span id="room-10-players">0</span> Players Active</span>
+            <span class="stake-room-players silver-players">
+              <i class="fa-solid fa-users"></i> <span id="room-10-players">1</span> Active
+            </span>
           </div>
-          <h3 style="font-size:26px; font-weight:900; color:#FFFFFF; margin-bottom:4px; letter-spacing:0.5px;">10 ETB (ብር)</h3>
-          <div style="font-size:12px; color:var(--muted); margin-bottom:16px;">Entry Stake / የካርቴላ መግቢያ • Any 1 Line</div>
-          <div style="background:rgba(0,0,0,0.45); border:1px solid rgba(255,255,255,0.12); border-radius:14px; padding:12px; margin-bottom:18px;">
-            <div style="font-size:10px; color:var(--muted); text-transform:uppercase; font-weight:800; letter-spacing:0.8px;">ESTIMATED PRIZE POOL</div>
-            <div id="room-10-pot" style="font-size:24px; font-weight:900; color:#CBD5E1; text-shadow:0 0 12px rgba(226,232,240,0.5);">0 ETB</div>
+          <div class="stake-room-price">
+            <span class="stake-price-num">10</span>
+            <span class="stake-price-cur">ETB (ብር)</span>
           </div>
-          <button class="stake-btn s10" onclick="event.stopPropagation(); selectStake(10)" style="width:100%; padding:14px; border-radius:12px; font-size:14px; font-weight:900; cursor:pointer; background:linear-gradient(135deg, #FFFFFF 0%, #CBD5E1 50%, #94A3B8 100%); color:#0B0F19; border:none; box-shadow:0 4px 16px rgba(226,232,240,0.35); text-transform:uppercase;">
-            <i class="fa-solid fa-play" style="margin-right:6px;"></i> PLAY 10 BIRR (ክፍል ግባ)
+          <div class="stake-room-pot-box">
+            <div class="stake-pot-lbl">ESTIMATED PRIZE POOL</div>
+            <div class="stake-pot-val silver-pot" id="room-10-pot">3,400 ETB</div>
+          </div>
+          <button class="stake-cta-btn silver-cta" onclick="event.stopPropagation(); selectStake(10)">
+            <i class="fa-solid fa-play"></i> PLAY 10 BIRR (ክፍል ግባ)
           </button>
         </div>
 
         <!-- Room 2: 20 Birr VIP Gold Room -->
         <div class="stake-card-room gold-room" onclick="selectStake(20)">
-          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:14px;">
-            <span style="font-size:11px; font-weight:800; background:rgba(251,191,36,0.15); color:#FBBF24; border:1px solid rgba(251,191,36,0.4); padding:4px 12px; border-radius:99px; text-transform:uppercase; letter-spacing:0.5px;">
-              <i class="fa-solid fa-crown" style="margin-right:4px;"></i> VIP GOLD • ቪአይፒ ወርቅ
+          <div class="stake-room-top">
+            <span class="stake-room-tag gold-tag">
+              <i class="fa-solid fa-crown"></i> VIP GOLD • ቪአይፒ ወርቅ
             </span>
-            <span style="font-size:12px; color:#FBBF24; font-weight:700;"><i class="fa-solid fa-users"></i> <span id="room-20-players">0</span> Players Active</span>
+            <span class="stake-room-players gold-players">
+              <i class="fa-solid fa-crown"></i> <span id="room-20-players">1</span> Active
+            </span>
           </div>
-          <h3 style="font-size:26px; font-weight:900; color:#FBBF24; margin-bottom:4px; letter-spacing:0.5px;">20 ETB (ብር)</h3>
-          <div style="font-size:12px; color:var(--muted); margin-bottom:16px;">VIP Entry Stake / የቪአይፒ መግቢያ • Any 1 Line</div>
-          <div style="background:rgba(0,0,0,0.45); border:1px solid rgba(251,191,36,0.3); border-radius:14px; padding:12px; margin-bottom:18px;">
-            <div style="font-size:10px; color:var(--muted); text-transform:uppercase; font-weight:800; letter-spacing:0.8px;">ESTIMATED PRIZE POOL</div>
-            <div id="room-20-pot" style="font-size:24px; font-weight:900; color:#FBBF24; text-shadow:0 0 15px rgba(251,191,36,0.6);">0 ETB</div>
+          <div class="stake-room-price">
+            <span class="stake-price-num gold-num">20</span>
+            <span class="stake-price-cur gold-cur">ETB (ብር)</span>
           </div>
-          <button class="stake-btn s20" onclick="event.stopPropagation(); selectStake(20)" style="width:100%; padding:14px; border-radius:12px; font-size:14px; font-weight:900; cursor:pointer; background:linear-gradient(135deg, #F59E0B 0%, #D97706 100%); color:#FFFFFF; border:none; box-shadow:0 4px 16px rgba(245,158,11,0.4); text-transform:uppercase;">
-            <i class="fa-solid fa-crown" style="margin-right:6px;"></i> PLAY 20 BIRR VIP (ክፍል ግባ)
+          <div class="stake-room-pot-box gold-pot-box">
+            <div class="stake-pot-lbl">ESTIMATED PRIZE POOL</div>
+            <div class="stake-pot-val gold-pot" id="room-20-pot">6,800 ETB</div>
+          </div>
+          <button class="stake-cta-btn gold-cta" onclick="event.stopPropagation(); selectStake(20)">
+            <i class="fa-solid fa-crown"></i> PLAY 20 BIRR VIP (ክፍል ግባ)
           </button>
         </div>
       </div>
-      <div id="stake-footer-msg" style="margin-top:25px; text-align:center; font-size:13px; color:var(--muted); line-height:1.5;">
-        Thanks for choosing Yerase Bingo! <i class="fa-solid fa-gem" style="color:var(--blue); font-size:11px;"></i> <i class="fa-solid fa-clover" style="color:var(--green); font-size:11px;"></i><br>
-        የራሴ ቢንጎን ስለመረጡ እናመሰግናለን!
-      </div>
     </div>
-  </div>
-
-  <div class="rules-screen" id="rules-screen">
+  </div><div class="rules-screen" id="rules-screen">
     <div class="rules-header">
       <button class="rules-back" onclick="closeRules()"><i class="fa-solid fa-arrow-left"></i></button>
       <div class="rules-header-title" id="rules-header-title">Rules & Info</div>
@@ -1513,9 +1906,10 @@ button:active, .card-cell:active, .cc:active, .nav-btn:active {
   </div>
   
   <div class="screen" id="screen-game">
-    <div id="spectator-banner" style="display:none; background: linear-gradient(90deg, #d84315 0%, #ff8f00 100%); color: #fff; padding: 8px 12px; font-size: 13px; font-weight: 700; text-align: center; border-bottom: 1px solid rgba(255,255,255,0.1); flex-shrink: 0; box-shadow: 0 4px 12px rgba(216,67,21,0.3); z-index: 50;">
-      <i class="fa-solid fa-circle-exclamation" style="margin-right: 6px;"></i>
-      <span>You didn't join this game. Watching in background... (ይህን ጨዋታ አልተቀላቀሉም። በጀርባ እየተመለከቱ ነው...)</span>
+    <div id="spectator-banner" style="display:none; background: linear-gradient(90deg, #d84315 0%, #ff8f00 100%); color: #fff; padding: 8px 12px; font-size: 13px; font-weight: 700; text-align: center; border-bottom: 1px solid rgba(255,255,255,0.1); flex-shrink: 0; box-shadow: 0 4px 12px rgba(216,67,21,0.3); z-index: 50; align-items:center; justify-content:center; gap:8px;">
+      <i class="fa-solid fa-circle-exclamation"></i>
+      <span>You didn't join this game. Watching live... (ይህን ጨዋታ አልተቀላቀሉም። በጀርባ እየተመለከቱ ነው...)</span>
+      <button onclick="navTo('home')" style="background:rgba(0,0,0,0.35); border:1px solid rgba(255,255,255,0.7); color:#fff; border-radius:8px; padding:4px 10px; font-size:11px; font-weight:800; cursor:pointer; display:inline-flex; align-items:center; gap:5px; margin-left:6px; transition:transform 0.15s ease;"><i class="fa-solid fa-arrow-left"></i> LOBBY (ውጣ)</button>
     </div>
     <div class="topbar">
       <div class="stat-box"><div class="stat-label" id="lbl-game-active">GAME ID</div><div class="stat-val yellow" id="s-game-id">—</div></div>
@@ -1695,6 +2089,34 @@ button:active, .card-cell:active, .cc:active, .nav-btn:active {
           </div>
         </a>
 
+        <!-- Game Rules & Instructions -->
+        <div class="setting-item" onclick="openRules()" style="background:var(--bg2); border-radius:12px; padding:12px 16px; border:1px solid rgba(255,255,255,0.06); display:flex; align-items:center; justify-content:space-between; cursor:pointer;">
+          <div style="display:flex; align-items:center; gap:12px;">
+            <div style="width:36px; height:36px; border-radius:10px; background:rgba(251,191,36,0.1); border:1px solid var(--yellow); display:flex; align-items:center; justify-content:center; color:var(--yellow); font-size:16px;">
+              <i class="fa-solid fa-book-open"></i>
+            </div>
+            <div>
+              <div style="font-size:14px; font-weight:700; color:var(--text);" id="lbl-prof-rules">Game Rules & How to Play</div>
+              <div style="font-size:11px; color:var(--muted);" id="lbl-prof-rules-desc">የጨዋታው ሕጎች እና የአሸናፊነት መመሪያ</div>
+            </div>
+          </div>
+          <i class="fa-solid fa-chevron-right" style="color:var(--muted); font-size:12px;"></i>
+        </div>
+
+        <!-- Change Password setting -->
+        <div class="setting-item" onclick="openChangePasswordModal()" style="background:var(--bg2); border-radius:12px; padding:12px 16px; border:1px solid rgba(255,255,255,0.06); display:flex; align-items:center; justify-content:space-between; cursor:pointer;">
+          <div style="display:flex; align-items:center; gap:12px;">
+            <div style="width:36px; height:36px; border-radius:10px; background:rgba(226,232,240,0.1); border:1px solid var(--silver); display:flex; align-items:center; justify-content:center; color:var(--silver); font-size:16px;">
+              <i class="fa-solid fa-key"></i>
+            </div>
+            <div>
+              <div style="font-size:14px; font-weight:700; color:var(--text);" id="lbl-prof-security">Security & Password</div>
+              <div style="font-size:11px; color:var(--muted);" id="lbl-prof-security-desc">Update or protect your account password</div>
+            </div>
+          </div>
+          <i class="fa-solid fa-chevron-right" style="color:var(--muted); font-size:12px;"></i>
+        </div>
+
         <!-- Logout setting -->
         <div id="logout-setting-item" class="setting-item" style="background:var(--bg2); border-radius:12px; padding:12px 16px; border:1px solid rgba(255,255,255,0.06); display:none; align-items:center; justify-content:space-between; cursor:pointer;" onclick="doLogout()">
           <div style="display:flex; align-items:center; gap:12px;">
@@ -1848,11 +2270,24 @@ button:active, .card-cell:active, .cc:active, .nav-btn:active {
     </div>
   </div>
   
-  <nav class="bottom-nav" style="display: none;">
-    <button class="nav-btn active" id="nav-home" onclick="navTo('home')"><span class="nav-icon"><i class="fa-solid fa-house"></i></span><span class="nav-text" id="lbl-nav-home">HOME</span></button>
-    <button class="nav-btn" id="nav-winners" onclick="navTo('winners')"><span class="nav-icon"><i class="fa-solid fa-trophy"></i></span><span class="nav-text" id="lbl-nav-winners">WINNERS</span></button>
-    <button class="nav-btn" id="nav-wallet" onclick="navTo('wallet')"><span class="nav-icon"><i class="fa-solid fa-wallet"></i></span><span class="nav-text" id="lbl-nav-wallet">WALLET</span></button>
-    <button class="nav-btn" id="nav-profile" onclick="navTo('profile')"><span class="nav-icon"><i class="fa-solid fa-user"></i></span><span class="nav-text" id="lbl-nav-profile">PROFILE</span></button>
+    <!-- Fixed Bottom Navigation Bar -->
+  <nav class="bottom-nav" id="bottom-nav">
+    <button class="nav-btn active" id="nav-home" onclick="navTo('home')">
+      <span class="nav-icon"><i class="fa-solid fa-house"></i></span>
+      <span class="nav-text" id="lbl-nav-home">ROOMS</span>
+    </button>
+    <button class="nav-btn" id="nav-winners" onclick="navTo('winners')">
+      <span class="nav-icon"><i class="fa-solid fa-trophy"></i></span>
+      <span class="nav-text" id="lbl-nav-winners">WINNERS</span>
+    </button>
+    <button class="nav-btn" id="nav-wallet" onclick="navTo('wallet')">
+      <span class="nav-icon"><i class="fa-solid fa-wallet"></i></span>
+      <span class="nav-text" id="lbl-nav-wallet">WALLET</span>
+    </button>
+    <button class="nav-btn" id="nav-profile" onclick="navTo('profile')">
+      <span class="nav-icon"><i class="fa-solid fa-user"></i></span>
+      <span class="nav-text" id="lbl-nav-profile">PROFILE</span>
+    </button>
   </nav>
 
   <!-- Change Password Modal -->
@@ -2185,7 +2620,38 @@ function getUserDisplayName() {
   return 'Player ' + uid;
 }
 
+
+// Telegram WebApp Haptic & Viewport Integration
+function triggerHaptic(type) {
+  try {
+    if (window.Telegram && window.Telegram.WebApp && window.Telegram.WebApp.HapticFeedback) {
+      var hf = window.Telegram.WebApp.HapticFeedback;
+      if (type === 'impact' || type === 'heavy') hf.impactOccurred('heavy');
+      else if (type === 'medium') hf.impactOccurred('medium');
+      else if (type === 'success') hf.notificationOccurred('success');
+      else if (type === 'warning') hf.notificationOccurred('warning');
+      else if (type === 'selection') hf.selectionChanged();
+      else hf.impactOccurred('light');
+    }
+  } catch(e) {}
+}
+
+function initTelegramTMA() {
+  if (window.Telegram && window.Telegram.WebApp) {
+    try {
+      var wa = window.Telegram.WebApp;
+      wa.ready();
+      wa.expand();
+      if (wa.setHeaderColor) wa.setHeaderColor('#0b0f19');
+      if (wa.setBackgroundColor) wa.setBackgroundColor('#080c14');
+      if (wa.enableClosingConfirmation) wa.enableClosingConfirmation();
+    } catch(e) {}
+  }
+}
+
 function initTelegram() {
+  initTelegramTMA();
+
   try {
     if (window.Telegram && window.Telegram.WebApp && window.Telegram.WebApp.initDataUnsafe && window.Telegram.WebApp.initDataUnsafe.user) {
       var wa = window.Telegram.WebApp;
@@ -2908,6 +3374,7 @@ function updatePlayersDisplay(){
 }
 
 function selectStake(stake) {
+  triggerHaptic('medium');
   if (soundOn) sfx.playClick();
   currentStake = stake;
   currentRoom = 'stake_' + stake;
@@ -3289,11 +3756,6 @@ function openClientWithdrawModal() {
 function closeClientWithdrawModal() {
   if (soundOn) sfx.playClick();
   document.getElementById('client-withdraw-modal').classList.remove('active');
-}
-
-// old withdraw removed catch (err) {
-    alert('Server connection error. Please try again.');
-  }
 }
 
 // Client Configuration Receiver
@@ -4621,6 +5083,7 @@ function updateCardStatusBadge() {
 }
 
 async function toggleCard(n) {
+  triggerHaptic('selection');
   if (takenCartelas[n] && takenCartelas[n] !== tgUserId) {
     if (apiAvailable) Telegram.WebApp.showAlert('⚠️ This cartela is already taken by another player! (ይህ ካርቴላ በሌላ ተጫዋች ቀድሞ ተወስዷል!)');
     else alert('⚠️ This cartela is already taken by another player! (ይህ ካርቴላ በሌላ ተጫዋች ቀድሞ ተወስዷል!)');
@@ -5508,25 +5971,36 @@ function sendBrowserNotification(title, body) {
   try {
     new Notification(title, {
       body: body,
-      icon: 'data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' stop-color='%23FFFFFF'/%3E%3Cstop offset='50%25' stop-color='%23CBD5E1'/%3E%3Cstop offset='100%25' stop-color='%2364748B'/%3E%3C/linearGradient%3E%3C/defs%3E%3Ccircle cx='50' cy='50' r='46' fill='url(%23g)' stroke='%23FFFFFF' stroke-width='3'/%3E%3Ccircle cx='50' cy='50' r='38' fill='%230B0F19'/%3E%3Ctext x='50' y='63' font-size='42' font-family='sans-serif' font-weight='900' fill='%23FFFFFF' text-anchor='middle'%3E%E1%8B%A8%3C/text%3E%3C/svg%3E'
+      icon: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' stop-color='%23FFFFFF'/%3E%3Cstop offset='50%25' stop-color='%23CBD5E1'/%3E%3Cstop offset='100%25' stop-color='%2364748B'/%3E%3C/linearGradient%3E%3C/defs%3E%3Ccircle cx='50' cy='50' r='46' fill='url(%23g)' stroke='%23FFFFFF' stroke-width='3'/%3E%3Ccircle cx='50' cy='50' r='38' fill='%230B0F19'/%3E%3Ctext x='50' y='63' font-size='42' font-family='sans-serif' font-weight='900' fill='%23FFFFFF' text-anchor='middle'%3E%E1%8B%A8%3C/text%3E%3C/svg%3E"
     });
   } catch (e) {
     console.error('Failed to dispatch notification:', e);
   }
 }
 
-function showScreen(id){
-  document.querySelectorAll('.screen').forEach(function(s){s.classList.remove('active');});
+function showScreen(id) {
+  triggerHaptic('selection');
+  document.querySelectorAll('.screen').forEach(function(s) {
+    s.classList.remove('active');
+  });
   var target = document.getElementById(id);
-  if (target) target.classList.add('active');
+  if (target) {
+    target.classList.add('active');
+    window.scrollTo({ top: 0, behavior: 'instant' });
+  }
+
+  var topbar = document.getElementById('home-topbar-card');
+  var nav = document.getElementById('bottom-nav');
+  var appEl = document.querySelector('.app');
   
-  var nav = document.querySelector('.bottom-nav');
-  if (nav) {
-    if (id === 'screen-game' || id === 'screen-winner') {
-      nav.style.display = 'none';
-    } else {
-      nav.style.display = 'flex';
-    }
+  if (id === 'screen-game' || id === 'screen-winner' || id === 'screen-create-password') {
+    if (nav) nav.style.display = 'none';
+    if (topbar) topbar.style.display = 'none';
+    if (appEl) appEl.classList.add('in-game-mode');
+  } else {
+    if (nav) nav.style.display = 'flex';
+    if (topbar) topbar.style.display = 'flex';
+    if (appEl) appEl.classList.remove('in-game-mode');
   }
 }
 
