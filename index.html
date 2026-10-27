@@ -16,22 +16,22 @@
 
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
 :root{
-  --bg:#080C14;--bg2:rgba(22, 29, 44, 0.85);--bg3:#0D121D;
-  --silver:#CBD5E1;--silver-bright:#FFFFFF;--silver-dark:#64748B;
-  --silver-gradient:linear-gradient(135deg, #FFFFFF 0%, #E2E8F0 25%, #94A3B8 50%, #CBD5E1 75%, #F8FAFC 100%);
-  --silver-card:linear-gradient(145deg, rgba(30, 41, 59, 0.75) 0%, rgba(15, 23, 42, 0.95) 100%);
-  --silver-glow:0 0 25px rgba(226, 232, 240, 0.4);
-  --orange:#E2E8F0;
-  --green:#00e676;--blue:#38BDF8;
-  --purple:#C084FC;--pink:#FB7185;--yellow:#FBBF24;
-  --text:#f8fafc;--muted:rgba(248, 250, 252, 0.65);
-  --shadow-glow:0 0 25px rgba(226, 232, 240, 0.35);
-  --glass-border:rgba(226, 232, 240, 0.22);
-  --glass-bg:rgba(18, 24, 38, 0.65);
+  --bg:#090D16;--bg2:rgba(18, 24, 38, 0.88);--bg3:#111726;
+  --silver:#CBD5E1;--silver-bright:#FFFFFF;--silver-mid:#94A3B8;--silver-dark:#64748B;
+  --silver-gradient:linear-gradient(135deg, #FFFFFF 0%, #E2E8F0 50%, #CBD5E1 100%);
+  --silver-card:linear-gradient(145deg, rgba(24, 32, 48, 0.8) 0%, rgba(12, 17, 28, 0.96) 100%);
+  --silver-glow:0 0 16px rgba(226, 232, 240, 0.18);
+  --orange:#CBD5E1;--blue:#CBD5E1;--purple:#CBD5E1;--pink:#CBD5E1;--yellow:#CBD5E1;
+  --green:#10B981;--danger:#EF4444;--gold:#FCD34D;
+  --text:#F8FAFC;--muted:rgba(226, 232, 240, 0.65);
+  --shadow-glow:0 0 20px rgba(226, 232, 240, 0.12);
+  --glass-border:rgba(226, 232, 240, 0.12);
+  --glass-bg:rgba(14, 19, 30, 0.78);
+  --topbar-height:60px;
+  --bottomnav-height:64px;
 }
-body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden;min-height:100vh;}
-body::before{content:'';position:fixed;inset:0;background:radial-gradient(circle at 15% 50%, rgba(255, 107, 0, 0.08), transparent 40%),radial-gradient(circle at 85% 30%, rgba(0, 212, 255, 0.08), transparent 40%),radial-gradient(circle at 50% 80%, rgba(179, 136, 255, 0.05), transparent 50%);z-index:-1;animation:ambientGlow 15s ease-in-out infinite alternate;}
-@keyframes ambientGlow { 0% { transform: scale(1); } 100% { transform: scale(1.1); } }
+body{font-family:'Outfit',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden;min-height:100vh;-webkit-tap-highlight-color:transparent;}
+body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse at 50% 0%, rgba(226, 232, 240, 0.05) 0%, transparent 65%);z-index:-1;pointer-events:none;} 100% { transform: scale(1.1); } }
 @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
 @keyframes rotate { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
 ::-webkit-scrollbar { width: 4px; }
@@ -1428,13 +1428,14 @@ body {
 }
 
 .nav-btn.active .nav-icon {
-  color: #38BDF8 !important;
-  transform: translateY(-2px) scale(1.15) !important;
-  filter: drop-shadow(0 0 8px rgba(56, 189, 248, 0.7)) !important;
+  color: #FFFFFF !important;
+  transform: translateY(-2px) scale(1.12) !important;
+  filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.45)) !important;
 }
 
 .nav-btn.active .nav-text {
-  color: #38BDF8 !important;
+  color: #FFFFFF !important;
+  font-weight: 800 !important;
 }
 
 /* SCREEN CONTAINER & BUTTERY SMOOTH TRANSITIONS */
@@ -1680,6 +1681,28 @@ body {
   box-shadow: 0 4px 18px rgba(245, 158, 11, 0.45);
 }
 
+
+/* Single Unified Brand Icon Box & Micro-Components */
+.setting-icon-box {
+  width: 38px !important;
+  height: 38px !important;
+  border-radius: 11px !important;
+  background: rgba(255, 255, 255, 0.05) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  color: #CBD5E1 !important;
+  font-size: 15px !important;
+  flex-shrink: 0 !important;
+  transition: all 0.15s ease-out !important;
+}
+.setting-item:hover .setting-icon-box {
+  background: rgba(255, 255, 255, 0.09) !important;
+  border-color: rgba(255, 255, 255, 0.2) !important;
+  color: #FFFFFF !important;
+}
+
 </style>
 <script src="/socket.io/socket.io.js"></script>
 </head>
@@ -1713,35 +1736,34 @@ body {
       <div class="home-user-profile" onclick="navTo('profile')" title="View Profile">
         <div class="home-avatar-container">
           <img id="home-avatar-img" src="" class="home-avatar-img" style="display:none;" alt="Profile Picture">
-          <div id="home-avatar-letter" class="home-avatar-letter">?</div>
+          <div id="home-avatar-letter" class="home-avatar-letter" style="background:linear-gradient(135deg, #334155 0%, #1E293B 100%); color:#F8FAFC; border:1.5px solid rgba(226,232,240,0.3); font-weight:800;">?</div>
           <div class="home-online-dot"></div>
         </div>
         <div class="home-user-info">
           <div class="home-user-name-row">
-            <span id="home-user-name" class="home-user-name">Player</span>
-            <span id="home-user-nickname" class="home-user-nickname">@nickname</span>
+            <span id="home-user-name" class="home-user-name" style="color:#FFFFFF; font-weight:800;">Player</span>
+            <span id="home-user-nickname" class="home-user-nickname" style="color:#CBD5E1; background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.12);">@nickname</span>
           </div>
-          <div class="home-user-id-row">
-            <span>ID: <strong id="home-user-id-val" style="color:#fff;"></strong></span>
-            <button class="home-copy-id-btn" onclick="event.stopPropagation(); copyUserId();" title="Copy ID">
-              <i class="fa-solid fa-copy"></i>
+          <div class="home-user-id-row" style="color:rgba(255,255,255,0.65); font-size:10.5px; font-weight:600; margin-top:2px; display:flex; align-items:center; gap:4px;">
+            <span>ID: <strong id="home-user-id-val" style="color:#FFFFFF;"></strong></span>
+            <button class="home-copy-id-btn" onclick="event.stopPropagation(); copyUserId();" style="background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.12); color:#CBD5E1; border-radius:4px; padding:1px 5px; font-size:9.5px; cursor:pointer;" title="Copy ID">
+              <i class="fa-solid fa-copy" style="color:#CBD5E1;"></i>
             </button>
           </div>
         </div>
       </div>
 
-      <div class="home-wallet-pill" onclick="navTo('wallet')" style="display:flex; align-items:center; gap:8px; background:rgba(255,255,255,0.06); border:1px solid rgba(226,232,240,0.25); border-radius:12px; padding:6px 12px; cursor:pointer;" title="View Wallet">
-        <i class="fa-solid fa-wallet" style="color:var(--green); font-size:14px;"></i>
-        <span style="font-size:13px; font-weight:800; color:#fff;" id="home-bal-display">250.00 Br</span>
-        <button onclick="event.stopPropagation(); openClientDepositModal();" style="background:linear-gradient(135deg, #10b981 0%, #059669 100%); color:#fff; border:none; border-radius:8px; padding:4px 8px; font-size:11px; font-weight:800; cursor:pointer; display:flex; align-items:center; gap:4px; box-shadow:0 2px 8px rgba(16,185,129,0.3);" title="Deposit">
-          <i class="fa-solid fa-plus"></i>
+      <div class="home-wallet-pill" onclick="navTo('wallet')" style="display:flex; align-items:center; gap:8px; background:rgba(255,255,255,0.05); border:1px solid rgba(226,232,240,0.16); border-radius:12px; padding:6px 11px; cursor:pointer;" title="View Wallet">
+        <i class="fa-solid fa-wallet" style="color:#CBD5E1; font-size:13px;"></i>
+        <span style="font-size:13px; font-weight:800; color:#FFFFFF;" id="home-bal-display">250.00 Br</span>
+        <button onclick="event.stopPropagation(); openClientDepositModal();" style="background:linear-gradient(135deg, #FFFFFF 0%, #E2E8F0 100%); color:#090D16; border:none; border-radius:7px; padding:3px 7px; font-size:11px; font-weight:900; cursor:pointer; display:flex; align-items:center; gap:3px; box-shadow:0 2px 8px rgba(255,255,255,0.2);" title="Deposit">
+          <i class="fa-solid fa-plus" style="color:#090D16; font-size:10px;"></i>
         </button>
       </div>
 
-      <button class="home-role-btn" onclick="openRoleModal()" id="home-role-btn" title="User Role Information">
-        <i class="fa-solid fa-user-shield" style="color:var(--orange);"></i>
-        <span>ROLE:</span>
-        <span class="home-role-badge-tag" id="home-user-role-badge">PLAYER</span>
+      <button class="home-role-btn" onclick="openRoleModal()" id="home-role-btn" style="background:rgba(255,255,255,0.05); border:1px solid rgba(226,232,240,0.16); color:#F8FAFC; border-radius:10px; padding:5px 8px; font-size:10.5px; font-weight:700; cursor:pointer; display:flex; align-items:center; gap:5px;" title="User Role Information">
+        <i class="fa-solid fa-shield-halved" style="color:#CBD5E1; font-size:12px;"></i>
+        <span class="home-role-badge-tag" id="home-user-role-badge" style="background:#E2E8F0; color:#090D16; font-size:9.5px; font-weight:900; padding:2px 5px; border-radius:5px;">PLAYER</span>
       </button>
     </header>
 
@@ -1763,10 +1785,10 @@ body {
         <div class="stake-card-room silver-room" onclick="selectStake(10)">
           <div class="stake-room-top">
             <span class="stake-room-tag silver-tag">
-              <i class="fa-solid fa-shield-halved"></i> SILVER • ሲልቨር
+              <i class="fa-solid fa-shield-halved" style="color:#CBD5E1;"></i> SILVER • ሲልቨር
             </span>
             <span class="stake-room-players silver-players">
-              <i class="fa-solid fa-users"></i> <span id="room-10-players">1</span> Active
+              <i class="fa-solid fa-users" style="color:#CBD5E1;"></i> <span id="room-10-players">1</span> Active
             </span>
           </div>
           <div class="stake-room-price">
@@ -1778,7 +1800,7 @@ body {
             <div class="stake-pot-val silver-pot" id="room-10-pot">3,400 ETB</div>
           </div>
           <button class="stake-cta-btn silver-cta" onclick="event.stopPropagation(); selectStake(10)">
-            <i class="fa-solid fa-play"></i> PLAY 10 BIRR (ክፍል ግባ)
+            <i class="fa-solid fa-play" style="color:#090D16; font-size:12px;"></i> PLAY 10 BIRR (ይጫወቱ)
           </button>
         </div>
 
@@ -1786,10 +1808,10 @@ body {
         <div class="stake-card-room gold-room" onclick="selectStake(20)">
           <div class="stake-room-top">
             <span class="stake-room-tag gold-tag">
-              <i class="fa-solid fa-crown"></i> VIP GOLD • ቪአይፒ ወርቅ
+              <i class="fa-solid fa-crown" style="color:#FCD34D;"></i> VIP GOLD • ጎልድ VIP
             </span>
             <span class="stake-room-players gold-players">
-              <i class="fa-solid fa-crown"></i> <span id="room-20-players">1</span> Active
+              <i class="fa-solid fa-users" style="color:#CBD5E1;"></i> <span id="room-20-players">1</span> Active
             </span>
           </div>
           <div class="stake-room-price">
@@ -1801,12 +1823,14 @@ body {
             <div class="stake-pot-val gold-pot" id="room-20-pot">6,800 ETB</div>
           </div>
           <button class="stake-cta-btn gold-cta" onclick="event.stopPropagation(); selectStake(20)">
-            <i class="fa-solid fa-crown"></i> PLAY 20 BIRR VIP (ክፍል ግባ)
+            <i class="fa-solid fa-crown" style="color:#090D16; font-size:12px;"></i> PLAY 20 BIRR VIP (ይጫወቱ)
           </button>
         </div>
       </div>
     </div>
-  </div><div class="rules-screen" id="rules-screen">
+  </div>
+
+  <div class="rules-screen"  id="rules-screen">
     <div class="rules-header">
       <button class="rules-back" onclick="closeRules()"><i class="fa-solid fa-arrow-left"></i></button>
       <div class="rules-header-title" id="rules-header-title">Rules & Info</div>
@@ -1834,32 +1858,32 @@ body {
       <!-- Active running-overlay to block betting during game -->
       <div id="running-overlay" style="position:absolute; top:0; left:0; width:100%; height:100%; background:rgba(10, 25, 41, 0.95); backdrop-filter:blur(8px); display:none; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:20px; z-index:100; border-radius:12px;">
         <div style="background: radial-gradient(circle, rgba(245, 158, 11, 0.15) 0%, transparent 70%); width: 140px; height: 140px; display: flex; align-items: center; justify-content: center; border-radius: 50%; margin-bottom: 20px;">
-          <i class="fa-solid fa-hourglass-half" style="color:var(--orange); font-size:64px; filter:drop-shadow(0 0 15px rgba(245,158,11,0.4));"></i>
+          <i class="fa-solid fa-hourglass-half" style="color:#CBD5E1; font-size:64px; filter:drop-shadow(0 0 15px rgba(226,232,240,0.3));"></i>
         </div>
         <h2 style="font-size:18px; font-weight:800; color:#fff; margin-bottom:10px; letter-spacing:0.5px; text-transform:uppercase;">GAME IN PROGRESS</h2>
         <p style="font-size:13px; color:var(--muted); max-width:280px; line-height:1.5; margin-bottom: 18px;">
           A synchronized round is currently active. Please wait for the next countdown to buy a ticket.
-          <br><span style="color:var(--orange); font-size:12px; font-weight:600; margin-top:5px; display:inline-block;">ጨዋታው በመካሄድ ላይ ነው። እባክዎ ቀጣዩን ዙር ይጠብቁ።</span>
+          <br><span style="color:#CBD5E1; font-size:12px; font-weight:600; margin-top:5px; display:inline-block;">ጨዋታው በመካሄድ ላይ ነው። እባክዎ ቀጣዩን ዙር ይጠብቁ።</span>
         </p>
         <!-- Spectator button to watch live game calling balls -->
-        <button onclick="spectateLiveGame()" style="background: linear-gradient(135deg, var(--orange) 0%, #ff8f00 100%); color:#fff; border:none; padding:12px 24px; border-radius:10px; font-size:14px; font-weight:800; cursor:pointer; display:flex; align-items:center; gap:8px; box-shadow: 0 4px 15px rgba(255,107,0,0.4); transition: transform 0.2s;"><i class="fa-solid fa-eye"></i> WATCH LIVE GAME (ቀጥታ ጨዋታውን ይመልከቱ)</button>
+        <button onclick="spectateLiveGame()" style="background: linear-gradient(135deg, #334155 0%, #1E293B 100%); color:#F8FAFC; border:1px solid rgba(226,232,240,0.25); padding:12px 24px; border-radius:10px; font-size:14px; font-weight:800; cursor:pointer; display:flex; align-items:center; gap:8px; box-shadow: 0 4px 15px rgba(0,0,0,0.5); transition: transform 0.15s ease;"><i class="fa-solid fa-eye" style="color:#CBD5E1;"></i> WATCH LIVE GAME (ቀጥታ ጨዋታውን ይመልከቱ)</button>
       </div>
 
       <div style="padding:5px 12px; display:flex; justify-content:flex-start;">
-        <button onclick="backToStake()" style="background:transparent; border:1px solid var(--orange); color:var(--orange); padding:6px 12px; border-radius:8px; font-size:11px; font-weight:800; cursor:pointer; transition: all .2s; letter-spacing:0.3px; text-shadow:0 0 6px rgba(255,107,53,0.4);"><i class="fa-solid fa-arrow-left" style="margin-right:6px;"></i>Back/Change stake</button>
+        <button onclick="backToStake()" style="background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.12); color:#E2E8F0; padding:6px 12px; border-radius:8px; font-size:11px; font-weight:700; cursor:pointer; transition: all .15s ease;"><i class="fa-solid fa-arrow-left" style="margin-right:6px; color:#CBD5E1;"></i>Back / Change Room</button>
       </div>
-      <div class="no-balance-msg" id="no-balance-msg"><i class="fa-solid fa-circle-exclamation" style="margin-right:6px;"></i><span id="lbl-no-bal-msg">Insufficient balance! Please load your wallet.</span></div>
+      <div class="no-balance-msg" id="no-balance-msg"><i class="fa-solid fa-circle-exclamation" style="margin-right:6px; color:#CBD5E1;"></i><span id="lbl-no-bal-msg">Insufficient balance! Please load your wallet.</span></div>
       <div class="game-id-bar">Game ID: <span id="game-id-label">—</span></div>
       
       <!-- Quick Card Selection Controls -->
       <div style="display:flex; justify-content:space-between; align-items:center; gap:6px; padding: 0 12px 10px; flex-wrap:wrap;">
         <div style="display:flex; gap:6px;">
-          <button class="quick-pick-btn" onclick="quickPickCards(1)"><i class="fa-solid fa-bolt" style="color:#ffd600;"></i> 1 Card (በነሲብ 1)</button>
-          <button class="quick-pick-btn" onclick="quickPickCards(2)"><i class="fa-solid fa-dice" style="color:#00d4ff;"></i> 2 Cards (በነሲብ 2)</button>
-          <button class="quick-pick-btn" onclick="clearSelectedCards()" style="background:rgba(239,68,68,0.15); border-color:rgba(239,68,68,0.3); color:#fca5a5;"><i class="fa-solid fa-trash-can"></i> Clear (አጥፋ)</button>
+          <button class="quick-pick-btn" onclick="quickPickCards(1)" style="background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.12); color:#F1F5F9; border-radius:8px; padding:6px 12px; font-size:11px; font-weight:700; cursor:pointer; display:flex; align-items:center; gap:5px;"><i class="fa-solid fa-bolt" style="color:#CBD5E1;"></i> 1 Card (በነሲብ 1)</button>
+          <button class="quick-pick-btn" onclick="quickPickCards(2)" style="background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.12); color:#F1F5F9; border-radius:8px; padding:6px 12px; font-size:11px; font-weight:700; cursor:pointer; display:flex; align-items:center; gap:5px;"><i class="fa-solid fa-dice" style="color:#CBD5E1;"></i> 2 Cards (በነሲብ 2)</button>
+          <button class="quick-pick-btn" onclick="clearSelectedCards()" style="background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.1); color:#CBD5E1; border-radius:8px; padding:6px 12px; font-size:11px; font-weight:700; cursor:pointer; display:flex; align-items:center; gap:5px;"><i class="fa-solid fa-trash-can" style="color:#CBD5E1;"></i> Clear (አጥፋ)</button>
         </div>
-        <button onclick="instantStartMatch()" id="btn-instant-start" style="background:linear-gradient(135deg, #10b981 0%, #059669 100%); color:#fff; border:none; border-radius:8px; padding:6px 12px; font-size:11px; font-weight:800; cursor:pointer; display:flex; align-items:center; gap:5px; box-shadow:0 3px 10px rgba(16,185,129,0.3);">
-          <i class="fa-solid fa-play"></i> START NOW
+        <button onclick="instantStartMatch()" id="btn-instant-start" style="background:linear-gradient(135deg, #FFFFFF 0%, #E2E8F0 100%); color:#090D16; border:none; border-radius:8px; padding:6px 14px; font-size:11px; font-weight:800; cursor:pointer; display:flex; align-items:center; gap:5px; box-shadow:0 2px 10px rgba(255,255,255,0.2);">
+          <i class="fa-solid fa-play" style="color:#090D16; font-size:10px;"></i> START NOW
         </button>
       </div>
 
@@ -1868,7 +1892,7 @@ body {
       <div class="bottom-bar" style="display: flex; flex-direction: column; align-items: center; gap: 8px; padding: 10px 16px; width: 100%;">
         <div id="card-status-bar" style="width: 100%;">
           <div style="font-size:12px; color:var(--muted); text-align:center; padding:6px; font-weight:700;">
-            <i class="fa-solid fa-hand-pointer" style="color:var(--orange); margin-right:6px;"></i>Tap any card number (1-400) to instantly buy your ticket
+            <i class="fa-solid fa-hand-pointer" style="color:#CBD5E1; margin-right:6px;"></i>Tap any card number (1-400) to instantly buy your ticket
           </div>
         </div>
       </div>
@@ -1936,7 +1960,7 @@ body {
 
         <div id="active-cards-bar" style="background: rgba(15, 15, 35, 0.9); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 8px 12px; margin: 8px 0; display: flex; flex-direction: column; gap: 4px;">
           <div style="font-size: 11px; font-weight: 800; color: var(--yellow); display: flex; justify-content: space-between; align-items: center;">
-            <span><i class="fa-solid fa-layer-group" style="margin-right: 6px; color: var(--orange);"></i> Active Cards (በጨዋታ ላይ ያሉ)</span>
+            <span><i class="fa-solid fa-layer-group" style="margin-right: 6px; color: #CBD5E1;"></i> Active Cards (በጨዋታ ላይ ያሉ)</span>
             <span id="active-cards-count-badge" style="background: var(--orange); color: #fff; padding: 2px 8px; border-radius: 10px; font-size: 11px; font-weight: 800;">0</span>
           </div>
           <div id="active-cards-list" style="display: flex; gap: 6px; overflow-x: auto; padding: 4px 0; max-width: 100%;"></div>
@@ -1965,19 +1989,19 @@ body {
     
     <!-- Prominent Dedicated BINGO Claim Button -->
     <div style="padding: 6px 14px 10px; width:100%;">
-      <button id="btn-claim-bingo" onclick="claimBingoAction()" class="btn-claim-bingo-glow" style="width:100%; padding:14px; border-radius:14px; border:none; font-size:18px; font-weight:900; letter-spacing:1px; cursor:pointer; background:linear-gradient(135deg, #10b981 0%, #059669 50%, #047857 100%); color:#fff; display:flex; align-items:center; justify-content:center; gap:10px; box-shadow:0 6px 20px rgba(16,185,129,0.5); text-transform:uppercase;">
-        <i class="fa-solid fa-trophy" style="font-size:20px; color:#ffd600;"></i> BINGO! / ቢንጎ በል!
+      <button id="btn-claim-bingo" onclick="claimBingoAction()" class="btn-claim-bingo-glow" style="width:100%; padding:14px; border-radius:14px; border:none; font-size:18px; font-weight:900; letter-spacing:1px; cursor:pointer; background:linear-gradient(135deg, #FFFFFF 0%, #E2E8F0 50%, #CBD5E1 100%); color:#090D16; display:flex; align-items:center; justify-content:center; gap:10px; box-shadow:0 6px 20px rgba(226,232,240,0.35); text-transform:uppercase;">
+        <i class="fa-solid fa-trophy" style="font-size:20px; color:#FCD34D;"></i> BINGO! / ቢንጎ በል!
       </button>
     </div>
 
-    <div class="game-bottom-controls" style="display:flex; gap:10px; padding:10px 14px; background:rgba(10,10,25,0.95); border-top:1px solid rgba(255,255,255,0.1); width:100%;">
-      <button onclick="leaveGameView()" style="flex:1; background:linear-gradient(135deg, #ea580c 0%, #dc2626 100%); color:#fff; border:none; border-radius:12px; padding:12px; font-size:14px; font-weight:800; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:6px; box-shadow:0 4px 12px rgba(239,68,68,0.3);">
-        <i class="fa-solid fa-right-from-bracket"></i> Leave
+    <div class="game-bottom-controls" style="display:flex; gap:10px; padding:10px 14px; background:rgba(9,13,22,0.96); border-top:1px solid rgba(226,232,240,0.12); width:100%;">
+      <button onclick="leaveGameView()" style="flex:1; background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.12); color:#CBD5E1; border-radius:12px; padding:12px; font-size:14px; font-weight:700; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:6px;">
+        <i class="fa-solid fa-arrow-left" style="color:#CBD5E1;"></i> Leave
       </button>
-      <button onclick="refreshGameState()" style="background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.2); color:#fff; border-radius:12px; width:48px; padding:12px; font-size:16px; font-weight:800; cursor:pointer; display:flex; align-items:center; justify-content:center;">
-        <i class="fa-solid fa-rotate"></i>
+      <button onclick="refreshGameState()" style="background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.12); color:#CBD5E1; border-radius:12px; width:48px; padding:12px; font-size:16px; font-weight:800; cursor:pointer; display:flex; align-items:center; justify-content:center;">
+        <i class="fa-solid fa-rotate" style="color:#CBD5E1;"></i>
       </button>
-      <button onclick="toggleAutoMode()" id="game-btn-auto" style="flex:1; background:linear-gradient(135deg, #d97706 0%, #b45309 100%); color:#fff; border:none; border-radius:12px; padding:12px; font-size:14px; font-weight:800; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:6px; box-shadow:0 4px 12px rgba(217,119,6,0.3);">
+      <button onclick="toggleAutoMode()" id="game-btn-auto" style="flex:1; background:linear-gradient(135deg, #FFFFFF 0%, #E2E8F0 100%); color:#090D16; border:none; border-radius:12px; padding:12px; font-size:14px; font-weight:800; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:6px; box-shadow:0 4px 12px rgba(255,255,255,0.15);">
         Automatic
       </button>
     </div>
@@ -1986,7 +2010,7 @@ body {
   <div class="screen" id="screen-winner">
     <canvas id="confetti-canvas" style="position:absolute; top:0; left:0; width:100%; height:100%; pointer-events:none; z-index:100;"></canvas>
     <div class="winner-screen">
-      <div class="winner-trophy"><i class="fa-solid fa-trophy" style="color:var(--yellow); filter: drop-shadow(0 0 15px rgba(245,158,11,0.65));"></i></div>
+      <div class="winner-trophy"><i class="fa-solid fa-trophy" style="color:#FCD34D; filter: drop-shadow(0 0 15px rgba(252,211,77,0.5));"></i></div>
       <div class="winner-title" id="winner-title-text">BINGO! WINNER!</div>
       <div class="winners-names-row" id="winners-names-row"></div>
       <div class="winner-card-box" id="w-card-box"><div class="winner-card-hdr" id="w-card-hdr"></div><div class="winner-card-grid" id="w-card-grid"></div></div>
@@ -2026,59 +2050,59 @@ body {
             <button onclick="copyUserId()" style="background:rgba(255,255,255,0.08); border:1px solid rgba(255,255,255,0.15); border-radius:6px; padding:3px 6px; color:var(--text); font-size:10px; font-weight:700; cursor:pointer; display:flex; align-items:center; gap:4px; transition:all 0.2s;"><i class="fa-regular fa-copy"></i> Copy</button>
           </div>
           <div class="profile-username" id="p-username" style="display:none;"></div>
-          <div class="profile-bal" id="p-bal"><i class="fa-solid fa-wallet" style="color:var(--green); margin-right:4px;"></i> — Br</div>
+          <div class="profile-bal" id="p-bal"><i class="fa-solid fa-wallet" style="color:#CBD5E1; margin-right:4px;"></i> — Br</div>
         </div>
       </div>
       <div class="stats-row">
         <div class="stat-card"><div class="sv" id="p-played">0</div><div class="sl" id="lbl-prof-played">Games Played</div></div>
         <div class="stat-card"><div class="sv" id="p-won">0</div><div class="sl" id="lbl-prof-won">Games Won</div></div>
         <div class="stat-card"><div class="sv" id="p-brwon">0</div><div class="sl" id="lbl-prof-brwon">Br Total Won</div></div>
-        <div class="stat-card"><div class="sv" id="p-cur-streak">0</div><div class="sl" id="lbl-prof-cur-streak"><i class="fa-solid fa-fire" style="color:var(--orange); margin-right:4px;"></i>Current Streak</div></div>
-        <div class="stat-card" style="grid-column: span 2;"><div class="sv" id="p-max-streak">0</div><div class="sl" id="lbl-prof-max-streak"><i class="fa-solid fa-trophy" style="color:var(--yellow); margin-right:4px;"></i>Highest Streak</div></div>
+        <div class="stat-card"><div class="sv" id="p-cur-streak">0</div><div class="sl" id="lbl-prof-cur-streak"><i class="fa-solid fa-fire" style="color:#CBD5E1; margin-right:4px;"></i>Current Streak</div></div>
+        <div class="stat-card" style="grid-column: span 2;"><div class="sv" id="p-max-streak">0</div><div class="sl" id="lbl-prof-max-streak"><i class="fa-solid fa-trophy" style="color:#CBD5E1; margin-right:4px;"></i>Highest Streak</div></div>
       </div>
 
       <!-- Settings Section -->
-      <div class="section-title" id="lbl-prof-settings-title" style="margin-top: 15px;"><i class="fa-solid fa-sliders" style="color:var(--orange); margin-right:6px;"></i>Game Settings & Account</div>
+      <div class="section-title" id="lbl-prof-settings-title" style="margin-top: 15px;"><i class="fa-solid fa-sliders" style="color:#CBD5E1; margin-right:6px;"></i>Game Settings & Account</div>
       <div class="settings-panel" style="margin: 0 16px 20px; display: flex; flex-direction: column; gap: 10px;">
         <!-- Sound setting -->
-        <div class="setting-item" style="background:var(--bg2); border-radius:12px; padding:12px 16px; border:1px solid rgba(255,255,255,0.06); display:flex; align-items:center; justify-content:space-between;">
+        <div class="setting-item" style="background:var(--bg2); border-radius:14px; padding:12px 16px; border:1px solid rgba(255,255,255,0.07); display:flex; align-items:center; justify-content:space-between;">
           <div style="display:flex; align-items:center; gap:12px;">
-            <div style="width:36px; height:36px; border-radius:10px; background:rgba(0,212,255,0.1); border:1px solid var(--blue); display:flex; align-items:center; justify-content:center; color:var(--blue); font-size:16px;">
-              <i class="fa-solid fa-volume-high" id="profile-sound-icon"></i>
+            <div class="setting-icon-box">
+              <i class="fa-solid fa-volume-high" id="profile-sound-icon" style="color:#CBD5E1;"></i>
             </div>
             <div>
               <div style="font-size:14px; font-weight:700; color:var(--text);" id="lbl-prof-sound">In-game Sound Effects</div>
               <div style="font-size:11px; color:var(--muted);" id="lbl-prof-sound-desc">Mute or unmute game voice calls and blips</div>
             </div>
           </div>
-          <div class="toggle" id="profile-sound-toggle" onclick="toggleGlobalSound()" style="cursor:pointer; width:44px; height:24px; border-radius:12px; background:rgba(255,255,255,0.1); position:relative; transition:all 0.3s;">
+          <div class="toggle" id="profile-sound-toggle" onclick="toggleGlobalSound()" style="cursor:pointer; width:44px; height:24px; border-radius:12px; background:rgba(255,255,255,0.12); position:relative; transition:all 0.3s;">
             <div class="toggle-circle" style="width:18px; height:18px; border-radius:50%; background:#fff; position:absolute; top:3px; left:3px; transition:all 0.3s;"></div>
           </div>
         </div>
 
         <!-- Language toggle setting -->
-        <div class="setting-item" style="background:var(--bg2); border-radius:12px; padding:12px 16px; border:1px solid rgba(255,255,255,0.06); display:flex; align-items:center; justify-content:space-between;">
+        <div class="setting-item" style="background:var(--bg2); border-radius:14px; padding:12px 16px; border:1px solid rgba(255,255,255,0.07); display:flex; align-items:center; justify-content:space-between;">
           <div style="display:flex; align-items:center; gap:12px;">
-            <div style="width:36px; height:36px; border-radius:10px; background:rgba(16,185,129,0.1); border:1px solid var(--green); display:flex; align-items:center; justify-content:center; color:var(--green); font-size:16px;">
-              <i class="fa-solid fa-language"></i>
+            <div class="setting-icon-box">
+              <i class="fa-solid fa-language" style="color:#CBD5E1;"></i>
             </div>
             <div>
               <div style="font-size:14px; font-weight:700; color:var(--text);" id="lbl-prof-lang">Rules & Interface Language</div>
               <div style="font-size:11px; color:var(--muted);" id="lbl-prof-lang-desc">Choose English or አማርኛ (Amharic)</div>
             </div>
           </div>
-          <div style="display:flex; border-radius:8px; overflow:hidden; border:1px solid var(--orange);">
-            <button onclick="setRulesLang('en')" id="profile-lang-en" style="background:transparent; border:none; color:var(--orange); padding:4px 8px; font-size:11px; font-weight:800; cursor:pointer;">EN</button>
-            <button onclick="setRulesLang('am')" id="profile-lang-am" style="background:transparent; border:none; color:var(--orange); padding:4px 8px; font-size:11px; font-weight:800; cursor:pointer;">አማ</button>
+          <div style="display:flex; border-radius:8px; overflow:hidden; border:1px solid rgba(255,255,255,0.18);">
+            <button onclick="setRulesLang('en')" id="profile-lang-en" style="background:transparent; border:none; color:#CBD5E1; padding:4px 8px; font-size:11px; font-weight:800; cursor:pointer;">EN</button>
+            <button onclick="setRulesLang('am')" id="profile-lang-am" style="background:transparent; border:none; color:#CBD5E1; padding:4px 8px; font-size:11px; font-weight:800; cursor:pointer;">አማ</button>
           </div>
         </div>
 
         <!-- Telegram Support setting -->
         <a href="https://t.me/one_day_82" target="_blank" style="text-decoration:none; display:block;">
-          <div class="setting-item" style="background:var(--bg2); border-radius:12px; padding:12px 16px; border:1px solid rgba(255,255,255,0.06); display:flex; align-items:center; justify-content:space-between;">
+          <div class="setting-item" style="background:var(--bg2); border-radius:14px; padding:12px 16px; border:1px solid rgba(255,255,255,0.07); display:flex; align-items:center; justify-content:space-between;">
             <div style="display:flex; align-items:center; gap:12px;">
-              <div style="width:36px; height:36px; border-radius:10px; background:rgba(179,136,255,0.1); border:1px solid var(--purple); display:flex; align-items:center; justify-content:center; color:var(--purple); font-size:16px;">
-                <i class="fa-solid fa-circle-question"></i>
+              <div class="setting-icon-box">
+                <i class="fa-solid fa-circle-question" style="color:#CBD5E1;"></i>
               </div>
               <div>
                 <div style="font-size:14px; font-weight:700; color:var(--text);" id="lbl-prof-support">Contact Support Representative</div>
@@ -2090,10 +2114,10 @@ body {
         </a>
 
         <!-- Game Rules & Instructions -->
-        <div class="setting-item" onclick="openRules()" style="background:var(--bg2); border-radius:12px; padding:12px 16px; border:1px solid rgba(255,255,255,0.06); display:flex; align-items:center; justify-content:space-between; cursor:pointer;">
+        <div class="setting-item" onclick="openRules()" style="background:var(--bg2); border-radius:14px; padding:12px 16px; border:1px solid rgba(255,255,255,0.07); display:flex; align-items:center; justify-content:space-between; cursor:pointer;">
           <div style="display:flex; align-items:center; gap:12px;">
-            <div style="width:36px; height:36px; border-radius:10px; background:rgba(251,191,36,0.1); border:1px solid var(--yellow); display:flex; align-items:center; justify-content:center; color:var(--yellow); font-size:16px;">
-              <i class="fa-solid fa-book-open"></i>
+            <div class="setting-icon-box">
+              <i class="fa-solid fa-book-open" style="color:#CBD5E1;"></i>
             </div>
             <div>
               <div style="font-size:14px; font-weight:700; color:var(--text);" id="lbl-prof-rules">Game Rules & How to Play</div>
@@ -2104,10 +2128,10 @@ body {
         </div>
 
         <!-- Change Password setting -->
-        <div class="setting-item" onclick="openChangePasswordModal()" style="background:var(--bg2); border-radius:12px; padding:12px 16px; border:1px solid rgba(255,255,255,0.06); display:flex; align-items:center; justify-content:space-between; cursor:pointer;">
+        <div class="setting-item" onclick="openChangePasswordModal()" style="background:var(--bg2); border-radius:14px; padding:12px 16px; border:1px solid rgba(255,255,255,0.07); display:flex; align-items:center; justify-content:space-between; cursor:pointer;">
           <div style="display:flex; align-items:center; gap:12px;">
-            <div style="width:36px; height:36px; border-radius:10px; background:rgba(226,232,240,0.1); border:1px solid var(--silver); display:flex; align-items:center; justify-content:center; color:var(--silver); font-size:16px;">
-              <i class="fa-solid fa-key"></i>
+            <div class="setting-icon-box">
+              <i class="fa-solid fa-key" style="color:#CBD5E1;"></i>
             </div>
             <div>
               <div style="font-size:14px; font-weight:700; color:var(--text);" id="lbl-prof-security">Security & Password</div>
@@ -2118,9 +2142,9 @@ body {
         </div>
 
         <!-- Logout setting -->
-        <div id="logout-setting-item" class="setting-item" style="background:var(--bg2); border-radius:12px; padding:12px 16px; border:1px solid rgba(255,255,255,0.06); display:none; align-items:center; justify-content:space-between; cursor:pointer;" onclick="doLogout()">
+        <div id="logout-setting-item" class="setting-item" style="background:var(--bg2); border-radius:14px; padding:12px 16px; border:1px solid rgba(255,255,255,0.07); display:none; align-items:center; justify-content:space-between; cursor:pointer;" onclick="doLogout()">
           <div style="display:flex; align-items:center; gap:12px;">
-            <div style="width:36px; height:36px; border-radius:10px; background:rgba(239,68,68,0.1); border:1px solid #ef4444; display:flex; align-items:center; justify-content:center; color:#ef4444; font-size:16px;">
+            <div class="setting-icon-box" style="background:rgba(239,68,68,0.08); border-color:rgba(239,68,68,0.2); color:#FCA5A5;">
               <i class="fa-solid fa-right-from-bracket"></i>
             </div>
             <div>
@@ -2128,11 +2152,11 @@ body {
               <div style="font-size:11px; color:var(--muted);" id="lbl-prof-logout-desc">Safely exit this device session</div>
             </div>
           </div>
-          <i class="fa-solid fa-chevron-right" style="color:#ef4444; font-size:12px;"></i>
+          <i class="fa-solid fa-chevron-right" style="color:var(--muted); font-size:12px;"></i>
         </div>
       </div>
 
-      <div class="section-title" id="lbl-prof-hist-title">Game History</div>
+      <div class="section-title"  id="lbl-prof-hist-title">Game History</div>
       <div class="table-box"><div class="table-head" id="lbl-prof-hist-head"><span>GAME</span><span>ENTRY</span><span>STATUS</span><span>RESULT</span></div><div id="p-history-rows"><div class="empty-row">No games yet</div></div></div>
     </div>
   </div>
@@ -2188,7 +2212,7 @@ body {
           <div class="profile-name" id="wl-name">—</div>
           <div class="profile-id" id="wl-id">ID: —</div>
           <div class="profile-username" id="wl-username" style="display:none;"></div>
-          <div class="profile-bal" id="wl-bal"><i class="fa-solid fa-wallet" style="color:var(--green); margin-right:4px;"></i> — Br</div>
+          <div class="profile-bal" id="wl-bal"><i class="fa-solid fa-wallet" style="color:#CBD5E1; margin-right:4px;"></i> — Br</div>
         </div>
       </div>
       
@@ -2226,7 +2250,7 @@ body {
       <div style="background:rgba(20,20,40,0.8); border:1px solid rgba(255,255,255,0.08); border-radius:16px; padding:16px; margin-top:14px; margin-bottom:14px;">
         <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
           <div style="font-size:12px; font-weight:800; color:var(--yellow); letter-spacing:0.5px; display:flex; align-items:center; gap:6px;">
-            <i class="fa-solid fa-shield-halved" style="color:var(--yellow);"></i>
+            <i class="fa-solid fa-shield-halved" style="color:#CBD5E1;"></i>
             <span>WITHDRAWAL REQUIREMENTS</span>
           </div>
           <span id="wagering-status-badge" style="font-size:10px; font-weight:700; padding:3px 8px; border-radius:10px; background:rgba(255,255,255,0.1); color:#fff;">Checking...</span>
@@ -2298,7 +2322,7 @@ body {
     </div>
     <div style="flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:24px;">
       <div class="auth-box">
-        <div style="font-size:40px; color:var(--orange); margin-bottom:12px;"><i class="fa-solid fa-shield-halved"></i></div>
+        <div style="font-size:40px; color:#CBD5E1; margin-bottom:12px;"><i class="fa-solid fa-shield-halved"></i></div>
         <div class="auth-title">UPDATE PASSWORD</div>
         <div class="input-group" id="old-pass-group" style="margin-bottom:16px;">
           <label>CURRENT PASSWORD (የአሁኑ የይለፍ ቃል)</label>
@@ -2327,7 +2351,7 @@ body {
     </div>
     <div style="flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:20px; overflow-y:auto;">
       <div class="auth-box" style="max-width:340px; width:100%; text-align:center;">
-        <div style="font-size:38px; color:var(--orange); margin-bottom:10px;"><i class="fa-solid fa-user-shield"></i></div>
+        <div style="font-size:38px; color:#CBD5E1; margin-bottom:10px;"><i class="fa-solid fa-user-shield"></i></div>
         <div class="auth-title" style="margin-bottom:4px;">ACCOUNT ROLE</div>
         <p style="font-size:11px; color:var(--muted); margin-bottom:16px;">Your current membership tier and system permissions</p>
         
@@ -2377,7 +2401,7 @@ body {
     </div>
     <div style="flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:24px; overflow-y:auto;">
       <div class="auth-box" style="margin-top:auto; margin-bottom:auto; max-width:380px;">
-        <div style="font-size:40px; color:var(--green); margin-bottom:12px;"><i class="fa-solid fa-circle-arrow-down"></i></div>
+        <div style="font-size:40px; color:#CBD5E1; margin-bottom:12px;"><i class="fa-solid fa-circle-arrow-down"></i></div>
         <div class="auth-title">REQUEST DEPOSIT (ገንዘብ ያስገቡ)</div>
         <p style="font-size:11px; color:var(--muted); text-align:center; margin-bottom:16px; line-height:1.4;">
           Please deposit the funds using Telebirr or CBE, then enter the amount and your reference phone below.<br>
@@ -2388,10 +2412,10 @@ body {
         <!-- Payment Method Tabs -->
         <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:14px;">
           <button type="button" id="dep-method-telebirr" onclick="selectDepositMethod('Telebirr')" style="padding:10px; border-radius:10px; border:2px solid var(--green); background:rgba(0,230,118,0.15); color:#fff; font-size:12px; font-weight:800; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:6px;">
-            <i class="fa-solid fa-mobile-screen-button" style="color:var(--green);"></i> Telebirr (ቴሌብር)
+            <i class="fa-solid fa-mobile-screen-button" style="color:#CBD5E1;"></i> Telebirr (ቴሌብር)
           </button>
           <button type="button" id="dep-method-cbe" onclick="selectDepositMethod('CBE Birr')" style="padding:10px; border-radius:10px; border:1px solid rgba(255,255,255,0.15); background:rgba(255,255,255,0.05); color:#fff; font-size:12px; font-weight:800; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:6px;">
-            <i class="fa-solid fa-building-columns" style="color:var(--purple);"></i> CBE (ንግድ ባንክ)
+            <i class="fa-solid fa-building-columns" style="color:#CBD5E1;"></i> CBE (ንግድ ባንክ)
           </button>
         </div>
 
@@ -2519,7 +2543,7 @@ body {
     }
   </style>
 </div>
-<div class="paused-overlay" id="paused-overlay"><div class="p-icon"><i class="fa-solid fa-circle-pause" style="color:var(--yellow); filter: drop-shadow(0 0 15px rgba(245,158,11,0.5));"></i></div><div class="p-title">Game Paused</div><div class="p-sub">ጨዋታው ቆሟል። እባክዎ ይጠብቁ…</div></div>
+<div class="paused-overlay" id="paused-overlay"><div class="p-icon"><i class="fa-solid fa-circle-pause" style="color:#CBD5E1; filter: drop-shadow(0 0 15px rgba(226,232,240,0.5));"></i></div><div class="p-title">Game Paused</div><div class="p-sub">ጨዋታው ቆሟል። እባክዎ ይጠብቁ…</div></div>
 <div class="cancelled-overlay" id="cancelled-overlay"><div class="c-icon"><i class="fa-solid fa-circle-xmark" style="color:#ef4444; filter: drop-shadow(0 0 15px rgba(239,68,68,0.5));"></i></div><div class="c-title">Game Cancelled</div><div class="c-sub">ጨዋታው ተሰርዟል። ሂሳብዎ ይመለሳል።<br>The game was cancelled by admin.</div><button class="c-btn" onclick="dismissCancel()">OK — Back to Home</button></div>
 
 <div class="onboarding-overlay" id="onboarding-overlay">
@@ -2843,13 +2867,13 @@ var APP_TRANSLATIONS = {
     "lbl-prof-won": "Games Won",
     "lbl-prof-brwon": "Br Total Won",
     "lbl-prof-invited": "Users Invited",
-    "lbl-prof-cur-streak": '<i class="fa-solid fa-fire" style="color:var(--orange); margin-right:4px;"></i>Current Streak',
-    "lbl-prof-max-streak": '<i class="fa-solid fa-trophy" style="color:var(--yellow); margin-right:4px;"></i>Highest Streak',
-    "lbl-prof-referral-title": '<i class="fa-solid fa-user-plus" style="color:var(--green); margin-right:6px;"></i>Referral Program',
+    "lbl-prof-cur-streak": '<i class="fa-solid fa-fire" style="color:#CBD5E1; margin-right:4px;"></i>Current Streak',
+    "lbl-prof-max-streak": '<i class="fa-solid fa-trophy" style="color:#CBD5E1; margin-right:4px;"></i>Highest Streak',
+    "lbl-prof-referral-title": '<i class="fa-solid fa-user-plus" style="color:#CBD5E1; margin-right:6px;"></i>Referral Program',
     "lbl-prof-refer-earn": "Invite Friends & Earn Commission",
     "lbl-prof-refer-desc": "Get a 10 Br cash bonus for every friend who joins Yerase Bingo and plays using your referral link.",
     "lbl-prof-copy-referral-btn-text": "Copy Referral Link",
-    "lbl-prof-settings-title": '<i class="fa-solid fa-sliders" style="color:var(--orange); margin-right:6px;"></i>Game Settings & Account',
+    "lbl-prof-settings-title": '<i class="fa-solid fa-sliders" style="color:#CBD5E1; margin-right:6px;"></i>Game Settings & Account',
     "lbl-prof-sound": "In-game Sound Effects",
     "lbl-prof-sound-desc": "Mute or unmute game voice calls and blips",
     "lbl-prof-notify": "Browser Notifications",
@@ -2960,13 +2984,13 @@ var APP_TRANSLATIONS = {
     "lbl-prof-won": "ያሸነፉት ጨዋታ",
     "lbl-prof-brwon": "በብር ጠቅላላ ያሸነፉት",
     "lbl-prof-invited": "የጋበዟቸው ሰዎች",
-    "lbl-prof-cur-streak": '<i class="fa-solid fa-fire" style="color:var(--orange); margin-right:4px;"></i>የአሁኑ ተከታታይ ድል',
-    "lbl-prof-max-streak": '<i class="fa-solid fa-trophy" style="color:var(--yellow); margin-right:4px;"></i>ከፍተኛ ተከታታይ ድል',
-    "lbl-prof-referral-title": '<i class="fa-solid fa-user-plus" style="color:var(--green); margin-right:6px;"></i>ሪፈራል ፕሮግራም',
+    "lbl-prof-cur-streak": '<i class="fa-solid fa-fire" style="color:#CBD5E1; margin-right:4px;"></i>የአሁኑ ተከታታይ ድል',
+    "lbl-prof-max-streak": '<i class="fa-solid fa-trophy" style="color:#CBD5E1; margin-right:4px;"></i>ከፍተኛ ተከታታይ ድል',
+    "lbl-prof-referral-title": '<i class="fa-solid fa-user-plus" style="color:#CBD5E1; margin-right:6px;"></i>ሪፈራል ፕሮግራም',
     "lbl-prof-refer-earn": "ጓደኛ ይጋብዙና ኮሚሽን ያግኙ",
     "lbl-prof-refer-desc": "እርስዎ በጋበዙት ሊንክ ተመዝግበው ለሚጫወቱ ለእያንዳንዱ ጓደኛ የ 10 ብር የቦነስ ሽልማት ያግኙ።",
     "lbl-prof-copy-referral-btn-text": "የሪፈራል ሊንክ ኮፒ ያድርጉ",
-    "lbl-prof-settings-title": '<i class="fa-solid fa-sliders" style="color:var(--orange); margin-right:6px;"></i>የመተግበሪያ ቅንብሮች',
+    "lbl-prof-settings-title": '<i class="fa-solid fa-sliders" style="color:#CBD5E1; margin-right:6px;"></i>የመተግበሪያ ቅንብሮች',
     "lbl-prof-sound": "የጨዋታ ድምጾች",
     "lbl-prof-sound-desc": "የድምጽ ጥሪዎችን እና ድምጾችን ማብራት/ማጥፋት",
     "lbl-prof-notify": "የአሳሽ ማሳወቂያዎች",
@@ -3350,7 +3374,7 @@ function renderActiveCardsBar() {
     var color = isMine ? '#ffffff' : '#f0f0f0';
 
     return '<div style="background:' + bg + '; border:' + border + '; color:' + color + '; padding:5px 12px; border-radius:12px; font-size:11px; font-weight:800; white-space:nowrap; display:flex; align-items:center; gap:6px; box-shadow:0 2px 6px rgba(0,0,0,0.3);">' +
-             '<i class="fa-solid fa-id-card" style="font-size:11px; color:var(--yellow);"></i> Card #' + item.cardNum +
+             '<i class="fa-solid fa-id-card" style="font-size:11px; color:#CBD5E1;"></i> Card #' + item.cardNum +
            '</div>';
   }).join('');
 
@@ -3926,7 +3950,7 @@ function toggleAutoMode() {
   
   if (autoDaubEnabled) {
     if (btn) {
-      btn.innerHTML = '<i class="fa-solid fa-bolt" style="color:#ffd600;"></i> Auto: ON (አውቶ)';
+      btn.innerHTML = '<i class="fa-solid fa-bolt" style="color:#CBD5E1;"></i> Auto: ON (አውቶ)';
       btn.style.background = 'linear-gradient(135deg, #059669 0%, #10b981 100%)';
       btn.style.boxShadow = '0 4px 14px rgba(16,185,129,0.4)';
     }
@@ -4396,7 +4420,7 @@ function initSocket(){
         var heading = runOverlay.querySelector('h2');
         if (heading) heading.textContent = 'WINNER CELEBRATING!';
         var desc = runOverlay.querySelector('p');
-        if (desc) desc.innerHTML = 'Please wait... Next round starts soon!<br><span style="color:var(--orange); font-size:12px; font-weight:600; margin-top:5px; display:inline-block;">አሸናፊው እየጨፈረ ነው። ቀጣዩ ዙር በቅርቡ ይጀምራል!</span>';
+        if (desc) desc.innerHTML = 'Please wait... Next round starts soon!<br><span style="color:#CBD5E1; font-size:12px; font-weight:600; margin-top:5px; display:inline-block;">አሸናፊው እየጨፈረ ነው። ቀጣዩ ዙር በቅርቡ ይጀምራል!</span>';
       }
       
       if(game.cards.length === 0) {
@@ -4786,7 +4810,7 @@ async function loadProfile(){
     var isWin=h.result&&h.result!=='-';
     var rc=isWin?'result-win':'result-loss';
     var statusBadge='<span class="history-badge '+sc+'">'+h.status+'</span>';
-    var resultText=isWin?'<i class="fa-solid fa-trophy" style="font-size:8px; margin-right:3px; color:var(--yellow);"></i>'+h.result:'Loss';
+    var resultText=isWin?'<i class="fa-solid fa-trophy" style="font-size:8px; margin-right:3px; color:#FCD34D;"></i>'+h.result:'Loss';
     var resultBadge='<span class="history-badge '+rc+'">'+resultText+'</span>';
     return '<div class="table-row"><span>'+h.game_id+'</span><span>'+h.entry+' Br</span>'+statusBadge+resultBadge+'</div>';
   }).join('');
@@ -5078,7 +5102,7 @@ function updateCardStatusBadge() {
       '</div>' +
       '<div style="font-size:11px; color:var(--muted); text-align:center; margin-top:4px;"><i class="fa-solid fa-circle-info" style="margin-right:4px;"></i>Tap a selected card to cancel & refund anytime before game starts</div>';
   } else {
-    container.innerHTML = '<div style="font-size:12px; color:var(--muted); text-align:center; padding:6px; font-weight:700;"><i class="fa-solid fa-hand-pointer" style="color:var(--orange); margin-right:6px;"></i>Tap any card number (1-400) to instantly buy your ticket</div>';
+    container.innerHTML = '<div style="font-size:12px; color:var(--muted); text-align:center; padding:6px; font-weight:700;"><i class="fa-solid fa-hand-pointer" style="color:#CBD5E1; margin-right:6px;"></i>Tap any card number (1-400) to instantly buy your ticket</div>';
   }
 }
 
@@ -5770,7 +5794,7 @@ function newRound(){
     var heading = runOverlay.querySelector('h2');
     if (heading) heading.textContent = 'GAME IN PROGRESS';
     var desc = runOverlay.querySelector('p');
-    if (desc) desc.innerHTML = 'A synchronized round is currently active. Please wait for the next countdown to buy a ticket.<br><span style="color:var(--orange); font-size:12px; font-weight:600; margin-top:5px; display:inline-block;">ጨዋታው በመካሄድ ላይ ነው። እባክዎ ቀጣዩን ዙር ይጠብቁ።</span>';
+    if (desc) desc.innerHTML = 'A synchronized round is currently active. Please wait for the next countdown to buy a ticket.<br><span style="color:#CBD5E1; font-size:12px; font-weight:600; margin-top:5px; display:inline-block;">ጨዋታው በመካሄድ ላይ ነው። እባክዎ ቀጣዩን ዙር ይጠብቁ።</span>';
   }
 
   selCards=new Set();
@@ -5877,7 +5901,7 @@ function updateSoundUI(){
   var navIcon = document.getElementById('sound-nav-icon');
   if (navIcon) {
     if (soundOn) {
-      navIcon.innerHTML = '<i class="fa-solid fa-volume-high" style="color:var(--green); filter: drop-shadow(0 0 8px rgba(0,230,118,0.5));"></i>';
+      navIcon.innerHTML = '<i class="fa-solid fa-volume-high" style="color:#CBD5E1; filter: drop-shadow(0 0 8px rgba(0,230,118,0.5));"></i>';
       if (navBtn) navBtn.style.color = 'var(--blue)';
     } else {
       navIcon.innerHTML = '<i class="fa-solid fa-volume-xmark" style="color:var(--muted);"></i>';
@@ -6102,7 +6126,7 @@ function updateOnboardingStep() {
     visual.innerHTML = `
       <div class="onboarding-visual-stakes">
         <div class="onboarding-visual-stake active">
-          <i class="fa-solid fa-play" style="color:var(--blue); font-size:12px;"></i>
+          <i class="fa-solid fa-play" style="color:#CBD5E1; font-size:12px;"></i>
           <span>Play 10 Birr</span>
         </div>
         <div class="onboarding-visual-stake">
