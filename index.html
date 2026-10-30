@@ -960,11 +960,7 @@ body::before {
   transform: translateX(-50%) translateY(0);
   opacity: 1;
 }
-.btn-claim-bingo-glow {
-  animation: bingoPulse 1.4s infinite alternate;
-}
-@keyframes bingoPulse {
-  0% { transform: scale(1); box-shadow: 0 4px 18px rgba(16, 185, 129, 0.4); }
+
   100% { transform: scale(1.02); box-shadow: 0 8px 30px rgba(16, 185, 129, 0.8); }
 }
 .quick-pick-btn {
@@ -1947,6 +1943,42 @@ body {
   50% { transform: scale(1.03); }
 }
 
+
+/* Modern Bottom Sheet */
+.rules-bottom-sheet {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  max-width: 540px;
+  margin: 0 auto;
+  background: rgba(14, 19, 32, 0.98);
+  border-top: 1.5px solid rgba(226, 232, 240, 0.25);
+  border-radius: 24px 24px 0 0;
+  box-shadow: 0 -10px 40px rgba(0,0,0,0.8), 0 0 30px rgba(226, 232, 240, 0.1);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  z-index: 1000;
+  transform: translateY(105%);
+  transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+  display: flex;
+  flex-direction: column;
+}
+.rules-bottom-sheet.active {
+  transform: translateY(0);
+}
+.bottom-sheet-handle-bar {
+  display: flex;
+  justify-content: center;
+  padding: 10px 0 4px;
+}
+.bottom-sheet-handle {
+  width: 44px;
+  height: 4px;
+  background: rgba(255,255,255,0.25);
+  border-radius: 4px;
+}
+
 </style>
 <script src="/socket.io/socket.io.js"></script>
 </head>
@@ -1986,7 +2018,7 @@ body {
         <div class="home-user-info">
           <div class="home-user-name-row">
             <span id="home-user-name" class="home-user-name" style="color:#FFFFFF; font-weight:800;">Player</span>
-            <span id="home-user-nickname" class="home-user-nickname" style="color:#CBD5E1; background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.12);">@nickname</span>
+            
           </div>
           <div class="home-user-id-row" style="color:rgba(255,255,255,0.65); font-size:10.5px; font-weight:600; margin-top:2px; display:flex; align-items:center; gap:4px;">
             <span>ID: <strong id="home-user-id-val" style="color:#FFFFFF;"></strong></span>
@@ -2031,49 +2063,52 @@ body {
         </div>
       </div>
 
-      <!-- The 2 Flagship Rooms: Play 10 Birr and Play 20 Birr -->
-      <div class="stake-box">
-        <!-- Room 1: 10 Birr Silver Room -->
-        <div class="stake-card-room silver-room" onclick="selectStake(10)">
-          <div class="stake-room-top">
-            <span class="stake-room-tag silver-tag">
-              <i class="fa-solid fa-shield-halved" style="color:#CBD5E1;"></i> SILVER • ሲልቨር
-            </span>
-            <span class="stake-room-players silver-players">
-              <span class="live-pulse-dot"></span><span id="room-10-players">1</span> Active
-            </span>
+      <!-- The 2 Flagship Rooms: Play 10 Birr and Play 20 Birr (1 Column, 2 Rows) -->
+      <div class="stake-box" style="display:flex; flex-direction:column; gap:14px; width:100%; max-width:440px; margin:0 auto 16px;">
+        <!-- Room 1: Play 10 Birr -->
+        <div class="stake-room-card" onclick="selectStake(10)" style="width:100%; background:linear-gradient(135deg, rgba(22, 29, 46, 0.95) 0%, rgba(14, 19, 32, 0.98) 100%); border:1.5px solid rgba(226, 232, 240, 0.22); border-radius:18px; padding:18px 20px; display:flex; align-items:center; justify-content:space-between; cursor:pointer; box-shadow:0 8px 24px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.1); transition:transform 0.15s ease, border-color 0.15s ease;">
+          <div style="display:flex; align-items:center; gap:14px;">
+            <div style="width:48px; height:48px; border-radius:14px; background:linear-gradient(135deg, rgba(255,255,255,0.15) 0%, rgba(203,213,225,0.06) 100%); border:1px solid rgba(255,255,255,0.25); display:flex; align-items:center; justify-content:center; box-shadow:0 4px 12px rgba(0,0,0,0.3);">
+              <i class="fa-solid fa-layer-group" style="color:#FFFFFF; font-size:20px;"></i>
+            </div>
+            <div>
+              <div style="font-size:18px; font-weight:900; color:#FFFFFF; letter-spacing:0.5px;">Play 10 Birr</div>
+              <div style="font-size:12px; font-weight:600; color:var(--muted); margin-top:2px;">10 ETB Entry Fee</div>
+            </div>
           </div>
-          <div class="stake-room-price">
-            <span class="stake-price-num">10</span>
-            <span class="stake-price-cur">ETB (ብር)</span>
+          <div style="display:flex; align-items:center; gap:8px;">
+            <div style="background:linear-gradient(135deg, #FFFFFF 0%, #E2E8F0 100%); color:#090D16; border-radius:10px; padding:10px 18px; font-size:13px; font-weight:900; display:flex; align-items:center; gap:6px; box-shadow:0 4px 14px rgba(255,255,255,0.2);">
+              <span>ENTER</span>
+              <i class="fa-solid fa-chevron-right" style="font-size:11px;"></i>
+            </div>
           </div>
-          <div class="stake-room-pot-box">
-            <div class="stake-pot-lbl">ESTIMATED PRIZE POOL</div>
-            <div class="stake-pot-val silver-pot" id="room-10-pot">3,400 ETB</div>
-          </div>
-          <button class="stake-cta-btn silver-cta" onclick="event.stopPropagation(); selectStake(10)">
-            <i class="fa-solid fa-play" style="color:#090D16; font-size:12px;"></i> PLAY 10 BIRR (ይጫወቱ)
-          </button>
         </div>
 
-        <!-- Room 2: 20 Birr VIP Gold Room -->
-        <div class="stake-card-room gold-room" onclick="selectStake(20)">
-          <div class="stake-room-top">
-            <span class="stake-room-tag gold-tag">
-              <i class="fa-solid fa-crown" style="color:#FCD34D;"></i> VIP GOLD • ጎልድ VIP
-            </span>
-            <span class="stake-room-players gold-players">
-              <span class="live-pulse-dot"></span><span id="room-20-players">1</span> Active
-            </span>
+        <!-- Room 2: Play 20 Birr -->
+        <div class="stake-room-card" onclick="selectStake(20)" style="width:100%; background:linear-gradient(135deg, rgba(22, 29, 46, 0.95) 0%, rgba(14, 19, 32, 0.98) 100%); border:1.5px solid rgba(226, 232, 240, 0.22); border-radius:18px; padding:18px 20px; display:flex; align-items:center; justify-content:space-between; cursor:pointer; box-shadow:0 8px 24px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.1); transition:transform 0.15s ease, border-color 0.15s ease;">
+          <div style="display:flex; align-items:center; gap:14px;">
+            <div style="width:48px; height:48px; border-radius:14px; background:linear-gradient(135deg, rgba(255,255,255,0.15) 0%, rgba(203,213,225,0.06) 100%); border:1px solid rgba(255,255,255,0.25); display:flex; align-items:center; justify-content:center; box-shadow:0 4px 12px rgba(0,0,0,0.3);">
+              <i class="fa-solid fa-crown" style="color:#FFFFFF; font-size:20px;"></i>
+            </div>
+            <div>
+              <div style="font-size:18px; font-weight:900; color:#FFFFFF; letter-spacing:0.5px;">Play 20 Birr</div>
+              <div style="font-size:12px; font-weight:600; color:var(--muted); margin-top:2px;">20 ETB Entry Fee</div>
+            </div>
           </div>
-          <div class="stake-room-price">
-            <span class="stake-price-num gold-num">20</span>
-            <span class="stake-price-cur gold-cur">ETB (ብር)</span>
+          <div style="display:flex; align-items:center; gap:8px;">
+            <div style="background:linear-gradient(135deg, #FFFFFF 0%, #E2E8F0 100%); color:#090D16; border-radius:10px; padding:10px 18px; font-size:13px; font-weight:900; display:flex; align-items:center; gap:6px; box-shadow:0 4px 14px rgba(255,255,255,0.2);">
+              <span>ENTER</span>
+              <i class="fa-solid fa-chevron-right" style="font-size:11px;"></i>
+            </div>
           </div>
-          <div class="stake-room-pot-box gold-pot-box">
-            <div class="stake-pot-lbl">ESTIMATED PRIZE POOL</div>
-            <div class="stake-pot-val gold-pot" id="room-20-pot">6,800 ETB</div>
-          </div>
+        </div>
+
+        <!-- Subtle Compact Activity Ticker -->
+        <div style="background:rgba(255,255,255,0.03); border:1px solid rgba(226,232,240,0.1); border-radius:12px; padding:8px 14px; display:flex; align-items:center; justify-content:center; gap:8px; text-align:center; margin-top:4px;">
+          <span class="live-pulse-dot"></span>
+          <span style="font-size:11.5px; font-weight:700; color:#CBD5E1;">Live Bingo Active • 100% Real-Time Synchronized Draws</span>
+        </div>
+      </div>
           <button class="stake-cta-btn gold-cta" onclick="event.stopPropagation(); selectStake(20)">
             <i class="fa-solid fa-crown" style="color:#090D16; font-size:12px;"></i> PLAY 20 BIRR VIP (ይጫወቱ)
           </button>
@@ -2082,7 +2117,10 @@ body {
     </div>
   </div>
 
-  <div class="rules-screen"  id="rules-screen">
+  <!-- Bottom Sheet Backdrop & Container -->
+  <div id="rules-backdrop" onclick="closeRules()" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.68); backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px); z-index:999; transition:opacity 0.25s ease;"></div>
+  <div class="rules-bottom-sheet" id="rules-screen">
+    <div class="bottom-sheet-handle-bar"><div class="bottom-sheet-handle"></div></div>
     <div class="rules-header">
       <button class="rules-back" onclick="closeRules()"><i class="fa-solid fa-arrow-left"></i></button>
       <div class="rules-header-title" id="rules-header-title">Rules & Info</div>
@@ -2127,49 +2165,43 @@ body {
       <div class="no-balance-msg" id="no-balance-msg"><i class="fa-solid fa-circle-exclamation" style="margin-right:6px; color:#CBD5E1;"></i><span id="lbl-no-bal-msg">Insufficient balance! Please load your wallet.</span></div>
       <div class="game-id-bar">Game ID: <span id="game-id-label">—</span></div>
       
-      <!-- Quick Card Selection Controls -->
-      <div style="display:flex; justify-content:space-between; align-items:center; gap:6px; padding: 0 12px 10px; flex-wrap:wrap;">
-        <div style="display:flex; gap:6px;">
-          <button class="quick-pick-btn" onclick="quickPickCards(1)" style="background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.12); color:#F1F5F9; border-radius:8px; padding:6px 12px; font-size:11px; font-weight:700; cursor:pointer; display:flex; align-items:center; gap:5px;"><i class="fa-solid fa-bolt" style="color:#CBD5E1;"></i> 1 Card (በነሲብ 1)</button>
-          <button class="quick-pick-btn" onclick="quickPickCards(2)" style="background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.12); color:#F1F5F9; border-radius:8px; padding:6px 12px; font-size:11px; font-weight:700; cursor:pointer; display:flex; align-items:center; gap:5px;"><i class="fa-solid fa-dice" style="color:#CBD5E1;"></i> 2 Cards (በነሲብ 2)</button>
-          <button class="quick-pick-btn" onclick="clearSelectedCards()" style="background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.1); color:#CBD5E1; border-radius:8px; padding:6px 12px; font-size:11px; font-weight:700; cursor:pointer; display:flex; align-items:center; gap:5px;"><i class="fa-solid fa-trash-can" style="color:#CBD5E1;"></i> Clear (አጥፋ)</button>
-        </div>
-        <button onclick="instantStartMatch()" id="btn-instant-start" style="background:linear-gradient(135deg, #FFFFFF 0%, #E2E8F0 100%); color:#090D16; border:none; border-radius:8px; padding:6px 14px; font-size:11px; font-weight:800; cursor:pointer; display:flex; align-items:center; gap:5px; box-shadow:0 2px 10px rgba(255,255,255,0.2);">
-          <i class="fa-solid fa-play" style="color:#090D16; font-size:10px;"></i> START NOW
-        </button>
-      </div>
-
-            <!-- Lucky Card Search / Jump Bar -->
+      <!-- Lucky Card Search / Jump Bar -->
       <div class="card-search-container">
         <i class="fa-solid fa-magnifying-glass" style="color:var(--silver); font-size:12px;"></i>
-        <input type="number" id="card-search-input" min="1" max="400" placeholder="ካርቴላ ቁጥር ፈልግ (1-400) / Search card #..." oninput="jumpToCard(this.value)">
+        <input type="number" id="card-search-input" min="1" max="200" placeholder="Search card # (1-200)..." oninput="jumpToCard(this.value)">
         <button type="button" onclick="document.getElementById('card-search-input').value=''; jumpToCard('');" style="background:none; border:none; color:rgba(255,255,255,0.4); cursor:pointer; font-size:14px; padding:0 6px;">&times;</button>
       </div>
 
-      <div class="select-info" id="home-select-info">YOU CAN SELECT UP TO <span>2 CARDS</span></div>
-      <div class="cards-scroll"><div class="cards-grid" id="cards-grid"></div></div>
-      <div class="bottom-bar" style="display: flex; flex-direction: column; align-items: center; gap: 8px; padding: 10px 16px; width: 100%;">
-        <div id="card-status-bar" style="width: 100%;">
-          <div style="font-size:12px; color:var(--muted); text-align:center; padding:6px; font-weight:700;">
-            <i class="fa-solid fa-hand-pointer" style="color:#CBD5E1; margin-right:6px;"></i>Tap any card number (1-400) to instantly buy your ticket
+      <div class="select-info" id="home-select-info">SELECT UP TO <span>2 CARDS</span></div>
+      <div class="cards-scroll">
+        <div class="cards-grid" id="cards-grid"></div>
+
+        <!-- Live Selected Cartela(s) Details Preview Box -->
+        <div id="selected-cards-preview-box" style="margin: 14px 4px 6px; padding: 12px; background: rgba(18, 24, 38, 0.95); border: 1.5px solid rgba(226, 232, 240, 0.2); border-radius: 14px; box-shadow: 0 4px 20px rgba(0,0,0,0.5);">
+          <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:10px; border-bottom:1px solid rgba(255,255,255,0.08); padding-bottom:6px;">
+            <div style="font-size:12.5px; font-weight:800; color:#FFFFFF; display:flex; align-items:center; gap:6px;">
+              <i class="fa-solid fa-eye" style="color:var(--silver);"></i> Selected Cartela Preview
+            </div>
+            <div id="preview-count-badge" style="font-size:11px; font-weight:800; color:#090D16; background:#FFFFFF; padding:2px 8px; border-radius:10px;">0 / 2 Selected</div>
+          </div>
+          <div id="selected-cards-preview-grid" style="display:flex; gap:10px; justify-content:center; flex-wrap:wrap;">
+            <div style="font-size:12px; color:var(--muted); padding:16px 0; text-align:center;">
+              <i class="fa-solid fa-hand-pointer" style="margin-right:6px; color:#CBD5E1;"></i>Tap any card number (1-200) to select your lucky ticket
+            </div>
           </div>
         </div>
       </div>
       
-      <!-- Floating Selected Cards Bottom Dock -->
-      <div id="floating-selection-dock" class="floating-selection-dock">
-        <div class="floating-dock-content">
-          <div class="floating-dock-info">
-            <div class="floating-dock-badge"><span id="floating-selected-count">1</span> ካርቴላ ተመርጧል</div>
-            <div class="floating-dock-stake">መደብ: <span id="floating-total-stake" style="color:#FFFFFF; font-weight:900;">10 ETB</span></div>
+      
+      <div class="bottom-bar" style="display: flex; flex-direction: column; align-items: center; gap: 8px; padding: 10px 16px; width: 100%;">
+        <div id="card-status-bar" style="width: 100%;">
+          <div style="font-size:12px; color:var(--muted); text-align:center; padding:6px; font-weight:700;">
+            <i class="fa-solid fa-hand-pointer" style="color:#CBD5E1; margin-right:6px;"></i>Tap any card number (1-200) to instantly buy your ticket
           </div>
-          <button class="floating-confirm-btn" onclick="instantStartMatch()">
-            <span>ጀምር / START ROUND</span>
-            <i class="fa-solid fa-chevron-right" style="font-size:11px;"></i>
-          </button>
         </div>
       </div>
-    </div>
+      
+      
     <div id="wait-area" style="display:none;flex:1;flex-direction:column;">
       <div class="topbar">
         <div class="stat-box"><div class="stat-label" id="lbl-game-wait">GAME ID</div><div class="stat-val yellow" id="w-game-id">—</div></div>
@@ -2260,22 +2292,15 @@ body {
       </div>
     </div>
     
-    <!-- Prominent Dedicated BINGO Claim Button -->
-    <div style="padding: 6px 14px 10px; width:100%;">
-      <button id="btn-claim-bingo" onclick="claimBingoAction()" class="btn-claim-bingo-glow" style="width:100%; padding:14px; border-radius:14px; border:none; font-size:18px; font-weight:900; letter-spacing:1px; cursor:pointer; background:linear-gradient(135deg, #FFFFFF 0%, #E2E8F0 50%, #CBD5E1 100%); color:#090D16; display:flex; align-items:center; justify-content:center; gap:10px; box-shadow:0 6px 20px rgba(226,232,240,0.35); text-transform:uppercase;">
-        <i class="fa-solid fa-trophy" style="font-size:20px; color:#FCD34D;"></i> BINGO! / ቢንጎ በል!
-      </button>
-    </div>
+    
 
+    
     <div class="game-bottom-controls" style="display:flex; gap:10px; padding:10px 14px; background:rgba(9,13,22,0.96); border-top:1px solid rgba(226,232,240,0.12); width:100%;">
       <button onclick="leaveGameView()" style="flex:1; background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.12); color:#CBD5E1; border-radius:12px; padding:12px; font-size:14px; font-weight:700; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:6px;">
-        <i class="fa-solid fa-arrow-left" style="color:#CBD5E1;"></i> Leave
+        <i class="fa-solid fa-arrow-left" style="color:#CBD5E1;"></i> Leave Game
       </button>
       <button onclick="refreshGameState()" style="background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.12); color:#CBD5E1; border-radius:12px; width:48px; padding:12px; font-size:16px; font-weight:800; cursor:pointer; display:flex; align-items:center; justify-content:center;">
         <i class="fa-solid fa-rotate" style="color:#CBD5E1;"></i>
-      </button>
-      <button onclick="toggleAutoMode()" id="game-btn-auto" style="flex:1; background:linear-gradient(135deg, #FFFFFF 0%, #E2E8F0 100%); color:#090D16; border:none; border-radius:12px; padding:12px; font-size:14px; font-weight:800; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:6px; box-shadow:0 4px 12px rgba(255,255,255,0.15);">
-        Automatic
       </button>
     </div>
   </div>
@@ -2405,14 +2430,7 @@ body {
         </div>
 
         <!-- Change Password setting -->
-        <div class="setting-item" onclick="openChangePasswordModal()" style="background:var(--bg2); border-radius:14px; padding:12px 16px; border:1px solid rgba(255,255,255,0.07); display:flex; align-items:center; justify-content:space-between; cursor:pointer;">
-          <div style="display:flex; align-items:center; gap:12px;">
-            <div class="setting-icon-box">
-              <i class="fa-solid fa-key" style="color:#CBD5E1;"></i>
-            </div>
-            <div>
-              <div style="font-size:14px; font-weight:700; color:var(--text);" id="lbl-prof-security">Security & Password</div>
-              <div style="font-size:11px; color:var(--muted);" id="lbl-prof-security-desc">Update or protect your account password</div>
+        
             </div>
           </div>
           <i class="fa-solid fa-chevron-right" style="color:var(--muted); font-size:12px;"></i>
@@ -2449,11 +2467,9 @@ body {
         <button class="ftab active" id="tab-week" onclick="setWeek('week')">This Week</button>
         <button class="ftab" id="tab-month" onclick="setWeek('month')">This Month</button>
       </div>
-      <div class="filter-tabs2" style="margin-bottom: 10px;">
-        <button class="ftab2 active" id="tab-games" onclick="setCategory('games')"><i class="fa-solid fa-gamepad" style="margin-right:2px;"></i> Games</button>
-        <button class="ftab2" id="tab-wins" onclick="setCategory('wins')"><i class="fa-solid fa-trophy" style="margin-right:2px;"></i> Won</button>
-        <button class="ftab2" id="tab-deposit" onclick="setCategory('deposit')"><i class="fa-solid fa-wallet" style="margin-right:2px;"></i> Balance</button>
-        <button class="ftab2" id="tab-invite" onclick="setCategory('invite')"><i class="fa-solid fa-user-plus" style="margin-right:2px;"></i> Invites</button>
+      <div class="filter-tabs2" style="margin-bottom: 12px; display:flex; gap:8px;">
+        <button class="ftab2 active" id="tab-wins" onclick="setCategory('wins')" style="flex:1;"><i class="fa-solid fa-trophy" style="margin-right:4px;"></i> Won</button>
+        <button class="ftab2" id="tab-invite" onclick="setCategory('invite')" style="flex:1;"><i class="fa-solid fa-user-plus" style="margin-right:4px;"></i> Most Invites</button>
       </div>
       <div class="my-rank-box" style="margin-top: 6px;">
         <div>
@@ -2591,34 +2607,7 @@ body {
     </button>
   </nav>
 
-  <!-- Change Password Modal -->
-  <div class="rules-screen" id="change-password-modal" style="z-index: 1000;">
-    <div class="rules-header">
-      <button class="rules-back" onclick="closeChangePasswordModal()"><i class="fa-solid fa-arrow-left"></i></button>
-      <div class="rules-header-title">Change Password</div>
-    </div>
-    <div style="flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:24px;">
-      <div class="auth-box">
-        <div style="font-size:40px; color:#CBD5E1; margin-bottom:12px;"><i class="fa-solid fa-shield-halved"></i></div>
-        <div class="auth-title">UPDATE PASSWORD</div>
-        <div class="input-group" id="old-pass-group" style="margin-bottom:16px;">
-          <label>CURRENT PASSWORD (የአሁኑ የይለፍ ቃል)</label>
-          <div class="input-wrap">
-            <input type="password" id="old-sec-pass" class="auth-input" placeholder="••••••••" onkeydown="if(event.key === 'Enter') saveNewPassword()">
-            <span class="eye-icon" onclick="togglePassword('old-sec-pass')"><i class="fa-solid fa-eye"></i></span>
-          </div>
-        </div>
-        <div class="input-group" style="margin-bottom:16px;">
-          <label>NEW PASSWORD (አዲስ የይለፍ ቃል)</label>
-          <div class="input-wrap">
-            <input type="password" id="new-sec-pass" class="auth-input" placeholder="••••••••" onkeydown="if(event.key === 'Enter') saveNewPassword()">
-            <span class="eye-icon" onclick="togglePassword('new-sec-pass')"><i class="fa-solid fa-eye"></i></span>
-          </div>
-        </div>
-        <button class="auth-btn" onclick="saveNewPassword()">UPDATE PASSWORD</button>
-      </div>
-    </div>
-  </div>
+  
   
   <!-- Role Details Modal -->
   <div class="rules-screen" id="role-modal" style="z-index: 1000;">
@@ -3078,8 +3067,21 @@ var game={called:new Set(),current:null,recentBalls:[],autoIv:null,callCount:0,c
 var waitGame={called:new Set(),current:null,recentBalls:[],callCount:0,autoIv:null};
 var currentRulesLang = 'en'; var currentRulesTab = 'terms';
 
-function openRules() { if(soundOn) sfx.playClick(); document.getElementById('rules-screen').classList.add('active'); renderRules(); }
-function closeRules() { if(soundOn) sfx.playClick(); document.getElementById('rules-screen').classList.remove('active'); }
+function openRules() { 
+  if (soundOn) sfx.playClick(); 
+  var sheet = document.getElementById('rules-screen');
+  var bd = document.getElementById('rules-backdrop');
+  if (bd) bd.style.display = 'block';
+  if (sheet) sheet.classList.add('active'); 
+  renderRules(); 
+}
+function closeRules() { 
+  if (soundOn) sfx.playClick(); 
+  var sheet = document.getElementById('rules-screen');
+  var bd = document.getElementById('rules-backdrop');
+  if (sheet) sheet.classList.remove('active'); 
+  if (bd) bd.style.display = 'none';
+}
 var APP_TRANSLATIONS = {
   en: {
     // Topbars
@@ -3711,12 +3713,13 @@ function selectStake(stake) {
   setTxt('w-game-id', currentGameId);
   selCards = new Set();
   cardDeductMap = {};
-  for(var i=1;i<=400;i++){
+  for(var i=1;i <= 200;i++){
     var el = document.getElementById('cc-'+i);
     if(el) el.classList.remove('selected','disabled','taken');
   }
   setTxt('sel-count','0');
   setTxt('s-win-sel','0');
+  renderSelectedCardsPreview();
 
   if (socket && socket.connected) {
     socket.emit('join_room', { room: currentRoom, user_id: tgUserId, stake: currentStake });
@@ -4296,25 +4299,36 @@ function updateCardProximityBadge(ci, remaining) {
   var lblEl = document.getElementById(id);
   if (!lblEl) return;
   var cardNum = (game.cardNums && game.cardNums[ci]) ? game.cardNums[ci] : (ci + 1);
-  
-  var badgeHtml = '';
-  if (remaining === 0) {
-    badgeHtml = ' <span class="proximity-badge win-ready">🎉 BINGO READY!</span>';
-  } else if (remaining === 1) {
-    badgeHtml = ' <span class="proximity-badge one-to-go">🔥 1 ቀረው (1 TO GO)</span>';
-  } else if (remaining === 2) {
-    badgeHtml = ' <span class="proximity-badge two-to-go">⚡ 2 ቀረው (2 TO GO)</span>';
-  }
-  lblEl.parentElement.innerHTML = 'CARD: <span id="' + id + '">' + cardNum + '</span>' + badgeHtml;
+  lblEl.textContent = cardNum;
 }
 
 function highlightBingoReady() {
-  var btn = document.getElementById('btn-claim-bingo');
-  if (btn) {
-    btn.classList.add('bingo-ready-pulse');
-    btn.innerHTML = '<i class="fa-solid fa-crown" style="font-size:18px;"></i> CLAIM BINGO! (አሸንፌአለሁ ይጫኑ!) <i class="fa-solid fa-crown" style="font-size:18px;"></i>';
-  }
   triggerHaptic('success');
+  // AUTOMATIC BINGO WINNER DECLARATION
+  if (typeof autoClaimBingo === 'function') {
+    autoClaimBingo();
+  }
+}
+
+function autoClaimBingo() {
+  if (myWinReported) return;
+  bingoAudio.playBingo();
+  if (typeof triggerShareExplosion === 'function') triggerShareExplosion();
+
+  var winnerName = getUserDisplayName();
+  var winCard = (game.cardNums && game.cardNums[0]) ? game.cardNums[0] : 1;
+  
+  if (socket && socket.connected) {
+    socket.emit('declare_winner', {
+      user_id: tgUserId,
+      name: winnerName,
+      card_num: winCard,
+      card_index: 0,
+      game_id: game.gameId,
+      room: currentRoom
+    });
+  }
+  showToast('🏆 BINGO! YOU COMPLETED A WINNING LINE!');
 }
 
 function checkWin(ci) {
@@ -4384,7 +4398,7 @@ function quickPickCards(count) {
   clearSelectedCards(true);
   
   var available = [];
-  for (var i = 1; i <= 400; i++) {
+  for (var i = 1; i <= 200; i++) {
     if (!takenCartelas[i] || takenCartelas[i] === tgUserId) {
       available.push(i);
     }
@@ -4577,8 +4591,8 @@ function searchAndToggleCard() {
   var input = document.getElementById('cartela-search-input');
   if (!input) return;
   var num = parseInt(input.value);
-  if (!num || num < 1 || num > 400) {
-    showToast(' Please enter a valid card number between 1 and 400.');
+  if (!num || num < 1 || num > 200) {
+    showToast(' Please enter a valid card number between 1 and 200.');
     return;
   }
   toggleCard(num);
@@ -5043,8 +5057,8 @@ function updateUserInfo(){
   setTxt('wl-id', 'ID: ' + idDisplay);
 
   // Redesigned Homepage Top Bar Text
-  setTxt('home-user-name', name);
-  setTxt('home-user-nickname', nickname);
+  setTxt('home-user-name', (tgUser && tgUser.username ? '@' + tgUser.username.replace('@','') : name));
+  // nickname hidden in topbar
   setTxt('home-user-id-val', idDisplay);
 
   // Avatars across screens
@@ -5433,7 +5447,7 @@ function buildGrid() {
   var g = document.getElementById('cards-grid');
   if (!g) return;
   var h = '';
-  for (var i = 1; i <= 400; i++) {
+  for (var i = 1; i <= 200; i++) {
     h += '<div class="card-cell" id="cc-' + i + '" onclick="toggleCard(' + i + ')">' + i + '</div>';
   }
   g.innerHTML = h;
@@ -5445,7 +5459,7 @@ var cardDeductMap = {};
 // UX Helper: Lucky Card Search & Smooth Scroll Jump
 function jumpToCard(val) {
   var num = parseInt(val, 10);
-  if (isNaN(num) || num < 1 || num > 400) return;
+  if (isNaN(num) || num < 1 || num > 200) return;
   var el = document.getElementById('cc-' + num);
   if (el) {
     el.scrollIntoView({ behavior: 'smooth', block: 'center' });
@@ -5499,7 +5513,7 @@ function updateFloatingSelectionDock() {
 }
 
 function updateCardGridStyling() {
-  for (var i = 1; i <= 400; i++) {
+  for (var i = 1; i <= 200; i++) {
     var el = document.getElementById('cc-' + i);
     if (!el) continue;
     
@@ -5529,11 +5543,53 @@ function updateCardStatusBadge() {
       '</div>' +
       '<div style="font-size:11px; color:var(--muted); text-align:center; margin-top:4px;"><i class="fa-solid fa-circle-info" style="margin-right:4px;"></i>Tap a selected card to cancel & refund anytime before game starts</div>';
   } else {
-    container.innerHTML = '<div style="font-size:12px; color:var(--muted); text-align:center; padding:6px; font-weight:700;"><i class="fa-solid fa-hand-pointer" style="color:#CBD5E1; margin-right:6px;"></i>Tap any card number (1-400) to instantly buy your ticket</div>';
+    container.innerHTML = '<div style="font-size:12px; color:var(--muted); text-align:center; padding:6px; font-weight:700;"><i class="fa-solid fa-hand-pointer" style="color:#CBD5E1; margin-right:6px;"></i>Tap any card number (1-200) to instantly buy your ticket</div>';
   }
 }
 
-async function toggleCard(n) {
+async 
+// Render 5x5 preview matrix for selected cartelas in the lobby
+function renderSelectedCardsPreview() {
+  var container = document.getElementById('selected-cards-preview-grid');
+  var badge = document.getElementById('preview-count-badge');
+  if (!container) return;
+
+  var selectedArray = Array.from(selCards);
+  if (badge) badge.textContent = selectedArray.length + ' / 2 Selected';
+
+  if (selectedArray.length === 0) {
+    container.innerHTML = '<div style="font-size:12px; color:var(--muted); padding:16px 0; text-align:center;"><i class="fa-solid fa-hand-pointer" style="margin-right:6px; color:#CBD5E1;"></i>Tap any card number (1-200) to select your lucky ticket</div>';
+    return;
+  }
+
+  var htmlOut = '';
+  selectedArray.forEach(function(cardNum) {
+    var cardData = generateCardDeterministic(cardNum);
+    htmlOut += '<div class="preview-mini-card" style="background:rgba(10,15,26,0.9); border:1px solid rgba(255,255,255,0.15); border-radius:10px; padding:8px; width:100%; max-width:210px;">';
+    htmlOut += '  <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">';
+    htmlOut += '    <span style="font-size:12px; font-weight:900; color:#FFFFFF;">Cartela #' + cardNum + '</span>';
+    htmlOut += '    <button onclick="event.stopPropagation(); toggleCard(' + cardNum + ');" style="background:rgba(239,68,68,0.2); border:1px solid rgba(239,68,68,0.5); color:#FCA5A5; border-radius:6px; padding:2px 6px; font-size:10px; font-weight:800; cursor:pointer;">&times; Remove</button>';
+    htmlOut += '  </div>';
+    htmlOut += '  <div style="display:grid; grid-template-columns:repeat(5, 1fr); gap:2px; text-align:center; margin-bottom:3px;">';
+    ['B','I','N','G','O'].forEach(function(L) {
+      htmlOut += '<div style="font-size:9px; font-weight:900; color:#CBD5E1; background:rgba(255,255,255,0.06); padding:2px 0; border-radius:2px;">' + L + '</div>';
+    });
+    htmlOut += '  </div>';
+    htmlOut += '  <div style="display:grid; grid-template-columns:repeat(5, 1fr); gap:2px; text-align:center;">';
+    cardData.forEach(function(cell) {
+      var isStar = cell.n === '★';
+      htmlOut += '<div style="font-size:10px; font-weight:700; color:' + (isStar ? '#FCD34D' : '#F8FAFC') + '; background:' + (isStar ? 'rgba(252,211,77,0.15)' : 'rgba(255,255,255,0.04)') + '; padding:4px 0; border-radius:3px;">' + cell.n + '</div>';
+    });
+    htmlOut += '  </div>';
+    htmlOut += '</div>';
+  });
+
+  container.innerHTML = htmlOut;
+}
+
+// Hook renderSelectedCardsPreview to toggleCard
+
+function toggleCard(n) {
   triggerHaptic('selection');
   if (takenCartelas[n] && takenCartelas[n] !== tgUserId) {
     if (apiAvailable) Telegram.WebApp.showAlert('⚠️ This cartela is already taken by another player! (ይህ ካርቴላ በሌላ ተጫዋች ቀድሞ ተወስዷል!)');
@@ -5670,7 +5726,7 @@ async function toggleCard(n) {
   var winAmt = Math.round(selCards.size * currentStake * 0.8);
   setTxt('s-win-sel', winAmt);
   setTxt('s-win-game', winAmt);
-  updateFloatingSelectionDock();
+  renderSelectedCardsPreview();
   updatePlayersDisplay();
   updateCardStatusBadge();
 }
@@ -6212,7 +6268,7 @@ function newRound(){
   cardDeductMap={};
   winnersThisRound=[];
   myWinReported=false;
-  for(var i=1;i<=400;i++){
+  for(var i=1;i <= 200;i++){
     var el=document.getElementById('cc-'+i);
     if(el)el.classList.remove('selected','disabled','taken');
   }
@@ -6424,7 +6480,7 @@ function showScreen(id) {
   var nav = document.getElementById('bottom-nav');
   var appEl = document.querySelector('.app');
   
-  if (id === 'screen-game' || id === 'screen-winner' || id === 'screen-create-password') {
+  if (id === 'screen-game' || id === 'screen-winner' || id === 'screen-home') {
     if (nav) nav.style.display = 'none';
     if (topbar) topbar.style.display = 'none';
     if (appEl) appEl.classList.add('in-game-mode');

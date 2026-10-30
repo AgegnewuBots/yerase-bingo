@@ -442,7 +442,7 @@ function createGameObject(roomId, stake) {
     roomId: roomId,
     stake: Number(stake) || 10,
     status: 'waiting', // 'waiting', 'running', 'celebrating'
-    timeLeft: 30, // 30-second lobby countdown
+    timeLeft: 60, // 60-second lobby countdown
     gameId: generateGameId(),
     calledNumbers: [],
     players: {}, // userId -> { userId, name, cards, cardNumbers, stake }
@@ -554,7 +554,7 @@ function tryStartGame(game) {
     startBallDrawing(game);
   } else {
     // No player joined, reset timer for next countdown
-    game.timeLeft = 30;
+    game.timeLeft = 60;
     game.gameId = generateGameId();
     io.to(game.roomId).emit('countdown_update', {
       room: game.roomId,
@@ -602,6 +602,63 @@ function startBallDrawing(game) {
       letter: letter,
       calledNumbers: game.calledNumbers
     });
+
+    // Automatic Server-Side Bingo Win Verification
+    const calledSet = new Set(game.calledNumbers);
+    let autoWinner = null;
+    for (const [userId, player] of Object.entries(game.players || {})) {
+      if (!player.cards) continue;
+      for (let ci = 0; ci < player.cards.length; ci++) {
+        const card = player.cards[ci];
+        const cardNum = (player.cardNumbers && player.cardNumbers[ci]) ? player.cardNumbers[ci] : (ci + 1);
+        if (verifyWin(card, calledSet)) {
+          autoWinner = {
+            userId: userId,
+            name: player.name || 'Player',
+            cardNum: cardNum,
+            cardIndex: ci
+          };
+          break;
+        }
+      }
+      if (autoWinner) break;
+    }
+
+    if (autoWinner) {
+      if (game.ballTimer) {
+        clearInterval(game.ballTimer);
+        game.ballTimer = null;
+      }
+      game.winners = [autoWinner];
+      game.status = 'celebrating';
+
+      const summary = getRoomGameSummary(game);
+      const totalPrize = summary.total_prize || Math.round(game.totalPot * 0.8);
+
+      // Award win in database
+      db.addWin(autoWinner.userId, totalPrize, game.gameId);
+
+      io.to(game.roomId).emit('game_ended', {
+        room: game.roomId,
+        game_id: game.gameId,
+        winners: game.winners,
+        total_players: summary.total_players,
+        total_cards: summary.total_cards,
+        total_pot: summary.total_pot,
+        total_prize: totalPrize,
+        active_cards: summary.active_cards
+      });
+
+      if (!game.streaksUpdated) {
+        updateStreaksOnGameEnd(game.players, game.winners);
+        game.streaksUpdated = true;
+      }
+
+      setTimeout(() => {
+        endGame(game);
+      }, 7000);
+      return;
+    }
   }
 
   // Draw first ball immediately
@@ -643,7 +700,7 @@ function endGame(game) {
   }
 
   game.status = 'waiting';
-  game.timeLeft = 30;
+  game.timeLeft = 60;
   game.gameId = generateGameId();
   game.players = {};
   game.calledNumbers = [];
