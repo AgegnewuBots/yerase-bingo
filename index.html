@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"/>
-<title>Yerase Bingo (የራሴ ቢንጎ) - Silver Edition</title>
+<title>Yerase Bingo - Live Multiplayer</title>
 <script src="https://telegram.org/js/telegram-web-app.js"></script>
 <!-- Firebase SDK Client Compatibility Libraries -->
 <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
@@ -1092,7 +1092,6 @@ body::before {
   font-weight: 900 !important;
 }
 
-
 /* Luxury Glassmorphic Toast Notification */
 #yerase-toast {
   position: fixed;
@@ -1146,7 +1145,6 @@ body::before {
   border-color: #FFFFFF;
   transform: translateY(-1px);
 }
-
 
 /* ============================================================================
    CHROME-FIRST LUXURY SILVER CASINO DESIGN SYSTEM
@@ -1453,7 +1451,6 @@ button:active, .card-cell:active, .cc:active, .nav-btn:active {
   color: #38BDF8 !important;
   text-shadow: 0 0 12px rgba(56, 189, 248, 0.8) !important;
 }
-
 
 /* ============================================================================
    ADVANCED TELEGRAM MINI APP PRO CASINO DESIGN SYSTEM
@@ -1840,7 +1837,6 @@ body {
   box-shadow: 0 4px 18px rgba(245, 158, 11, 0.45);
 }
 
-
 /* Single Unified Brand Icon Box & Micro-Components */
 .setting-icon-box {
   width: 38px !important;
@@ -1861,7 +1857,6 @@ body {
   border-color: rgba(255, 255, 255, 0.2) !important;
   color: #FFFFFF !important;
 }
-
 
 /* ============================================================================
    ADVANCED UX & MICRO-INTERACTION STYLES
@@ -2061,7 +2056,6 @@ body {
   100% { transform: scale(1.05); box-shadow: 0 0 20px rgba(252, 211, 77, 0.5); }
 }
 
-
 /* 1-to-Go / 2-to-Go Proximity Badges */
 .proximity-badge {
   display: inline-flex;
@@ -2106,7 +2100,6 @@ body {
   50% { transform: scale(1.03); }
 }
 
-
 /* Modern Bottom Sheet */
 .rules-bottom-sheet {
   position: fixed;
@@ -2141,7 +2134,6 @@ body {
   background: rgba(255,255,255,0.25);
   border-radius: 4px;
 }
-
 
 /* Clean Human-Crafted Room Pick Buttons */
 .room-pick-btn {
@@ -2350,19 +2342,18 @@ body.in-room-mode .bottom-nav,
     <div class="auth-container">
       <div class="auth-box">
         <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' stop-color='%23FFFFFF'/%3E%3Cstop offset='50%25' stop-color='%23CBD5E1'/%3E%3Cstop offset='100%25' stop-color='%2364748B'/%3E%3C/linearGradient%3E%3C/defs%3E%3Ccircle cx='50' cy='50' r='46' fill='url(%23g)' stroke='%23FFFFFF' stroke-width='3'/%3E%3Ccircle cx='50' cy='50' r='38' fill='%230B0F19'/%3E%3Ctext x='50' y='63' font-size='42' font-family='sans-serif' font-weight='900' fill='%23FFFFFF' text-anchor='middle'%3E%E1%8B%A8%3C/text%3E%3C/svg%3E" style="width: 100px; height: 100px; border-radius: 50%; border: 3px solid var(--orange); object-fit: cover; margin: 0 auto 15px; box-shadow: 0 0 20px rgba(255,107,0,0.5); display: block;" alt="Yerase Bingo Logo">
-        <div class="auth-title" style="color:var(--orange); font-size:22px; font-weight:800; text-shadow:0 0 10px rgba(255,107,0,0.3);">CREATE PASSWORD</div>
-        <p style="font-size:12px; color:var(--muted); line-height:1.5; margin-bottom:20px;">
-          Welcome to Yerase Bingo! Since this is your first time, please create a secure password to protect your wallet.<br>
-          እንኳን ደህና መጡ! ደህንነቱ የተጠበቀ የይለፍ ቃል ይፍጠሩ።
+        <div class="auth-title" id="lbl-create-pwd-title" style="color:var(--gold); font-size:22px; font-weight:800; text-shadow:0 0 10px rgba(230,199,135,0.3);">CREATE PASSWORD</div>
+        <p style="font-size:12px; color:var(--muted); line-height:1.5; margin-bottom:20px;" id="lbl-create-pwd-desc">
+          Welcome to Yerase Bingo! Please create a secure password to protect your wallet.
         </p>
         <div class="input-group" style="margin-bottom: 20px;">
-          <label>CREATE PASSWORD (የይለፍ ቃል)</label>
+          <label id="lbl-create-pwd-label">CREATE PASSWORD</label>
           <div class="input-wrap">
             <input type="password" id="tg-create-pass" class="auth-input" placeholder="••••••••" onkeydown="if(event.key === 'Enter') saveTgPassword()">
             <span class="eye-icon" onclick="togglePassword('tg-create-pass')"><i class="fa-solid fa-eye"></i></span>
           </div>
         </div>
-        <button class="auth-btn" onclick="saveTgPassword()">SAVE PASSWORD & START</button>
+        <button class="auth-btn" id="lbl-create-pwd-btn" onclick="saveTgPassword()">SAVE PASSWORD & START</button>
       </div>
     </div>
   </div>
@@ -2391,7 +2382,7 @@ body.in-room-mode .bottom-nav,
 
       <div class="home-wallet-pill" onclick="navTo('wallet')" style="display:flex; align-items:center; gap:8px; background:rgba(255,255,255,0.05); border:1px solid rgba(230, 199, 135,0.16); border-radius:12px; padding:6px 11px; cursor:pointer;" title="View Wallet">
         <i class="fa-solid fa-wallet" style="color:#E6C787; font-size:13px;"></i>
-        <span style="font-size:13px; font-weight:800; color:#FFFFFF;" id="home-bal-display">250.00 Br</span>
+        <span style="font-size:13px; font-weight:800; color:#FFFFFF;" id="home-bal-display">200.00 ETB</span>
         <button onclick="event.stopPropagation(); openClientDepositModal();" style="background:linear-gradient(135deg, #FFF4D9 0%, #E6C787 100%); color:#120824; border:none; border-radius:7px; padding:3px 7px; font-size:11px; font-weight:900; cursor:pointer; display:flex; align-items:center; gap:3px; box-shadow:0 2px 8px rgba(255,255,255,0.2);" title="Deposit">
           <i class="fa-solid fa-plus" style="color:#090D16; font-size:10px;"></i>
         </button>
@@ -2410,18 +2401,18 @@ body.in-room-mode .bottom-nav,
           <div style="position:absolute; inset:-4px; border-radius:50%; background:radial-gradient(circle, rgba(230, 199, 135, 0.25) 0%, transparent 70%); filter:blur(8px); pointer-events:none;"></div>
           <img id="stake-center-logo-img" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' stop-color='%23FFF4D9'/%3E%3Cstop offset='50%25' stop-color='%23E6C787'/%3E%3Cstop offset='100%25' stop-color='%23B8860B'/%3E%3C/linearGradient%3E%3C/defs%3E%3Ccircle cx='50' cy='50' r='46' fill='url(%23g)' stroke='%23E6C787' stroke-width='2.5'/%3E%3Ccircle cx='50' cy='50' r='38' fill='%23120824'/%3E%3Ctext x='50' y='63' font-size='42' font-family='sans-serif' font-weight='900' fill='%23FFF4D9' text-anchor='middle'%3E%E1%8B%A8%3C/text%3E%3C/svg%3E" class="stake-emblem-img" style="width:88px; height:88px; border-radius:50%; border:2px solid rgba(255,255,255,0.3); box-shadow:0 8px 30px rgba(0,0,0,0.6); position:relative; z-index:1;" alt="Yerase Bingo">
         </div>
-        <div class="stake-brand-title" style="font-size:24px; font-weight:900; letter-spacing:1px; background:linear-gradient(180deg, #FFFFFF 0%, #E6C787 100%); -webkit-background-clip:text; -webkit-text-fill-color:transparent; text-shadow:0 2px 10px rgba(0,0,0,0.5);">YERASE BINGO</div>
-        <div class="stake-brand-amharic" style="font-size:13px; font-weight:700; color:var(--muted); margin-top:4px; letter-spacing:0.3px;">የራሴ ቢንጎ • የቀጥታ ጨዋታ</div>
+        <div class="stake-brand-title" id="lbl-stake-brand-title" style="font-size:24px; font-weight:900; letter-spacing:1px; background:linear-gradient(180deg, #FFFFFF 0%, #E6C787 100%); -webkit-background-clip:text; -webkit-text-fill-color:transparent; text-shadow:0 2px 10px rgba(0,0,0,0.5);">YERASE BINGO</div>
+        <div class="stake-brand-amharic" id="lbl-stake-brand-subtitle" style="font-size:13px; font-weight:700; color:var(--muted); margin-top:4px; letter-spacing:0.3px;">Live Synchronized Bingo</div>
       </div>
 
       <!-- The 2 Flagship Rooms: Play 10 Birr and Play 20 Birr -->
       <div class="stake-box" style="display:flex; flex-direction:column; gap:14px; width:100%; max-width:390px; margin:22px auto 20px; padding:0 4px;">
         <button class="room-pick-btn" onclick="selectStake(10)">
-          <span>Play 10 Birr</span>
+          <span id="lbl-room-pick-10">Play 10 Birr</span>
           <i class="fa-solid fa-arrow-right"></i>
         </button>
         <button class="room-pick-btn" onclick="selectStake(20)">
-          <span>Play 20 Birr</span>
+          <span id="lbl-room-pick-20">Play 20 Birr</span>
           <i class="fa-solid fa-arrow-right"></i>
         </button>
       </div>
@@ -2461,30 +2452,28 @@ body.in-room-mode .bottom-nav,
         <div style="background: radial-gradient(circle, rgba(245, 158, 11, 0.15) 0%, transparent 70%); width: 140px; height: 140px; display: flex; align-items: center; justify-content: center; border-radius: 50%; margin-bottom: 20px;">
           <i class="fa-solid fa-hourglass-half" style="color:#E6C787; font-size:64px; filter:drop-shadow(0 0 15px rgba(230, 199, 135,0.3));"></i>
         </div>
-        <h2 style="font-size:18px; font-weight:800; color:#fff; margin-bottom:10px; letter-spacing:0.5px; text-transform:uppercase;">GAME IN PROGRESS</h2>
-        <p style="font-size:13px; color:var(--muted); max-width:280px; line-height:1.5; margin-bottom: 18px;">
+        <h2 id="lbl-running-title" style="font-size:18px; font-weight:800; color:#fff; margin-bottom:10px; letter-spacing:0.5px; text-transform:uppercase;">GAME IN PROGRESS</h2>
+        <p id="lbl-running-desc" style="font-size:13px; color:var(--muted); max-width:280px; line-height:1.5; margin-bottom: 18px;">
           A synchronized round is currently active. Please wait for the next countdown to buy a ticket.
-          <br><span style="color:#E6C787; font-size:12px; font-weight:600; margin-top:5px; display:inline-block;">ጨዋታው በመካሄድ ላይ ነው። እባክዎ ቀጣዩን ዙር ይጠብቁ።</span>
         </p>
-        <!-- Spectator button to watch live game calling balls -->
-        <button onclick="spectateLiveGame()" style="background: linear-gradient(135deg, #334155 0%, #1E293B 100%); color:#F8FAFC; border:1px solid rgba(230, 199, 135,0.25); padding:12px 24px; border-radius:10px; font-size:14px; font-weight:800; cursor:pointer; display:flex; align-items:center; gap:8px; box-shadow: 0 4px 15px rgba(0,0,0,0.5); transition: transform 0.15s ease;"><i class="fa-solid fa-eye" style="color:#E6C787;"></i> WATCH LIVE GAME (ቀጥታ ጨዋታውን ይመልከቱ)</button>
+        <button onclick="spectateLiveGame()" style="background: linear-gradient(135deg, #334155 0%, #1E293B 100%); color:#F8FAFC; border:1px solid rgba(230, 199, 135,0.25); padding:12px 24px; border-radius:10px; font-size:14px; font-weight:800; cursor:pointer; display:flex; align-items:center; gap:8px; box-shadow: 0 4px 15px rgba(0,0,0,0.5); transition: transform 0.15s ease;"><i class="fa-solid fa-eye" style="color:#E6C787;"></i> <span id="lbl-running-watch-btn">WATCH LIVE GAME</span></button>
       </div>
 
       <!-- Sleek In-Room Dedicated Header Bar -->
       <div class="room-header-bar">
         <button class="room-back-btn" onclick="backToStake()">
           <i class="fa-solid fa-arrow-left" style="color:#E6C787;"></i>
-          <span>Rooms</span>
+          <span id="lbl-room-back-btn">Rooms</span>
         </button>
         <div class="room-badge-pill" id="room-header-title">Play 10 Birr</div>
         <div class="room-balance-pill" onclick="openClientDepositModal()" title="Add balance">
           <i class="fa-solid fa-wallet" style="color:#E6C787; font-size:12px;"></i>
-          <span style="font-size:12px; font-weight:800; color:#FFF4D9;" id="room-bal-display">0.00 Br</span>
+          <span style="font-size:12px; font-weight:800; color:#FFF4D9;" id="room-bal-display">200.00 ETB</span>
           <span style="background:var(--gold-gradient); color:#120824; border-radius:5px; padding:2px 6px; font-size:10px; font-weight:900;">+</span>
         </div>
       </div>
       <div class="no-balance-msg" id="no-balance-msg"><i class="fa-solid fa-circle-exclamation" style="margin-right:6px; color:#E6C787;"></i><span id="lbl-no-bal-msg">Insufficient balance! Please load your wallet.</span></div>
-      <div class="game-id-bar">Game ID: <span id="game-id-label">—</span></div>
+      <div class="game-id-bar"><span id="lbl-game-id-prefix">Game ID:</span> <span id="game-id-label">—</span></div>
 
       <div class="select-info" id="home-select-info">SELECT UP TO <span>2 CARDS</span></div>
       <div class="cards-scroll">
@@ -2494,13 +2483,13 @@ body.in-room-mode .bottom-nav,
         <div id="selected-cards-preview-box" style="margin: 14px 4px 6px; padding: 12px; background: rgba(18, 24, 38, 0.95); border: 1.5px solid rgba(230, 199, 135, 0.2); border-radius: 14px; box-shadow: 0 4px 20px rgba(0,0,0,0.5);">
           <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:10px; border-bottom:1px solid rgba(255,255,255,0.08); padding-bottom:6px;">
             <div style="font-size:12.5px; font-weight:800; color:#FFFFFF; display:flex; align-items:center; gap:6px;">
-              <i class="fa-solid fa-eye" style="color:var(--silver);"></i> Selected Cartela Preview
+              <i class="fa-solid fa-eye" style="color:var(--silver);"></i> <span id="lbl-preview-title">Selected Cartela Preview</span>
             </div>
             <div id="preview-count-badge" style="font-size:11px; font-weight:800; color:#090D16; background:#FFFFFF; padding:2px 8px; border-radius:10px;">0 / 2 Selected</div>
           </div>
           <div id="selected-cards-preview-grid" style="display:flex; gap:10px; justify-content:center; flex-wrap:wrap;">
             <div style="font-size:12px; color:var(--muted); padding:16px 0; text-align:center;">
-              <i class="fa-solid fa-hand-pointer" style="margin-right:6px; color:#E6C787;"></i>Tap any card number (1-200) to select your lucky ticket
+              <i class="fa-solid fa-hand-pointer" style="margin-right:6px; color:#E6C787;"></i><span id="lbl-preview-empty">Tap any card number (1-200) to select your lucky ticket</span>
             </div>
           </div>
         </div>
@@ -2510,7 +2499,7 @@ body.in-room-mode .bottom-nav,
       <div class="bottom-bar" style="display: flex; flex-direction: column; align-items: center; gap: 8px; padding: 10px 16px; width: 100%;">
         <div id="card-status-bar" style="width: 100%;">
           <div style="font-size:12px; color:var(--muted); text-align:center; padding:6px; font-weight:700;">
-            <i class="fa-solid fa-hand-pointer" style="color:#E6C787; margin-right:6px;"></i>Tap any card number (1-200) to instantly buy your ticket
+            <i class="fa-solid fa-hand-pointer" style="color:#E6C787; margin-right:6px;"></i><span id="lbl-status-empty">Tap any card number (1-200) to instantly buy your ticket</span>
           </div>
         </div>
       </div>
@@ -2532,7 +2521,7 @@ body.in-room-mode .bottom-nav,
         <div class="right-col">
           <div class="recent-balls" id="wait-recent-balls"></div>
           <div class="current-box">
-            <div class="current-label">Current</div>
+            <div class="current-label" id="lbl-wait-current">Current</div>
             <div class="current-ball-big" id="wait-current-big" style="background:#333;color:#fff;margin:auto;"><span class="cbl" id="wait-cb-letter">-</span><span class="cbn" id="wait-cb-num">-</span></div>
           </div>
           <div class="controls-row">
@@ -2551,8 +2540,8 @@ body.in-room-mode .bottom-nav,
   <div class="screen" id="screen-game">
     <div id="spectator-banner" style="display:none; background: linear-gradient(90deg, #d84315 0%, #ff8f00 100%); color: #fff; padding: 8px 12px; font-size: 13px; font-weight: 700; text-align: center; border-bottom: 1px solid rgba(255,255,255,0.1); flex-shrink: 0; box-shadow: 0 4px 12px rgba(216,67,21,0.3); z-index: 50; align-items:center; justify-content:center; gap:8px;">
       <i class="fa-solid fa-circle-exclamation"></i>
-      <span>You didn't join this game. Watching live... (ይህን ጨዋታ አልተቀላቀሉም። በጀርባ እየተመለከቱ ነው...)</span>
-      <button onclick="navTo('home')" style="background:rgba(0,0,0,0.35); border:1px solid rgba(255,255,255,0.7); color:#fff; border-radius:8px; padding:4px 10px; font-size:11px; font-weight:800; cursor:pointer; display:inline-flex; align-items:center; gap:5px; margin-left:6px; transition:transform 0.15s ease;"><i class="fa-solid fa-arrow-left"></i> LOBBY (ውጣ)</button>
+      <span id="lbl-spec-banner-text">You didn't join this round. Watching live...</span>
+      <button onclick="navTo('home')" style="background:rgba(0,0,0,0.35); border:1px solid rgba(255,255,255,0.7); color:#fff; border-radius:8px; padding:4px 10px; font-size:11px; font-weight:800; cursor:pointer; display:inline-flex; align-items:center; gap:5px; margin-left:6px; transition:transform 0.15s ease;"><i class="fa-solid fa-arrow-left"></i> <span id="lbl-spec-banner-btn">LOBBY</span></button>
     </div>
     <div class="topbar">
       <div class="stat-box"><div class="stat-label" id="lbl-game-active">GAME ID</div><div class="stat-val yellow" id="s-game-id">—</div></div>
@@ -2573,32 +2562,32 @@ body.in-room-mode .bottom-nav,
           <div class="current-ball-big" id="current-big" style="background:#333;color:#fff;margin:auto;"><span class="cbl" id="cb-letter">-</span><span class="cbn" id="cb-num">-</span></div>
         </div>
         <div class="controls-row">
-          <div class="ctrl-item"><span class="ctrl-lbl green">Auto</span><div class="toggle on locked" id="auto-toggle"></div></div>
+          <div class="ctrl-item"><span class="ctrl-lbl green" id="lbl-auto-ctrl">Auto</span><div class="toggle on locked" id="auto-toggle"></div></div>
           <div class="ctrl-item"><span class="ctrl-lbl blue"><i class="fa-solid fa-volume-xmark sound-icon-inner"></i></span><div class="toggle" id="sound-toggle" onclick="toggleSound()"></div></div>
         </div>
 
         <div id="active-cards-bar" style="background: rgba(15, 15, 35, 0.9); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 8px 12px; margin: 8px 0; display: flex; flex-direction: column; gap: 4px;">
           <div style="font-size: 11px; font-weight: 800; color: var(--yellow); display: flex; justify-content: space-between; align-items: center;">
-            <span><i class="fa-solid fa-layer-group" style="margin-right: 6px; color: #E6C787;"></i> Active Cards (በጨዋታ ላይ ያሉ)</span>
+            <span><i class="fa-solid fa-layer-group" style="margin-right: 6px; color: #E6C787;"></i> <span id="lbl-active-cards-bar">Active Cards</span></span>
             <span id="active-cards-count-badge" style="background: var(--orange); color: #fff; padding: 2px 8px; border-radius: 10px; font-size: 11px; font-weight: 800;">0</span>
           </div>
           <div id="active-cards-list" style="display: flex; gap: 6px; overflow-x: auto; padding: 4px 0; max-width: 100%;"></div>
         </div>
 
         <div class="watching-only-box" id="watching-only-box" style="display:none; background: linear-gradient(135deg, rgba(20, 20, 45, 0.95) 0%, rgba(10, 10, 30, 0.95) 100%); border: 1.5px solid rgba(255, 123, 0, 0.4); border-radius: 18px; padding: 32px 20px; text-align: center; box-shadow: 0 8px 32px rgba(0,0,0,0.6); margin: 12px 0; flex-direction: column; align-items: center; justify-content: center; min-height: 220px;">
-          <div style="font-size:24px; font-weight:800; color:#ffffff; margin-bottom:14px; letter-spacing:0.5px;">Watching Only</div>
-          <div style="font-size:15px; color:#ffffff; line-height:1.7; font-weight:600; font-family:sans-serif; max-width:280px; text-shadow:0 1px 2px rgba(0,0,0,0.5);">
-            የዚህ ዙር ጨዋታ ተጀምሯል። አዲስ ዙር እስኪጀምር እዚህ ይጠበቁ።
+          <div id="lbl-watching-title" style="font-size:24px; font-weight:800; color:#ffffff; margin-bottom:14px; letter-spacing:0.5px;">Watching Only</div>
+          <div id="lbl-watching-desc" style="font-size:15px; color:#ffffff; line-height:1.7; font-weight:600; font-family:sans-serif; max-width:280px; text-shadow:0 1px 2px rgba(0,0,0,0.5);">
+            This round has already started. Please wait here for the next round.
           </div>
         </div>
 
         <div class="card-box" id="card1-box">
-          <div class="card-id-lbl">CARD: <span id="card1-id">—</span></div>
+          <div class="card-id-lbl"><span id="lbl-card1-prefix">CARD:</span> <span id="card1-id">—</span></div>
           <div class="card-hdr" id="card1-header"></div>
           <div class="card-grid" id="card1-grid"></div>
         </div>
         <div class="card-box" id="card2-box" style="display:none;">
-          <div class="card-id-lbl">CARD: <span id="card2-id">—</span></div>
+          <div class="card-id-lbl"><span id="lbl-card2-prefix">CARD:</span> <span id="card2-id">—</span></div>
           <div class="card-hdr" id="card2-header"></div>
           <div class="card-grid" id="card2-grid"></div>
         </div>
@@ -2611,7 +2600,7 @@ body.in-room-mode .bottom-nav,
     
     <div class="game-bottom-controls" style="display:flex; gap:10px; padding:10px 14px; background:rgba(9,13,22,0.96); border-top:1px solid rgba(230, 199, 135,0.12); width:100%;">
       <button onclick="leaveGameView()" style="flex:1; background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.12); color:#E6C787; border-radius:12px; padding:12px; font-size:14px; font-weight:700; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:6px;">
-        <i class="fa-solid fa-arrow-left" style="color:#E6C787;"></i> Leave Game
+        <i class="fa-solid fa-arrow-left" style="color:#E6C787;"></i> <span id="lbl-leave-game-btn">Leave Game</span>
       </button>
       <button onclick="refreshGameState()" style="background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.12); color:#E6C787; border-radius:12px; width:48px; padding:12px; font-size:16px; font-weight:800; cursor:pointer; display:flex; align-items:center; justify-content:center;">
         <i class="fa-solid fa-rotate" style="color:#E6C787;"></i>
@@ -2626,22 +2615,22 @@ body.in-room-mode .bottom-nav,
       <div class="winner-title" id="winner-title-text">BINGO! WINNER!</div>
       <div class="winners-names-row" id="winners-names-row"></div>
       <div class="winner-card-box" id="w-card-box"><div class="winner-card-hdr" id="w-card-hdr"></div><div class="winner-card-grid" id="w-card-grid"></div></div>
-      <div class="prize-box"><div class="prize-label">Prize Distributed</div><div class="prize-amount" id="w-prize">0</div><div class="prize-each" id="w-prize-each"></div></div>
+      <div class="prize-box"><div class="prize-label" id="lbl-winner-prize-dist">Prize Distributed</div><div class="prize-amount" id="w-prize">0</div><div class="prize-each" id="w-prize-each"></div></div>
       <div class="distribute-bar"><div class="distribute-fill" id="dist-fill"></div></div>
       
       <!-- Share Result Button with custom style and tap/celebratory behavior -->
       <div style="margin: 18px 0; text-align: center; width: 100%;">
         <button id="share-result-btn" onclick="shareWinnerResult()" class="btn btn-primary btn-breath" style="background: linear-gradient(135deg, #10b981 0%, #059669 100%); color: #fff; font-weight: 800; border-radius: 50px; padding: 12px 30px; border: none; font-size: 14px; text-transform: uppercase; letter-spacing: 1px; box-shadow: 0 4px 15px rgba(16, 185, 129, 0.4); cursor: pointer; display: inline-flex; align-items: center; gap: 8px; transition: all 0.2s ease-in-out; outline: none; width: auto;">
           <i class="fa-solid fa-share-nodes" style="font-size: 15px;"></i>
-          <span>Share Result (አጋራ)</span>
+          <span id="lbl-winner-share">Share Result</span>
         </button>
         <button onclick="showScreen('screen-stake')" class="btn" style="background:linear-gradient(135deg, #FFFFFF 0%, #E2E8F0 100%); color:#0B0F19; font-weight:900; border-radius:50px; padding:12px 26px; border:none; font-size:14px; text-transform:uppercase; letter-spacing:0.5px; box-shadow:0 4px 15px rgba(255,255,255,0.25); cursor:pointer; display:inline-flex; align-items:center; gap:8px; margin-left:8px; transition:transform 0.15s ease;">
           <i class="fa-solid fa-rotate-right" style="font-size:14px; color:#0B0F19;"></i>
-          <span>Play Again (እንደገና)</span>
+          <span id="lbl-winner-again">Play Again</span>
         </button>
       </div>
 
-      <div class="next-label">Next round starts in</div>
+      <div class="next-label" id="lbl-winner-next-label">Next round starts in</div>
       <div class="next-count" id="next-count">10</div>
     </div>
   </div>
@@ -2704,7 +2693,7 @@ body.in-room-mode .bottom-nav,
             </div>
             <div>
               <div style="font-size:14px; font-weight:700; color:var(--text);" id="lbl-prof-lang">Rules & Interface Language</div>
-              <div style="font-size:11px; color:var(--muted);" id="lbl-prof-lang-desc">Choose English or አማርኛ (Amharic)</div>
+              <div style="font-size:11px; color:var(--muted);" id="lbl-prof-lang-desc">Choose English or Amharic</div>
             </div>
           </div>
           <div style="display:flex; border-radius:8px; overflow:hidden; border:1px solid rgba(255,255,255,0.18);">
@@ -2737,7 +2726,7 @@ body.in-room-mode .bottom-nav,
             </div>
             <div>
               <div style="font-size:14px; font-weight:700; color:var(--text);" id="lbl-prof-rules">Game Rules & How to Play</div>
-              <div style="font-size:11px; color:var(--muted);" id="lbl-prof-rules-desc">የጨዋታው ሕጎች እና የአሸናፊነት መመሪያ</div>
+              <div style="font-size:11px; color:var(--muted);" id="lbl-prof-rules-desc">Learn how to daub, winning lines, and legal terms</div>
             </div>
           </div>
           <i class="fa-solid fa-chevron-right" style="color:var(--muted); font-size:12px;"></i>
@@ -2778,13 +2767,13 @@ body.in-room-mode .bottom-nav,
     </div>
     <div class="page-scroll">
       <div class="filter-tabs" style="display:flex; gap:6px; margin-bottom:12px;">
-        <button class="ftab active" id="tab-today" onclick="setPeriod('today')" style="flex:1;">Today (የዛሬ)</button>
-        <button class="ftab" id="tab-week" onclick="setPeriod('week')" style="flex:1;">This Week (የዚህ ሳምንት)</button>
-        <button class="ftab" id="tab-month" onclick="setPeriod('month')" style="flex:1;">This Month (የዚህ ወር)</button>
+        <button class="ftab active" id="tab-today" onclick="setPeriod('today')" style="flex:1;">Today</button>
+        <button class="ftab" id="tab-week" onclick="setPeriod('week')" style="flex:1;">This Week</button>
+        <button class="ftab" id="tab-month" onclick="setPeriod('month')" style="flex:1;">This Month</button>
       </div>
       <div class="filter-tabs2" style="margin-bottom: 12px; display:flex; gap:8px;">
-        <button class="ftab2 active" id="tab-wins" onclick="setCategory('wins')" style="flex:1;"><i class="fa-solid fa-trophy" style="margin-right:4px;"></i> Won</button>
-        <button class="ftab2" id="tab-invite" onclick="setCategory('invite')" style="flex:1;"><i class="fa-solid fa-user-plus" style="margin-right:4px;"></i> Most Invites</button>
+        <button class="ftab2 active" id="tab-wins" onclick="setCategory('wins')" style="flex:1;"><i class="fa-solid fa-trophy" style="margin-right:4px;"></i> <span id="lbl-tab-won">Won</span></button>
+        <button class="ftab2" id="tab-invite" onclick="setCategory('invite')" style="flex:1;"><i class="fa-solid fa-user-plus" style="margin-right:4px;"></i> <span id="lbl-tab-invites">Most Invites</span></button>
       </div>
       <div class="my-rank-box" style="margin-top: 6px;">
         <div>
@@ -2805,9 +2794,9 @@ body.in-room-mode .bottom-nav,
   
   <div class="screen" id="screen-wallet">
     <div class="topbar">
-      <div class="stat-box"><div class="stat-label">MAIN</div><div class="stat-val green" id="w-main">—</div></div>
-      <div class="stat-box"><div class="stat-label">PLAY</div><div class="stat-val green" id="w-play">—</div></div>
-      <div class="stat-box"><div class="stat-label">TOTAL</div><div class="stat-val yellow" id="w-total">—</div></div>
+      <div class="stat-box"><div class="stat-label" id="lbl-main-wallet">MAIN</div><div class="stat-val green" id="w-main">—</div></div>
+      <div class="stat-box"><div class="stat-label" id="lbl-play-wallet">PLAY</div><div class="stat-val green" id="w-play">—</div></div>
+      <div class="stat-box"><div class="stat-label" id="lbl-total-wallet">TOTAL</div><div class="stat-val yellow" id="w-total">—</div></div>
     </div>
     <div class="page-scroll">
       <!-- Profile & Wallet Avatar/Username -->
@@ -2849,7 +2838,7 @@ body.in-room-mode .bottom-nav,
               <span id="lbl-wal-playable-title">Playable Bonus</span>
             </div>
             <div style="font-size:20px; font-weight:800; color:#fff; margin-top:4px;"><span id="wl-play-sub">—</span> <span style="font-size:13px; font-weight:600; color:var(--muted);">Br</span></div>
-            <div style="font-size:9px; color:var(--muted); margin-top:4px; line-height:1.2;" id="lbl-wal-playable-desc">50 ETB Bonus</div>
+            <div style="font-size:9px; color:var(--muted); margin-top:4px; line-height:1.2;" id="lbl-wal-playable-desc">200 ETB Welcome Bonus</div>
           </div>
         </div>
       </div>
@@ -2859,21 +2848,21 @@ body.in-room-mode .bottom-nav,
         <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
           <div style="font-size:12px; font-weight:800; color:var(--yellow); letter-spacing:0.5px; display:flex; align-items:center; gap:6px;">
             <i class="fa-solid fa-shield-halved" style="color:#E6C787;"></i>
-            <span>WITHDRAWAL REQUIREMENTS</span>
+            <span id="lbl-wal-req-title">WITHDRAWAL REQUIREMENTS</span>
           </div>
           <span id="wagering-status-badge" style="font-size:10px; font-weight:700; padding:3px 8px; border-radius:10px; background:rgba(255,255,255,0.1); color:#fff;">Checking...</span>
         </div>
 
         <!-- Metric 1: Min Deposit -->
         <div style="display:flex; justify-content:space-between; align-items:center; font-size:11px; margin-bottom:10px; background:rgba(255,255,255,0.02); padding:8px 10px; border-radius:8px;">
-          <span style="color:var(--muted);">Min. Deposit Required:</span>
+          <span style="color:var(--muted);" id="lbl-wal-min-dep">Min. Deposit Required:</span>
           <span id="dep-req-val" style="font-weight:700; color:#fff;">0 / 50 Br</span>
         </div>
 
         <!-- Metric 2: 15x Wagering -->
         <div style="background:rgba(255,255,255,0.02); padding:10px; border-radius:8px;">
           <div style="display:flex; justify-content:space-between; align-items:center; font-size:11px; margin-bottom:6px;">
-            <span style="color:var(--muted);">Wagering Progress (15x Deposit):</span>
+            <span style="color:var(--muted);" id="lbl-wal-wager-prog">Wagering Progress (15x Deposit):</span>
             <span id="wager-req-val" style="font-weight:700; color:var(--green);">0 / 0 Br</span>
           </div>
           <div style="width:100%; height:8px; background:rgba(255,255,255,0.08); border-radius:4px; overflow:hidden;">
@@ -2881,7 +2870,7 @@ body.in-room-mode .bottom-nav,
           </div>
         </div>
 
-        <div style="font-size:10px; color:var(--muted); line-height:1.4; margin-top:10px; border-top:1px dashed rgba(255,255,255,0.08); padding-top:8px;">
+        <div style="font-size:10px; color:var(--muted); line-height:1.4; margin-top:10px; border-top:1px dashed rgba(255,255,255,0.08); padding-top:8px;" id="lbl-wal-policy-desc">
           💡 <strong>Withdrawal Policy:</strong> Deposited funds and winnings are withdrawable once you have deposited at least 50 ETB and wagered 15x your total deposit amount.
         </div>
       </div>
@@ -2890,10 +2879,10 @@ body.in-room-mode .bottom-nav,
       <!-- Quick Action Buttons for Deposit & Withdraw -->
       <div style="display:flex; gap:12px; margin: 16px 0;">
         <button onclick="openClientDepositModal()" style="flex:1; padding:14px; border-radius:14px; border:none; background:linear-gradient(135deg, #059669 0%, #10b981 100%); color:#fff; font-size:14px; font-weight:800; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:8px; box-shadow:0 4px 16px rgba(16,185,129,0.4); text-transform:uppercase;">
-          <i class="fa-solid fa-circle-arrow-down"></i> <span id="lbl-btn-deposit">DEPOSIT (ገንዘብ አስገባ)</span>
+          <i class="fa-solid fa-circle-arrow-down"></i> <span id="lbl-btn-deposit">DEPOSIT</span>
         </button>
         <button onclick="openClientWithdrawModal()" style="flex:1; padding:14px; border-radius:14px; border:1px solid rgba(239,68,68,0.4); background:linear-gradient(135deg, rgba(239,68,68,0.2) 0%, rgba(185,28,28,0.3) 100%); color:#fca5a5; font-size:14px; font-weight:800; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:8px; box-shadow:0 4px 16px rgba(239,68,68,0.2); text-transform:uppercase;">
-          <i class="fa-solid fa-circle-arrow-up"></i> <span id="lbl-btn-withdraw">WITHDRAW (ገንዘብ አውጣ)</span>
+          <i class="fa-solid fa-circle-arrow-up"></i> <span id="lbl-btn-withdraw">WITHDRAW</span>
         </button>
       </div>
 
@@ -2928,26 +2917,26 @@ body.in-room-mode .bottom-nav,
   <div class="rules-screen" id="role-modal" style="z-index: 1000;">
     <div class="rules-header">
       <button class="rules-back" onclick="closeRoleModal()"><i class="fa-solid fa-arrow-left"></i></button>
-      <div class="rules-header-title">USER ROLE & STATUS</div>
+      <div class="rules-header-title" id="lbl-role-modal-title">USER ROLE & STATUS</div>
     </div>
     <div style="flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:20px; overflow-y:auto;">
       <div class="auth-box" style="max-width:340px; width:100%; text-align:center;">
         <div style="font-size:38px; color:#E6C787; margin-bottom:10px;"><i class="fa-solid fa-user-shield"></i></div>
-        <div class="auth-title" style="margin-bottom:4px;">ACCOUNT ROLE</div>
-        <p style="font-size:11px; color:var(--muted); margin-bottom:16px;">Your current membership tier and system permissions</p>
+        <div class="auth-title" style="margin-bottom:4px;" id="lbl-role-modal-hdr">ACCOUNT ROLE</div>
+        <p style="font-size:11px; color:var(--muted); margin-bottom:16px;" id="lbl-role-modal-sub">Your current membership tier and system permissions</p>
         
         <div style="background:rgba(255,255,255,0.04); border:1px solid rgba(255,123,0,0.3); border-radius:14px; padding:14px; margin-bottom:16px; text-align:left;">
           <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px; border-bottom:1px solid rgba(255,255,255,0.06); padding-bottom:8px;">
-            <span style="font-size:11px; color:var(--muted); font-weight:700;">CURRENT ROLE</span>
+            <span style="font-size:11px; color:var(--muted); font-weight:700;" id="lbl-role-modal-lbl">CURRENT ROLE</span>
             <span id="role-modal-badge" style="font-size:11px; font-weight:900; background:#ff6b00; color:#000; padding:3px 8px; border-radius:6px; letter-spacing:0.5px;">PLAYER</span>
           </div>
           
           <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
-            <span style="font-size:11px; color:var(--muted);">Account ID:</span>
+            <span style="font-size:11px; color:var(--muted);" id="lbl-role-modal-accid">Account ID:</span>
             <span id="role-modal-id" style="font-size:11px; font-weight:700; color:#fff;">—</span>
           </div>
           <div style="display:flex; justify-content:space-between; align-items:center;">
-            <span style="font-size:11px; color:var(--muted);">Account Name:</span>
+            <span style="font-size:11px; color:var(--muted);" id="lbl-role-modal-accname">Account Name:</span>
             <span id="role-modal-name" style="font-size:11px; font-weight:700; color:#fff;">—</span>
           </div>
         </div>
@@ -2978,58 +2967,57 @@ body.in-room-mode .bottom-nav,
   <div class="rules-screen" id="client-deposit-modal" style="z-index: 1000;">
     <div class="rules-header">
       <button class="rules-back" onclick="closeClientDepositModal()"><i class="fa-solid fa-arrow-left"></i></button>
-      <div class="rules-header-title">Deposit / ገንዘብ ማስገቢያ</div>
+      <div class="rules-header-title" id="lbl-dep-modal-title">Deposit Funds</div>
     </div>
     <div style="flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:24px; overflow-y:auto;">
       <div class="auth-box" style="margin-top:auto; margin-bottom:auto; max-width:380px;">
         <div style="font-size:40px; color:#E6C787; margin-bottom:12px;"><i class="fa-solid fa-circle-arrow-down"></i></div>
-        <div class="auth-title">REQUEST DEPOSIT (ገንዘብ ያስገቡ)</div>
-        <p style="font-size:11px; color:var(--muted); text-align:center; margin-bottom:16px; line-height:1.4;">
-          Please deposit the funds using Telebirr or CBE, then enter the amount and your reference phone below.<br>
-          እባክዎን በቴሌብር ወይም በንግድ ባንክ ያስገቡና ያስገቡትን የገንዘብ መጠንና ስልክዎን ከታች ይመዝግቡ።
+        <div class="auth-title" id="lbl-dep-modal-heading">REQUEST DEPOSIT</div>
+        <p id="lbl-dep-modal-desc" style="font-size:11px; color:var(--muted); text-align:center; margin-bottom:16px; line-height:1.4;">
+          Please deposit funds using Telebirr or CBE, then enter the amount and reference phone below.
         </p>
         
         
         <!-- Payment Method Tabs -->
         <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:14px;">
           <button type="button" id="dep-method-telebirr" onclick="selectDepositMethod('Telebirr')" style="padding:10px; border-radius:10px; border:2px solid var(--green); background:rgba(0,230,118,0.15); color:#fff; font-size:12px; font-weight:800; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:6px;">
-            <i class="fa-solid fa-mobile-screen-button" style="color:#E6C787;"></i> Telebirr (ቴሌብር)
+            <i class="fa-solid fa-mobile-screen-button" style="color:#E6C787;"></i> <span id="lbl-dep-method-tele">Telebirr</span>
           </button>
           <button type="button" id="dep-method-cbe" onclick="selectDepositMethod('CBE Birr')" style="padding:10px; border-radius:10px; border:1px solid rgba(255,255,255,0.15); background:rgba(255,255,255,0.05); color:#fff; font-size:12px; font-weight:800; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:6px;">
-            <i class="fa-solid fa-building-columns" style="color:#E6C787;"></i> CBE (ንግድ ባንክ)
+            <i class="fa-solid fa-building-columns" style="color:#E6C787;"></i> <span id="lbl-dep-method-cbe">CBE Birr</span>
           </button>
         </div>
 
         <!-- Luxury Quick Amount Chips -->
         <div class="deposit-chips-row">
-          <button type="button" onclick="setQuickDeposit(50, this)" class="quick-chip-btn active">50 Br</button>
-          <button type="button" onclick="setQuickDeposit(100, this)" class="quick-chip-btn">100 Br</button>
-          <button type="button" onclick="setQuickDeposit(200, this)" class="quick-chip-btn">200 Br</button>
-          <button type="button" onclick="setQuickDeposit(500, this)" class="quick-chip-btn">500 Br</button>
+          <button type="button" onclick="setQuickDeposit(50, this)" class="quick-chip-btn active" id="chip-dep-50">50 ETB</button>
+          <button type="button" onclick="setQuickDeposit(100, this)" class="quick-chip-btn" id="chip-dep-100">100 ETB</button>
+          <button type="button" onclick="setQuickDeposit(200, this)" class="quick-chip-btn" id="chip-dep-200">200 ETB</button>
+          <button type="button" onclick="setQuickDeposit(500, this)" class="quick-chip-btn" id="chip-dep-500">500 ETB</button>
         </div>
 
         <div class="input-group" style="margin-bottom:12px;">
-          <label>DEPOSIT AMOUNT (የገንዘብ መጠን) - Min 50 Br</label>
+          <label id="lbl-dep-amount-label">DEPOSIT AMOUNT - Min 50 Br</label>
           <div class="input-wrap">
             <input type="number" id="dep-req-amount" class="auth-input" placeholder="50" min="50" value="50" onkeydown="if(event.key === 'Enter') submitClientDeposit()">
           </div>
         </div>
         
         <div class="input-group" style="margin-bottom:12px;">
-          <label>TRANSFER PHONE / SENDER (የከፈሉበት ስልክ ቁጥር)</label>
+          <label id="lbl-dep-phone-label">TRANSFER PHONE / SENDER</label>
           <div class="input-wrap">
             <input type="text" id="dep-req-ref" class="auth-input" placeholder="09xxxxxxxx" onkeydown="if(event.key === 'Enter') submitClientDeposit()">
           </div>
         </div>
 
         <div class="input-group" style="margin-bottom:16px;">
-          <label>SMS CONFIRMATION TEXT / TXN ID (የደረሰኝ SMS ወይም የሂሳብ ማረጋገጫ)</label>
+          <label id="lbl-dep-sms-label">SMS CONFIRMATION / TXN ID</label>
           <div class="input-wrap">
-            <textarea id="dep-req-sms" class="auth-input" rows="2" style="resize:none; padding:10px 14px; font-size:12px; height:auto; min-height:54px;" placeholder="Paste bank or Telebirr SMS confirmation here (የባንክ ወይም ቴሌብር ደረሰኝ SMS እዚህ ይለጥፉ)..."></textarea>
+            <textarea id="dep-req-sms" class="auth-input" rows="2" style="resize:none; padding:10px 14px; font-size:12px; height:auto; min-height:54px;" placeholder="Paste bank or Telebirr SMS confirmation here..."></textarea>
           </div>
         </div>
         
-        <button class="auth-btn" style="background-color:var(--green);" onclick="submitClientDeposit()">SUBMIT DEPOSIT REQUEST</button>
+        <button class="auth-btn" id="lbl-dep-submit-btn" style="background-color:var(--green);" onclick="submitClientDeposit()">SUBMIT DEPOSIT REQUEST</button>
       </div>
     </div>
   </div>
@@ -3038,21 +3026,20 @@ body.in-room-mode .bottom-nav,
   <div class="rules-screen" id="client-withdraw-modal" style="z-index: 1000;">
     <div class="rules-header">
       <button class="rules-back" onclick="closeClientWithdrawModal()"><i class="fa-solid fa-arrow-left"></i></button>
-      <div class="rules-header-title">Withdrawal / ገንዘብ ማውጫ</div>
+      <div class="rules-header-title" id="lbl-with-modal-title">Withdraw Funds</div>
     </div>
     <div style="flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:24px; overflow-y:auto;">
       <div class="auth-box" style="margin-top:auto; margin-bottom:auto; max-width:380px;">
         <div style="font-size:40px; color:#ef4444; margin-bottom:12px;"><i class="fa-solid fa-circle-arrow-up"></i></div>
-        <div class="auth-title">REQUEST WITHDRAWAL (ገንዘብ ያውጡ)</div>
-        <p style="font-size:11px; color:var(--muted); text-align:center; margin-bottom:12px; line-height:1.4;">
-          Your cashout request will be sent to the administrator for verification.<br>
-          የማውጣት ጥያቄዎ በአስተዳዳሪው ዘንድ ተረጋግጦ ይከፈልዎታል።
+        <div class="auth-title" id="lbl-with-modal-heading">REQUEST WITHDRAWAL</div>
+        <p id="lbl-with-modal-desc" style="font-size:11px; color:var(--muted); text-align:center; margin-bottom:12px; line-height:1.4;">
+          Your cashout request will be verified by the administrator and sent to your account.
         </p>
 
         <!-- Withdrawable status banner in modal -->
         <div id="modal-withdraw-summary" style="background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08); border-radius:12px; padding:12px; margin-bottom:16px; text-align:left;">
           <div style="display:flex; justify-content:space-between; align-items:center;">
-            <span style="font-size:10px; font-weight:800; color:var(--muted); text-transform:uppercase;">WITHDRAWABLE MAIN BALANCE</span>
+            <span id="lbl-with-modal-sub" style="font-size:10px; font-weight:800; color:var(--muted); text-transform:uppercase;">WITHDRAWABLE MAIN BALANCE</span>
             <span style="font-size:16px; font-weight:900; color:var(--green);" id="modal-withdrawable-bal">0.00 Br</span>
           </div>
           <div style="font-size:10px; color:var(--yellow); margin-top:8px; border-top:1px solid rgba(255,255,255,0.06); padding-top:8px; line-height:1.4;" id="modal-wager-info">
@@ -3061,20 +3048,20 @@ body.in-room-mode .bottom-nav,
         </div>
         
         <div class="input-group" style="margin-bottom:12px;">
-          <label>WITHDRAW AMOUNT (የማውጫ መጠን) - Min 150 Br</label>
+          <label id="lbl-with-amount-label">WITHDRAW AMOUNT - Min 150 Br</label>
           <div class="input-wrap">
             <input type="number" id="with-req-amount" class="auth-input" placeholder="150" min="150" value="150" onkeydown="if(event.key === 'Enter') submitClientWithdraw()">
           </div>
         </div>
         
         <div class="input-group" style="margin-bottom:16px;">
-          <label>RECEIVER ACCOUNT / PHONE (ገንዘብ የሚቀበሉበት ስልክ)</label>
+          <label id="lbl-with-phone-label">RECEIVER ACCOUNT / PHONE</label>
           <div class="input-wrap">
             <input type="text" id="with-req-phone" class="auth-input" placeholder="09xxxxxxxx" onkeydown="if(event.key === 'Enter') submitClientWithdraw()">
           </div>
         </div>
         
-        <button class="auth-btn" style="background-color:#ef4444;" onclick="submitClientWithdraw()">SUBMIT WITHDRAWAL REQUEST</button>
+        <button class="auth-btn" id="lbl-with-submit-btn" style="background-color:#ef4444;" onclick="submitClientWithdraw()">SUBMIT WITHDRAWAL REQUEST</button>
       </div>
     </div>
   </div>
@@ -3083,8 +3070,8 @@ body.in-room-mode .bottom-nav,
   <div class="rules-screen" id="banned-overlay" style="z-index: 11000; background:rgba(8,8,22,0.98); display:none;">
     <div style="flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:24px; text-align:center;">
       <div style="font-size:72px; color:#ef4444; filter: drop-shadow(0 0 15px rgba(239,68,68,0.5)); margin-bottom:20px;"><i class="fa-solid fa-user-slash"></i></div>
-      <div style="font-size:28px; font-weight:800; color:#fff; margin-bottom:8px;">Account Suspended</div>
-      <p style="font-size:14px; color:var(--muted); max-width:400px; line-height:1.6;" id="banned-reason-text">Your account has been suspended for violating our terms of service.<br>የእርስዎ መለያ ደንቦችን በመተላለፍዎ ታግዷል።</p>
+      <div id="lbl-banned-title" style="font-size:28px; font-weight:800; color:#fff; margin-bottom:8px;">Account Suspended</div>
+      <p style="font-size:14px; color:var(--muted); max-width:400px; line-height:1.6;" id="banned-reason-text">Your account has been suspended for violating our terms of service.</p>
     </div>
   </div>
 
@@ -3092,8 +3079,8 @@ body.in-room-mode .bottom-nav,
   <div class="rules-screen" id="maintenance-overlay" style="z-index: 11000; background:rgba(8,8,22,0.98); display:none;">
     <div style="flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:24px; text-align:center;">
       <div style="font-size:72px; color:var(--orange); filter: drop-shadow(0 0 15px rgba(255,107,0,0.5)); margin-bottom:20px;"><i class="fa-solid fa-screwdriver-wrench"></i></div>
-      <div style="font-size:28px; font-weight:800; color:#fff; margin-bottom:8px;">Under Maintenance</div>
-      <p style="font-size:14px; color:var(--muted); max-width:400px; line-height:1.6;">Our platform is currently undergoing scheduled maintenance. We will be back online shortly!<br>መድረካችን በአሁኑ ጊዜ የጥገና ሥራ ላይ ነው። በቅርቡ እንመለሳለን!</p>
+      <div style="font-size:28px; font-weight:800; color:#fff; margin-bottom:8px;" id="lbl-maint-title">Under Maintenance</div>
+      <p style="font-size:14px; color:var(--muted); max-width:400px; line-height:1.6;" id="lbl-maint-desc">Our platform is currently undergoing scheduled maintenance. We will be back online shortly!</p>
     </div>
   </div>
 
@@ -3103,16 +3090,15 @@ body.in-room-mode .bottom-nav,
       <div style="width:72px; height:72px; margin:0 auto 16px; border-radius:50%; background:radial-gradient(circle, rgba(124, 58, 237, 0.4) 0%, transparent 70%); border:2px solid var(--gold); display:flex; align-items:center; justify-content:center; box-shadow:0 0 24px rgba(230, 199, 135, 0.4);">
         <i class="fa-brands fa-telegram" style="color:#0088cc; font-size:40px;"></i>
       </div>
-      <div style="font-size:20px; font-weight:900; color:#FFF4D9; margin-bottom:8px; letter-spacing:0.5px;">OPEN IN TELEGRAM</div>
-      <p style="font-size:12.5px; color:var(--muted); line-height:1.6; margin-bottom:20px;">
-        Yerase Bingo functions securely inside Telegram Mini App. Please launch via our official Telegram bot to sync your account, wallet, and live games.<br>
-        <span style="color:#E6C787; font-weight:700; display:inline-block; margin-top:6px;">ይህ ጨዋታ የሚሰራው በቴሌግራም ብቻ ነው። እባክዎ በይፋዊው ቦት ይክፈቱ።</span>
+      <div style="font-size:20px; font-weight:900; color:#FFF4D9; margin-bottom:8px; letter-spacing:0.5px;" id="lbl-tg-only-title">OPEN IN TELEGRAM</div>
+      <p style="font-size:12.5px; color:var(--muted); line-height:1.6; margin-bottom:20px;" id="lbl-tg-only-desc">
+        Yerase Bingo functions securely inside Telegram Mini App. Please launch via our official Telegram bot to sync your account, wallet, and live games.
       </p>
-      <a href="https://t.me/yerase_bingo_bot" target="_blank" style="display:inline-flex; align-items:center; justify-content:center; gap:8px; width:100%; padding:14px; background:linear-gradient(135deg, #FFF4D9 0%, #E6C787 50%, #B8860B 100%); color:#120824; font-weight:900; font-size:14px; border-radius:14px; text-decoration:none; box-shadow:0 4px 20px rgba(230, 199, 135, 0.4); text-transform:uppercase;">
+      <a id="lbl-tg-only-btn" href="https://t.me/yerase_bingo_bot" target="_blank" style="display:inline-flex; align-items:center; justify-content:center; gap:8px; width:100%; padding:14px; background:linear-gradient(135deg, #FFF4D9 0%, #E6C787 50%, #B8860B 100%); color:#120824; font-weight:900; font-size:14px; border-radius:14px; text-decoration:none; box-shadow:0 4px 20px rgba(230, 199, 135, 0.4); text-transform:uppercase;">
         <i class="fa-brands fa-telegram" style="font-size:18px;"></i> Open in Telegram Bot
       </a>
-      <button onclick="document.getElementById('tg-only-overlay').style.display='none'" style="margin-top:14px; background:none; border:none; color:var(--muted); font-size:11.5px; cursor:pointer; text-decoration:underline;">
-        Continue as Preview / እንደ ሙከራ ቀጥል
+      <button id="lbl-tg-only-preview" onclick="document.getElementById('tg-only-overlay').style.display='none'" style="margin-top:14px; background:none; border:none; color:var(--muted); font-size:11.5px; cursor:pointer; text-decoration:underline;">
+        Continue as Preview
       </button>
     </div>
   </div>
@@ -3151,12 +3137,12 @@ body.in-room-mode .bottom-nav,
     }
   </style>
 </div>
-<div class="paused-overlay" id="paused-overlay"><div class="p-icon"><i class="fa-solid fa-circle-pause" style="color:#E6C787; filter: drop-shadow(0 0 15px rgba(230, 199, 135,0.5));"></i></div><div class="p-title">Game Paused</div><div class="p-sub">ጨዋታው ቆሟል። እባክዎ ይጠብቁ…</div></div>
-<div class="cancelled-overlay" id="cancelled-overlay"><div class="c-icon"><i class="fa-solid fa-circle-xmark" style="color:#ef4444; filter: drop-shadow(0 0 15px rgba(239,68,68,0.5));"></i></div><div class="c-title">Game Cancelled</div><div class="c-sub">ጨዋታው ተሰርዟል። ሂሳብዎ ይመለሳል።<br>The game was cancelled by admin.</div><button class="c-btn" onclick="dismissCancel()">OK — Back to Home</button></div>
+<div class="paused-overlay" id="paused-overlay"><div class="p-icon"><i class="fa-solid fa-circle-pause" style="color:#E6C787; filter: drop-shadow(0 0 15px rgba(230, 199, 135,0.5));"></i></div><div class="p-title" id="lbl-paused-title">Game Paused</div><div class="p-sub" id="lbl-paused-sub">Game is paused by administrator. Please wait…</div></div>
+<div class="cancelled-overlay" id="cancelled-overlay"><div class="c-icon"><i class="fa-solid fa-circle-xmark" style="color:#ef4444; filter: drop-shadow(0 0 15px rgba(239,68,68,0.5));"></i></div><div class="c-title" id="lbl-cancel-title">Game Cancelled</div><div class="c-sub" id="lbl-cancel-sub">The game was cancelled by admin. Any staked balance has been refunded.</div><button class="c-btn" id="lbl-cancel-btn" onclick="dismissCancel()">OK — Back to Home</button></div>
 
 <div class="onboarding-overlay" id="onboarding-overlay">
   <div class="onboarding-card">
-    <button class="onboarding-skip-btn" onclick="closeOnboarding()">Skip</button>
+    <button class="onboarding-skip-btn" onclick="closeOnboarding()" id="lbl-onb-skip">Skip</button>
     
     <div class="onboarding-badge" id="onboarding-step-badge">Step 1 of 3</div>
     
@@ -3252,7 +3238,6 @@ function getUserDisplayName() {
   return 'Player ' + uid;
 }
 
-
 // Telegram WebApp Haptic & Viewport Integration
 function triggerHaptic(type) {
   try {
@@ -3344,7 +3329,7 @@ function submitPastedTelegramId() {
   var nameInput = document.getElementById('pasted-tg-name').value.trim();
   
   if (!idInput) {
-    alert('Please enter or paste your Telegram ID. እባክዎ የስልክ ወይም አካውንት መለያዎን ያስገቡ።');
+    alert((currentRulesLang === 'am') ? 'እባክዎ የስልክ ወይም አካውንት መለያዎን ያስገቡ።' : 'Please enter or paste your Telegram ID.');
     return;
   }
   
@@ -3402,7 +3387,8 @@ var COL_COLORS = {B:'#00b0ff',I:'#d500f9',N:'#ff4081',G:'#ffd600',O:'#ff7b00'};
 var COL_TEXT   = {B:'#fff',I:'#fff',N:'#fff',G:'#000',O:'#000'};
 var AM_NUMBERS = {1:'አንድ',2:'ሁለት',3:'ሶስት',4:'አራት',5:'አምስት',6:'ስድስት',7:'ሰባት',8:'ስምንት',9:'ዘጠኝ',10:'አስር',11:'አስራ አንድ',12:'አስራ ሁለት',13:'አስራ ሶስት',14:'አስራ አራት',15:'አስራ አምስት',16:'አስራ ስድስት',17:'አስራ ሰባት',18:'አስራ ስምንት',19:'አስራ ዘጠኝ',20:'ሃያ',21:'ሃያ አንድ',22:'ሃያ ሁለት',23:'ሃያ ሶስት',24:'ሃያ አራት',25:'ሃያ አምስት',26:'ሃያ ስድስት',27:'ሃያ ሰባት',28:'ሃያ ስምንት',29:'ሃያ ዘጠኝ',30:'ሰላሳ',31:'ሰላሳ አንድ',32:'ሰላሳ ሁለት',33:'ሰላሳ ሶስት',34:'ሰላሳ አራት',35:'ሰላሳ አምስት',36:'ሰላሳ ስድስት',37:'ሰላሳ ሰባት',38:'ሰላሳ ስምንት',39:'ሰላሳ ዘጠኝ',40:'አርባ',41:'አርባ አንድ',42:'አርባ ሁለት',43:'አርባ ሶስት',44:'አርባ አራት',45:'አርባ አምስት',46:'አርባ ስድስት',47:'አርባ ሰባት',48:'አርባ ስምንት',49:'አርባ ዘጠኝ',50:'ሃምሳ',51:'ሃምሳ አንድ',52:'ሃምሳ ሁለት',53:'ሃምሳ ሶስት',54:'ሃምሳ አራት',55:'ሃምሳ አምስት',56:'ሃምሳ ስድስት',57:'ሃምሳ ሰባት',58:'ሃምሳ ስምንት',59:'ሃምሳ ዘጠኝ',60:'ስልሳ',61:'ስልሳ አንድ',62:'ስልሳ ሁለት',63:'ስልሳ ሶስት',64:'ስልሳ አራት',65:'ስልሳ አምስት',66:'ስልሳ ስድስት',67:'ስልሳ ሰባት',68:'ስልሳ ስምንት',69:'ስልሳ ዘጠኝ',70:'ሰባ',71:'ሰባ አንድ',72:'ሰባ ሁለት',73:'ሰባ ሶስት',74:'ሰባ አራት',75:'ሰባ አምስት'};
 
-var userMainBalance=parseFloat(localStorage.getItem('bingio_main_balance') || '0'),userPlayBalance=parseFloat(localStorage.getItem('bingio_play_balance') || '0'),hasUserPassword=false,apiAvailable=false;
+var userMainBalance=parseFloat(localStorage.getItem('bingio_main_balance') || '0'),userPlayBalance=parseFloat(localStorage.getItem('bingio_play_balance') || '200'),hasUserPassword=false,apiAvailable=false;
+if (isNaN(userPlayBalance) || userPlayBalance < 200) { userPlayBalance = 200; localStorage.setItem('bingio_play_balance', '200'); }
 var userTotalDeposited=0,userTotalWagered=0,userRequiredWager=0,userMinDepositMet=false,userWageringCompleted=false,userCanWithdraw=false;
 var selCards=new Set(),timeLeft=35,timerIv=null,round=1,currentGameId=null,hasBoughtTicket=false,serverGameStatus='waiting';
 var soundOn=localStorage.getItem('soundOn') === 'true',currentPeriod='week',currentCategory='games';
@@ -3452,48 +3438,66 @@ var APP_TRANSLATIONS = {
     "lbl-main-leader": "MAIN",
     "lbl-play-leader": "PLAY",
     "lbl-total-leader": "TOTAL",
+    "lbl-main-home": "MAIN",
+    "lbl-play-home": "PLAY",
+    "lbl-bet-home": "BET",
+    "lbl-win-home": "WIN",
+    "lbl-time-home": "TIME LEFT",
+    "lbl-game-wait": "GAME ID",
+    "lbl-win-wait": "WIN",
+    "lbl-players-wait": "PLAYERS",
+    "lbl-bet-wait": "BET",
+    "lbl-call-wait": "CALL",
+    "lbl-game-active": "GAME ID",
+    "lbl-players-active": "PLAYERS",
+    "lbl-bet-active": "BET",
+    "lbl-win-active": "DERASH",
+    "lbl-call-active": "CALLED",
+    "lbl-wait-current": "Current",
+    "game-current-label": "Current",
 
-    // Home screen
-    "lbl-welcome": "Welcome back,",
-    "lbl-join-game-title": "JOIN YERASE BINGO ROOM",
-    "lbl-join-game-desc": "Choose your preferred stake room to start play with online players",
-    "lbl-room-10-title": "⚡ YERASE ROOM 10",
-    "lbl-room-10-desc": "Multipliers: 2x, 3x, 5x",
-    "lbl-room-10-entry": "ENTRY: 10 Br",
-    "lbl-room-20-title": "🔥 ELITE ROOM 20",
-    "lbl-room-20-desc": "Multipliers: 2.5x, 4x, 6x",
-    "lbl-room-20-entry": "ENTRY: 20 Br",
-    "lbl-how-to-play": "How to Play Yerase Bingo",
-    "lbl-terms-cond": "Rules, Terms & Conditions",
-    "lbl-rules-title-btn": "RULES & TERMS",
+    // Password Screen
+    "lbl-create-pwd-title": "CREATE PASSWORD",
+    "lbl-create-pwd-desc": "Welcome to Yerase Bingo! Please create a secure password to protect your wallet.",
+    "lbl-create-pwd-label": "CREATE PASSWORD",
+    "lbl-create-pwd-btn": "SAVE PASSWORD & START",
 
-    // Stake Screen
-    "lbl-stake-back": "Change Stake",
-    "lbl-select-luck-title": "PICK LUCKY CARDS",
-    "lbl-select-luck-desc": "Pick up to 2 cards. Match called numbers to form winning patterns!",
-    "lbl-selected-card": "SELECTED CARDS",
-    "lbl-stake-sel-lbl": "CARD",
-    "lbl-stake-win-lbl": "EST. WIN",
-    "lbl-join-action-btn": "JOIN ACTIVE ROUND",
+    // Stake Screen & Rooms
+    "lbl-stake-brand-title": "YERASE BINGO",
+    "lbl-stake-brand-subtitle": "Live Synchronized Bingo",
+    "lbl-room-pick-10": "Play 10 Birr",
+    "lbl-room-pick-20": "Play 20 Birr",
+    "lbl-room-back-btn": "Rooms",
+    "lbl-no-bal-msg": "Insufficient balance! Please load your wallet.",
+    "lbl-game-id-prefix": "Game ID:",
+    "lbl-leave-game-btn": "Leave Game",
 
-    // Wait Screen
-    "lbl-waiting-title": "WAITING FOR ROUND START",
-    "lbl-waiting-desc": "The round is starting soon. Wait for other players to complete entry.",
-    "lbl-waiting-timer-title": "Round Starts In",
-    "lbl-joined-lbl": "JOINED CARDS",
-    "lbl-cur-players-lbl": "PLAYERS ONLINE",
-    "lbl-cur-pot-lbl": "ESTIMATED PRIZE POT",
-    "lbl-live-balls-lbl": "RECENT ROUND BALLS",
+    // Running Overlay
+    "lbl-running-title": "GAME IN PROGRESS",
+    "lbl-running-desc": "A synchronized round is currently active. Please wait for the next countdown to buy a ticket.",
+    "lbl-running-watch-btn": "WATCH LIVE GAME",
+
+    // Card Selection Area & Preview
+    "home-select-info": "SELECT UP TO <span>2 CARDS</span>",
+    "lbl-preview-title": "Selected Cartela Preview",
+    "lbl-preview-empty": "Tap any card number (1-200) to select your lucky ticket",
+    "lbl-status-empty": "Tap any card number (1-200) to instantly buy your ticket",
 
     // Game Screen
-    "lbl-active-game-title": "YERASE BINGO LIVE MATCH",
-    "lbl-active-game-desc": "Matching active numbers. Standard pattern winning prize distributed instantly.",
-    "lbl-called-lbl": "CALLED BALLS",
-    "lbl-players-lbl": "PLAYERS",
-    "lbl-total-pot-lbl": "TOTAL POT",
-    "lbl-card-control-prev": "PREVIOUS CARD",
-    "lbl-card-control-next": "NEXT CARD",
-    "lbl-sound-status": "SOUNDS",
+    "lbl-spec-banner-text": "You didn't join this round. Watching live...",
+    "lbl-spec-banner-btn": "LOBBY",
+    "lbl-active-cards-bar": "Active Cards",
+    "lbl-watching-title": "Watching Only",
+    "lbl-watching-desc": "This round has already started. Please wait here for the next round.",
+    "wait-lbl-wait": "Please wait for this game to be completed",
+    "wait-lbl-wait-desc": "The system is calling balls in the background. You will join the next game automatically.",
+
+    // Winner Screen
+    "winner-title-text": "BINGO! WINNER!",
+    "lbl-winner-prize-dist": "Prize Distributed",
+    "lbl-winner-share": "Share Result",
+    "lbl-winner-again": "Play Again",
+    "lbl-winner-next-label": "Next round starts in",
 
     // Profile Screen
     "lbl-prof-played": "Games Played",
@@ -3513,38 +3517,123 @@ var APP_TRANSLATIONS = {
     "lbl-prof-notify-desc": "Alert when joined game is starting or you win",
     "lbl-prof-pass": "Change Security Password",
     "lbl-prof-pass-desc": "Update your account password anytime",
-    "lbl-prof-lang": "Rules & Interface Language",
-    "lbl-prof-lang-desc": "Choose English or አማርኛ (Amharic)",
+    "lbl-prof-lang": "Interface Language",
+    "lbl-prof-lang-desc": "Choose English or Amharic",
     "lbl-prof-support": "Contact Support Representative",
     "lbl-prof-support-desc": "Telegram chat support open 24/7",
+    "lbl-prof-rules": "Game Rules & How to Play",
+    "lbl-prof-rules-desc": "Learn how to daub, winning lines, and legal terms",
     "lbl-prof-logout": "Log Out of Account",
     "lbl-prof-logout-desc": "Safely exit this device session",
     "lbl-prof-hist-title": "Game History",
     "lbl-prof-hist-head": "<span>GAME</span><span>ENTRY</span><span>STATUS</span><span>RESULT</span>",
 
     // Leaderboard Screen
+    "tab-today": "Today",
     "tab-week": "This Week",
     "tab-month": "This Month",
-    "tab-deposit": '<i class="fa-solid fa-money-bill-trend-up" style="margin-right:4px;"></i>Most Deposit',
-    "tab-invite": '<i class="fa-solid fa-user-group" style="margin-right:4px;"></i>Most Invitation',
-    "tab-games": '<i class="fa-solid fa-gamepad" style="margin-right:4px;"></i>Most Games',
+    "lbl-tab-won": "Won",
+    "lbl-tab-invites": "Most Invites",
     "lbl-lead-your-rank": "Your Rank",
-    "lbl-lead-head": '<span>#</span><span>NAME</span><span style="text-align:right;">TIMES</span>',
+    "my-rank-val-label": "Games Played",
+    "lbl-lead-head": '<span># RANK</span><span>PLAYER</span><span style="text-align:right;">TOTAL WON</span>',
 
     // Wallet Screen
     "lbl-wal-total": "TOTAL BALANCE",
     "lbl-wal-withdrawable-title": "Withdrawable",
-    "lbl-wal-withdrawable-desc": "Deposits & Wins (Profits)",
+    "lbl-wal-withdrawable-desc": "Deposits & Wins",
     "lbl-wal-playable-title": "Playable Bonus",
-    "lbl-wal-playable-desc": "50 ETB Welcome Bonus",
-    "lbl-wal-info-title": "Deposit & Withdrawal",
-    "lbl-wal-info-desc": "To ensure security, deposits and withdrawals are processed manually:<br><strong>Mini App Players:</strong> Please use our official Telegram bot commands.<br><strong>Web Players:</strong> Contact our administrator directly on Telegram to load your wallet or cash out instantly.",
-    "lbl-wal-contact-admin": "CONTACT ADMIN (አድሚን ያነጋግሩ)",
+    "lbl-wal-playable-desc": "200 ETB Welcome Bonus",
+    "lbl-wal-req-title": "WITHDRAWAL REQUIREMENTS",
+    "lbl-wal-min-dep": "Min. Deposit Required:",
+    "lbl-wal-wager-prog": "Wagering Progress (15x Deposit):",
+    "lbl-wal-policy-desc": "💡 <strong>Withdrawal Policy:</strong> Deposited funds and winnings are withdrawable once you have deposited at least 50 ETB and wagered 15x your total deposit amount.",
+    "lbl-btn-deposit": "DEPOSIT",
+    "lbl-btn-withdraw": "WITHDRAW",
     "lbl-wal-tx-title": "Transaction History",
     "lbl-wal-tx-head": "<span>TYPE</span><span>AMOUNT</span><span>STATUS</span><span>DATE</span>",
 
+    // Modals
+    "lbl-dep-modal-title": "Deposit Funds",
+    "lbl-dep-modal-heading": "REQUEST DEPOSIT",
+    "lbl-dep-modal-desc": "Please deposit funds using Telebirr or CBE, then enter the amount and reference phone below.",
+    "lbl-dep-method-tele": "Telebirr",
+    "lbl-dep-method-cbe": "CBE Birr",
+    "lbl-dep-amount-label": "DEPOSIT AMOUNT - Min 50 Br",
+    "lbl-dep-phone-label": "TRANSFER PHONE / SENDER",
+    "lbl-dep-sms-label": "SMS CONFIRMATION / TXN ID",
+    "lbl-dep-submit-btn": "SUBMIT DEPOSIT REQUEST",
+
+    "lbl-with-modal-title": "Withdraw Funds",
+    "lbl-with-modal-heading": "REQUEST WITHDRAWAL",
+    "lbl-with-modal-desc": "Your cashout request will be verified by the administrator and sent to your account.",
+    "lbl-with-modal-sub": "WITHDRAWABLE MAIN BALANCE",
+    "lbl-with-amount-label": "WITHDRAW AMOUNT - Min 150 Br",
+    "lbl-with-phone-label": "RECEIVER ACCOUNT / PHONE",
+    "lbl-with-submit-btn": "SUBMIT WITHDRAWAL REQUEST",
+
+    // Overlays
+    "lbl-banned-title": "Account Suspended",
+    "banned-reason-text": "Your account has been suspended for violating our terms of service.",
+    "lbl-maint-title": "Under Maintenance",
+    "lbl-maint-desc": "Our platform is currently undergoing scheduled maintenance. We will be back online shortly!",
+    "lbl-tg-only-title": "OPEN IN TELEGRAM",
+    "lbl-tg-only-desc": "Yerase Bingo functions securely inside Telegram Mini App. Please launch via our official Telegram bot to sync your account, wallet, and live games.",
+    "lbl-tg-only-btn": '<i class="fa-brands fa-telegram" style="font-size:18px;"></i> Open in Telegram Bot',
+    "lbl-tg-only-preview": "Continue as Preview",
+
+    // Rules Bottom Sheet
+    "rules-header-title": "Rules & Info",
+    "tab-terms": "Terms & Conditions",
+    "tab-info": "Info & Rules",
+
+    // Tabs & Filters
+    "tab-today": "Today",
+    "tab-week": "This Week",
+    "tab-month": "This Month",
+    "lbl-tab-wins": "Won",
+    "lbl-tab-invite": "Most Invites",
+
+    // Controls & Card labels
+    "lbl-auto-ctrl": "Auto",
+    "lbl-card1-prefix": "CARD:",
+    "lbl-card2-prefix": "CARD:",
+    "lbl-no-card-slot": "NO CARD",
+    "btn-copy-id": '<i class="fa-solid fa-copy" style="margin-right:3px;"></i> Copy',
+
+    // Wallet Topbar
+    "lbl-main-wallet": "MAIN",
+    "lbl-play-wallet": "PLAY",
+    "lbl-total-wallet": "TOTAL",
+
+    // Overlays
+    "lbl-paused-title": "Game Paused",
+    "lbl-paused-sub": "Game is paused by administrator. Please wait…",
+    "lbl-cancel-title": "Game Cancelled",
+    "lbl-cancel-sub": "The game was cancelled by admin. Any staked balance has been refunded.",
+    "lbl-cancel-btn": "OK — Back to Home",
+
+    // Role Modal
+    "lbl-role-modal-title": "USER ROLE & STATUS",
+    "lbl-role-modal-hdr": "ACCOUNT ROLE",
+    "lbl-role-modal-sub": "Your current membership tier and system permissions",
+    "lbl-role-modal-lbl": "CURRENT ROLE",
+    "lbl-role-modal-accid": "Account ID:",
+    "lbl-role-modal-accname": "Account Name:",
+
+    // Quick deposit chips
+    "chip-dep-50": "50 ETB",
+    "chip-dep-100": "100 ETB",
+    "chip-dep-200": "200 ETB",
+    "chip-dep-500": "500 ETB",
+
+    // Onboarding
+    "lbl-onb-skip": "Skip",
+    "lbl-onb-prev": "Back",
+    "lbl-onb-next": "Next",
+
     // Bottom Navigation
-    "lbl-nav-home": "HOME",
+    "lbl-nav-home": "ROOMS",
     "lbl-nav-winners": "WINNERS",
     "lbl-nav-wallet": "WALLET",
     "lbl-nav-profile": "PROFILE"
@@ -3569,48 +3658,66 @@ var APP_TRANSLATIONS = {
     "lbl-main-leader": "ዋና ሒሳብ",
     "lbl-play-leader": "የመጫወቻ",
     "lbl-total-leader": "ጠቅላላ",
+    "lbl-main-home": "ዋና ሒሳብ",
+    "lbl-play-home": "የመጫወቻ",
+    "lbl-bet-home": "መደብ",
+    "lbl-win-home": "ድል",
+    "lbl-time-home": "ቀሪ ጊዜ",
+    "lbl-game-wait": "የጨዋታ መለያ",
+    "lbl-win-wait": "ድል",
+    "lbl-players-wait": "ተጫዋቾች",
+    "lbl-bet-wait": "መደብ",
+    "lbl-call-wait": "ጥሪ",
+    "lbl-game-active": "የጨዋታ መለያ",
+    "lbl-players-active": "ተጫዋቾች",
+    "lbl-bet-active": "መደብ",
+    "lbl-win-active": "ደራሽ",
+    "lbl-call-active": "የወጡ",
+    "lbl-wait-current": "የወጣው",
+    "game-current-label": "የወጣው",
 
-    // Home screen
-    "lbl-welcome": "እንኳን ደህና መጡ፣",
-    "lbl-join-game-title": "የራሴ ቢንጎ ጨዋታ ክፍል",
-    "lbl-join-game-desc": "ከኦንላይን ተጫዋቾች ጋር ለመጫወት የመደብ ምርጫዎን ይምረጡ",
-    "lbl-room-10-title": "⚡ የራሴ ክፍል 10",
-    "lbl-room-10-desc": "ማባዣዎች፡ 2x, 3x, 5x",
-    "lbl-room-10-entry": "መግቢያ፡ 10 ብር",
-    "lbl-room-20-title": "🔥 ቪአይፒ ክፍል 20",
-    "lbl-room-20-desc": "ማባዣዎች፡ 2.5x, 4x, 6x",
-    "lbl-room-20-entry": "መግቢያ፡ 20 ብር",
-    "lbl-how-to-play": "ቢንጎ እንዴት እንደሚጫወት",
-    "lbl-terms-cond": "ህጎች እና መመሪያዎች",
-    "lbl-rules-title-btn": "ህጎች እና መመሪያዎች",
+    // Password Screen
+    "lbl-create-pwd-title": "የይለፍ ቃል ፍጠር",
+    "lbl-create-pwd-desc": "እንኳን ወደ የራሴ ቢንጎ በደህና መጡ! ሒሳብዎን ለመጠበቅ እባክዎ ደህንነቱ የተጠበቀ የይለፍ ቃል ይፍጠሩ።",
+    "lbl-create-pwd-label": "የይለፍ ቃል ፍጠር",
+    "lbl-create-pwd-btn": "የይለፍ ቃል መዝግብና ጀምር",
 
-    // Stake Screen
-    "lbl-stake-back": "ክፍል ለመቀየር",
-    "lbl-select-luck-title": "ካርቴላ ይምረጡ",
-    "lbl-select-luck-desc": "እስከ 2 ካርቴላ ይምረጡ። የወጡ ቁጥሮች ሲገጥሙ እርስዎ ያሸንፋሉ!",
-    "lbl-selected-card": "የተመረጡ ካርቴላዎች",
-    "lbl-stake-sel-lbl": "ካርቴላ",
-    "lbl-stake-win-lbl": "የሚገመት ድል",
-    "lbl-join-action-btn": "ወደ ጨዋታው ግባ",
+    // Stake Screen & Rooms
+    "lbl-stake-brand-title": "የራሴ ቢንጎ",
+    "lbl-stake-brand-subtitle": "የቀጥታ ባለብዙ ተጫዋች ቢንጎ",
+    "lbl-room-pick-10": "በ10 ብር ተጫወቱ",
+    "lbl-room-pick-20": "በ20 ብር ተጫወቱ",
+    "lbl-room-back-btn": "ክፍሎች",
+    "lbl-no-bal-msg": "በቂ ሂሳብ የለም! እባክዎ ብር ያስገቡ።",
+    "lbl-game-id-prefix": "የጨዋታ መለያ፡",
+    "lbl-leave-game-btn": "ከጨዋታው ውጣ",
 
-    // Wait Screen
-    "lbl-waiting-title": "ጨዋታው እስኪጀምር መጠበቂያ",
-    "lbl-waiting-desc": "ጨዋታው በቅርቡ ይጀምራል። ሌሎች ተጫዋቾች ገብተው እስኪጨርሱ እባክዎ ይጠብቁ።",
-    "lbl-waiting-timer-title": "ጨዋታው የሚጀምረው በ",
-    "lbl-joined-lbl": "የገቡ ካርቴላዎች",
-    "lbl-cur-players-lbl": "ኦንላይን ተጫዋቾች",
-    "lbl-cur-pot-lbl": "የሽልማት ድምር",
-    "lbl-live-balls-lbl": "ባለፈው ዙር የወጡ ቁጥሮች",
+    // Running Overlay
+    "lbl-running-title": "ጨዋታው በመካሄድ ላይ ነው",
+    "lbl-running-desc": "የቀጥታ ጨዋታው ተጀምሯል። እባክዎ አዲስ ዙር እስኪጀምር ይጠብቁ።",
+    "lbl-running-watch-btn": "ቀጥታ ጨዋታውን ይመልከቱ",
+
+    // Card Selection Area & Preview
+    "home-select-info": "እስከ <span>2 ካርቴላ</span> ይምረጡ",
+    "lbl-preview-title": "የተመረጡ ካርቴላዎች ማሳያ",
+    "lbl-preview-empty": "ካርቴላ ለመቁረጥ ማንኛውንም ቁጥር (1-200) ይንኩ",
+    "lbl-status-empty": "ካርቴላ ለመቁረጥ ማንኛውንም ቁጥር (1-200) ይንኩ",
 
     // Game Screen
-    "lbl-active-game-title": "የራሴ ቢንጎ ቀጥታ ጨዋታ",
-    "lbl-active-game-desc": "ቁጥሮች በመውጣት ላይ ናቸው። ህጉን ያሟላ ካርቴላ ወዲያውኑ ይሸለማል።",
-    "lbl-called-lbl": "የወጡ ቁጥሮች",
-    "lbl-players-lbl": "ተጫዋቾች",
-    "lbl-total-pot-lbl": "ጠቅላላ ሽልማት",
-    "lbl-card-control-prev": "ቀዳሚ ካርቴላ",
-    "lbl-card-control-next": "ቀጣይ ካርቴላ",
-    "lbl-sound-status": "ድምፅ",
+    "lbl-spec-banner-text": "በዚህ ዙር አልተሳተፉም። ቀጥታ እየተመለከቱ ነው...",
+    "lbl-spec-banner-btn": "ዋና ገጽ",
+    "lbl-active-cards-bar": "የገቡ ካርቴላዎች",
+    "lbl-watching-title": "ተመልካች ብቻ",
+    "lbl-watching-desc": "የዚህ ዙር ጨዋታ ተጀምሯል። አዲስ ዙር እስኪጀምር እዚህ ይጠበቁ።",
+    "wait-lbl-wait": "እባክዎ ይህ ጨዋታ እስኪጠናቀቅ ይጠብቁ",
+    "wait-lbl-wait-desc": "ቁጥሮች በመውጣት ላይ ናቸው። የሚቀጥለውን ጨዋታ በቀጥታ ይቀላቀላሉ።",
+
+    // Winner Screen
+    "winner-title-text": "🎉 ቢንጎ አሸናፊ! 🎉",
+    "lbl-winner-prize-dist": "የተከፋፈለ ሽልማት",
+    "lbl-winner-share": "ውጤቱን አጋራ",
+    "lbl-winner-again": "እንደገና ተጫወት",
+    "lbl-winner-next-label": "ቀጣዩ ዙር የሚጀምረው በ",
 
     // Profile Screen
     "lbl-prof-played": "የተጫወቱት ጨዋታ",
@@ -3621,7 +3728,7 @@ var APP_TRANSLATIONS = {
     "lbl-prof-max-streak": '<i class="fa-solid fa-trophy" style="color:#E6C787; margin-right:4px;"></i>ከፍተኛ ተከታታይ ድል',
     "lbl-prof-referral-title": '<i class="fa-solid fa-user-plus" style="color:#E6C787; margin-right:6px;"></i>ሪፈራል ፕሮግራም',
     "lbl-prof-refer-earn": "ጓደኛ ይጋብዙና ኮሚሽን ያግኙ",
-    "lbl-prof-refer-desc": "እርስዎ በጋበዙት ሊንክ ተመዝግበው ለሚጫወቱ ለእያንዳንዱ ጓደኛ የ 10 ብር የቦነስ ሽልማት ያግኙ።",
+    "lbl-prof-refer-desc": "እርስዎ በጋበዙት ሊንክ ተመዝግበው ለሚጫወቱ ለእያንዳንዱ ጓደኛ የ10 ብር የቦነስ ሽልማት ያግኙ።",
     "lbl-prof-copy-referral-btn-text": "የሪፈራል ሊንክ ኮፒ ያድርጉ",
     "lbl-prof-settings-title": '<i class="fa-solid fa-sliders" style="color:#E6C787; margin-right:6px;"></i>የመተግበሪያ ቅንብሮች',
     "lbl-prof-sound": "የጨዋታ ድምጾች",
@@ -3630,38 +3737,123 @@ var APP_TRANSLATIONS = {
     "lbl-prof-notify-desc": "ጨዋታ ሲጀምር ወይም ሲያሸንፉ ማሳወቂያዎች ይደርስዎታል",
     "lbl-prof-pass": "የደህንነት ይለፍ ቃል ቀይር",
     "lbl-prof-pass-desc": "የመለያዎን ይለፍ ቃል በማንኛውም ጊዜ ያሻሽሉ",
-    "lbl-prof-lang": "የህጎች እና መተግበሪያ ቋንቋ",
+    "lbl-prof-lang": "የመተግበሪያ ቋንቋ",
     "lbl-prof-lang-desc": "እንግሊዝኛ ወይም አማርኛ ይምረጡ",
     "lbl-prof-support": "አድሚን ለማነጋገር",
     "lbl-prof-support-desc": "የቴሌግራም ድጋፍ 24/7 ክፍት ነው",
+    "lbl-prof-rules": "የጨዋታው ሕጎች እና መመሪያ",
+    "lbl-prof-rules-desc": "የጨዋታው ሕጎች እና የአሸናፊነት መመሪያ",
     "lbl-prof-logout": "ከአካውንት ውጣ",
     "lbl-prof-logout-desc": "ከዚህ መሳሪያ ላይ መለያዎን ያስወጡ",
     "lbl-prof-hist-title": "የጨዋታ ታሪክ",
     "lbl-prof-hist-head": "<span>ጨዋታ</span><span>መግቢያ</span><span>ሁኔታ</span><span>ውጤት</span>",
 
     // Leaderboard Screen
-    "tab-week": "በዚህ ሳምንት",
-    "tab-month": "በዚህ ወር",
-    "tab-deposit": '<i class="fa-solid fa-money-bill-trend-up" style="margin-right:4px;"></i>ከፍተኛ ተቀማጭ',
-    "tab-invite": '<i class="fa-solid fa-user-group" style="margin-right:4px;"></i>ብዙ የጋበዙ',
-    "tab-games": '<i class="fa-solid fa-gamepad" style="margin-right:4px;"></i>ብዙ የተጫወቱ',
+    "tab-today": "የዛሬ",
+    "tab-week": "የዚህ ሳምንት",
+    "tab-month": "የዚህ ወር",
+    "lbl-tab-won": "አሸናፊዎች",
+    "lbl-tab-invites": "ብዙ የጋበዙ",
     "lbl-lead-your-rank": "የእርስዎ ደረጃ",
-    "lbl-lead-head": '<span>#</span><span>ስም</span><span style="text-align:right;">ጊዜ</span>',
+    "my-rank-val-label": "የተጫወቱት",
+    "lbl-lead-head": '<span># ደረጃ</span><span>ተጫዋች</span><span style="text-align:right;">ያሸነፉት ጠቅላላ</span>',
 
     // Wallet Screen
     "lbl-wal-total": "ጠቅላላ ሒሳብ",
     "lbl-wal-withdrawable-title": "ሊወጣ የሚችል",
-    "lbl-wal-withdrawable-desc": "ተቀማጭ እና ድሎች (ትርፍ)",
+    "lbl-wal-withdrawable-desc": "ተቀማጭ እና ድሎች",
     "lbl-wal-playable-title": "መጫወቻ ቦነስ",
-    "lbl-wal-playable-desc": "50 ብር የእንኳን ደህና መጡ ስጦታ",
-    "lbl-wal-info-title": "ብር ለማስገባት እና ለማውጣት",
-    "lbl-wal-info-desc": "ደህንነትን ለመጠበቅ ገንዘብ ማስገባት እና ማውጣት በእጅ ይከናወናል፦<br><strong>በቴሌግራም መጫወቻ፡</strong> እባክዎ በቦታችን ላይ ያሉትን ትዕዛዞች ይጠቀሙ።<br><strong>በዌብሳይት መጫወቻ፡</strong> ሒሳብዎን ለመሙላት ወይም ወዲያውኑ ለማውጣት ቴሌግራም ላይ አድሚኑን በቀጥታ ያነጋግሩ።",
-    "lbl-wal-contact-admin": "CONTACT ADMIN (አድሚን ያነጋግሩ)",
+    "lbl-wal-playable-desc": "200 ብር የእንኳን ደህና መጡ ስጦታ",
+    "lbl-wal-req-title": "የገንዘብ ማውጣት መስፈርቶች",
+    "lbl-wal-min-dep": "አስፈላጊው ዝቅተኛ ተቀማጭ፡",
+    "lbl-wal-wager-prog": "የመጫወቻ ሂደት (15x ተቀማጭ)፡",
+    "lbl-wal-policy-desc": "💡 <strong>የማውጣት ደንብ፦</strong> ተቀማጭ ገንዘብ እና ያሸነፉትን ለማውጣት ቢያንስ 50 ብር ማስገባት እና የተጣራውን 15 እጥፍ መጫወት ያስፈልጋል።",
+    "lbl-btn-deposit": "ገንዘብ አስገባ",
+    "lbl-btn-withdraw": "ገንዘብ አውጣ",
     "lbl-wal-tx-title": "የሂሳብ ታሪክ",
     "lbl-wal-tx-head": "<span>አይነት</span><span>መጠን</span><span>ሁኔታ</span><span>ቀን</span>",
 
+    // Modals
+    "lbl-dep-modal-title": "ገንዘብ ማስገቢያ",
+    "lbl-dep-modal-heading": "ገንዘብ ያስገቡ",
+    "lbl-dep-modal-desc": "እባክዎን በቴሌብር ወይም በንግድ ባንክ ያስገቡና ያስገቡትን የገንዘብ መጠንና ስልክዎን ከታች ይመዝግቡ።",
+    "lbl-dep-method-tele": "ቴሌብር",
+    "lbl-dep-method-cbe": "ንግድ ባንክ",
+    "lbl-dep-amount-label": "የገንዘብ መጠን - ቢያንስ 50 ብር",
+    "lbl-dep-phone-label": "የከፈሉበት ስልክ ቁጥር",
+    "lbl-dep-sms-label": "የደረሰኝ መልእክት ወይም የሂሳብ ማረጋገጫ",
+    "lbl-dep-submit-btn": "ገንዘብ አስገባ",
+
+    "lbl-with-modal-title": "ገንዘብ ማውጫ",
+    "lbl-with-modal-heading": "ገንዘብ ያውጡ",
+    "lbl-with-modal-desc": "የማውጣት ጥያቄዎ በአስተዳዳሪው ዘንድ ተረጋግጦ ይከፈልዎታል።",
+    "lbl-with-modal-sub": "ሊወጣ የሚችል ዋና ሒሳብ",
+    "lbl-with-amount-label": "የማውጫ መጠን - ቢያንስ 150 ብር",
+    "lbl-with-phone-label": "ገንዘብ የሚቀበሉበት ስልክ ቁጥር",
+    "lbl-with-submit-btn": "ገንዘብ አውጣ",
+
+    // Overlays
+    "lbl-banned-title": "መለያዎ ታግዷል",
+    "banned-reason-text": "የእርስዎ መለያ ደንቦችን በመተላለፍዎ ታግዷል።",
+    "lbl-maint-title": "የጥገና ሥራ",
+    "lbl-maint-desc": "መድረካችን በአሁኑ ጊዜ የጥገና ሥራ ላይ ነው። በቅርቡ እንመለሳለን!",
+    "lbl-tg-only-title": "በቴሌግራም ይክፈቱ",
+    "lbl-tg-only-desc": "ይህ ጨዋታ የሚሰራው በቴሌግራም ብቻ ነው። እባክዎ በይፋዊው ቦት ይክፈቱ።",
+    "lbl-tg-only-btn": '<i class="fa-brands fa-telegram" style="font-size:18px;"></i> በቴሌግራም ቦት ይክፈቱ',
+    "lbl-tg-only-preview": "እንደ ሙከራ ቀጥል",
+
+    // Rules Bottom Sheet
+    "rules-header-title": "ህጎች እና መረጃ",
+    "tab-terms": "ደንቦች እና ግዴታዎች",
+    "tab-info": "የጨዋታ መመሪያ",
+
+    // Tabs & Filters
+    "tab-today": "የዛሬ",
+    "tab-week": "የዚህ ሳምንት",
+    "tab-month": "የዚህ ወር",
+    "lbl-tab-wins": "አሸናፊዎች",
+    "lbl-tab-invite": "ብዙ የጋበዙ",
+
+    // Controls & Card labels
+    "lbl-auto-ctrl": "አውቶ",
+    "lbl-card1-prefix": "ካርቴላ:",
+    "lbl-card2-prefix": "ካርቴላ:",
+    "lbl-no-card-slot": "ካርቴላ አልተመረጠም",
+    "btn-copy-id": '<i class="fa-solid fa-copy" style="margin-right:3px;"></i> ቅዳ',
+
+    // Wallet Topbar
+    "lbl-main-wallet": "ዋና ሒሳብ",
+    "lbl-play-wallet": "የመጫወቻ",
+    "lbl-total-wallet": "ጠቅላላ",
+
+    // Overlays
+    "lbl-paused-title": "ጨዋታው ቆሟል",
+    "lbl-paused-sub": "ጨዋታው በአስተዳዳሪው ለጊዜው ቆሟል። እባክዎ ይጠብቁ…",
+    "lbl-cancel-title": "ጨዋታው ተሰርዟል",
+    "lbl-cancel-sub": "ጨዋታው በአስተዳዳሪው ተሰርዟል። የተያዘው ሂሳብዎ ተመላሽ ተደርጓል።",
+    "lbl-cancel-btn": "እሺ — ወደ መነሻ ይመለሱ",
+
+    // Role Modal
+    "lbl-role-modal-title": "የተጠቃሚ ደረጃ እና ሁኔታ",
+    "lbl-role-modal-hdr": "የመለያ ደረጃ",
+    "lbl-role-modal-sub": "የአሁኑ የአባልነት ደረጃዎ እና የመድረክ ፈቃዶች",
+    "lbl-role-modal-lbl": "የአሁኑ ደረጃ",
+    "lbl-role-modal-accid": "የመለያ ቁጥር:",
+    "lbl-role-modal-accname": "የመለያ ስም:",
+
+    // Quick deposit chips
+    "chip-dep-50": "50 ብር",
+    "chip-dep-100": "100 ብር",
+    "chip-dep-200": "200 ብር",
+    "chip-dep-500": "500 ብር",
+
+    // Onboarding
+    "lbl-onb-skip": "ዝለል",
+    "lbl-onb-prev": "ተመለስ",
+    "lbl-onb-next": "ቀጣይ",
+
     // Bottom Navigation
-    "lbl-nav-home": "ዋና ገጽ",
+    "lbl-nav-home": "ክፍሎች",
     "lbl-nav-winners": "ደረጃዎች",
     "lbl-nav-wallet": "ዋሌት",
     "lbl-nav-profile": "የኔ ማህደር"
@@ -3680,23 +3872,88 @@ function translateApp(lang) {
 }
 
 function setRulesLang(lang) {
+  if (lang !== 'en' && lang !== 'am') lang = 'en';
   currentRulesLang = lang;
   localStorage.setItem('appLanguage', lang);
+  
+  // 1. Update HTML document title
+  document.title = lang === 'am' ? 'የራሴ ቢንጎ - የቀጥታ ባለብዙ ተጫዋች' : 'Yerase Bingo - Live Multiplayer';
+  
+  // 2. Update Top Bar Pill Switcher
+  var topEn = document.getElementById('topbar-lang-en');
+  var topAm = document.getElementById('topbar-lang-am');
+  if (topEn && topAm) {
+    if (lang === 'en') {
+      topEn.style.background = 'linear-gradient(135deg, #FFF4D9 0%, #E6C787 100%)';
+      topEn.style.color = '#120824';
+      topEn.style.fontWeight = '900';
+      topEn.style.boxShadow = '0 0 10px rgba(230,199,135,0.4)';
+      topAm.style.background = 'transparent';
+      topAm.style.color = '#E6C787';
+      topAm.style.fontWeight = '700';
+      topAm.style.boxShadow = 'none';
+    } else {
+      topAm.style.background = 'linear-gradient(135deg, #FFF4D9 0%, #E6C787 100%)';
+      topAm.style.color = '#120824';
+      topAm.style.fontWeight = '900';
+      topAm.style.boxShadow = '0 0 10px rgba(230,199,135,0.4)';
+      topEn.style.background = 'transparent';
+      topEn.style.color = '#E6C787';
+      topEn.style.fontWeight = '700';
+      topEn.style.boxShadow = 'none';
+    }
+  }
+
+  // 3. Update Rules Bottom Sheet Lang Buttons
   var enBtn = document.getElementById('lang-en');
   var amBtn = document.getElementById('lang-am');
-  if (enBtn) enBtn.classList.toggle('active', lang==='en');
-  if (amBtn) amBtn.classList.toggle('active', lang==='am');
+  if (enBtn) enBtn.classList.toggle('active', lang === 'en');
+  if (amBtn) amBtn.classList.toggle('active', lang === 'am');
   
+  // 4. Update Profile screen lang buttons
   var pEn = document.getElementById('profile-lang-en');
   var pAm = document.getElementById('profile-lang-am');
   if (pEn && pAm) {
-    pEn.style.background = lang === 'en' ? 'var(--orange)' : 'transparent';
-    pEn.style.color = lang === 'en' ? '#fff' : 'var(--orange)';
-    pAm.style.background = lang === 'am' ? 'var(--orange)' : 'transparent';
-    pAm.style.color = lang === 'am' ? '#fff' : 'var(--orange)';
+    pEn.style.background = lang === 'en' ? 'linear-gradient(135deg, #FFF4D9 0%, #E6C787 100%)' : 'transparent';
+    pEn.style.color = lang === 'en' ? '#120824' : '#E6C787';
+    pAm.style.background = lang === 'am' ? 'linear-gradient(135deg, #FFF4D9 0%, #E6C787 100%)' : 'transparent';
+    pAm.style.color = lang === 'am' ? '#120824' : '#E6C787';
   }
+
+  // 5. Update input placeholders
+  var smsInput = document.getElementById('dep-req-sms');
+  if (smsInput) {
+    smsInput.placeholder = lang === 'am' 
+      ? 'የባንክ ወይም ቴሌብር ደረሰኝ SMS እዚህ ይለጥፉ...' 
+      : 'Paste bank or Telebirr SMS confirmation here...';
+  }
+
   renderRules();
   translateApp(lang);
+  updateBalanceDisplay();
+  updateWageringUI();
+
+  // 6. Refresh active room title & live dynamic previews
+  if (typeof currentStake !== 'undefined' && currentStake) {
+    var roomTitle = document.getElementById('room-header-title');
+    if (roomTitle) {
+      roomTitle.textContent = lang === 'am' ? ('በ' + currentStake + ' ብር ተጫወት') : ('Play ' + currentStake + ' Birr');
+    }
+  }
+  if (typeof renderSelectedCardsPreview === 'function') renderSelectedCardsPreview();
+  if (typeof updateCardStatusBadge === 'function') updateCardStatusBadge();
+
+  // 7. Refresh current active screen if wallet, profile, or leaderboard
+  var sWallet = document.getElementById('screen-wallet');
+  if (sWallet && sWallet.classList.contains('active') && typeof loadWallet === 'function') loadWallet();
+  var sProfile = document.getElementById('screen-profile');
+  if (sProfile && sProfile.classList.contains('active') && typeof loadProfile === 'function') loadProfile();
+  var sWinners = document.getElementById('screen-winners');
+  if (sWinners && sWinners.classList.contains('active') && typeof loadLeaderboard === 'function') loadLeaderboard();
+}
+
+function toggleAppLanguage() {
+  setRulesLang(currentRulesLang === 'en' ? 'am' : 'en');
 }
 function setRulesTab(tab) { currentRulesTab = tab; document.getElementById('tab-terms').classList.toggle('active', tab==='terms'); document.getElementById('tab-info').classList.toggle('active', tab==='info'); renderRules(); }
 
@@ -3714,18 +3971,18 @@ function getTermsEn() {
 }
 
 function getTermsAm() {
-  return `<h1>ደንቦች እና ግዴታዎች</h1><h1 class="sub">YERASE BINGO</h1><p style="text-align:center; color:var(--muted); font-size:12px; margin-bottom:16px;">⚖️ ሕጋዊ · ኦፊሴላዊ ደንቦች</p><p>እንኳን ወደ የራሴ ቢንጎ በደህና መጡ። የእኛን የመጫወቻ መድረክ ሲጠቀሙ የሚከተሉትን ደንቦች እና ግዴታዎች ለማክበር ተስማምተዋል። እባክዎን በጥንቃቄ ያንብቡ።</p><h2><span class="rule-num">1</span> የጨዋታው ባህሪ</h2><h3>በዕድል ላይ የተመሰረተ</h3><p>የራሴ ቢንጎ ሙሉ በሙሉ በዕድል ላይ የተመሰረተ ጨዋታ ነው።</p><h3>ለመዝናኛ ብቻ</h3><p>ይህ መድረክ የተዘጋጀው ለመዝናኛ ብቻ ነው። ተጫዋቾች ሊያጡት የሚችሉትን ገንዘብ ብቻ በመጠቀም እንዲጫወቱ ይመከራል።</p><h2><span class="rule-num">2</span> የገንዘብ ዝውውር</h2><h3>ተመላሽ የማይደረግ ክፍያ</h3><p>አንዴ ወደ የራሴ ቢንጎ የኪስ ቦርሳ (Wallet) ገቢ የተደረገ ገንዘብ በማንኛውም ሁኔታ ተመላሽ አይደረግም።</p><h3>የገንዘብ ወጪ (Withdrawal)</h3><p>ለደህንነት ሲባል፣ ተጫዋቾች ገንዘብ ወጪ ማድረግ የሚችሉት በተመዘገቡበት የስልክ ቁጥር ብቻ ነው። ወደ ሌላ ሰው ወይም ያልተመዘገበ ቁጥር ገንዘብ ማስተላለፍ አይቻልም።</p><h2><span class="rule-num">3</span> የመድረኩ መብቶች እና ደህንነት</h2><h3>የአስተዳደር ውሳኔዎች</h3><p>የራሴ ቢንጎ ለመድረኩ ደህንነት እና ለተጫዋቾች እኩልነት ሲባል በማንኛውም ጊዜ አስፈላጊ የሆኑ የአስተዳደር እርምጃዎችን የመውሰድ ሙሉ መብቱ የተጠበቀ ነው። ይህም የሚከተሉትን ሊያካትት ይችላል፦</p><ul><li>የጨዋታውን ሚዛን ለመጠበቅ አስፈላጊ የሆኑ ማሻሻያዎችን ማድረግ。</li><li>ከደንብ ውጭ የሚንቀሳቀሱ ተጫዋቾችን ማገድ ወይም መገደብ።</li><li>ለጥገና ወይም ለደህንነት ፍተሻ ሲባል የገንዘብ ዝውውሮችን ለጊዜው ማቆም ወይም መገደብ።</li></ul><h3>ማሳሰቢያ</h3><p>ኩባንያው እነዚህን እርምጃዎች የሚወስደው የመድረኩን ትክክለኛነት ለመጠበቅ ሲሆን፣ እንደ አስፈላጊነቱ ያለ ቅድመ ማስታወቂያ ሊተገበሩ ይችላሉ።</p><h2><span class="rule-num">4</span> ጠቅላላ ደንቦች</h2><h3>የዕድሜ ገደብ</h3><p>ተጫዋቾች ዕድሜያቸው 21 ዓመት እና ከዚያ በላይ መሆን አለበት።</p><h3>የተከለከሉ ተግባራት</h3><p>በሶፍትዌር (Bots) መጠቀም ወይም የመድረኩን የቴክኒክ ክፍተቶች ለራስ ጥቅም ለማዋል መሞከር በጥብቅ የተከለከለ ነው፤ ይህን የሚያደርጉ ተጫዋቾችም ወዲያውኑ ይታገዳሉ።</p><h3>ኃላፊነት የተሞላበት ጨዋታ</h3><p>ተጫዋቾች በኃላፊነት ስሜት እንዲጫወቱ እናበረታታለን።</p>`;
+  return `<h1>ደንቦች እና ግዴታዎች</h1><h1 class="sub">የራሴ ቢንጎ</h1><p style="text-align:center; color:var(--muted); font-size:12px; margin-bottom:16px;">⚖️ ሕጋዊ · ኦፊሴላዊ ደንቦች</p><p>እንኳን ወደ የራሴ ቢንጎ በደህና መጡ። የእኛን የመጫወቻ መድረክ ሲጠቀሙ የሚከተሉትን ደንቦች እና ግዴታዎች ለማክበር ተስማምተዋል። እባክዎን በጥንቃቄ ያንብቡ።</p><h2><span class="rule-num">1</span> የጨዋታው ባህሪ</h2><h3>በዕድል ላይ የተመሰረተ</h3><p>የራሴ ቢንጎ ሙሉ በሙሉ በዕድል ላይ የተመሰረተ ጨዋታ ነው።</p><h3>ለመዝናኛ ብቻ</h3><p>ይህ መድረክ የተዘጋጀው ለመዝናኛ ብቻ ነው። ተጫዋቾች ሊያጡት የሚችሉትን ገንዘብ ብቻ በመጠቀም እንዲጫወቱ ይመከራል።</p><h2><span class="rule-num">2</span> የገንዘብ ዝውውር</h2><h3>ተመላሽ የማይደረግ ክፍያ</h3><p>አንዴ ወደ የራሴ ቢንጎ የኪስ ቦርሳ ገቢ የተደረገ ገንዘብ በማንኛውም ሁኔታ ተመላሽ አይደረግም።</p><h3>የገንዘብ ወጪ</h3><p>ለደህንነት ሲባል፣ ተጫዋቾች ገንዘብ ወጪ ማድረግ የሚችሉት በተመዘገቡበት የስልክ ቁጥር ብቻ ነው። ወደ ሌላ ሰው ወይም ያልተመዘገበ ቁጥር ገንዘብ ማስተላለፍ አይቻልም።</p><h2><span class="rule-num">3</span> የመድረኩ መብቶች እና ደህንነት</h2><h3>የአስተዳደር ውሳኔዎች</h3><p>የራሴ ቢንጎ ለመድረኩ ደህንነት እና ለተጫዋቾች እኩልነት ሲባል በማንኛውም ጊዜ አስፈላጊ የሆኑ የአስተዳደር እርምጃዎችን የመውሰድ ሙሉ መብቱ የተጠበቀ ነው። ይህም የሚከተሉትን ሊያካትት ይችላል፦</p><ul><li>የጨዋታውን ሚዛን ለመጠበቅ አስፈላጊ የሆኑ ማሻሻያዎችን ማድረግ。</li><li>ከደንብ ውጭ የሚንቀሳቀሱ ተጫዋቾችን ማገድ ወይም መገደብ።</li><li>ለጥገና ወይም ለደህንነት ፍተሻ ሲባል የገንዘብ ዝውውሮችን ለጊዜው ማቆም ወይም መገደብ።</li></ul><h3>ማሳሰቢያ</h3><p>ኩባንያው እነዚህን እርምጃዎች የሚወስደው የመድረኩን ትክክለኛነት ለመጠበቅ ሲሆን፣ እንደ አስፈላጊነቱ ያለ ቅድመ ማስታወቂያ ሊተገበሩ ይችላሉ።</p><h2><span class="rule-num">4</span> ጠቅላላ ደንቦች</h2><h3>የዕድሜ ገደብ</h3><p>ተጫዋቾች ዕድሜያቸው 21 ዓመት እና ከዚያ በላይ መሆን አለበት።</p><h3>የተከለከሉ ተግባራት</h3><p>በአውቶማቲክ ሶፍትዌር መጠቀም ወይም የመድረኩን የቴክኒክ ክፍተቶች ለራስ ጥቅም ለማዋል መሞከር በጥብቅ የተከለከለ ነው፤ ይህን የሚያደርጉ ተጫዋቾችም ወዲያውኑ ይታገዳሉ።</p><h3>ኃላፊነት የተሞላበት ጨዋታ</h3><p>ተጫዋቾች በኃላፊነት ስሜት እንዲጫወቱ እናበረታታለን።</p>`;
 }
 
 function getInfoEn() {
   return `
 <div class="rules-support">☎️ <strong>Support</strong><br>If you have any problems, contact <a href="https://t.me/one_day_82" target="_blank">@one_day_82</a></div>
-<h2>🎮 How to play</h2>
-<p><span class="rule-num">1</span> Click "Open Game"</p>
-<p><span class="rule-num">2</span> Select your Bingo cards</p>
-<p><span class="rule-num">3</span> Follow along as numbers are called and match them on your card</p>
-<p><span class="rule-num">4</span> When you complete a winning pattern, shout "BINGO"</p>
-<p style="color:var(--green); margin-top:8px;">If you turn on Automatic, you don't need to do steps 3 and 4.</p>
+<h2>🎮 How to Play</h2>
+<p><span class="rule-num">1</span> Choose your stake (10 or 20 Birr)</p>
+<p><span class="rule-num">2</span> Select up to 2 Bingo cards before countdown ends</p>
+<p><span class="rule-num">3</span> Follow called numbers and mark matching squares on your card</p>
+<p><span class="rule-num">4</span> Complete any line or 4 corners to claim BINGO</p>
+<p style="color:var(--green); margin-top:8px;">With Automatic Daub on, matching numbers are marked for you automatically!</p>
 <h2>🏆 Winning Patterns</h2>
 <span class="pattern-label">Any row ⥨</span>
 <div class="pattern-box">🟢 🟡 🟠 🔴 🟣
@@ -3761,49 +4018,49 @@ function getInfoEn() {
 ⬜ ⬜ ❎ ⬜ ⬜
 ⬜ ⬜ ⬜ ⬜ ⬜
 🟩 ⬜ ⬜ ⬜ 🟩</div>
-<h2>💰 Commands</h2>
-<div class="rules-cmd"><code>/start</code> <span>Main menu / ዋና ማውጫ</span></div>
-<div class="rules-cmd"><code>/lang</code> <span>Change language / ቋንቋ ይቀይሩ</span></div>
-<div class="rules-cmd"><code>/play</code> <span>Open Game / ይጫወቱ</span></div>
-<div class="rules-cmd"><code>/deposit</code> <span>Deposit / ያስገቡ</span></div>
-<div class="rules-cmd"><code>/balance</code> <span>Balance / ሂሳብ</span></div>
-<div class="rules-cmd"><code>/withdraw</code> <span>Withdraw / ያውጡ</span></div>
-<div class="rules-cmd"><code>/history</code> <span>History / ታሪክ</span></div>
-<div class="rules-cmd"><code>/profile</code> <span>Profile / መገለጫ</span></div>
-<div class="rules-cmd"><code>/support</code> <span>Support / ድጋፍ</span></div>
-<div class="rules-cmd"><code>/invite</code> <span>Invite Friends / ጓደኛ ይጋብዙ</span></div>
-<div class="rules-cmd"><code>/agent</code> <span>Agent Panel / ወኪል</span></div>
-<div class="rules-cmd"><code>/transfer</code> <span>Transfer / ይላኩ</span></div>
-<div class="rules-cmd"><code>/info</code> <span>Info & Rules / መረጃ</span></div>
+<h2>💰 Bot Commands</h2>
+<div class="rules-cmd"><code>/start</code> <span>Main menu</span></div>
+<div class="rules-cmd"><code>/lang</code> <span>Change language</span></div>
+<div class="rules-cmd"><code>/play</code> <span>Open Game</span></div>
+<div class="rules-cmd"><code>/deposit</code> <span>Deposit funds</span></div>
+<div class="rules-cmd"><code>/balance</code> <span>Check balance</span></div>
+<div class="rules-cmd"><code>/withdraw</code> <span>Withdraw winnings</span></div>
+<div class="rules-cmd"><code>/history</code> <span>Game history</span></div>
+<div class="rules-cmd"><code>/profile</code> <span>Player profile</span></div>
+<div class="rules-cmd"><code>/support</code> <span>Support representative</span></div>
+<div class="rules-cmd"><code>/invite</code> <span>Invite friends</span></div>
+<div class="rules-cmd"><code>/agent</code> <span>Agent panel</span></div>
+<div class="rules-cmd"><code>/transfer</code> <span>Transfer balance</span></div>
+<div class="rules-cmd"><code>/info</code> <span>Rules and guide</span></div>
 <p style="text-align:center; margin-top:20px; font-size:14px; color:var(--yellow); font-weight:700;">Good luck! 🍀</p>
   `;
 }
 
 function getInfoAm() {
   return `
-<div class="rules-support">☎️ <strong>Support (ድጋፍ)</strong><br>ችግር ካጋጠመዎት <a href="https://t.me/one_day_82" target="_blank">@one_day_82</a> ን ያግኙ</div>
+<div class="rules-support">☎️ <strong>የደንበኞች ድጋፍ</strong><br>ችግር ካጋጠመዎት <a href="https://t.me/one_day_82" target="_blank">@one_day_82</a> ን ያግኙ</div>
 <h2>🎮 እንዴት እንደሚጫወቱ</h2>
-<p><span class="rule-num">1</span> "Play Now/ይጫወቱ" የሚለውን ይጫኑ</p>
-<p><span class="rule-num">2</span> በምርጫ ጊዜ የቢንጎ ካርዶችዎን ይምረጡ</p>
-<p><span class="rule-num">3</span> ቁጥሮች ሲጠሩ እየተከታተሉ ካርዶችዎ ውስጥ ካሉ ያጥቁሩ</p>
-<p><span class="rule-num">4</span> ቢያንስ አንድ የማሸነፊያ ንድፍ ሲያጠናቅቁ "BINGO" ይበሉ</p>
-<p style="color:var(--green); margin-top:8px;">Automatic ካበሩ 3 እና 4ን ማድረግ አይጠበቅብዎትም።</p>
+<p><span class="rule-num">1</span> የመደብ ክፍል ይምረጡ (የ10 ወይም 20 ብር)</p>
+<p><span class="rule-num">2</span> ቆጣሪው ከማለቁ በፊት እስከ 2 የቢንጎ ካርቴላዎችን ይቁረጡ</p>
+<p><span class="rule-num">3</span> ቁጥሮች ሲጠሩ እየተከታተሉ ካርቴላዎ ውስጥ ካሉ ያድምቁ</p>
+<p><span class="rule-num">4</span> ማንኛውንም መስመር ወይም 4 ማዕዘን ሲሞሉ "ቢንጎ" ይበሉ</p>
+<p style="color:var(--green); margin-top:8px;">አውቶማቲክ ካበሩ 3 እና 4ን ማድረግ አይጠበቅብዎትም፤ በራሱ ያደምቅልዎታል!</p>
 <h2>🏆 የማሸነፊያ ንድፎች</h2>
-<span class="pattern-label">Any row(ማንኛውንም ረድፍ) ⥨</span>
+<span class="pattern-label">ማንኛውንም ረድፍ ⥨</span>
 <div class="pattern-box">🟢 🟡 🟠 🔴 🟣
 🟩 🟩 🟩 🟩 🟩
 ⬜ ⬜ ⬜ ⬜ ⬜
 ⬜ ⬜ ❎ ⬜ ⬜
 ⬜ ⬜ ⬜ ⬜ ⬜
 ⬜ ⬜ ⬜ ⬜ ⬜</div>
-<span class="pattern-label">Any column(ማንኛውንም አምድ) ⥯</span>
+<span class="pattern-label">ማንኛውንም አምድ ⥯</span>
 <div class="pattern-box">🟢 🟡 🟠 🔴 🟣
 🟩 ⬜ ⬜ ⬜ ⬜
 🟩 ⬜ ⬜ ⬜ ⬜
 🟩 ⬜ ❎ ⬜ ⬜
 🟩 ⬜ ⬜ ⬜ ⬜
 🟩 ⬜ ⬜ ⬜ ⬜</div>
-<span class="pattern-label">Any diagonal(ማንኛውንም ሰያፍ) ⤢⤡</span>
+<span class="pattern-label">ማንኛውንም ሰያፍ ⤢⤡</span>
 <div class="pattern-box">🟢 🟡 🟠 🔴 🟣
 🟩 ⬜ ⬜ ⬜ ⬜
 ⬜ 🟩 ⬜ ⬜ ⬜
@@ -3816,27 +4073,27 @@ function getInfoAm() {
 ⬜ ⬜ ❎ ⬜ ⬜
 ⬜ 🟩 ⬜ ⬜ ⬜
 🟩 ⬜ ⬜ ⬜ ⬜</div>
-<span class="pattern-label">Four corners(አራቱንም ማዕዘኖች) ⸬</span>
+<span class="pattern-label">አራቱንም ማዕዘናት ⸬</span>
 <div class="pattern-box">🟢 🟡 🟠 🔴 🟣
 🟩 ⬜ ⬜ ⬜ 🟩
 ⬜ ⬜ ⬜ ⬜ ⬜
 ⬜ ⬜ ❎ ⬜ ⬜
 ⬜ ⬜ ⬜ ⬜ ⬜
 🟩 ⬜ ⬜ ⬜ 🟩</div>
-<h2>💰 ትእዛዞች (Commands)</h2>
-<div class="rules-cmd"><code>/start</code> <span>Main menu / ዋና ማውጫ</span></div>
-<div class="rules-cmd"><code>/lang</code> <span>Change language / ቋንቋ ይቀይሩ</span></div>
-<div class="rules-cmd"><code>/play</code> <span>Open Game / ይጫወቱ</span></div>
-<div class="rules-cmd"><code>/deposit</code> <span>Deposit / ያስገቡ</span></div>
-<div class="rules-cmd"><code>/balance</code> <span>Balance / ሂሳብ</span></div>
-<div class="rules-cmd"><code>/withdraw</code> <span>Withdraw / ያውጡ</span></div>
-<div class="rules-cmd"><code>/history</code> <span>History / ታሪክ</span></div>
-<div class="rules-cmd"><code>/profile</code> <span>Profile / መገለጫ</span></div>
-<div class="rules-cmd"><code>/support</code> <span>Support / ድጋፍ</span></div>
-<div class="rules-cmd"><code>/invite</code> <span>Invite Friends / ጓደኛ ይጋብዙ</span></div>
-<div class="rules-cmd"><code>/agent</code> <span>Agent Panel / ወኪል</span></div>
-<div class="rules-cmd"><code>/transfer</code> <span>Transfer / ይላኩ</span></div>
-<div class="rules-cmd"><code>/info</code> <span>Info & Rules / መረጃ</span></div>
+<h2>💰 የቦት ትእዛዞች</h2>
+<div class="rules-cmd"><code>/start</code> <span>ዋና ማውጫ</span></div>
+<div class="rules-cmd"><code>/lang</code> <span>ቋንቋ ይቀይሩ</span></div>
+<div class="rules-cmd"><code>/play</code> <span>ይጫወቱ</span></div>
+<div class="rules-cmd"><code>/deposit</code> <span>ብር ያስገቡ</span></div>
+<div class="rules-cmd"><code>/balance</code> <span>ሒሳብ ያረጋግጡ</span></div>
+<div class="rules-cmd"><code>/withdraw</code> <span>ያሸነፉትን ያውጡ</span></div>
+<div class="rules-cmd"><code>/history</code> <span>የጨዋታ ታሪክ</span></div>
+<div class="rules-cmd"><code>/profile</code> <span>የተጫዋች መገለጫ</span></div>
+<div class="rules-cmd"><code>/support</code> <span>የድጋፍ አገልግሎት</span></div>
+<div class="rules-cmd"><code>/invite</code> <span>ጓደኛ ይጋብዙ</span></div>
+<div class="rules-cmd"><code>/agent</code> <span>የወኪል ገጽ</span></div>
+<div class="rules-cmd"><code>/transfer</code> <span>ብር ያስተላልፉ</span></div>
+<div class="rules-cmd"><code>/info</code> <span>ህጎች እና መመሪያ</span></div>
 <p style="text-align:center; margin-top:20px; font-size:14px; color:var(--yellow); font-weight:700;">መልካም ዕድል ይገጥምዎ! 🍀</p>
   `;
 }
@@ -4068,10 +4325,12 @@ function selectStake(stake) {
   }
   setTxt('sel-count','0');
   setTxt('s-win-sel','0');
+  var isAm = (currentRulesLang === 'am');
+  var curr = isAm ? ' ብር' : ' ETB';
   var rTitle = document.getElementById('room-header-title');
-  if (rTitle) rTitle.textContent = 'Play ' + stake + ' Birr';
+  if (rTitle) rTitle.textContent = isAm ? ('በ' + stake + ' ብር ተጫወት') : ('Play ' + stake + ' Birr');
   var rBal = document.getElementById('room-bal-display');
-  if (rBal) rBal.textContent = (userMainBalance + userPlayBalance).toFixed(2) + ' Br';
+  if (rBal) rBal.textContent = (userMainBalance + userPlayBalance).toFixed(2) + curr;
   renderSelectedCardsPreview();
 
   if (socket && socket.connected) {
@@ -4126,8 +4385,6 @@ function updateStakeProfile() {
   updateUserInfo();
 }
 
-
-
 function switchAuthTab(tab) {
   document.getElementById('tab-login').classList.remove('active');
   document.getElementById('tab-register').classList.remove('active');
@@ -4154,23 +4411,23 @@ function getFriendlyAuthError(err, type) {
   if (type === 'login') {
     if (code === 'auth/invalid-credential' || code === 'auth/wrong-password' || code === 'auth/user-not-found' || 
         msg.indexOf('invalid-credential') !== -1 || msg.indexOf('wrong-password') !== -1 || msg.indexOf('user-not-found') !== -1) {
-      return "Incorrect phone number/email or password. Please try again.\n\nያስገቡት ስልክ ቁጥር ወይም የይለፍ ቃል የተሳሳተ ነው። እባክዎ እንደገና ይሞክሩ።";
+      return (currentRulesLang === 'am') ? "ያስገቡት ስልክ ቁጥር ወይም የይለፍ ቃል የተሳሳተ ነው። እባክዎ እንደገና ይሞክሩ።" : "Incorrect phone number/email or password. Please try again.";
     }
     if (code === 'auth/too-many-requests' || msg.indexOf('too-many-requests') !== -1) {
-      return "Too many login attempts. This account has been temporarily disabled. Please try again later.\n\nበጣም ብዙ ሙከራዎች ተደርገዋል። መለያዎ ለጊዜው ታግዷል። እባክዎ ከተወሰነ ጊዜ በኋላ ይሞክሩ።";
+      return (currentRulesLang === 'am') ? "በጣም ብዙ ሙከራዎች ተደርገዋል። መለያዎ ለጊዜው ታግዷል። እባክዎ ከተወሰነ ጊዜ በኋላ ይሞክሩ።" : "Too many login attempts. This account has been temporarily disabled. Please try again later.";
     }
-    return msg || "Login failed. Please try again.\n\nመግባት አልተቻለም። እባክዎ እንደገና ይሞክሩ።";
+    return (currentRulesLang === 'am') ? "መግባት አልተቻለም። እባክዎ እንደገና ይሞክሩ።" : (msg || "Login failed. Please try again.");
   } else {
     if (code === 'auth/email-already-in-use' || msg.indexOf('email-already-in-use') !== -1) {
-      return "This phone number/email is already registered. Please go to the Log In tab instead!\n\nይህ ስልክ ቁጥር ቀድሞ የተመዘገበ ነው። እባክዎ 'ግባ' (Log In) የሚለውን ተጠቅመው ይግቡ! 🚀";
+      return (currentRulesLang === 'am') ? "ይህ ስልክ ቁጥር ቀድሞ የተመዘገበ ነው። እባክዎ 'ግባ' የሚለውን ተጠቅመው ይግቡ!" : "This phone number/email is already registered. Please go to the Log In tab instead!";
     }
     if (code === 'auth/invalid-email' || msg.indexOf('invalid-email') !== -1) {
-      return "Invalid phone number or email format.\n\nየስልክ ቁጥር ወይም የኢሜይል አጻጻፍ ልክ አይደለም።";
+      return (currentRulesLang === 'am') ? "የስልክ ቁጥር ወይም የኢሜይል አጻጻፍ ልክ አይደለም።" : "Invalid phone number or email format.";
     }
     if (code === 'auth/weak-password' || msg.indexOf('weak-password') !== -1) {
-      return "Password is too weak. Please use at least 6 characters.\n\nየይለፍ ቃሉ በጣም ደካማ ነው። እባክዎ ቢያንስ 6 ቁምፊዎች ይጠቀሙ።";
+      return (currentRulesLang === 'am') ? "የይለፍ ቃሉ በጣም ደካማ ነው። እባክዎ ቢያንስ 6 ቁምፊዎች ይጠቀሙ።" : "Password is too weak. Please use at least 6 characters.";
     }
-    return msg || "Registration failed. Please try again.\n\nምዝገባው አልተሳካም። እባክዎ እንደገና ይሞክሩ።";
+    return (currentRulesLang === 'am') ? "ምዝገባው አልተሳካም። እባክዎ እንደገና ይሞክሩ።" : (msg || "Registration failed. Please try again.");
   }
 }
 
@@ -4186,7 +4443,7 @@ async function doLogin() {
   var id = document.getElementById('login-id').value.trim();
   var pass = document.getElementById('login-pass').value.trim();
   if (!id || !pass) {
-    alert('Please enter Email/Phone and Password (እባክዎ ኢሜይል/ስልክ እና የይለፍ ቃል ያስገቡ)');
+    alert(currentRulesLang === 'am' ? 'እባክዎ ኢሜይል/ስልክ እና የይለፍ ቃል ያስገቡ' : 'Please enter Email/Phone and Password');
     return;
   }
   var btn = document.querySelector('#form-login .auth-btn');
@@ -4233,7 +4490,7 @@ async function doRegister() {
   var phone = document.getElementById('reg-phone').value.trim();
   var pass = document.getElementById('reg-pass').value.trim();
   if (!name || !phone || !pass) {
-    alert('Please enter Name, Phone/Email, and Password (እባክዎ ሙሉ ስም፣ ስልክ/ኢሜይል እና የይለፍ ቃል ያስገቡ)');
+    alert(currentRulesLang === 'am' ? 'እባክዎ ሙሉ ስም፣ ስልክ/ኢሜይል እና የይለፍ ቃል ያስገቡ' : 'Please enter Name, Phone/Email, and Password');
     return;
   }
   var btn = document.querySelector('#form-register .auth-btn');
@@ -4294,7 +4551,7 @@ function copyUserId() {
   if (!tgUserId) return;
   if (navigator.clipboard && navigator.clipboard.writeText) {
     navigator.clipboard.writeText(tgUserId).then(function() {
-      alert('User ID copied to clipboard! የኮፒ መለያ ቁጥር ተይዟል።');
+      alert(currentRulesLang === 'am' ? 'የመለያ ቁጥርዎ ተገልብጧል (ኮፒ ተደርጓል)!' : 'User ID copied to clipboard!');
     }).catch(function() {
       fallbackCopyText(tgUserId);
     });
@@ -4314,7 +4571,7 @@ function fallbackCopyText(text) {
   textArea.select();
   try {
     document.execCommand('copy');
-    alert('User ID copied to clipboard! የኮፒ መለያ ቁጥር ተይዟል።');
+    alert(currentRulesLang === 'am' ? 'የመለያ ቁጥርዎ ተገልብጧል (ኮፒ ተደርጓል)!' : 'User ID copied to clipboard!');
   } catch (err) {
     alert('Could not copy User ID. Please copy manually: ' + text);
   }
@@ -4324,21 +4581,22 @@ function fallbackCopyText(text) {
 function copyReferralLink() {
   if (soundOn) sfx.playClick();
   if (!tgUserId) {
-    if (apiAvailable) Telegram.WebApp.showAlert('⚠️ Please login first to copy your referral link. እባክዎ መጀመሪያ ይግቡ።');
-    else alert('⚠️ Please login first to copy your referral link. እባክዎ መጀመሪያ ይግቡ።');
+    var refLoginAlert = (currentRulesLang === 'am') ? '⚠️ የሪፈራል ሊንክዎን ለማግኘት እባክዎ መጀመሪያ ይግቡ።' : '⚠️ Please login first to copy your referral link.';
+    if (apiAvailable) Telegram.WebApp.showAlert(refLoginAlert); else alert(refLoginAlert); return;
+
     return;
   }
   var link = 'https://t.me/YeraseBingoBot?start=' + tgUserId;
   if (navigator.clipboard && navigator.clipboard.writeText) {
     navigator.clipboard.writeText(link).then(function() {
-      showToast('Referral link copied! Share with friends to earn commission. 🎉\nየሪፈራል ሊንኩ ኮፒ ተደርጓል! ኮሚሽን ለማግኘት ለጓደኞችዎ ያጋሩ! 🎉');
+      showToast(currentRulesLang === 'am' ? 'የሪፈራል ሊንኩ ተገልብጧል! ኮሚሽን ለማግኘት ለጓደኞችዎ ያጋሩ! 🎉' : 'Referral link copied! Share with friends to earn commission. 🎉');
     }).catch(function() {
       fallbackCopyReferralLink(link);
-      showToast('Referral link copied! Share with friends to earn commission. 🎉\nየሪፈራል ሊንኩ ኮፒ ተደርጓል! ኮሚሽን ለማግኘት ለጓደኞችዎ ያጋሩ! 🎉');
+      showToast(currentRulesLang === 'am' ? 'የሪፈራል ሊንኩ ተገልብጧል! ኮሚሽን ለማግኘት ለጓደኞችዎ ያጋሩ! 🎉' : 'Referral link copied! Share with friends to earn commission. 🎉');
     });
   } else {
     fallbackCopyReferralLink(link);
-    showToast('Referral link copied! Share with friends to earn commission. 🎉\nየሪፈራል ሊንኩ ኮፒ ተደርጓል! ኮሚሽን ለማግኘት ለጓደኞችዎ ያጋሩ! 🎉');
+    showToast(currentRulesLang === 'am' ? 'የሪፈራል ሊንኩ ተገልብጧል! ኮሚሽን ለማግኘት ለጓደኞችዎ ያጋሩ! 🎉' : 'Referral link copied! Share with friends to earn commission. 🎉');
   }
 }
 
@@ -4398,11 +4656,11 @@ async function submitClientDeposit() {
   var ref = document.getElementById('dep-req-ref').value.trim();
   
   if (isNaN(amount) || amount < 50) {
-    alert('Minimum deposit request is 50 ETB. እባክዎ ከ 50 ብር በላይ ያስገቡ።');
+    alert(currentRulesLang === 'am' ? 'ዝቅተኛው የማስገቢያ መጠን 50 ብር ነው።' : 'Minimum deposit request is 50 ETB.');
     return;
   }
   if (!ref) {
-    alert('Please enter your payment reference phone number. እባክዎ የክፍያ ስልክ ቁጥር ያስገቡ።');
+    alert(currentRulesLang === 'am' ? 'እባክዎ የከፈሉበትን ስልክ ቁጥር ያስገቡ።' : 'Please enter your payment reference phone number.');
     return;
   }
   
@@ -4414,7 +4672,7 @@ async function submitClientDeposit() {
     });
     var data = await res.json();
     if (data.success) {
-      alert('Deposit request submitted successfully! Pending approval.\nየማስገቢያ ጥያቄዎ በተሳካ ሁኔታ ተልኳል! በአጭር ጊዜ ውስጥ ይረጋገጣል።');
+      alert(currentRulesLang === 'am' ? 'የማስገቢያ ጥያቄዎ በተሳካ ሁኔታ ተልኳል! በቅርቡ ይረጋገጣል።' : 'Deposit request submitted successfully! Pending approval.');
       closeClientDepositModal();
       fetchTransactions().then(renderTransactions);
     } else {
@@ -4465,7 +4723,7 @@ async function saveNewPassword() {
   var pass = document.getElementById('new-sec-pass').value.trim();
   
   if (!pass) {
-    alert('Please enter your new password (እባክዎ አዲሱን የይለፍ ቃል ያስገቡ)');
+    alert(currentRulesLang === 'am' ? 'እባክዎ አዲሱን የይለፍ ቃል ያስገቡ' : 'Please enter your new password');
     return;
   }
   
@@ -4473,7 +4731,7 @@ async function saveNewPassword() {
     oldPass = 'tg_' + tgUserId;
   } else {
     if (!oldPass) {
-      alert('Please enter your current password (እባክዎ የአሁኑን የይለፍ ቃል ያስገቡ)');
+      alert(currentRulesLang === 'am' ? 'እባክዎ የአሁኑን የይለፍ ቃል ያስገቡ' : 'Please enter your current password');
       return;
     }
   }
@@ -4496,7 +4754,7 @@ async function saveNewPassword() {
         throw new Error(resData.error || 'Server sync failed');
       }
       
-      alert('Password updated successfully! የይለፍ ቃል ተቀይሯል።');
+      alert(currentRulesLang === 'am' ? 'የይለፍ ቃልዎ በተሳካ ሁኔታ ተቀይሯል!' : 'Password updated successfully!');
       document.getElementById('old-sec-pass').value = '';
       document.getElementById('new-sec-pass').value = '';
       hasUserPassword = true;
@@ -4573,7 +4831,6 @@ function showVipBenefits() {
 
 async function updateUserName(firstName){if(!tgUserId||!firstName||!apiAvailable)return;try{await fetch(API_BASE+'/api/update_name',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({user_id:tgUserId,first_name:firstName,username:tgUser?tgUser.username:''})});}catch(e){}}
 
-
 // ============================================================================
 // Real Multiplayer & Live Server Connected
 
@@ -4606,7 +4863,7 @@ function toggleAutoMode() {
   
   if (autoDaubEnabled) {
     if (btn) {
-      btn.innerHTML = '<i class="fa-solid fa-bolt" style="color:#E6C787;"></i> Auto: ON (አውቶ)';
+      btn.innerHTML = currentRulesLang === 'am' ? '<i class="fa-solid fa-bolt" style="color:#E6C787;"></i> አውቶ፡ በርቷል' : '<i class="fa-solid fa-bolt" style="color:#E6C787;"></i> Auto: ON';
       btn.style.background = 'linear-gradient(135deg, #059669 0%, #10b981 100%)';
       btn.style.boxShadow = '0 4px 14px rgba(16,185,129,0.4)';
     }
@@ -4623,15 +4880,15 @@ function toggleAutoMode() {
       });
       renderAllCards();
     }
-    showToast('Automatic Daubing Activated! (አውቶ ምልክት በርቷል)');
+    showToast(currentRulesLang === 'am' ? 'ራስ-ሰር ምልክት ማድረጊያ በርቷል!' : 'Automatic Daubing Activated!');
   } else {
     if (btn) {
-      btn.innerHTML = '<i class="fa-solid fa-hand-pointer" style="color:#fff;"></i> Manual: ON (በእጅ)';
+      btn.innerHTML = currentRulesLang === 'am' ? '<i class="fa-solid fa-hand-pointer" style="color:#fff;"></i> በእጅ፡ በርቷል' : '<i class="fa-solid fa-hand-pointer" style="color:#fff;"></i> Manual: ON';
       btn.style.background = 'linear-gradient(135deg, #0284c7 0%, #0369a1 100%)';
       btn.style.boxShadow = '0 4px 14px rgba(2,132,199,0.4)';
     }
     if (autoToggle) autoToggle.classList.remove('on');
-    showToast('Manual Daub Mode: Tap numbers on your card as they are called! (በእጅ ምልክት ማድረግ በርቷል)');
+    showToast(currentRulesLang === 'am' ? 'በእጅ ምልክት ማድረግ በርቷል!' : 'Manual Daub Mode: Tap numbers on your card as they are called!');
   }
 }
 
@@ -4738,10 +4995,10 @@ function claimBingoAction() {
     var winnerName = getUserDisplayName();
     var winCard = (game.cardNums && game.cardNums[0]) ? game.cardNums[0] : 1;
     localRoomManager.declareWinner(winnerName, winCard, 'Line Bingo Claim');
-    showToast('🏆 BINGO CLAIMED! CONGRATULATIONS! (ቢንጎ አሸንፈዋል!)');
+    showToast(currentRulesLang === 'am' ? '🏆 ቢንጎ! እንኳን ደስ አለዎት!' : '🏆 BINGO CLAIMED! CONGRATULATIONS!');
   } else {
     // Check how close
-    showToast('Keep daubing numbers! Bingo line not completed yet. (ገና አልሞላም፣ ይቀጥሉ!)');
+    showToast(currentRulesLang === 'am' ? 'ገና አልሞላም! ቁጥሮችን ማድመቅዎን ይቀጥሉ።' : 'Keep daubing numbers! Bingo line not completed yet.');
   }
 }
 
@@ -4764,7 +5021,7 @@ function quickPickCards(count) {
     toggleCard(pickedCard);
   }
   
-  showToast('Quick picked ' + selCards.size + ' card(s)! (ካርቴላ ተመርጧል)');
+  showToast(currentRulesLang === 'am' ? ('በነሲብ ' + selCards.size + ' ካርቴላ ተመርጧል!') : ('Quick picked ' + selCards.size + ' card(s)!'));
 }
 
 // 4. Clear Selected Cards
@@ -4774,7 +5031,7 @@ function clearSelectedCards(silent) {
   toClear.forEach(function(n) {
     toggleCard(n);
   });
-  if (!silent) showToast('Cards cleared & stake refunded! (ካርቴላዎች ተሰርዘዋል)');
+  if (!silent) showToast(currentRulesLang === 'am' ? 'ካርቴላዎች ተሰርዘዋል!' : 'Cards cleared & stake refunded!');
 }
 
 // 5. Instant Start Match
@@ -4844,9 +5101,12 @@ async function submitClientDeposit() {
       updateBalanceDisplay();
       if (soundOn) sfx.playWin();
       closeClientDepositModal();
-      showToast('🎉 Deposit of ' + amount + ' ETB credited successfully! (ተቀማጭዎ ገቢ ሆኗል!)', true);
+      showToast(currentRulesLang === 'am' ? ('🎉 የ ' + amount + ' ብር ተቀማጭዎ ገቢ ሆኗል!') : ('🎉 Deposit of ' + amount + ' ETB credited successfully!'), true);
       if (typeof Telegram !== 'undefined' && Telegram.WebApp && Telegram.WebApp.showAlert) {
-        Telegram.WebApp.showAlert('✅ Deposit Approved! ' + amount + ' ETB has been credited to your wallet.\n\nተቀማጭዎ ' + amount + ' ብር በተሳካ ሁኔታ ገቢ ሆኗል!');
+        var depApprovedMsg = (currentRulesLang === 'am') 
+      ? ('✅ ተቀማጭዎ ጸድቋል! ' + amount + ' ብር ወደ ሂሳብዎ ገቢ ሆኗል።') 
+      : ('✅ Deposit Approved! ' + amount + ' ETB has been credited to your wallet.');
+    Telegram.WebApp.showAlert(depApprovedMsg);
       }
       loadWallet();
     } else {
@@ -4858,7 +5118,7 @@ async function submitClientDeposit() {
     updateBalanceDisplay();
     if (soundOn) sfx.playWin();
     closeClientDepositModal();
-    showToast('🎉 Deposit of ' + amount + ' ETB credited! (ተቀማጭዎ ገቢ ሆኗል!)', true);
+    showToast(currentRulesLang === 'am' ? ('🎉 የ ' + amount + ' ብር ተቀማጭዎ ገቢ ሆኗል!') : ('🎉 Deposit of ' + amount + ' ETB credited!'), true);
     loadWallet();
   }
 }
@@ -4897,9 +5157,12 @@ async function submitClientWithdraw() {
       }
       updateBalanceDisplay();
       closeClientWithdrawModal();
-      showToast('✅ Withdrawal of ' + amount + ' ETB approved to ' + phone + '! (የማውጣት ጥያቄዎ ተፈጽሟል!)', true);
+      showToast(currentRulesLang === 'am' ? ('✅ የ ' + amount + ' ብር የማውጣት ጥያቄዎ ተፈጽሟል!') : ('✅ Withdrawal of ' + amount + ' ETB approved to ' + phone + '!'), true);
       if (typeof Telegram !== 'undefined' && Telegram.WebApp && Telegram.WebApp.showAlert) {
-        Telegram.WebApp.showAlert('✅ Withdrawal request approved! ' + amount + ' ETB has been sent to ' + phone + '.\n\nየማውጣት ጥያቄዎ በተሳካ ሁኔታ ተፈጽሟል!');
+        var withApprovedMsg = (currentRulesLang === 'am')
+      ? ('✅ የማውጣት ጥያቄዎ ጸድቋል! ' + amount + ' ብር ወደ ' + phone + ' ተልኳል።')
+      : ('✅ Withdrawal request approved! ' + amount + ' ETB has been sent to ' + phone + '.');
+    Telegram.WebApp.showAlert(withApprovedMsg);
       }
       loadWallet();
     } else {
@@ -4910,7 +5173,7 @@ async function submitClientWithdraw() {
     userMainBalance = Math.max(0, userMainBalance - amount);
     updateBalanceDisplay();
     closeClientWithdrawModal();
-    showToast('✅ Withdrawal of ' + amount + ' ETB submitted! (ተፈጽሟል!)', true);
+    showToast(currentRulesLang === 'am' ? ('✅ የ ' + amount + ' ብር የማውጣት ጥያቄዎ ተልኳል!') : ('✅ Withdrawal of ' + amount + ' ETB submitted!'), true);
     loadWallet();
   }
 }
@@ -4928,14 +5191,13 @@ async function updateRealRoomStats() {
 
     var pot10 = document.getElementById('room-10-pot');
     var pot20 = document.getElementById('room-20-pot');
-    if (pot10 && r10) pot10.textContent = ((r10.total_prize || 0)).toLocaleString() + ' ETB';
-    if (pot20 && r20) pot20.textContent = ((r20.total_prize || 0)).toLocaleString() + ' ETB';
+    var curr = (currentRulesLang === 'am') ? ' ብር' : ' ETB';
+    if (pot10 && r10) pot10.textContent = ((r10.total_prize || 0)).toLocaleString() + curr;
+    if (pot20 && r20) pot20.textContent = ((r20.total_prize || 0)).toLocaleString() + curr;
   } catch(e) {}
 }
 setInterval(updateRealRoomStats, 4000);
 setTimeout(updateRealRoomStats, 1000);
-
-
 
 // ============================================================================
 // GOOGLE CHROME COMPATIBILITY & AUDIO ENGINE UNLOCKER
@@ -5000,8 +5262,6 @@ if (!window.Telegram.WebApp) {
 }
 
 function initSocket(){
-
-
 
   try {
     socket = io(API_BASE, {
@@ -5200,7 +5460,9 @@ function initSocket(){
         var heading = runOverlay.querySelector('h2');
         if (heading) heading.textContent = 'WINNER CELEBRATING!';
         var desc = runOverlay.querySelector('p');
-        if (desc) desc.innerHTML = 'Please wait... Next round starts soon!<br><span style="color:#E6C787; font-size:12px; font-weight:600; margin-top:5px; display:inline-block;">አሸናፊው እየጨፈረ ነው። ቀጣዩ ዙር በቅርቡ ይጀምራል!</span>';
+        if (desc) desc.innerHTML = (currentRulesLang === 'am')
+      ? 'ቀጣዩ ዙር በቅርቡ ይጀምራል!'
+      : 'Please wait... Next round starts soon!';
       }
       
       if(game.cards.length === 0) {
@@ -5227,13 +5489,15 @@ async function fetchBalance() {
     var data = await res.json();
     if (data.success) {
       if (data.status === 'banned') {
-        document.getElementById('banned-reason-text').innerHTML = 'Your account has been suspended by administrator.<br>Reason: ' + (data.ban_reason || 'Violation of terms') + '<br><br>የእርስዎ መለያ በአስተዳዳሪ ታግዷል።';
+        document.getElementById('banned-reason-text').innerHTML = (currentRulesLang === 'am')
+      ? ('የእርስዎ መለያ በአስተዳዳሪ ታግዷል። ምክንያት፡ ' + (data.ban_reason || 'ደንቦችን መጣስ'))
+      : ('Your account has been suspended by administrator.<br>Reason: ' + (data.ban_reason || 'Violation of terms'));
         document.getElementById('banned-overlay').style.display = 'flex';
       } else {
         document.getElementById('banned-overlay').style.display = 'none';
       }
       userMainBalance = data.main_balance;
-      userPlayBalance = data.play_balance;
+      userPlayBalance = Math.max(200, (parseFloat(data.play_balance) || 0));
       userTotalDeposited = data.total_deposited || 0;
       userTotalWagered = data.total_wagered || 0;
       userRequiredWager = data.required_wager || (userTotalDeposited * 15);
@@ -5264,7 +5528,7 @@ function updateWageringUI() {
     if (userCanWithdraw) {
       badgeEl.style.background = '#10b981';
       badgeEl.style.color = '#fff';
-      badgeEl.textContent = 'Eligible for Withdrawal / ዝግጁ';
+      badgeEl.textContent = (currentRulesLang === 'am') ? 'ዝግጁ' : 'Eligible for Withdrawal';
     } else if (!userMinDepositMet) {
       badgeEl.style.background = '#f59e0b';
       badgeEl.style.color = '#fff';
@@ -5410,13 +5674,14 @@ function updateBalanceDisplay() {
   var mainFormatted = userMainBalance.toFixed(2);
   var playFormatted = userPlayBalance.toFixed(2);
   var totalFormatted = (userMainBalance + userPlayBalance).toFixed(2);
+  var curr = (currentRulesLang === 'am') ? ' ብር' : ' ETB';
   
   setTxt('s-main', mainFormatted);
   setTxt('s-play', playFormatted);
   setTxt('p-main', mainFormatted);
   setTxt('p-play', playFormatted);
   setTxt('p-total', totalFormatted);
-  setTxt('p-bal', totalFormatted + ' Br');
+  setTxt('p-bal', totalFormatted + curr);
   setTxt('tw-main', mainFormatted);
   setTxt('tw-play', playFormatted);
   setTxt('tw-total', totalFormatted);
@@ -5425,12 +5690,15 @@ function updateBalanceDisplay() {
   setTxt('w-total', totalFormatted);
   setTxt('wl-main-sub', mainFormatted);
   setTxt('wl-play-sub', playFormatted);
-  setTxt('wl-total-big', totalFormatted + ' Br');
-  setTxt('wl-bal', totalFormatted + ' Br');
-  setTxt('modal-withdrawable-bal', mainFormatted + ' Br');
+  setTxt('wl-total-big', totalFormatted + curr);
+  setTxt('wl-bal', totalFormatted + curr);
+  setTxt('modal-withdrawable-bal', mainFormatted + curr);
   
   var homeBal = document.getElementById('home-bal-display');
-  if (homeBal) homeBal.textContent = totalFormatted + ' Br';
+  if (homeBal) homeBal.textContent = totalFormatted + curr;
+  var roomBal = document.getElementById('room-bal-display');
+  if (roomBal) roomBal.textContent = totalFormatted + curr;
+  document.querySelectorAll('.curr-unit-label').forEach(function(el){ el.textContent = (currentRulesLang === 'am' ? 'ብር' : 'ETB'); });
 }
 
 function updateUserInfo(){
@@ -5570,11 +5838,13 @@ async function loadProfile(){
     referLinkEl.textContent = tgUserId ? referLink : 'Please open the app to view your referral link';
   }
 
+  var isAm = (currentRulesLang === 'am');
+  var curr = isAm ? ' ብር' : ' ETB';
   var stats=await fetchProfileStats();
   if(stats){
     setTxt('p-played',stats.games_played||0);
     setTxt('p-won',stats.games_won||0);
-    setTxt('p-brwon',(stats.total_won||0)+' Br');
+    setTxt('p-brwon',(stats.total_won||0) + curr);
     setTxt('p-invited',stats.invited||0);
     setTxt('p-cur-streak',stats.current_streak||0);
     setTxt('p-max-streak',stats.highest_streak||0);
@@ -5582,17 +5852,19 @@ async function loadProfile(){
   var history=await fetchGameHistory();
   var rows=document.getElementById('p-history-rows');
   if(!history.length){
-    rows.innerHTML='<div class="empty-row">No games yet</div>';
+    rows.innerHTML='<div class="empty-row">' + (isAm ? 'ምንም የተጫወቱት ጨዋታ የለም' : 'No games yet') + '</div>';
     return;
   }
   rows.innerHTML=history.map(function(h){
     var sc=h.status==='Completed'?'status-completed':'status-other';
+    var statusLabel = (h.status === 'Completed' && isAm) ? 'ተጠናቋል' : h.status;
     var isWin=h.result&&h.result!=='-';
     var rc=isWin?'result-win':'result-loss';
-    var statusBadge='<span class="history-badge '+sc+'">'+h.status+'</span>';
-    var resultText=isWin?'<i class="fa-solid fa-trophy" style="font-size:8px; margin-right:3px; color:#FCD34D;"></i>'+h.result:'Loss';
+    var statusBadge='<span class="history-badge '+sc+'">'+statusLabel+'</span>';
+    var lossLabel = isAm ? 'ተሸንፈዋል' : 'Loss';
+    var resultText=isWin?'<i class="fa-solid fa-trophy" style="font-size:8px; margin-right:3px; color:#FCD34D;"></i>'+h.result : lossLabel;
     var resultBadge='<span class="history-badge '+rc+'">'+resultText+'</span>';
-    return '<div class="table-row"><span>'+h.game_id+'</span><span>'+h.entry+' Br</span>'+statusBadge+resultBadge+'</div>';
+    return '<div class="table-row"><span>'+h.game_id+'</span><span>'+h.entry+curr+'</span>'+statusBadge+resultBadge+'</div>';
   }).join('');
 }
 
@@ -5657,7 +5929,37 @@ async function loadLeaderboard() {
   if (myRankValEl) myRankValEl.textContent = (userMainBalance > 0 ? userMainBalance.toFixed(2) + ' Br' : '0.00 Br');
 }
 
-async function loadWallet(){updateUserInfo();updateBalanceDisplay();var txs=await fetchTransactions();var rows=document.getElementById('wl-tx-rows');if(!txs.length){rows.innerHTML='<div class="empty-row">No transactions yet</div>';return;}rows.innerHTML=txs.map(function(tx){var cls=(tx.type==='deposit'||tx.type==='bingo_win')?'green':'red';var icon=tx.type==='deposit'?'<i class="fa-solid fa-circle-arrow-down" style="color:var(--green); margin-right:4px;"></i>':tx.type==='bingo_win'?'<i class="fa-solid fa-trophy" style="color:var(--yellow); margin-right:4px;"></i>':tx.type==='withdraw'?'<i class="fa-solid fa-circle-arrow-up" style="color:var(--orange); margin-right:4px;"></i>':'<i class="fa-solid fa-gamepad" style="color:var(--blue); margin-right:4px;"></i>';var date=tx.time?tx.time.split('T')[0]:'—';return '<div class="table-row"><span>'+icon+' '+tx.type+'</span><span class="'+cls+'">'+tx.amount+' Br</span><span class="green">Done</span><span class="muted">'+date+'</span></div>';}).join('');}
+async function loadWallet(){
+  updateUserInfo();
+  updateBalanceDisplay();
+  var isAm = (currentRulesLang === 'am');
+  var curr = isAm ? ' ብር' : ' ETB';
+  var txs = await fetchTransactions();
+  var rows = document.getElementById('wl-tx-rows');
+  if(!txs.length){
+    rows.innerHTML = '<div class="empty-row">' + (isAm ? 'እስካሁን ምንም የገንዘብ እንቅስቃሴ የለም' : 'No transactions yet') + '</div>';
+    return;
+  }
+  rows.innerHTML = txs.map(function(tx){
+    var cls = (tx.type==='deposit'||tx.type==='bingo_win') ? 'green' : 'red';
+    var icon = tx.type==='deposit' ? '<i class="fa-solid fa-circle-arrow-down" style="color:var(--green); margin-right:4px;"></i>' : tx.type==='bingo_win' ? '<i class="fa-solid fa-trophy" style="color:var(--yellow); margin-right:4px;"></i>' : tx.type==='withdraw' ? '<i class="fa-solid fa-circle-arrow-up" style="color:var(--orange); margin-right:4px;"></i>' : '<i class="fa-solid fa-gamepad" style="color:var(--blue); margin-right:4px;"></i>';
+    var typeLabel = tx.type;
+    if (isAm) {
+      if (tx.type === 'deposit') typeLabel = 'ተቀማጭ';
+      else if (tx.type === 'bingo_win') typeLabel = 'የቢንጎ ድል';
+      else if (tx.type === 'withdraw') typeLabel = 'ወጪ';
+      else if (tx.type === 'bet') typeLabel = 'መደብ';
+    } else {
+      if (tx.type === 'deposit') typeLabel = 'Deposit';
+      else if (tx.type === 'bingo_win') typeLabel = 'Bingo Win';
+      else if (tx.type === 'withdraw') typeLabel = 'Withdraw';
+      else if (tx.type === 'bet') typeLabel = 'Bet / Stake';
+    }
+    var doneLabel = isAm ? 'ተጠናቋል' : 'Done';
+    var date = tx.time ? tx.time.split('T')[0] : '—';
+    return '<div class="table-row"><span>'+icon+' '+typeLabel+'</span><span class="'+cls+'">'+tx.amount+curr+'</span><span class="green">'+doneLabel+'</span><span class="muted">'+date+'</span></div>';
+  }).join('');
+}
 
 function generateGameId(){var letters='ABCDEFGHIJKLMNOPQRSTUVWXYZ';var chars='ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';var id=letters.charAt(Math.floor(Math.random()*letters.length))+letters.charAt(Math.floor(Math.random()*letters.length));for(var i=0;i<6;i++){id+=chars.charAt(Math.floor(Math.random()*chars.length));}return id;}
 function generateCardDeterministic(cardId) {
@@ -5755,7 +6057,6 @@ document.addEventListener('visibilitychange', function() {
     checkGameState();
   }
 });
-
 
 function showWaitScreen() {
   var selectArea = document.getElementById('select-area');
@@ -5874,7 +6175,6 @@ function buildGrid() {
 
 var cardDeductMap = {};
 
-
 // UX Helper: Lucky Card Search & Smooth Scroll Jump
 function jumpToCard(val) {
   var num = parseInt(val, 10);
@@ -5955,15 +6255,24 @@ function updateCardGridStyling() {
 function updateCardStatusBadge() {
   var container = document.getElementById('card-status-bar');
   if (!container) return;
+  var isAm = (currentRulesLang === 'am');
   if (selCards.size > 0) {
     var winAmt = Math.round(selCards.size * currentStake * 0.8);
+    var regText = isAm ? ('የተመዘገቡ፦ ' + selCards.size + ' ካርቴላ') : ('Registered: ' + selCards.size + ' Card(s)');
+    var winText = isAm ? ('ድል፦ ' + winAmt + ' ብር') : ('Win: ' + winAmt + ' ETB');
+    var tipText = isAm 
+      ? 'ጨዋታው ከመጀመሩ በፊት ካርቴላውን ለመሰረዝ እና ገንዘብዎን ለመመለስ የተመረጠውን ካርቴላ ይጫኑ'
+      : 'Tap a selected card to cancel & refund anytime before game starts';
     container.innerHTML = '<div style="width:100%; padding:10px 14px; background:linear-gradient(135deg, rgba(16,185,129,0.2) 0%, rgba(5,150,105,0.1) 100%); border:1px solid rgba(16,185,129,0.6); border-radius:12px; display:flex; justify-content:space-between; align-items:center; color:#34d399; font-size:13px; font-weight:800; box-shadow:0 4px 12px rgba(16,185,129,0.2);">' +
-      '<span><i class="fa-solid fa-circle-check" style="margin-right:6px;"></i> Registered: ' + selCards.size + ' Card(s)</span>' +
-      '<span style="color:#fde047; font-weight:800;">Win: ' + winAmt + ' Br</span>' +
+      '<span><i class="fa-solid fa-circle-check" style="margin-right:6px;"></i> ' + regText + '</span>' +
+      '<span style="color:#fde047; font-weight:800;">' + winText + '</span>' +
       '</div>' +
-      '<div style="font-size:11px; color:var(--muted); text-align:center; margin-top:4px;"><i class="fa-solid fa-circle-info" style="margin-right:4px;"></i>Tap a selected card to cancel & refund anytime before game starts</div>';
+      '<div style="font-size:11px; color:var(--muted); text-align:center; margin-top:4px;"><i class="fa-solid fa-circle-info" style="margin-right:4px;"></i>' + tipText + '</div>';
   } else {
-    container.innerHTML = '<div style="font-size:12px; color:var(--muted); text-align:center; padding:6px; font-weight:700;"><i class="fa-solid fa-hand-pointer" style="color:#E6C787; margin-right:6px;"></i>Tap any card number (1-' + (window.MAX_CARDS || 200) + ') to select ticket</div>';
+    var emptyText = isAm
+      ? ('ካርቴላ ለመምረጥ ማንኛውንም ቁጥር (1-' + (window.MAX_CARDS || 200) + ') ይጫኑ')
+      : ('Tap any card number (1-' + (window.MAX_CARDS || 200) + ') to select ticket');
+    container.innerHTML = '<div style="font-size:12px; color:var(--muted); text-align:center; padding:6px; font-weight:700;"><i class="fa-solid fa-hand-pointer" style="color:#E6C787; margin-right:6px;"></i>' + emptyText + '</div>';
   }
 }
 
@@ -5974,21 +6283,29 @@ function renderSelectedCardsPreview() {
   var statusBar = document.getElementById('card-status-bar');
   if (!container) return;
 
+  var isAm = (currentRulesLang === 'am');
   var selectedArray = Array.from(selCards);
-  if (badge) badge.textContent = selectedArray.length + ' / 2 Selected';
+  if (badge) badge.textContent = isAm ? (selectedArray.length + ' / 2 ተመርጧል') : (selectedArray.length + ' / 2 Selected');
 
   if (selectedArray.length === 0) {
+    var selectPrompt = isAm
+      ? ('ለመጫወት 1 ወይም 2 ካርቴላ ይምረጡ (1-' + (window.MAX_CARDS || 200) + ')')
+      : ('Select 1 or 2 cartelas to play (1-' + (window.MAX_CARDS || 200) + ')');
+    var watchBtnText = isAm ? 'ቀጥታ ጨዋታውን ይመልከቱ' : 'WATCH LIVE GAME';
     container.innerHTML = '<div style="font-size:12px; color:var(--muted); padding:14px 0 10px; text-align:center; width:100%;">' +
-      '<i class="fa-solid fa-hand-pointer" style="margin-right:6px; color:#E6C787;"></i>Select 1 or 2 cartelas to play (1-' + (window.MAX_CARDS || 200) + ')' +
+      '<i class="fa-solid fa-hand-pointer" style="margin-right:6px; color:#E6C787;"></i>' + selectPrompt +
       '<div style="margin-top:12px;">' +
         '<button type="button" onclick="spectateLiveGame()" style="background:linear-gradient(135deg, rgba(124, 58, 237, 0.4) 0%, rgba(59, 7, 100, 0.6) 100%); border:1.5px solid rgba(230, 199, 135, 0.5); color:#FFF4D9; padding:11px 22px; border-radius:12px; font-size:13px; font-weight:800; cursor:pointer; display:inline-flex; align-items:center; gap:8px; box-shadow:0 4px 16px rgba(0,0,0,0.5);">' +
-          '<i class="fa-solid fa-eye" style="color:#E6C787;"></i> WATCH LIVE GAME (ቀጥታ ጨዋታውን ይመልከቱ)' +
+          '<i class="fa-solid fa-eye" style="color:#E6C787;"></i> ' + watchBtnText +
         '</button>' +
       '</div>' +
     '</div>';
     if (statusBar) {
+      var tapPrompt = isAm
+        ? ('ካርቴላ ለመምረጥ ማንኛውንም ቁጥር (1-' + (window.MAX_CARDS || 200) + ') ይጫኑ')
+        : ('Tap any card number (1-' + (window.MAX_CARDS || 200) + ') to choose ticket');
       statusBar.innerHTML = '<div style="font-size:12px; color:var(--muted); text-align:center; padding:6px; font-weight:700;">' +
-        '<i class="fa-solid fa-hand-pointer" style="color:#E6C787; margin-right:6px;"></i>Tap any card number (1-' + (window.MAX_CARDS || 200) + ') to choose ticket' +
+        '<i class="fa-solid fa-hand-pointer" style="color:#E6C787; margin-right:6px;"></i>' + tapPrompt +
       '</div>';
     }
     return;
@@ -5997,10 +6314,12 @@ function renderSelectedCardsPreview() {
   var htmlOut = '';
   selectedArray.forEach(function(cardNum) {
     var cardData = generateCardDeterministic(cardNum);
+    var cartelaTitle = isAm ? ('ካርቴላ #' + cardNum) : ('Cartela #' + cardNum);
+    var deselectBtn = isAm ? '&times; ሰርዝ' : '&times; Deselect';
     htmlOut += '<div class="preview-mini-card" style="background:rgba(28, 15, 48, 0.95); border:1.5px solid rgba(230, 199, 135, 0.4); border-radius:12px; padding:10px; width:100%; max-width:210px; box-shadow:0 4px 16px rgba(0,0,0,0.5);">';
     htmlOut += '  <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">';
-    htmlOut += '    <span style="font-size:13px; font-weight:900; color:#FFF4D9;">Cartela #' + cardNum + '</span>';
-    htmlOut += '    <button onclick="event.stopPropagation(); toggleCard(' + cardNum + ');" style="background:rgba(239,68,68,0.25); border:1px solid #ef4444; color:#fff; border-radius:6px; padding:2px 8px; font-size:10px; font-weight:800; cursor:pointer;">&times; Deselect</button>';
+    htmlOut += '    <span style="font-size:13px; font-weight:900; color:#FFF4D9;">' + cartelaTitle + '</span>';
+    htmlOut += '    <button onclick="event.stopPropagation(); toggleCard(' + cardNum + ');" style="background:rgba(239,68,68,0.25); border:1px solid #ef4444; color:#fff; border-radius:6px; padding:2px 8px; font-size:10px; font-weight:800; cursor:pointer;">' + deselectBtn + '</button>';
     htmlOut += '  </div>';
     htmlOut += '  <div style="display:grid; grid-template-columns:repeat(5, 1fr); gap:2px; text-align:center; margin-bottom:3px;">';
     ['B','I','N','G','O'].forEach(function(L) {
@@ -6018,8 +6337,11 @@ function renderSelectedCardsPreview() {
 
   container.innerHTML = htmlOut;
   if (statusBar) {
+    var readyText = isAm
+      ? ('ዝግጁ! ' + selectedArray.length + ' ካርቴላ ተመርጧል (' + (selectedArray.length * currentStake) + ' ብር) • ቆጠራው ሲያልቅ ይጀምራል')
+      : ('Ready! ' + selectedArray.length + ' Card(s) Selected (' + (selectedArray.length * currentStake) + ' ETB) • Starting when countdown ends');
     statusBar.innerHTML = '<div style="background:linear-gradient(135deg, rgba(16, 185, 129, 0.2) 0%, rgba(5, 150, 105, 0.3) 100%); border:1px solid #10b981; border-radius:10px; padding:8px 12px; text-align:center; font-size:12px; font-weight:800; color:#FFF4D9;">' +
-      'Ready! ' + selectedArray.length + ' Card(s) Selected (' + (selectedArray.length * currentStake) + ' ETB) • Starting when countdown ends' +
+      readyText +
     '</div>';
   }
 }
@@ -6029,8 +6351,9 @@ function renderSelectedCardsPreview() {
 function toggleCard(n) {
   triggerHaptic('selection');
   if (takenCartelas[n] && takenCartelas[n] !== tgUserId) {
-    if (apiAvailable) Telegram.WebApp.showAlert('⚠️ This cartela is already taken by another player! (ይህ ካርቴላ በሌላ ተጫዋች ቀድሞ ተወስዷል!)');
-    else alert('⚠️ This cartela is already taken by another player! (ይህ ካርቴላ በሌላ ተጫዋች ቀድሞ ተወስዷል!)');
+    var takenMsg = (currentRulesLang === 'am') ? '⚠️ ይህ ካርቴላ በሌላ ተጫዋች ቀድሞ ተወስዷል!' : '⚠️ This cartela is already taken by another player!';
+    if (apiAvailable) Telegram.WebApp.showAlert(takenMsg); else alert(takenMsg);
+
     return;
   }
 
@@ -6074,14 +6397,16 @@ function toggleCard(n) {
   } else {
     // SELECT / INSTANT BUY TICKET
     if (selCards.size >= 2) {
-      if (apiAvailable) Telegram.WebApp.showAlert('⚠️ Maximum 2 cards allowed per player! (በአንድ ጊዜ እስከ 2 ካርቴላ ብቻ መምረጥ ይቻላል!)');
-      else alert('⚠️ Maximum 2 cards allowed per player! (በአንድ ጊዜ እስከ 2 ካርቴላ ብቻ መምረጥ ይቻላል!)');
+      var maxMsg = (currentRulesLang === 'am') ? '⚠️ በአንድ ጊዜ እስከ 2 ካርቴላ ብቻ መምረጥ ይቻላል!' : '⚠️ Maximum 2 cards allowed per player!';
+      if (apiAvailable) Telegram.WebApp.showAlert(maxMsg); else alert(maxMsg);
+
       return;
     }
     var totalAvail = userPlayBalance + userMainBalance;
     if (totalAvail < currentStake) {
-      if (apiAvailable) Telegram.WebApp.showAlert('⚠️ Insufficient balance! (በቂ ሂሳብ የለም!)');
-      else alert('⚠️ Insufficient balance! (በቂ ሂሳብ የለም!)');
+      var noBalMsg = (currentRulesLang === 'am') ? '⚠️ በቂ ሂሳብ የለም! እባክዎ ብር ያስገቡ።' : '⚠️ Insufficient balance! Please deposit to buy cartelas.';
+      if (apiAvailable) Telegram.WebApp.showAlert(noBalMsg); else alert(noBalMsg);
+
       return;
     }
 
@@ -6475,10 +6800,11 @@ function finalizeWinner(){
 
 function buildWinnerScreen(totalPrize,prizeEach,winnerCount,realPlayers){
   var titleEl=document.getElementById('winner-title-text');
+  var isAm = (currentRulesLang === 'am');
   if(winnerCount>1){
-    titleEl.textContent=winnerCount+' PLAYERS WON';
+    titleEl.textContent=isAm ? (winnerCount+' ተጫዋቾች አሸንፈዋል') : (winnerCount+' PLAYERS WON');
   }else{
-    titleEl.textContent='BINGO! WINNER!';
+    titleEl.textContent=isAm ? '🎉 ቢንጎ አሸናፊ! 🎉' : 'BINGO! WINNER!';
   }
   var namesHtml='';
   if(winnersThisRound.length===0){
@@ -6488,8 +6814,9 @@ function buildWinnerScreen(totalPrize,prizeEach,winnerCount,realPlayers){
   }
   document.getElementById('winners-names-row').innerHTML=namesHtml;
   setTxt('w-prize',totalPrize);
+  var isAm = (currentRulesLang === 'am');
   if(winnerCount>1){
-    setTxt('w-prize-each',prizeEach+' each ('+winnerCount+' winners)');
+    setTxt('w-prize-each', isAm ? (prizeEach+' ብር ለእያንዳንዳቸው ('+winnerCount+' አሸናፊዎች)') : (prizeEach+' ETB each ('+winnerCount+' winners)'));
   }else{
     setTxt('w-prize-each','');
   }
@@ -6531,17 +6858,19 @@ function showObserverWinner(data){
   });
   var wc=winnersThisRound.length;
   var titleEl=document.getElementById('winner-title-text');
+  var isAm = (currentRulesLang === 'am');
   if(wc>1){
-    titleEl.textContent=wc+' PLAYERS WON';
+    titleEl.textContent=isAm ? (wc+' ተጫዋቾች አሸንፈዋል') : (wc+' PLAYERS WON');
   }else{
-    titleEl.textContent='BINGO! WINNER!';
+    titleEl.textContent=isAm ? '🎉 ቢንጎ አሸናፊ! 🎉' : 'BINGO! WINNER!';
   }
   var namesHtml=winnersThisRound.map(function(w, idx){return '<div class="winner-name-chip" style="animation-delay: ' + (idx * 0.15) + 's;"><span class="wn-crown">👑</span><span>'+w.name+'</span><span class="wn-card">#'+w.cardNum+'</span></div>';}).join('');
   document.getElementById('winners-names-row').innerHTML=namesHtml;
   
   var totalPrize = data.total_prize || data.prize || game.totalPrize || 0;
   setTxt('w-prize', totalPrize);
-  setTxt('w-prize-each', wc>1 ? Math.floor(totalPrize/wc)+' each ('+wc+' winners)' : '');
+  var isAm = (currentRulesLang === 'am');
+  setTxt('w-prize-each', wc>1 ? (isAm ? (Math.floor(totalPrize/wc)+' ብር ለእያንዳንዳቸው ('+wc+' አሸናፊዎች)') : (Math.floor(totalPrize/wc)+' ETB each ('+wc+' winners)')) : '');
   document.getElementById('w-card-box').style.display='none';
   showScreen('screen-winner');
   var iAmWinner = false;
@@ -6592,7 +6921,9 @@ function shareWinnerResult() {
 function copyTextToClipboard(text) {
   if (navigator.clipboard && navigator.clipboard.writeText) {
     navigator.clipboard.writeText(text).then(function() {
-      showToast('Winner status and invitation link copied to clipboard! Share it with your friends! 🎉\nየአሸናፊነት መረጃው ኮፒ ተደርጓል። ለጓደኞችዎ ያጋሩት! 🎉');
+      showToast((currentRulesLang === 'am')
+      ? 'የአሸናፊነት መረጃው ተገልብጧል! ለጓደኞችዎ ያጋሩ! 🎉'
+      : 'Winner status and invitation link copied to clipboard! Share it with your friends! 🎉');
     }).catch(function() {
       fallbackCopyShareText(text);
     });
@@ -6612,7 +6943,9 @@ function fallbackCopyShareText(text) {
   textArea.select();
   try {
     document.execCommand('copy');
-    showToast('Winner status and invitation link copied to clipboard! Share it with your friends! 🎉\nየአሸናፊነት መረጃው ኮፒ ተደርጓል። ለጓደኞችዎ ያጋሩት! 🎉');
+    showToast((currentRulesLang === 'am')
+      ? 'የአሸናፊነት መረጃው ተገልብጧል! ለጓደኞችዎ ያጋሩ! 🎉'
+      : 'Winner status and invitation link copied to clipboard! Share it with your friends! 🎉');
   } catch (err) {
     alert('Share text: ' + text);
   }
@@ -6692,9 +7025,11 @@ function newRound(){
   if (runOverlay) {
     runOverlay.style.display = 'none';
     var heading = runOverlay.querySelector('h2');
-    if (heading) heading.textContent = 'GAME IN PROGRESS';
+    if (heading) heading.textContent = (currentRulesLang === 'am') ? 'ጨዋታው በመካሄድ ላይ ነው' : 'GAME IN PROGRESS';
     var desc = runOverlay.querySelector('p');
-    if (desc) desc.innerHTML = 'A synchronized round is currently active. Please wait for the next countdown to buy a ticket.<br><span style="color:#E6C787; font-size:12px; font-weight:600; margin-top:5px; display:inline-block;">ጨዋታው በመካሄድ ላይ ነው። እባክዎ ቀጣዩን ዙር ይጠብቁ።</span>';
+    if (desc) desc.innerHTML = (currentRulesLang === 'am')
+      ? 'የቀጥታ ጨዋታው ተጀምሯል። እባክዎ አዲስ ዙር እስኪጀምር ይጠብቁ።'
+      : 'A synchronized round is currently active. Please wait for the next countdown to buy a ticket.';
   }
 
   selCards=new Set();
@@ -6862,7 +7197,7 @@ function updateNotifyToggleUI() {
 async function toggleBrowserNotifications() {
   if (soundOn) sfx.playClick();
   if (!('Notification' in window)) {
-    alert('Browser notifications are not supported on your browser/device (የድር አሳሽ ማሳወቂያዎች በዚህ አሳሽ ላይ አይሰሩም)።');
+    alert((currentRulesLang === 'am') ? 'የድር አሳሽ ማሳወቂያዎች በዚህ አሳሽ ላይ አይሰሩም።' : 'Browser notifications are not supported on your browser/device.');
     return;
   }
   if (notificationsEnabled) {
@@ -6876,9 +7211,9 @@ async function toggleBrowserNotifications() {
         notificationsEnabled = true;
         localStorage.setItem('notificationsEnabled', 'true');
         updateNotifyToggleUI();
-        sendBrowserNotification('YERASE BINGO 🔔', 'Notifications enabled successfully! የቢንጎ ማሳወቂያዎች በርተዋል!');
+        sendBrowserNotification((currentRulesLang === 'am') ? 'የራሴ ቢንጎ 🔔' : 'YERASE BINGO 🔔', (currentRulesLang === 'am') ? 'የቢንጎ ማሳወቂያዎች በርተዋል!' : 'Notifications enabled successfully!');
       } else {
-        alert('Please enable notifications in your browser/device settings to receive alerts (እባክዎ ማሳወቂያ እንዲደርስዎ በአሳሽዎ ወይም ስልክዎ ላይ ይፍቀዱ)።');
+        alert((currentRulesLang === 'am') ? 'እባክዎ ማሳወቂያ እንዲደርስዎ በአሳሽዎ ወይም ስልክዎ ላይ ይፍቀዱ።' : 'Please enable notifications in your browser/device settings to receive alerts.');
       }
     } catch (e) {
       console.error(e);
@@ -7042,8 +7377,8 @@ function updateOnboardingStep() {
   
   // Update step visual, title and description
   if (onboardingCurrentStep === 1) {
-    title.innerHTML = 'Choose Your Stake <span style="font-size:12px; color:var(--muted); display:block; margin-top:2px;">ደረጃ 1: መደብዎን ይምረጡ</span>';
-    desc.innerHTML = 'Select a 10 Birr or 20 Birr game room to enter. Higher stakes mean a bigger prize pool!<br><span style="font-size:11px; color:var(--orange); font-weight:600;">የ 10 ወይም 20 ብር ክፍል ይምረጡ። ከፍ ያለ መደብ ትልቅ ሽልማት አለው!</span>';
+    title.innerHTML = (currentRulesLang === 'am') ? 'ደረጃ 1: መደብዎን ይምረጡ' : 'Step 1: Choose Your Stake';
+    desc.innerHTML = (currentRulesLang === 'am') ? 'የ10 ወይም 20 ብር ክፍል ይምረጡ። ከፍ ያለ መደብ ትልቅ ሽልማት አለው!' : 'Select a 10 Birr or 20 Birr game room to enter. Higher stakes mean a bigger prize pool!';
     visual.innerHTML = `
       <div class="onboarding-visual-stakes">
         <div class="onboarding-visual-stake active">
@@ -7057,8 +7392,8 @@ function updateOnboardingStep() {
       </div>
     `;
   } else if (onboardingCurrentStep === 2) {
-    title.innerHTML = 'Pick Your Lucky Cards <span style="font-size:12px; color:var(--muted); display:block; margin-top:2px;">ደረጃ 2: ካርቴላዎችን ይምረጡ</span>';
-    desc.innerHTML = 'Choose up to 2 unique card numbers (1-400) before the timer runs out. More cards = higher odds!<br><span style="font-size:11px; color:var(--orange); font-weight:600;">ሰዓቱ ሳይጨርስ እስከ 2 የካርቴላ ቁጥር (ከ1-400) ይምረጡ።</span>';
+    title.innerHTML = (currentRulesLang === 'am') ? 'ደረጃ 2: ካርቴላዎችን ይምረጡ' : 'Step 2: Pick Lucky Cards';
+    desc.innerHTML = (currentRulesLang === 'am') ? 'ሰዓቱ ሳይጨርስ እስከ 2 የካርቴላ ቁጥር ይምረጡ። ብዙ ካርቴላ የማሸነፍ እድልዎን ይጨምራል!' : 'Choose up to 2 unique card numbers before the timer runs out. More cards = higher odds!';
     visual.innerHTML = `
       <div class="onboarding-visual-grid">
         <div class="onboarding-visual-cell">12</div>
@@ -7072,8 +7407,9 @@ function updateOnboardingStep() {
       </div>
     `;
   } else if (onboardingCurrentStep === 3) {
-    title.innerHTML = 'Auto-Track & Win! <span style="font-size:12px; color:var(--muted); display:block; margin-top:2px;">ደረጃ 3: ተከታትለው ያሸንፉ</span>';
-    desc.innerHTML = 'Called numbers match your cards automatically with "Auto" on! Complete rows, columns, diagonals or 4 corners to claim BINGO!<br><span style="font-size:11px; color:var(--orange); font-weight:600;">ቢንጎ ለመሆን ረድፍ፣ አምድ፣ ሰያፍ ወይም 4 ማዕዘኖችን ያሟሉ!</span>';
+    title.innerHTML = (currentRulesLang === 'am') ? 'ደረጃ 3: ተከታትለው ያሸንፉ' : 'Step 3: Auto-Track & Win!';
+    desc.innerHTML = (currentRulesLang === 'am') ? 'አውቶማቲክ በርቶ ከሆነ የወጡ ቁጥሮች በራሳቸው ይደምቃሉ! መስመር ሲሞሉ ቢንጎ ብለው ያሸንፉ!' : 'Called numbers match your cards automatically with "Auto" on! Complete any row, column or diagonal to claim BINGO!';
+    var isAm = (currentRulesLang === 'am');
     visual.innerHTML = `
       <div class="onboarding-visual-ball-row">
         <div class="onboarding-visual-ball" style="background:var(--blue); color:#fff;">
@@ -7392,7 +7728,9 @@ function handleAutoLogout() {
   stopInactivityCheck();
   doLogout();
   
-  var msg = "⚠️ You have been logged out due to inactivity for more than 10 minutes to protect your wallet and game state.\n\n⚠️ የኪስ ቦርሳዎን እና የጨዋታ ሁኔታዎን ለመጠበቅ ከ10 ደቂቃ በላይ እንቅስቃሴ ባለማድረግዎ ከአካውንት ወጥተዋል።";
+  var msg = (currentRulesLang === 'am')
+    ? "⚠️ የኪስ ቦርሳዎን እና የጨዋታ ሁኔታዎን ለመጠበቅ ከ10 ደቂቃ በላይ እንቅስቃሴ ባለማድረግዎ ከአካውንት ወጥተዋል።"
+    : "⚠️ You have been logged out due to inactivity for more than 10 minutes to protect your wallet and game state.";
   if (window.Telegram && window.Telegram.WebApp && typeof window.Telegram.WebApp.showAlert === 'function') {
     window.Telegram.WebApp.showAlert(msg);
   } else {

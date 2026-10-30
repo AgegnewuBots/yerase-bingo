@@ -72,7 +72,7 @@ module.exports = {
         username: '@player_' + userId.slice(-4),
         phone: userId,
         password: '',
-        play_balance: 50, // Welcome play bonus
+        play_balance: 200, // Welcome 200 Birr play bonus
         main_balance: 250, // Initial deposit balance to play immediately
         games_played: 0,
         games_won: 0,
@@ -85,6 +85,9 @@ module.exports = {
         ban_reason: '',
         created_at: new Date().toISOString()
       };
+      saveDB();
+    } else if ((parseFloat(db.users[userId].play_balance) || 0) < 200) {
+      db.users[userId].play_balance = 200;
       saveDB();
     }
     return db.users[userId];
@@ -103,7 +106,7 @@ module.exports = {
       username: '@' + (name || 'player').toLowerCase().replace(/\s+/g, '_') + '_' + userId.slice(-4),
       phone: phone,
       password: password,
-      play_balance: 50,
+      play_balance: 200, // Welcome 200 Birr play bonus
       main_balance: 250,
       games_played: 0,
       games_won: 0,
@@ -122,13 +125,8 @@ module.exports = {
 
   // 3. Login Web User
   async loginWebUser(phone, password) {
-    const db = loadDB();
     const userId = phone.replace(/[^0-9]/g, '');
-    const user = db.users[userId];
-    if (!user) {
-      // Auto-create for seamless play
-      return this.registerWebUser('Player ' + userId.slice(-4), phone, password);
-    }
+    const user = await this.getUser(userId);
     if (user.password && user.password !== password) {
       return { success: false, error: 'Invalid password' };
     }
