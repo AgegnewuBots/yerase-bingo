@@ -1103,6 +1103,16 @@
               </div>
               <div class="form-row">
                 <div class="form-group">
+                  <label>Max Cards Available in Lobby (የካርቴላዎች ብዛት - 100, 200, 300, 500)</label>
+                  <input type="number" id="setting-max-cards" value="200" min="10" max="1000">
+                </div>
+                <div class="form-group">
+                  <label>Min Players to Start Game (ዝቅተኛ ተጫዋቾች - Min 1)</label>
+                  <input type="number" id="setting-min-players" value="1" min="1" max="500">
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group">
                   <label>Invite Commission Reward (ETB)</label>
                   <input type="number" id="setting-invite-commission" value="10">
                 </div>
@@ -1628,6 +1638,8 @@
         document.getElementById('setting-min-withdraw').value = s.min_withdraw || 150;
         document.getElementById('setting-min-deposit').value = s.min_deposit || 50;
         document.getElementById('setting-invite-commission').value = s.invite_commission || 10;
+        document.getElementById('setting-max-cards').value = s.max_cards || 200;
+        document.getElementById('setting-min-players').value = s.min_players || 1;
         document.getElementById('setting-maintenance').checked = Boolean(s.maintenance);
       }
     }
@@ -1637,6 +1649,8 @@
       const min_withdraw = parseFloat(document.getElementById('setting-min-withdraw').value);
       const min_deposit = parseFloat(document.getElementById('setting-min-deposit').value);
       const invite_commission = parseFloat(document.getElementById('setting-invite-commission').value);
+      const max_cards = parseInt(document.getElementById('setting-max-cards').value, 10) || 200;
+      const min_players = parseInt(document.getElementById('setting-min-players').value, 10) || 1;
       const maintenance = document.getElementById('setting-maintenance').checked;
       
       try {
@@ -1644,6 +1658,8 @@
           min_withdraw,
           min_deposit,
           invite_commission,
+          max_cards,
+          min_players,
           maintenance
         });
         

@@ -118,11 +118,11 @@ app.get('/api/config', async (req, res) => {
 
 // Client deposit submission
 const handleDepositRequest = async (req, res) => {
-  const { user_id, amount, ref_phone, ref } = req.body;
+  const { user_id, amount, ref_phone, ref, sms_text, sms } = req.body;
   if (!user_id || !amount) return res.status(400).json({ error: 'Missing parameters' });
   if (parseFloat(amount) <= 0) return res.status(400).json({ error: 'Invalid amount' });
   
-  const result = await db.createDepositRequest(user_id, amount, ref_phone || ref);
+  const result = await db.createDepositRequest(user_id, amount, ref_phone || ref, sms_text || sms);
   if (result.success) {
     res.json({ success: true, tx_id: result.tx_id, new_balance: result.new_balance });
   } else {
@@ -253,6 +253,35 @@ app.get('/api/admin/games', requireAdmin, async (req, res) => {
   }
 });
 
+app.get('/api/system_settings', async (req, res) => {
+  try {
+    const settings = await db.getSystemSettings();
+    res.json({ success: true, settings });
+  } catch (err) {
+    res.status(500).json({ error: 'Failed to retrieve settings' });
+  }
+});
+
+app.post('/api/admin/settings/update', requireAdmin, async (req, res) => {
+  try {
+    const { max_cards, min_players, maintenance, min_withdraw, bot_link, support_link } = req.body;
+    const updates = {};
+    if (max_cards !== undefined) updates.max_cards = parseInt(max_cards, 10);
+    if (min_players !== undefined) updates.min_players = parseInt(min_players, 10);
+    if (maintenance !== undefined) updates.maintenance = Boolean(maintenance);
+    if (min_withdraw !== undefined) updates.min_withdraw = parseFloat(min_withdraw);
+    if (bot_link) updates.bot_link = bot_link;
+    if (support_link) updates.support_link = support_link;
+
+    await db.updateSystemSettings(updates);
+    const updated = await db.getSystemSettings();
+    io.emit('system_settings_updated', updated);
+    res.json({ success: true, settings: updated });
+  } catch (err) {
+    res.status(500).json({ error: 'Failed to update settings' });
+  }
+});
+
 app.get('/api/admin/settings', requireAdmin, async (req, res) => {
   try {
     const settings = await db.getSystemSettings();
@@ -265,7 +294,9 @@ app.get('/api/admin/settings', requireAdmin, async (req, res) => {
 app.post('/api/admin/settings', requireAdmin, async (req, res) => {
   try {
     await db.updateSystemSettings(req.body);
-    res.json({ success: true });
+    const updated = await db.getSystemSettings();
+    io.emit('system_settings_updated', updated);
+    res.json({ success: true, settings: updated });
   } catch (err) {
     res.status(500).json({ error: 'Failed to update settings' });
   }
@@ -525,10 +556,17 @@ function startGameCountdown(game) {
   }, 1000);
 }
 
-function tryStartGame(game) {
+async function tryStartGame(game) {
   const summary = getRoomGameSummary(game);
+  let minPlayers = 1;
+  try {
+    const sysSettings = await db.getSystemSettings();
+    if (sysSettings && sysSettings.min_players) {
+      minPlayers = parseInt(sysSettings.min_players, 10) || 1;
+    }
+  } catch(e) {}
 
-  if (summary.total_cards >= 1) {
+  if (summary.total_players >= minPlayers && summary.total_cards >= 1) {
     clearInterval(game.timer);
     game.timer = null;
     game.status = 'running';

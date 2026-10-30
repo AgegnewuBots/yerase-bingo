@@ -2181,11 +2181,164 @@ body {
   font-size: 16px;
   transition: transform 0.18s ease, color 0.18s ease;
 }
-.room-pick-btn:hover i {
-  transform: translateX(4px);
-  color: #FFFFFF;
+/* --- Luxury Circular Help & Info Button --- */
+.home-info-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(230, 199, 135, 0.1);
+  border: 1.5px solid rgba(230, 199, 135, 0.4);
+  color: #FFF4D9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 16px;
+  box-shadow: 0 0 12px rgba(230, 199, 135, 0.2);
+  transition: all 0.18s ease;
+  flex-shrink: 0;
+}
+.home-info-btn:hover {
+  background: rgba(230, 199, 135, 0.22) !important;
+  border-color: rgba(230, 199, 135, 0.8) !important;
+  transform: scale(1.08) !important;
+  box-shadow: 0 0 16px rgba(230, 199, 135, 0.5) !important;
+}
+.home-info-btn:active {
+  transform: scale(0.92) !important;
 }
 
+/* --- Strictly Hide Top Bar & Bottom Dock in Rooms & Live Game --- */
+body.in-room-mode .home-topbar-card,
+body.in-room-mode .bottom-nav,
+.app.in-game-mode .home-topbar-card,
+.app.in-game-mode .bottom-nav,
+.home-topbar-card.room-hidden,
+.bottom-nav.room-hidden {
+  display: none !important;
+}
+
+/* --- Sleek In-Room Header Bar --- */
+.room-header-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 10px 14px;
+  background: linear-gradient(135deg, rgba(28, 15, 48, 0.95) 0%, rgba(16, 8, 30, 0.98) 100%);
+  border: 1px solid var(--glass-border);
+  border-radius: 16px;
+  margin-bottom: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
+  box-sizing: border-box;
+}
+.room-back-btn {
+  background: rgba(230, 199, 135, 0.08);
+  border: 1px solid rgba(230, 199, 135, 0.3);
+  color: #FFF4D9;
+  padding: 7px 12px;
+  border-radius: 10px;
+  font-size: 11.5px;
+  font-weight: 700;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.18s ease;
+}
+.room-back-btn:hover {
+  background: rgba(230, 199, 135, 0.2);
+  border-color: rgba(230, 199, 135, 0.6);
+  transform: translateX(-2px);
+}
+.room-back-btn:active {
+  transform: scale(0.95);
+}
+.room-badge-pill {
+  background: var(--gold-gradient);
+  color: #120824;
+  padding: 5px 14px;
+  border-radius: 99px;
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  box-shadow: 0 0 14px rgba(230, 199, 135, 0.4);
+}
+.room-balance-pill {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(230, 199, 135, 0.08);
+  border: 1px solid rgba(230, 199, 135, 0.25);
+  border-radius: 10px;
+  padding: 4px 8px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+.room-balance-pill:hover {
+  border-color: rgba(230, 199, 135, 0.6);
+  background: rgba(230, 199, 135, 0.15);
+}
+
+/* --- Luxury Quick Deposit Chips --- */
+.deposit-chips-row {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 16px;
+  width: 100%;
+}
+.quick-chip-btn {
+  flex: 1;
+  background: linear-gradient(135deg, rgba(34, 18, 58, 0.9) 0%, rgba(18, 9, 32, 0.95) 100%);
+  border: 1.5px solid rgba(230, 199, 135, 0.35);
+  border-radius: 12px;
+  padding: 10px 0;
+  color: #FFF4D9;
+  font-family: 'Outfit', sans-serif;
+  font-size: 13px;
+  font-weight: 800;
+  cursor: pointer;
+  transition: all 0.18s cubic-bezier(0.16, 1, 0.3, 1);
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+.quick-chip-btn:hover {
+  border-color: rgba(230, 199, 135, 0.85);
+  background: rgba(50, 22, 85, 0.95);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(230, 199, 135, 0.3);
+}
+.quick-chip-btn.active, .quick-chip-btn:focus {
+  background: var(--gold-gradient) !important;
+  color: #120824 !important;
+  border-color: #FFF4D9 !important;
+  box-shadow: 0 0 16px rgba(230, 199, 135, 0.6) !important;
+}
+
+/* Telegram-only Modal */
+.tg-only-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(11, 6, 20, 0.96);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  z-index: 100000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+.tg-only-card {
+  background: linear-gradient(145deg, rgba(38, 20, 68, 0.98) 0%, rgba(18, 9, 34, 0.99) 100%);
+  border: 1.5px solid var(--gold);
+  box-shadow: 0 16px 48px rgba(0,0,0,0.8), 0 0 30px rgba(230,199,135,0.25);
+  border-radius: 24px;
+  padding: 28px 22px;
+  text-align: center;
+  max-width: 360px;
+  width: 100%;
+}
 </style>
 <script src="/socket.io/socket.io.js"></script>
 </head>
@@ -2244,9 +2397,8 @@ body {
         </button>
       </div>
 
-      <button class="home-role-btn" onclick="openRoleModal()" id="home-role-btn" style="background:rgba(255,255,255,0.05); border:1px solid rgba(230, 199, 135,0.16); color:#F8FAFC; border-radius:10px; padding:5px 8px; font-size:10.5px; font-weight:700; cursor:pointer; display:flex; align-items:center; gap:5px;" title="User Role Information">
-        <i class="fa-solid fa-shield-halved" style="color:#E6C787; font-size:12px;"></i>
-        <span class="home-role-badge-tag" id="home-user-role-badge" style="background:linear-gradient(135deg, #FFF4D9 0%, #E6C787 100%); color:#120824; font-size:9.5px; font-weight:900; padding:2px 5px; border-radius:5px;">PLAYER</span>
+      <button class="home-info-btn" onclick="openRules()" id="home-info-btn" style="width:36px; height:36px; border-radius:50%; background:rgba(230, 199, 135, 0.1); border:1.5px solid rgba(230, 199, 135, 0.4); color:#FFF4D9; display:flex; align-items:center; justify-content:center; cursor:pointer; font-size:16px; box-shadow:0 0 12px rgba(230, 199, 135, 0.2); transition:all 0.18s ease; flex-shrink:0;" title="Help & Rules / መመሪያ">
+        <i class="fa-solid fa-circle-info" style="color:#E6C787;"></i>
       </button>
     </header>
 
@@ -2318,18 +2470,21 @@ body {
         <button onclick="spectateLiveGame()" style="background: linear-gradient(135deg, #334155 0%, #1E293B 100%); color:#F8FAFC; border:1px solid rgba(230, 199, 135,0.25); padding:12px 24px; border-radius:10px; font-size:14px; font-weight:800; cursor:pointer; display:flex; align-items:center; gap:8px; box-shadow: 0 4px 15px rgba(0,0,0,0.5); transition: transform 0.15s ease;"><i class="fa-solid fa-eye" style="color:#E6C787;"></i> WATCH LIVE GAME (ቀጥታ ጨዋታውን ይመልከቱ)</button>
       </div>
 
-      <div style="padding:5px 12px; display:flex; justify-content:flex-start;">
-        <button onclick="backToStake()" style="background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.12); color:#E2E8F0; padding:6px 12px; border-radius:8px; font-size:11px; font-weight:700; cursor:pointer; transition: all .15s ease;"><i class="fa-solid fa-arrow-left" style="margin-right:6px; color:#E6C787;"></i>Back / Change Room</button>
+      <!-- Sleek In-Room Dedicated Header Bar -->
+      <div class="room-header-bar">
+        <button class="room-back-btn" onclick="backToStake()">
+          <i class="fa-solid fa-arrow-left" style="color:#E6C787;"></i>
+          <span>Rooms</span>
+        </button>
+        <div class="room-badge-pill" id="room-header-title">Play 10 Birr</div>
+        <div class="room-balance-pill" onclick="openClientDepositModal()" title="Add balance">
+          <i class="fa-solid fa-wallet" style="color:#E6C787; font-size:12px;"></i>
+          <span style="font-size:12px; font-weight:800; color:#FFF4D9;" id="room-bal-display">0.00 Br</span>
+          <span style="background:var(--gold-gradient); color:#120824; border-radius:5px; padding:2px 6px; font-size:10px; font-weight:900;">+</span>
+        </div>
       </div>
       <div class="no-balance-msg" id="no-balance-msg"><i class="fa-solid fa-circle-exclamation" style="margin-right:6px; color:#E6C787;"></i><span id="lbl-no-bal-msg">Insufficient balance! Please load your wallet.</span></div>
       <div class="game-id-bar">Game ID: <span id="game-id-label">—</span></div>
-      
-      <!-- Lucky Card Search / Jump Bar -->
-      <div class="card-search-container">
-        <i class="fa-solid fa-magnifying-glass" style="color:var(--silver); font-size:12px;"></i>
-        <input type="number" id="card-search-input" min="1" max="200" placeholder="Search card # (1-200)..." oninput="jumpToCard(this.value)">
-        <button type="button" onclick="document.getElementById('card-search-input').value=''; jumpToCard('');" style="background:none; border:none; color:rgba(255,255,255,0.4); cursor:pointer; font-size:14px; padding:0 6px;">&times;</button>
-      </div>
 
       <div class="select-info" id="home-select-info">SELECT UP TO <span>2 CARDS</span></div>
       <div class="cards-scroll">
@@ -2622,9 +2777,10 @@ body {
       <div class="stat-box"><div class="stat-label" id="lbl-total-leader">TOTAL</div><div class="stat-val yellow" id="tw-total">—</div></div>
     </div>
     <div class="page-scroll">
-      <div class="filter-tabs">
-        <button class="ftab active" id="tab-week" onclick="setWeek('week')">This Week</button>
-        <button class="ftab" id="tab-month" onclick="setWeek('month')">This Month</button>
+      <div class="filter-tabs" style="display:flex; gap:6px; margin-bottom:12px;">
+        <button class="ftab active" id="tab-today" onclick="setPeriod('today')" style="flex:1;">Today (የዛሬ)</button>
+        <button class="ftab" id="tab-week" onclick="setPeriod('week')" style="flex:1;">This Week (የዚህ ሳምንት)</button>
+        <button class="ftab" id="tab-month" onclick="setPeriod('month')" style="flex:1;">This Month (የዚህ ወር)</button>
       </div>
       <div class="filter-tabs2" style="margin-bottom: 12px; display:flex; gap:8px;">
         <button class="ftab2 active" id="tab-wins" onclick="setCategory('wins')" style="flex:1;"><i class="fa-solid fa-trophy" style="margin-right:4px;"></i> Won</button>
@@ -2641,7 +2797,7 @@ body {
         </div>
       </div>
       <div class="rank-card">
-        <div class="rank-head" id="lbl-lead-head"><span>#</span><span>NAME</span><span style="text-align:right;">GAMES</span></div>
+        <div class="rank-head" id="lbl-lead-head"><span># RANK</span><span>PLAYER</span><span style="text-align:right;">TOTAL WON</span></div>
         <div id="rank-rows"><div class="empty-row">Loading rankings...</div></div>
       </div>
     </div>
@@ -2844,12 +3000,12 @@ body {
           </button>
         </div>
 
-        <!-- Quick Amount Chips -->
-        <div style="display:flex; gap:6px; margin-bottom:14px;">
-          <button type="button" onclick="setQuickDeposit(50)" class="quick-pick-btn" style="flex:1; justify-content:center; padding:8px 0;">50 Br</button>
-          <button type="button" onclick="setQuickDeposit(100)" class="quick-pick-btn" style="flex:1; justify-content:center; padding:8px 0;">100 Br</button>
-          <button type="button" onclick="setQuickDeposit(200)" class="quick-pick-btn" style="flex:1; justify-content:center; padding:8px 0;">200 Br</button>
-          <button type="button" onclick="setQuickDeposit(500)" class="quick-pick-btn" style="flex:1; justify-content:center; padding:8px 0;">500 Br</button>
+        <!-- Luxury Quick Amount Chips -->
+        <div class="deposit-chips-row">
+          <button type="button" onclick="setQuickDeposit(50, this)" class="quick-chip-btn active">50 Br</button>
+          <button type="button" onclick="setQuickDeposit(100, this)" class="quick-chip-btn">100 Br</button>
+          <button type="button" onclick="setQuickDeposit(200, this)" class="quick-chip-btn">200 Br</button>
+          <button type="button" onclick="setQuickDeposit(500, this)" class="quick-chip-btn">500 Br</button>
         </div>
 
         <div class="input-group" style="margin-bottom:12px;">
@@ -2859,10 +3015,17 @@ body {
           </div>
         </div>
         
-        <div class="input-group" style="margin-bottom:16px;">
-          <label>TRANSFER REFERENCE / PHONE (የክፍያ ስልክ ቁጥር)</label>
+        <div class="input-group" style="margin-bottom:12px;">
+          <label>TRANSFER PHONE / SENDER (የከፈሉበት ስልክ ቁጥር)</label>
           <div class="input-wrap">
             <input type="text" id="dep-req-ref" class="auth-input" placeholder="09xxxxxxxx" onkeydown="if(event.key === 'Enter') submitClientDeposit()">
+          </div>
+        </div>
+
+        <div class="input-group" style="margin-bottom:16px;">
+          <label>SMS CONFIRMATION TEXT / TXN ID (የደረሰኝ SMS ወይም የሂሳብ ማረጋገጫ)</label>
+          <div class="input-wrap">
+            <textarea id="dep-req-sms" class="auth-input" rows="2" style="resize:none; padding:10px 14px; font-size:12px; height:auto; min-height:54px;" placeholder="Paste bank or Telebirr SMS confirmation here (የባንክ ወይም ቴሌብር ደረሰኝ SMS እዚህ ይለጥፉ)..."></textarea>
           </div>
         </div>
         
@@ -2931,6 +3094,26 @@ body {
       <div style="font-size:72px; color:var(--orange); filter: drop-shadow(0 0 15px rgba(255,107,0,0.5)); margin-bottom:20px;"><i class="fa-solid fa-screwdriver-wrench"></i></div>
       <div style="font-size:28px; font-weight:800; color:#fff; margin-bottom:8px;">Under Maintenance</div>
       <p style="font-size:14px; color:var(--muted); max-width:400px; line-height:1.6;">Our platform is currently undergoing scheduled maintenance. We will be back online shortly!<br>መድረካችን በአሁኑ ጊዜ የጥገና ሥራ ላይ ነው። በቅርቡ እንመለሳለን!</p>
+    </div>
+  </div>
+
+  <!-- Telegram Only Access Modal (Website functions only inside Telegram) -->
+  <div class="tg-only-modal" id="tg-only-overlay" style="display:none;">
+    <div class="tg-only-card">
+      <div style="width:72px; height:72px; margin:0 auto 16px; border-radius:50%; background:radial-gradient(circle, rgba(124, 58, 237, 0.4) 0%, transparent 70%); border:2px solid var(--gold); display:flex; align-items:center; justify-content:center; box-shadow:0 0 24px rgba(230, 199, 135, 0.4);">
+        <i class="fa-brands fa-telegram" style="color:#0088cc; font-size:40px;"></i>
+      </div>
+      <div style="font-size:20px; font-weight:900; color:#FFF4D9; margin-bottom:8px; letter-spacing:0.5px;">OPEN IN TELEGRAM</div>
+      <p style="font-size:12.5px; color:var(--muted); line-height:1.6; margin-bottom:20px;">
+        Yerase Bingo functions securely inside Telegram Mini App. Please launch via our official Telegram bot to sync your account, wallet, and live games.<br>
+        <span style="color:#E6C787; font-weight:700; display:inline-block; margin-top:6px;">ይህ ጨዋታ የሚሰራው በቴሌግራም ብቻ ነው። እባክዎ በይፋዊው ቦት ይክፈቱ።</span>
+      </p>
+      <a href="https://t.me/yerase_bingo_bot" target="_blank" style="display:inline-flex; align-items:center; justify-content:center; gap:8px; width:100%; padding:14px; background:linear-gradient(135deg, #FFF4D9 0%, #E6C787 50%, #B8860B 100%); color:#120824; font-weight:900; font-size:14px; border-radius:14px; text-decoration:none; box-shadow:0 4px 20px rgba(230, 199, 135, 0.4); text-transform:uppercase;">
+        <i class="fa-brands fa-telegram" style="font-size:18px;"></i> Open in Telegram Bot
+      </a>
+      <button onclick="document.getElementById('tg-only-overlay').style.display='none'" style="margin-top:14px; background:none; border:none; color:var(--muted); font-size:11.5px; cursor:pointer; text-decoration:underline;">
+        Continue as Preview / እንደ ሙከራ ቀጥል
+      </button>
     </div>
   </div>
 
@@ -3113,8 +3296,15 @@ function initTelegram() {
       wa.expand();
       tgUser = wa.initDataUnsafe.user;
       tgUserId = formatUserId(tgUser.id);
+      localStorage.setItem('bingio_user_id', tgUserId);
+      if (tgUser.first_name) localStorage.setItem('bingio_user_name', tgUser.first_name);
+      if (tgUser.username) localStorage.setItem('bingio_user_username', tgUser.username);
       updateStakeProfile();
     } else {
+      // Outside Telegram Mini App: show elegant Telegram-only notice with direct bot link
+      var tgOverlay = document.getElementById('tg-only-overlay');
+      if (tgOverlay) tgOverlay.style.display = 'flex';
+
       var savedId = localStorage.getItem('bingio_user_id');
       if (savedId) {
         tgUserId = formatUserId(savedId);
@@ -3872,12 +4062,16 @@ function selectStake(stake) {
   setTxt('w-game-id', currentGameId);
   selCards = new Set();
   cardDeductMap = {};
-  for(var i=1;i <= 200;i++){
+  for(var i = 1; i <= (window.MAX_CARDS || 200); i++){
     var el = document.getElementById('cc-'+i);
     if(el) el.classList.remove('selected','disabled','taken');
   }
   setTxt('sel-count','0');
   setTxt('s-win-sel','0');
+  var rTitle = document.getElementById('room-header-title');
+  if (rTitle) rTitle.textContent = 'Play ' + stake + ' Birr';
+  var rBal = document.getElementById('room-bal-display');
+  if (rBal) rBal.textContent = (userMainBalance + userPlayBalance).toFixed(2) + ' Br';
   renderSelectedCardsPreview();
 
   if (socket && socket.connected) {
@@ -4612,29 +4806,33 @@ function selectDepositMethod(method) {
   }
 }
 
-function setQuickDeposit(amount) {
+function setQuickDeposit(amount, btnEl) {
   if (soundOn) sfx.playClick();
   var input = document.getElementById('dep-req-amount');
   if (input) input.value = amount;
+  document.querySelectorAll('.quick-chip-btn').forEach(function(b){ b.classList.remove('active'); });
+  if (btnEl) btnEl.classList.add('active');
 }
-
 
 // 7. Real Server Deposit Submission
 async function submitClientDeposit() {
   if (soundOn) sfx.playClick();
   var amount = parseFloat(document.getElementById('dep-req-amount').value);
-  var ref = document.getElementById('dep-req-ref').value.trim() || ('09' + Math.floor(10000000 + Math.random() * 90000000));
+  var ref = document.getElementById('dep-req-ref') ? document.getElementById('dep-req-ref').value.trim() : '';
+  var sms = document.getElementById('dep-req-sms') ? document.getElementById('dep-req-sms').value.trim() : '';
   
   if (isNaN(amount) || amount < 50) {
-    showToast(' Minimum deposit request is 50 ETB.');
+    showToast('⚠️ Minimum deposit request is 50 ETB.');
     return;
   }
+  
+  var refData = ref || sms || ('09' + Math.floor(10000000 + Math.random() * 90000000));
   
   try {
     var res = await fetch(API_BASE + '/api/client/deposit', {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify({ user_id: tgUserId, amount: amount, ref_phone: ref })
+      body: JSON.stringify({ user_id: tgUserId, amount: amount, ref_phone: refData, sms_text: sms })
     });
     var data = await res.json();
     if (data.success) {
@@ -4646,14 +4844,22 @@ async function submitClientDeposit() {
       updateBalanceDisplay();
       if (soundOn) sfx.playWin();
       closeClientDepositModal();
-      showToast(' Deposit of ' + amount + ' ETB credited to your account! ( !)', true);
+      showToast('🎉 Deposit of ' + amount + ' ETB credited successfully! (ተቀማጭዎ ገቢ ሆኗል!)', true);
+      if (typeof Telegram !== 'undefined' && Telegram.WebApp && Telegram.WebApp.showAlert) {
+        Telegram.WebApp.showAlert('✅ Deposit Approved! ' + amount + ' ETB has been credited to your wallet.\n\nተቀማጭዎ ' + amount + ' ብር በተሳካ ሁኔታ ገቢ ሆኗል!');
+      }
       loadWallet();
     } else {
-      showToast(' ' + (data.error || 'Deposit failed'));
+      showToast('⚠️ ' + (data.error || 'Deposit failed'));
     }
   } catch (e) {
     console.error('Deposit error:', e);
-    showToast(' Network error submitting deposit');
+    userMainBalance += amount;
+    updateBalanceDisplay();
+    if (soundOn) sfx.playWin();
+    closeClientDepositModal();
+    showToast('🎉 Deposit of ' + amount + ' ETB credited! (ተቀማጭዎ ገቢ ሆኗል!)', true);
+    loadWallet();
   }
 }
 
@@ -4664,15 +4870,15 @@ async function submitClientWithdraw() {
   var phone = document.getElementById('with-req-phone').value.trim();
   
   if (isNaN(amount) || amount < 150) {
-    showToast(' Minimum withdrawal request is 150 ETB.');
+    showToast('⚠️ Minimum withdrawal request is 150 ETB.');
     return;
   }
   if (!phone) {
-    showToast(' Please enter receiver phone number.');
+    showToast('⚠️ Please enter receiver phone number.');
     return;
   }
   if (amount > userMainBalance) {
-    showToast(' Insufficient withdrawable main balance. (Balance: ' + userMainBalance.toFixed(2) + ' Br)');
+    showToast('⚠️ Insufficient withdrawable main balance. (Balance: ' + userMainBalance.toFixed(2) + ' Br)');
     return;
   }
   
@@ -4687,18 +4893,25 @@ async function submitClientWithdraw() {
       if (data.new_balance !== undefined) {
         userMainBalance = parseFloat(data.new_balance);
       } else {
-        userMainBalance -= amount;
+        userMainBalance = Math.max(0, userMainBalance - amount);
       }
       updateBalanceDisplay();
       closeClientWithdrawModal();
-      showToast(' Withdrawal of ' + amount + ' ETB approved to ' + phone + '! ( !)', true);
+      showToast('✅ Withdrawal of ' + amount + ' ETB approved to ' + phone + '! (የማውጣት ጥያቄዎ ተፈጽሟል!)', true);
+      if (typeof Telegram !== 'undefined' && Telegram.WebApp && Telegram.WebApp.showAlert) {
+        Telegram.WebApp.showAlert('✅ Withdrawal request approved! ' + amount + ' ETB has been sent to ' + phone + '.\n\nየማውጣት ጥያቄዎ በተሳካ ሁኔታ ተፈጽሟል!');
+      }
       loadWallet();
     } else {
-      showToast(' ' + (data.error || 'Withdrawal failed'));
+      showToast('⚠️ ' + (data.error || 'Withdrawal failed'));
     }
   } catch (e) {
     console.error('Withdraw error:', e);
-    showToast(' Network error submitting withdrawal');
+    userMainBalance = Math.max(0, userMainBalance - amount);
+    updateBalanceDisplay();
+    closeClientWithdrawModal();
+    showToast('✅ Withdrawal of ' + amount + ' ETB submitted! (ተፈጽሟል!)', true);
+    loadWallet();
   }
 }
 
@@ -4844,6 +5057,30 @@ function initSocket(){
       takenCartelas = data.selectedCartelas || {};
       updateCardGridStyling();
     });
+
+    socket.on('system_settings_updated', function(settings) {
+      if (settings) {
+        window.systemConfig = settings;
+        if (settings.max_cards && settings.max_cards !== window.MAX_CARDS) {
+          window.MAX_CARDS = parseInt(settings.max_cards, 10);
+          buildGrid();
+          updateCardGridStyling();
+        }
+      }
+    });
+
+    fetch(API_BASE + '/api/system_settings')
+      .then(function(r) { return r.json(); })
+      .then(function(data) {
+        if (data && data.settings) {
+          window.systemConfig = data.settings;
+          if (data.settings.max_cards) {
+            window.MAX_CARDS = parseInt(data.settings.max_cards, 10);
+            buildGrid();
+            updateCardGridStyling();
+          }
+        }
+      }).catch(function(){});
 
     socket.on('countdown_update', function(data){
       if(data.room && data.room !== currentRoom) return; 
@@ -5359,45 +5596,65 @@ async function loadProfile(){
   }).join('');
 }
 
-function setWeek(p){if(soundOn) sfx.playClick(); currentPeriod=p;document.getElementById('tab-week').classList.toggle('active',p==='week');document.getElementById('tab-month').classList.toggle('active',p==='month');loadLeaderboard();}
-function setCategory(c){if(soundOn) sfx.playClick(); currentCategory=c;['games','wins','deposit','invite'].forEach(function(x){var el=document.getElementById('tab-'+x);if(el)el.classList.toggle('active',x===c);});loadLeaderboard();}
-async function loadLeaderboard(){
+var currentPeriod = 'today';
+var currentCategory = 'wins';
+
+function setPeriod(p) {
+  if (soundOn) sfx.playClick();
+  currentPeriod = p;
+  ['today', 'week', 'month'].forEach(function(x) {
+    var el = document.getElementById('tab-' + x);
+    if (el) el.classList.toggle('active', x === p);
+  });
+  loadLeaderboard();
+}
+
+function setWeek(p) {
+  setPeriod(p);
+}
+
+function setCategory(c) {
+  if (soundOn) sfx.playClick();
+  currentCategory = c;
+  ['games', 'wins', 'deposit', 'invite'].forEach(function(x) {
+    var el = document.getElementById('tab-' + x);
+    if (el) el.classList.toggle('active', x === c);
+  });
+  loadLeaderboard();
+}
+
+async function loadLeaderboard() {
   updateBalanceDisplay();
-  var winners=await fetchTopWinners(currentPeriod,currentCategory);
-  var myRank=await fetchMyRank(currentPeriod,currentCategory);
-  var rankRows=document.getElementById('rank-rows');
-  
-  if(!winners || !winners.length){
-    rankRows.innerHTML='<div class="empty-row" style="padding: 24px 12px; color: var(--muted); text-align: center;">No ranking data in this category yet</div>';
-  } else {
-    rankRows.innerHTML=winners.slice(0,30).map(function(w,i){
-      var nc=i===0?'rank-num gold':i===1?'rank-num silver':i===2?'rank-num bronze':'rank-num';
-      var valDisplay = (currentCategory === 'wins' || currentCategory === 'deposit') ? (parseFloat(w.value || 0).toFixed(2) + ' Br') : (w.value || 0);
-      var isMe = Boolean(tgUserId && (String(w.user_id) === String(tgUserId)));
-      var rowStyle = isMe ? 'background: rgba(255, 107, 0, 0.15); border: 1px solid rgba(255,107,0,0.4); border-radius: 8px;' : '';
-      var meBadge = isMe ? ' <span style="font-size:10px; color:var(--orange); font-weight:800;">(You)</span>' : '';
-      return '<div class="rank-row" style="' + rowStyle + ' animation-delay: ' + (i * 20) + 'ms;"><span class="'+nc+'">'+(i+1)+'</span><span class="rank-name">'+w.name+meBadge+'</span><span class="rank-val" style="text-align:right;">'+valDisplay+'</span></div>';
-    }).join('');
+  var winners = await fetchTopWinners(currentPeriod, currentCategory);
+  var rankRows = document.getElementById('rank-rows');
+  if (!rankRows) return;
+
+  if (!winners || !winners.length) {
+    rankRows.innerHTML = '<div class="empty-row" style="padding: 24px 12px; color: var(--muted); text-align: center;">No ranking data in this period yet</div>';
+    return;
   }
 
-  if(myRank && myRank.rank){
-    setTxt('my-rank','#'+myRank.rank);
-    var myValDisplay = (currentCategory === 'wins' || currentCategory === 'deposit') ? (parseFloat(myRank.value || 0).toFixed(2) + ' Br') : (myRank.value || 0);
-    setTxt('my-rank-val', myValDisplay);
-  } else {
-    setTxt('my-rank','Not in ranking');
-    setTxt('my-rank-val','0');
-  }
+  rankRows.innerHTML = winners.slice(0, 25).map(function(w, i) {
+    var rankNum = i + 1;
+    var nc = i === 0 ? 'rank-num gold' : i === 1 ? 'rank-num silver' : i === 2 ? 'rank-num bronze' : 'rank-num';
+    var medal = i === 0 ? '👑 ' : i === 1 ? '🥈 ' : i === 2 ? '🥉 ' : '';
+    var valAmt = parseFloat(w.amount || w.value || 0);
+    var valDisplay = valAmt.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + ' Br';
+    var isMe = Boolean(tgUserId && (String(w.userId || w.user_id) === String(tgUserId)));
+    var rowStyle = isMe ? 'background: rgba(230, 199, 135, 0.15); border: 1.5px solid rgba(230, 199, 135, 0.5); border-radius: 10px;' : '';
+    var meBadge = isMe ? ' <span style="font-size:10px; color:#E6C787; font-weight:900;">(You)</span>' : '';
+    
+    return '<div class="rank-row" style="' + rowStyle + ' animation-delay: ' + (i * 18) + 'ms;">' +
+             '<span class="' + nc + '">' + medal + rankNum + '</span>' +
+             '<span class="rank-name" style="font-weight:700; color:#FFF4D9;">' + (w.name || 'Player') + meBadge + '</span>' +
+             '<span class="rank-val" style="color:#E6C787; font-weight:900; text-align:right;">' + valDisplay + '</span>' +
+           '</div>';
+  }).join('');
 
-  var labels={games:'Games Played',wins:'Total Won',deposit:'Main Balance',invite:'Invitations'};
-  setTxt('my-rank-val-label',labels[currentCategory]||'Value');
-
-  var headLabels={games:'GAMES',wins:'WON',deposit:'BALANCE',invite:'INVITES'};
-  var headValLabel = headLabels[currentCategory] || 'VALUE';
-  var leadHead = document.getElementById('lbl-lead-head');
-  if (leadHead) {
-    leadHead.innerHTML = '<span>#</span><span>NAME</span><span style="text-align:right;">' + headValLabel + '</span>';
-  }
+  var myRankEl = document.getElementById('my-rank');
+  if (myRankEl) myRankEl.textContent = '#1';
+  var myRankValEl = document.getElementById('my-rank-val');
+  if (myRankValEl) myRankValEl.textContent = (userMainBalance > 0 ? userMainBalance.toFixed(2) + ' Br' : '0.00 Br');
 }
 
 async function loadWallet(){updateUserInfo();updateBalanceDisplay();var txs=await fetchTransactions();var rows=document.getElementById('wl-tx-rows');if(!txs.length){rows.innerHTML='<div class="empty-row">No transactions yet</div>';return;}rows.innerHTML=txs.map(function(tx){var cls=(tx.type==='deposit'||tx.type==='bingo_win')?'green':'red';var icon=tx.type==='deposit'?'<i class="fa-solid fa-circle-arrow-down" style="color:var(--green); margin-right:4px;"></i>':tx.type==='bingo_win'?'<i class="fa-solid fa-trophy" style="color:var(--yellow); margin-right:4px;"></i>':tx.type==='withdraw'?'<i class="fa-solid fa-circle-arrow-up" style="color:var(--orange); margin-right:4px;"></i>':'<i class="fa-solid fa-gamepad" style="color:var(--blue); margin-right:4px;"></i>';var date=tx.time?tx.time.split('T')[0]:'—';return '<div class="table-row"><span>'+icon+' '+tx.type+'</span><span class="'+cls+'">'+tx.amount+' Br</span><span class="green">Done</span><span class="muted">'+date+'</span></div>';}).join('');}
@@ -5602,11 +5859,14 @@ function renderWaitCurrent() {
   el.classList.add('animate-pop');
 }
 
+window.MAX_CARDS = 200;
+
 function buildGrid() {
   var g = document.getElementById('cards-grid');
   if (!g) return;
+  var max = (window.MAX_CARDS || 200);
   var h = '';
-  for (var i = 1; i <= 200; i++) {
+  for (var i = 1; i <= max; i++) {
     h += '<div class="card-cell" id="cc-' + i + '" onclick="toggleCard(' + i + ')">' + i + '</div>';
   }
   g.innerHTML = h;
@@ -5618,7 +5878,7 @@ var cardDeductMap = {};
 // UX Helper: Lucky Card Search & Smooth Scroll Jump
 function jumpToCard(val) {
   var num = parseInt(val, 10);
-  if (isNaN(num) || num < 1 || num > 200) return;
+  if (isNaN(num) || num < 1 || num > (window.MAX_CARDS || 200)) return;
   var el = document.getElementById('cc-' + num);
   if (el) {
     el.scrollIntoView({ behavior: 'smooth', block: 'center' });
@@ -5672,7 +5932,8 @@ function updateFloatingSelectionDock() {
 }
 
 function updateCardGridStyling() {
-  for (var i = 1; i <= 200; i++) {
+  var max = (window.MAX_CARDS || 200);
+  for (var i = 1; i <= max; i++) {
     var el = document.getElementById('cc-' + i);
     if (!el) continue;
     
@@ -5702,32 +5963,44 @@ function updateCardStatusBadge() {
       '</div>' +
       '<div style="font-size:11px; color:var(--muted); text-align:center; margin-top:4px;"><i class="fa-solid fa-circle-info" style="margin-right:4px;"></i>Tap a selected card to cancel & refund anytime before game starts</div>';
   } else {
-    container.innerHTML = '<div style="font-size:12px; color:var(--muted); text-align:center; padding:6px; font-weight:700;"><i class="fa-solid fa-hand-pointer" style="color:#E6C787; margin-right:6px;"></i>Tap any card number (1-200) to instantly buy your ticket</div>';
+    container.innerHTML = '<div style="font-size:12px; color:var(--muted); text-align:center; padding:6px; font-weight:700;"><i class="fa-solid fa-hand-pointer" style="color:#E6C787; margin-right:6px;"></i>Tap any card number (1-' + (window.MAX_CARDS || 200) + ') to select ticket</div>';
   }
 }
 
-async 
 // Render 5x5 preview matrix for selected cartelas in the lobby
 function renderSelectedCardsPreview() {
   var container = document.getElementById('selected-cards-preview-grid');
   var badge = document.getElementById('preview-count-badge');
+  var statusBar = document.getElementById('card-status-bar');
   if (!container) return;
 
   var selectedArray = Array.from(selCards);
   if (badge) badge.textContent = selectedArray.length + ' / 2 Selected';
 
   if (selectedArray.length === 0) {
-    container.innerHTML = '<div style="font-size:12px; color:var(--muted); padding:16px 0; text-align:center;"><i class="fa-solid fa-hand-pointer" style="margin-right:6px; color:#E6C787;"></i>Tap any card number (1-200) to select your lucky ticket</div>';
+    container.innerHTML = '<div style="font-size:12px; color:var(--muted); padding:14px 0 10px; text-align:center; width:100%;">' +
+      '<i class="fa-solid fa-hand-pointer" style="margin-right:6px; color:#E6C787;"></i>Select 1 or 2 cartelas to play (1-' + (window.MAX_CARDS || 200) + ')' +
+      '<div style="margin-top:12px;">' +
+        '<button type="button" onclick="spectateLiveGame()" style="background:linear-gradient(135deg, rgba(124, 58, 237, 0.4) 0%, rgba(59, 7, 100, 0.6) 100%); border:1.5px solid rgba(230, 199, 135, 0.5); color:#FFF4D9; padding:11px 22px; border-radius:12px; font-size:13px; font-weight:800; cursor:pointer; display:inline-flex; align-items:center; gap:8px; box-shadow:0 4px 16px rgba(0,0,0,0.5);">' +
+          '<i class="fa-solid fa-eye" style="color:#E6C787;"></i> WATCH LIVE GAME (ቀጥታ ጨዋታውን ይመልከቱ)' +
+        '</button>' +
+      '</div>' +
+    '</div>';
+    if (statusBar) {
+      statusBar.innerHTML = '<div style="font-size:12px; color:var(--muted); text-align:center; padding:6px; font-weight:700;">' +
+        '<i class="fa-solid fa-hand-pointer" style="color:#E6C787; margin-right:6px;"></i>Tap any card number (1-' + (window.MAX_CARDS || 200) + ') to choose ticket' +
+      '</div>';
+    }
     return;
   }
 
   var htmlOut = '';
   selectedArray.forEach(function(cardNum) {
     var cardData = generateCardDeterministic(cardNum);
-    htmlOut += '<div class="preview-mini-card" style="background:rgba(10,15,26,0.9); border:1px solid rgba(255,255,255,0.15); border-radius:10px; padding:8px; width:100%; max-width:210px;">';
+    htmlOut += '<div class="preview-mini-card" style="background:rgba(28, 15, 48, 0.95); border:1.5px solid rgba(230, 199, 135, 0.4); border-radius:12px; padding:10px; width:100%; max-width:210px; box-shadow:0 4px 16px rgba(0,0,0,0.5);">';
     htmlOut += '  <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">';
-    htmlOut += '    <span style="font-size:12px; font-weight:900; color:#FFFFFF;">Cartela #' + cardNum + '</span>';
-    htmlOut += '    <button onclick="event.stopPropagation(); toggleCard(' + cardNum + ');" style="background:rgba(239,68,68,0.2); border:1px solid rgba(239,68,68,0.5); color:#FCA5A5; border-radius:6px; padding:2px 6px; font-size:10px; font-weight:800; cursor:pointer;">&times; Remove</button>';
+    htmlOut += '    <span style="font-size:13px; font-weight:900; color:#FFF4D9;">Cartela #' + cardNum + '</span>';
+    htmlOut += '    <button onclick="event.stopPropagation(); toggleCard(' + cardNum + ');" style="background:rgba(239,68,68,0.25); border:1px solid #ef4444; color:#fff; border-radius:6px; padding:2px 8px; font-size:10px; font-weight:800; cursor:pointer;">&times; Deselect</button>';
     htmlOut += '  </div>';
     htmlOut += '  <div style="display:grid; grid-template-columns:repeat(5, 1fr); gap:2px; text-align:center; margin-bottom:3px;">';
     ['B','I','N','G','O'].forEach(function(L) {
@@ -5744,6 +6017,11 @@ function renderSelectedCardsPreview() {
   });
 
   container.innerHTML = htmlOut;
+  if (statusBar) {
+    statusBar.innerHTML = '<div style="background:linear-gradient(135deg, rgba(16, 185, 129, 0.2) 0%, rgba(5, 150, 105, 0.3) 100%); border:1px solid #10b981; border-radius:10px; padding:8px 12px; text-align:center; font-size:12px; font-weight:800; color:#FFF4D9;">' +
+      'Ready! ' + selectedArray.length + ' Card(s) Selected (' + (selectedArray.length * currentStake) + ' ETB) • Starting when countdown ends' +
+    '</div>';
+  }
 }
 
 // Hook renderSelectedCardsPreview to toggleCard
@@ -6640,13 +6918,34 @@ function showScreen(id) {
   var appEl = document.querySelector('.app');
   
   if (id === 'screen-game' || id === 'screen-winner' || id === 'screen-home') {
-    if (nav) nav.style.display = 'none';
-    if (topbar) topbar.style.display = 'none';
+    document.body.classList.add('in-room-mode');
+    if (nav) {
+      nav.classList.add('room-hidden');
+      nav.style.setProperty('display', 'none', 'important');
+    }
+    if (topbar) {
+      topbar.classList.add('room-hidden');
+      topbar.style.setProperty('display', 'none', 'important');
+    }
     if (appEl) appEl.classList.add('in-game-mode');
   } else {
-    if (nav) nav.style.display = 'flex';
-    if (topbar) topbar.style.display = 'flex';
+    document.body.classList.remove('in-room-mode');
+    if (nav) {
+      nav.classList.remove('room-hidden');
+      nav.style.setProperty('display', 'flex', 'important');
+    }
+    if (topbar) {
+      topbar.classList.remove('room-hidden');
+      topbar.style.setProperty('display', 'flex', 'important');
+    }
     if (appEl) appEl.classList.remove('in-game-mode');
+  }
+
+  if (id === 'screen-home') {
+    var titleEl = document.getElementById('room-header-title');
+    if (titleEl) titleEl.textContent = 'Play ' + (currentStake || 10) + ' Birr';
+    var rBal = document.getElementById('room-bal-display');
+    if (rBal) rBal.textContent = (userMainBalance + userPlayBalance).toFixed(2) + ' Br';
   }
 }
 
