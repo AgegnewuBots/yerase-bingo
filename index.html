@@ -1979,6 +1979,50 @@ body {
   border-radius: 4px;
 }
 
+
+/* Clean Human-Crafted Room Pick Buttons */
+.room-pick-btn {
+  width: 100%;
+  box-sizing: border-box;
+  background: linear-gradient(135deg, rgba(26, 34, 52, 0.96) 0%, rgba(14, 19, 32, 0.98) 100%);
+  border: 1.5px solid rgba(226, 232, 240, 0.22);
+  border-radius: 16px;
+  padding: 18px 22px;
+  color: #FFFFFF;
+  font-family: 'Outfit', sans-serif;
+  font-size: 19px;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.12);
+  transition: all 0.18s ease;
+  user-select: none;
+  -webkit-user-select: none;
+  outline: none;
+}
+.room-pick-btn:hover {
+  border-color: rgba(255, 255, 255, 0.45);
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.6), 0 0 20px rgba(226, 232, 240, 0.15);
+  transform: translateY(-2px);
+}
+.room-pick-btn:active {
+  transform: scale(0.98);
+}
+.room-pick-btn span {
+  letter-spacing: 0.3px;
+}
+.room-pick-btn i {
+  color: #CBD5E1;
+  font-size: 16px;
+  transition: transform 0.18s ease, color 0.18s ease;
+}
+.room-pick-btn:hover i {
+  transform: translateX(4px);
+  color: #FFFFFF;
+}
+
 </style>
 <script src="/socket.io/socket.io.js"></script>
 </head>
@@ -2052,67 +2096,18 @@ body {
         </div>
         <div class="stake-brand-title">YERASE BINGO</div>
         <div class="stake-brand-amharic">የራሴ ቢንጎ • የቀጥታ ጨዋታ</div>
-        <div class="stake-brand-tagline">Choose your room to play & win instantly!</div>
-        <!-- 3-Step Micro Quick-Guide -->
-        <div class="quick-guide-strip">
-          <div class="qg-step"><span class="qg-num">1</span> <span>Room (ክፍል)</span></div>
-          <div class="qg-arrow"><i class="fa-solid fa-chevron-right"></i></div>
-          <div class="qg-step"><span class="qg-num">2</span> <span>Cartela (ካርቴላ)</span></div>
-          <div class="qg-arrow"><i class="fa-solid fa-chevron-right"></i></div>
-          <div class="qg-step"><span class="qg-num">3</span> <span>Jackpot (ያሸንፉ)</span></div>
-        </div>
       </div>
 
-      <!-- The 2 Flagship Rooms: Play 10 Birr and Play 20 Birr (1 Column, 2 Rows) -->
-      <div class="stake-box" style="display:flex; flex-direction:column; gap:14px; width:100%; max-width:440px; margin:0 auto 16px;">
-        <!-- Room 1: Play 10 Birr -->
-        <div class="stake-room-card" onclick="selectStake(10)" style="width:100%; background:linear-gradient(135deg, rgba(22, 29, 46, 0.95) 0%, rgba(14, 19, 32, 0.98) 100%); border:1.5px solid rgba(226, 232, 240, 0.22); border-radius:18px; padding:18px 20px; display:flex; align-items:center; justify-content:space-between; cursor:pointer; box-shadow:0 8px 24px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.1); transition:transform 0.15s ease, border-color 0.15s ease;">
-          <div style="display:flex; align-items:center; gap:14px;">
-            <div style="width:48px; height:48px; border-radius:14px; background:linear-gradient(135deg, rgba(255,255,255,0.15) 0%, rgba(203,213,225,0.06) 100%); border:1px solid rgba(255,255,255,0.25); display:flex; align-items:center; justify-content:center; box-shadow:0 4px 12px rgba(0,0,0,0.3);">
-              <i class="fa-solid fa-layer-group" style="color:#FFFFFF; font-size:20px;"></i>
-            </div>
-            <div>
-              <div style="font-size:18px; font-weight:900; color:#FFFFFF; letter-spacing:0.5px;">Play 10 Birr</div>
-              <div style="font-size:12px; font-weight:600; color:var(--muted); margin-top:2px;">10 ETB Entry Fee</div>
-            </div>
-          </div>
-          <div style="display:flex; align-items:center; gap:8px;">
-            <div style="background:linear-gradient(135deg, #FFFFFF 0%, #E2E8F0 100%); color:#090D16; border-radius:10px; padding:10px 18px; font-size:13px; font-weight:900; display:flex; align-items:center; gap:6px; box-shadow:0 4px 14px rgba(255,255,255,0.2);">
-              <span>ENTER</span>
-              <i class="fa-solid fa-chevron-right" style="font-size:11px;"></i>
-            </div>
-          </div>
-        </div>
-
-        <!-- Room 2: Play 20 Birr -->
-        <div class="stake-room-card" onclick="selectStake(20)" style="width:100%; background:linear-gradient(135deg, rgba(22, 29, 46, 0.95) 0%, rgba(14, 19, 32, 0.98) 100%); border:1.5px solid rgba(226, 232, 240, 0.22); border-radius:18px; padding:18px 20px; display:flex; align-items:center; justify-content:space-between; cursor:pointer; box-shadow:0 8px 24px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.1); transition:transform 0.15s ease, border-color 0.15s ease;">
-          <div style="display:flex; align-items:center; gap:14px;">
-            <div style="width:48px; height:48px; border-radius:14px; background:linear-gradient(135deg, rgba(255,255,255,0.15) 0%, rgba(203,213,225,0.06) 100%); border:1px solid rgba(255,255,255,0.25); display:flex; align-items:center; justify-content:center; box-shadow:0 4px 12px rgba(0,0,0,0.3);">
-              <i class="fa-solid fa-crown" style="color:#FFFFFF; font-size:20px;"></i>
-            </div>
-            <div>
-              <div style="font-size:18px; font-weight:900; color:#FFFFFF; letter-spacing:0.5px;">Play 20 Birr</div>
-              <div style="font-size:12px; font-weight:600; color:var(--muted); margin-top:2px;">20 ETB Entry Fee</div>
-            </div>
-          </div>
-          <div style="display:flex; align-items:center; gap:8px;">
-            <div style="background:linear-gradient(135deg, #FFFFFF 0%, #E2E8F0 100%); color:#090D16; border-radius:10px; padding:10px 18px; font-size:13px; font-weight:900; display:flex; align-items:center; gap:6px; box-shadow:0 4px 14px rgba(255,255,255,0.2);">
-              <span>ENTER</span>
-              <i class="fa-solid fa-chevron-right" style="font-size:11px;"></i>
-            </div>
-          </div>
-        </div>
-
-        <!-- Subtle Compact Activity Ticker -->
-        <div style="background:rgba(255,255,255,0.03); border:1px solid rgba(226,232,240,0.1); border-radius:12px; padding:8px 14px; display:flex; align-items:center; justify-content:center; gap:8px; text-align:center; margin-top:4px;">
-          <span class="live-pulse-dot"></span>
-          <span style="font-size:11.5px; font-weight:700; color:#CBD5E1;">Live Bingo Active • 100% Real-Time Synchronized Draws</span>
-        </div>
-      </div>
-          <button class="stake-cta-btn gold-cta" onclick="event.stopPropagation(); selectStake(20)">
-            <i class="fa-solid fa-crown" style="color:#090D16; font-size:12px;"></i> PLAY 20 BIRR VIP (ይጫወቱ)
-          </button>
-        </div>
+      <!-- The 2 Flagship Rooms: Play 10 Birr and Play 20 Birr -->
+      <div class="stake-box" style="display:flex; flex-direction:column; gap:14px; width:100%; max-width:390px; margin:22px auto 20px; padding:0 4px;">
+        <button class="room-pick-btn" onclick="selectStake(10)">
+          <span>Play 10 Birr</span>
+          <i class="fa-solid fa-arrow-right"></i>
+        </button>
+        <button class="room-pick-btn" onclick="selectStake(20)">
+          <span>Play 20 Birr</span>
+          <i class="fa-solid fa-arrow-right"></i>
+        </button>
       </div>
     </div>
   </div>
