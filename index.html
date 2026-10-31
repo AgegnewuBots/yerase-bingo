@@ -59,7 +59,24 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
 ::-webkit-scrollbar-track { background: transparent; }
 ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.15); border-radius: 4px; }
 ::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.3); }
-.app{max-width:390px;margin:0 auto;min-height:100vh;display:flex;flex-direction:column;padding-bottom:60px;}
+.app {
+  width: 100%;
+  max-width: 480px;
+  margin: 0 auto;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 60px;
+}
+@media (max-width: 600px) {
+  .app {
+    max-width: 100% !important;
+    width: 100% !important;
+    margin: 0 !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+}
 .screen{display:none;flex:1;flex-direction:column;}
 .screen.active{display:flex;}
 
@@ -2107,6 +2124,8 @@ body {
   left: 0;
   right: 0;
   max-width: 540px;
+  height: 85vh;
+  max-height: 85vh;
   margin: 0 auto;
   background: rgba(14, 19, 32, 0.98);
   border-top: 1.5px solid rgba(230, 199, 135, 0.25);
@@ -2119,6 +2138,139 @@ body {
   transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1);
   display: flex;
   flex-direction: column;
+  overflow: hidden;
+}
+
+/* Modern Game History Bottom Sheet */
+.game-history-sheet {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  max-width: 540px;
+  height: 82vh;
+  max-height: 82vh;
+  margin: 0 auto;
+  background: rgba(14, 19, 32, 0.98);
+  border-top: 1.5px solid rgba(230, 199, 135, 0.25);
+  border-radius: 24px 24px 0 0;
+  box-shadow: 0 -10px 40px rgba(0,0,0,0.8), 0 0 30px rgba(230, 199, 135, 0.1);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  z-index: 1000;
+  transform: translateY(105%);
+  transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+.game-history-sheet.active {
+  transform: translateY(0);
+}
+.gh-stat-chip {
+  flex: 1;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  padding: 10px 8px;
+  text-align: center;
+}
+.gh-card-item {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 14px;
+  padding: 12px 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  transition: background 0.15s ease;
+}
+.gh-badge-win {
+  background: rgba(16, 185, 129, 0.18);
+  border: 1px solid rgba(16, 185, 129, 0.4);
+  color: #10B981;
+  padding: 4px 10px;
+  border-radius: 8px;
+  font-size: 11px;
+  font-weight: 800;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+.gh-badge-failed {
+  background: rgba(239, 68, 68, 0.15);
+  border: 1px solid rgba(239, 68, 68, 0.35);
+  color: #EF4444;
+  padding: 4px 10px;
+  border-radius: 8px;
+  font-size: 11px;
+  font-weight: 800;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+.gh-badge-playing {
+  background: rgba(245, 158, 11, 0.18);
+  border: 1px solid rgba(245, 158, 11, 0.4);
+  color: #F59E0B;
+  padding: 4px 10px;
+  border-radius: 8px;
+  font-size: 11px;
+  font-weight: 800;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* Pattern Mini Cards without Emojis */
+.pattern-mini-card {
+  width: 140px;
+  background: rgba(18, 10, 32, 0.95);
+  border: 1px solid rgba(230, 199, 135, 0.3);
+  border-radius: 8px;
+  padding: 6px;
+  margin: 6px 0 14px;
+}
+.pmc-head {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 2px;
+  margin-bottom: 4px;
+  text-align: center;
+}
+.pmc-h {
+  font-size: 9px;
+  font-weight: 900;
+  color: var(--gold);
+}
+.pmc-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 3px;
+}
+.pmc-cell {
+  width: 22px;
+  height: 22px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 3px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 8px;
+  color: #fff;
+}
+.pmc-cell.pmc-hit {
+  background: var(--green);
+  border-color: #34d399;
+  color: #000;
+  box-shadow: 0 0 6px rgba(16, 185, 129, 0.6);
+}
+.pmc-cell.pmc-center {
+  background: rgba(230, 199, 135, 0.2);
+  border-color: var(--gold);
+  color: var(--gold);
 }
 .rules-bottom-sheet.active {
   transform: translateY(0);
@@ -2335,13 +2487,13 @@ body.in-room-mode .bottom-nav,
 <script src="/socket.io/socket.io.js"></script>
 </head>
 <body>
-<div id="yerase-toast"><span>⭐</span><span id="yerase-toast-msg">Notification</span></div>
+<div id="yerase-toast"><span id="yerase-toast-icon"><i class="fa-solid fa-bell" style="color:var(--gold);"></i></span><span id="yerase-toast-msg">Notification</span></div>
 <div class="app">
   <!-- Create Password Screen for Telegram Users on First Login -->
   <div class="screen" id="screen-create-password" style="background:var(--bg);">
     <div class="auth-container">
       <div class="auth-box">
-        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' stop-color='%23FFFFFF'/%3E%3Cstop offset='50%25' stop-color='%23CBD5E1'/%3E%3Cstop offset='100%25' stop-color='%2364748B'/%3E%3C/linearGradient%3E%3C/defs%3E%3Ccircle cx='50' cy='50' r='46' fill='url(%23g)' stroke='%23FFFFFF' stroke-width='3'/%3E%3Ccircle cx='50' cy='50' r='38' fill='%230B0F19'/%3E%3Ctext x='50' y='63' font-size='42' font-family='sans-serif' font-weight='900' fill='%23FFFFFF' text-anchor='middle'%3E%E1%8B%A8%3C/text%3E%3C/svg%3E" style="width: 100px; height: 100px; border-radius: 50%; border: 3px solid var(--orange); object-fit: cover; margin: 0 auto 15px; box-shadow: 0 0 20px rgba(255,107,0,0.5); display: block;" alt="Yerase Bingo Logo">
+        <img src="assets/logo.jpg" onerror="this.src='https://i.ibb.co/twZTnFpw/7e495c40-d1e9-4583-9ecf-49b4c4f9d925.jpg'" style="width: 100px; height: 100px; border-radius: 50%; border: 3px solid var(--orange); object-fit: cover; margin: 0 auto 15px; box-shadow: 0 0 20px rgba(255,107,0,0.5); display: block;" alt="Yerase Bingo Logo">
         <div class="auth-title" id="lbl-create-pwd-title" style="color:var(--gold); font-size:22px; font-weight:800; text-shadow:0 0 10px rgba(230,199,135,0.3);">CREATE PASSWORD</div>
         <p style="font-size:12px; color:var(--muted); line-height:1.5; margin-bottom:20px;" id="lbl-create-pwd-desc">
           Welcome to Yerase Bingo! Please create a secure password to protect your wallet.
@@ -2399,20 +2551,27 @@ body.in-room-mode .bottom-nav,
       <div class="stake-hero-brand" style="margin-top: 10px; margin-bottom: 24px;">
         <div class="stake-emblem-wrap" style="position:relative; width:88px; height:88px; margin:0 auto 16px;">
           <div style="position:absolute; inset:-4px; border-radius:50%; background:radial-gradient(circle, rgba(230, 199, 135, 0.25) 0%, transparent 70%); filter:blur(8px); pointer-events:none;"></div>
-          <img id="stake-center-logo-img" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' stop-color='%23FFF4D9'/%3E%3Cstop offset='50%25' stop-color='%23E6C787'/%3E%3Cstop offset='100%25' stop-color='%23B8860B'/%3E%3C/linearGradient%3E%3C/defs%3E%3Ccircle cx='50' cy='50' r='46' fill='url(%23g)' stroke='%23E6C787' stroke-width='2.5'/%3E%3Ccircle cx='50' cy='50' r='38' fill='%23120824'/%3E%3Ctext x='50' y='63' font-size='42' font-family='sans-serif' font-weight='900' fill='%23FFF4D9' text-anchor='middle'%3E%E1%8B%A8%3C/text%3E%3C/svg%3E" class="stake-emblem-img" style="width:88px; height:88px; border-radius:50%; border:2px solid rgba(255,255,255,0.3); box-shadow:0 8px 30px rgba(0,0,0,0.6); position:relative; z-index:1;" alt="Yerase Bingo">
+          <img id="stake-center-logo-img" src="assets/logo.jpg" onerror="this.src='https://i.ibb.co/twZTnFpw/7e495c40-d1e9-4583-9ecf-49b4c4f9d925.jpg'" class="stake-emblem-img" style="width:90px; height:90px; border-radius:50%; object-fit:cover; border:2.5px solid var(--gold); box-shadow:0 0 25px rgba(230,199,135,0.45); position:relative; z-index:1;" alt="Yerase Bingo">
         </div>
         <div class="stake-brand-title" id="lbl-stake-brand-title" style="font-size:24px; font-weight:900; letter-spacing:1px; background:linear-gradient(180deg, #FFFFFF 0%, #E6C787 100%); -webkit-background-clip:text; -webkit-text-fill-color:transparent; text-shadow:0 2px 10px rgba(0,0,0,0.5);">YERASE BINGO</div>
         <div class="stake-brand-amharic" id="lbl-stake-brand-subtitle" style="font-size:13px; font-weight:700; color:var(--muted); margin-top:4px; letter-spacing:0.3px;">Live Synchronized Bingo</div>
       </div>
 
       <!-- The 2 Flagship Rooms: Play 10 Birr and Play 20 Birr -->
-      <div class="stake-box" style="display:flex; flex-direction:column; gap:14px; width:100%; max-width:390px; margin:22px auto 20px; padding:0 4px;">
+      <div class="stake-box" style="display:flex; flex-direction:column; gap:14px; width:100%; max-width:440px; margin:20px auto; padding:0 4px;">
         <button class="room-pick-btn" onclick="selectStake(10)">
           <span id="lbl-room-pick-10">Play 10 Birr</span>
           <i class="fa-solid fa-arrow-right"></i>
         </button>
         <button class="room-pick-btn" onclick="selectStake(20)">
           <span id="lbl-room-pick-20">Play 20 Birr</span>
+          <i class="fa-solid fa-arrow-right"></i>
+        </button>
+        <button class="room-pick-btn" onclick="openGameHistorySheet()" style="background:linear-gradient(135deg, rgba(35, 18, 58, 0.96) 0%, rgba(20, 10, 36, 0.98) 100%); border-color:rgba(230, 199, 135, 0.35);">
+          <div style="display:flex; align-items:center; gap:12px;">
+            <i class="fa-solid fa-clock-rotate-left" style="color:#E6C787; font-size:18px;"></i>
+            <span id="lbl-room-pick-history">Game History</span>
+          </div>
           <i class="fa-solid fa-arrow-right"></i>
         </button>
       </div>
@@ -2436,6 +2595,40 @@ body.in-room-mode .bottom-nav,
       <div class="rules-tab" id="tab-info" onclick="setRulesTab('info')">Info</div>
     </div>
     <div class="rules-body" id="rules-body"></div>
+  </div>
+  <!-- Game History Bottom Sheet Backdrop & Container -->
+  <div id="game-history-backdrop" onclick="closeGameHistorySheet()" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.68); backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px); z-index:999; transition:opacity 0.25s ease;"></div>
+  <div class="game-history-sheet" id="game-history-sheet">
+    <div class="bottom-sheet-handle-bar"><div class="bottom-sheet-handle"></div></div>
+    <div class="rules-header">
+      <button class="rules-back" onclick="closeGameHistorySheet()"><i class="fa-solid fa-arrow-left"></i></button>
+      <div class="rules-header-title" id="lbl-game-history-sheet-title">Game History</div>
+      <button onclick="loadUserGameHistorySheet()" style="background:none; border:none; color:var(--gold); font-size:14px; cursor:pointer; padding:6px;" title="Refresh"><i class="fa-solid fa-rotate-right"></i></button>
+    </div>
+    
+    <!-- Mini Stats Bar in Sheet -->
+    <div style="display:flex; gap:8px; padding:10px 16px; background:rgba(0,0,0,0.25); border-bottom:1px solid rgba(255,255,255,0.06);">
+      <div class="gh-stat-chip">
+        <div style="font-size:10px; color:var(--muted); font-weight:700;" id="lbl-gh-played">PLAYED</div>
+        <div id="gh-stat-played" style="font-size:15px; font-weight:900; color:#fff;">0</div>
+      </div>
+      <div class="gh-stat-chip">
+        <div style="font-size:10px; color:var(--green); font-weight:700;" id="lbl-gh-won">WINS</div>
+        <div id="gh-stat-won" style="font-size:15px; font-weight:900; color:var(--green);">0</div>
+      </div>
+      <div class="gh-stat-chip">
+        <div style="font-size:10px; color:var(--gold); font-weight:700;" id="lbl-gh-net">NET WON</div>
+        <div id="gh-stat-net" style="font-size:15px; font-weight:900; color:var(--gold);">0 Br</div>
+      </div>
+    </div>
+
+    <!-- History list container -->
+    <div id="game-history-sheet-list" style="flex:1; overflow-y:auto; padding:14px 16px 30px; display:flex; flex-direction:column; gap:10px; -webkit-overflow-scrolling:touch;">
+      <div style="text-align:center; padding:30px 10px; color:var(--muted); font-size:13px;" id="lbl-gh-empty">
+        <i class="fa-solid fa-clock-rotate-left" style="font-size:32px; color:rgba(230,199,135,0.4); margin-bottom:10px; display:block;"></i>
+        <span>No games played yet. Join a 10 or 20 Birr room to play!</span>
+      </div>
+    </div>
   </div>
 
   <div class="screen" id="screen-home">
@@ -2463,7 +2656,7 @@ body.in-room-mode .bottom-nav,
       <div class="room-header-bar">
         <button class="room-back-btn" onclick="backToStake()">
           <i class="fa-solid fa-arrow-left" style="color:#E6C787;"></i>
-          <span id="lbl-room-back-btn">Rooms</span>
+          <span id="lbl-room-back-btn">Home</span>
         </button>
         <div class="room-badge-pill" id="room-header-title">Play 10 Birr</div>
         <div class="room-balance-pill" onclick="openClientDepositModal()" title="Add balance">
@@ -2541,7 +2734,7 @@ body.in-room-mode .bottom-nav,
     <div id="spectator-banner" style="display:none; background: linear-gradient(90deg, #d84315 0%, #ff8f00 100%); color: #fff; padding: 8px 12px; font-size: 13px; font-weight: 700; text-align: center; border-bottom: 1px solid rgba(255,255,255,0.1); flex-shrink: 0; box-shadow: 0 4px 12px rgba(216,67,21,0.3); z-index: 50; align-items:center; justify-content:center; gap:8px;">
       <i class="fa-solid fa-circle-exclamation"></i>
       <span id="lbl-spec-banner-text">You didn't join this round. Watching live...</span>
-      <button onclick="navTo('home')" style="background:rgba(0,0,0,0.35); border:1px solid rgba(255,255,255,0.7); color:#fff; border-radius:8px; padding:4px 10px; font-size:11px; font-weight:800; cursor:pointer; display:inline-flex; align-items:center; gap:5px; margin-left:6px; transition:transform 0.15s ease;"><i class="fa-solid fa-arrow-left"></i> <span id="lbl-spec-banner-btn">LOBBY</span></button>
+      <button onclick="navTo('home')" style="background:rgba(0,0,0,0.35); border:1px solid rgba(255,255,255,0.7); color:#fff; border-radius:8px; padding:4px 10px; font-size:11px; font-weight:800; cursor:pointer; display:inline-flex; align-items:center; gap:5px; margin-left:6px; transition:transform 0.15s ease;"><i class="fa-solid fa-arrow-left"></i> <span id="lbl-spec-banner-btn">Home</span></button>
     </div>
     <div class="topbar">
       <div class="stat-box"><div class="stat-label" id="lbl-game-active">GAME ID</div><div class="stat-val yellow" id="s-game-id">—</div></div>
@@ -2631,7 +2824,7 @@ body.in-room-mode .bottom-nav,
       </div>
 
       <div class="next-label" id="lbl-winner-next-label">Next round starts in</div>
-      <div class="next-count" id="next-count">10</div>
+      <div class="next-count" id="next-count">5</div>
     </div>
   </div>
 
@@ -2754,8 +2947,7 @@ body.in-room-mode .bottom-nav,
         </div>
       </div>
 
-      <div class="section-title"  id="lbl-prof-hist-title">Game History</div>
-      <div class="table-box"><div class="table-head" id="lbl-prof-hist-head"><span>GAME</span><span>ENTRY</span><span>STATUS</span><span>RESULT</span></div><div id="p-history-rows"><div class="empty-row">No games yet</div></div></div>
+      
     </div>
   </div>
   
@@ -2871,7 +3063,7 @@ body.in-room-mode .bottom-nav,
         </div>
 
         <div style="font-size:10px; color:var(--muted); line-height:1.4; margin-top:10px; border-top:1px dashed rgba(255,255,255,0.08); padding-top:8px;" id="lbl-wal-policy-desc">
-          💡 <strong>Withdrawal Policy:</strong> Deposited funds and winnings are withdrawable once you have deposited at least 50 ETB and wagered 15x your total deposit amount.
+          <i class="fa-solid fa-circle-info" style="color:var(--gold); margin-right:4px;"></i><strong>Withdrawal Policy:</strong> Deposited funds and winnings are withdrawable once you have deposited at least 50 ETB and wagered 15x your total deposit amount.
         </div>
       </div>
       
@@ -2895,7 +3087,7 @@ body.in-room-mode .bottom-nav,
   <nav class="bottom-nav" id="bottom-nav">
     <button class="nav-btn active" id="nav-home" onclick="navTo('home')">
       <span class="nav-icon"><i class="fa-solid fa-house"></i></span>
-      <span class="nav-text" id="lbl-nav-home">ROOMS</span>
+      <span class="nav-text" id="lbl-nav-home">HOME</span>
     </button>
     <button class="nav-btn" id="nav-winners" onclick="navTo('winners')">
       <span class="nav-icon"><i class="fa-solid fa-trophy"></i></span>
@@ -2983,8 +3175,8 @@ body.in-room-mode .bottom-nav,
           <button type="button" id="dep-method-telebirr" onclick="selectDepositMethod('Telebirr')" style="padding:10px; border-radius:10px; border:2px solid var(--green); background:rgba(0,230,118,0.15); color:#fff; font-size:12px; font-weight:800; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:6px;">
             <i class="fa-solid fa-mobile-screen-button" style="color:#E6C787;"></i> <span id="lbl-dep-method-tele">Telebirr</span>
           </button>
-          <button type="button" id="dep-method-cbe" onclick="selectDepositMethod('CBE Birr')" style="padding:10px; border-radius:10px; border:1px solid rgba(255,255,255,0.15); background:rgba(255,255,255,0.05); color:#fff; font-size:12px; font-weight:800; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:6px;">
-            <i class="fa-solid fa-building-columns" style="color:#E6C787;"></i> <span id="lbl-dep-method-cbe">CBE Birr</span>
+          <button type="button" id="dep-method-cbe" onclick="selectDepositMethod('CBE')" style="padding:10px; border-radius:10px; border:1px solid rgba(255,255,255,0.15); background:rgba(255,255,255,0.05); color:#fff; font-size:12px; font-weight:800; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:6px;">
+            <i class="fa-solid fa-building-columns" style="color:#E6C787;"></i> <span id="lbl-dep-method-cbe">CBE</span>
           </button>
         </div>
 
@@ -2996,25 +3188,20 @@ body.in-room-mode .bottom-nav,
           <button type="button" onclick="setQuickDeposit(500, this)" class="quick-chip-btn" id="chip-dep-500">500 ETB</button>
         </div>
 
-        <div class="input-group" style="margin-bottom:12px;">
+        <div class="input-group" style="margin-bottom:14px;">
           <label id="lbl-dep-amount-label">DEPOSIT AMOUNT - Min 50 Br</label>
           <div class="input-wrap">
-            <input type="number" id="dep-req-amount" class="auth-input" placeholder="50" min="50" value="50" onkeydown="if(event.key === 'Enter') submitClientDeposit()">
+            <input type="number" id="dep-req-amount" class="auth-input" placeholder="50" min="50" value="50" oninput="clearDepositErrors()" onkeydown="if(event.key === 'Enter') submitClientDeposit()">
           </div>
-        </div>
-        
-        <div class="input-group" style="margin-bottom:12px;">
-          <label id="lbl-dep-phone-label">TRANSFER PHONE / SENDER</label>
-          <div class="input-wrap">
-            <input type="text" id="dep-req-ref" class="auth-input" placeholder="09xxxxxxxx" onkeydown="if(event.key === 'Enter') submitClientDeposit()">
-          </div>
+          <div id="dep-amount-error" style="display:none; color:#ef4444; font-size:11px; font-weight:700; margin-top:5px; text-align:left;"></div>
         </div>
 
         <div class="input-group" style="margin-bottom:16px;">
           <label id="lbl-dep-sms-label">SMS CONFIRMATION / TXN ID</label>
           <div class="input-wrap">
-            <textarea id="dep-req-sms" class="auth-input" rows="2" style="resize:none; padding:10px 14px; font-size:12px; height:auto; min-height:54px;" placeholder="Paste bank or Telebirr SMS confirmation here..."></textarea>
+            <textarea id="dep-req-sms" class="auth-input" rows="2" style="resize:none; padding:10px 14px; font-size:12px; height:auto; min-height:54px;" placeholder="Paste bank or Telebirr SMS confirmation here..." oninput="clearDepositErrors()"></textarea>
           </div>
+          <div id="dep-sms-error" style="display:none; color:#ef4444; font-size:11px; font-weight:700; margin-top:5px; text-align:left;"></div>
         </div>
         
         <button class="auth-btn" id="lbl-dep-submit-btn" style="background-color:var(--green);" onclick="submitClientDeposit()">SUBMIT DEPOSIT REQUEST</button>
@@ -3404,6 +3591,8 @@ var currentRulesLang = 'en'; var currentRulesTab = 'terms';
 
 function openRules() { 
   if (soundOn) sfx.playClick(); 
+  var nav = document.getElementById('bottom-nav');
+  if (nav) nav.style.setProperty('display', 'none', 'important');
   var sheet = document.getElementById('rules-screen');
   var bd = document.getElementById('rules-backdrop');
   if (bd) bd.style.display = 'block';
@@ -3416,6 +3605,10 @@ function closeRules() {
   var bd = document.getElementById('rules-backdrop');
   if (sheet) sheet.classList.remove('active'); 
   if (bd) bd.style.display = 'none';
+  var nav = document.getElementById('bottom-nav');
+  if (nav && !document.body.classList.contains('in-room-mode')) {
+    nav.style.setProperty('display', 'flex', 'important');
+  }
 }
 var APP_TRANSLATIONS = {
   en: {
@@ -3467,7 +3660,7 @@ var APP_TRANSLATIONS = {
     "lbl-stake-brand-subtitle": "Live Synchronized Bingo",
     "lbl-room-pick-10": "Play 10 Birr",
     "lbl-room-pick-20": "Play 20 Birr",
-    "lbl-room-back-btn": "Rooms",
+    "lbl-room-back-btn": "Home",
     "lbl-no-bal-msg": "Insufficient balance! Please load your wallet.",
     "lbl-game-id-prefix": "Game ID:",
     "lbl-leave-game-btn": "Leave Game",
@@ -3547,7 +3740,7 @@ var APP_TRANSLATIONS = {
     "lbl-wal-req-title": "WITHDRAWAL REQUIREMENTS",
     "lbl-wal-min-dep": "Min. Deposit Required:",
     "lbl-wal-wager-prog": "Wagering Progress (15x Deposit):",
-    "lbl-wal-policy-desc": "💡 <strong>Withdrawal Policy:</strong> Deposited funds and winnings are withdrawable once you have deposited at least 50 ETB and wagered 15x your total deposit amount.",
+    "lbl-wal-policy-desc": "<i class="fa-solid fa-circle-info" style="color:var(--gold); margin-right:4px;"></i><strong>Withdrawal Policy:</strong> Deposited funds and winnings are withdrawable once you have deposited at least 50 ETB and wagered 15x your total deposit amount.",
     "lbl-btn-deposit": "DEPOSIT",
     "lbl-btn-withdraw": "WITHDRAW",
     "lbl-wal-tx-title": "Transaction History",
@@ -3558,7 +3751,7 @@ var APP_TRANSLATIONS = {
     "lbl-dep-modal-heading": "REQUEST DEPOSIT",
     "lbl-dep-modal-desc": "Please deposit funds using Telebirr or CBE, then enter the amount and reference phone below.",
     "lbl-dep-method-tele": "Telebirr",
-    "lbl-dep-method-cbe": "CBE Birr",
+    "lbl-dep-method-cbe": "CBE",
     "lbl-dep-amount-label": "DEPOSIT AMOUNT - Min 50 Br",
     "lbl-dep-phone-label": "TRANSFER PHONE / SENDER",
     "lbl-dep-sms-label": "SMS CONFIRMATION / TXN ID",
@@ -3633,7 +3826,13 @@ var APP_TRANSLATIONS = {
     "lbl-onb-next": "Next",
 
     // Bottom Navigation
-    "lbl-nav-home": "ROOMS",
+    "lbl-nav-home": "HOME",
+    "lbl-room-pick-history": "Game History",
+    "lbl-game-history-sheet-title": "Game History",
+    "lbl-gh-played": "PLAYED",
+    "lbl-gh-won": "WINS",
+    "lbl-gh-net": "NET WON",
+    "lbl-gh-empty": "No games played yet. Join a 10 or 20 Birr room to play!",
     "lbl-nav-winners": "WINNERS",
     "lbl-nav-wallet": "WALLET",
     "lbl-nav-profile": "PROFILE"
@@ -3687,7 +3886,7 @@ var APP_TRANSLATIONS = {
     "lbl-stake-brand-subtitle": "የቀጥታ ባለብዙ ተጫዋች ቢንጎ",
     "lbl-room-pick-10": "በ10 ብር ተጫወቱ",
     "lbl-room-pick-20": "በ20 ብር ተጫወቱ",
-    "lbl-room-back-btn": "ክፍሎች",
+    "lbl-room-back-btn": "መነሻ",
     "lbl-no-bal-msg": "በቂ ሂሳብ የለም! እባክዎ ብር ያስገቡ።",
     "lbl-game-id-prefix": "የጨዋታ መለያ፡",
     "lbl-leave-game-btn": "ከጨዋታው ውጣ",
@@ -3713,7 +3912,7 @@ var APP_TRANSLATIONS = {
     "wait-lbl-wait-desc": "ቁጥሮች በመውጣት ላይ ናቸው። የሚቀጥለውን ጨዋታ በቀጥታ ይቀላቀላሉ።",
 
     // Winner Screen
-    "winner-title-text": "🎉 ቢንጎ አሸናፊ! 🎉",
+    "winner-title-text": "ቢንጎ አሸናፊ! ",
     "lbl-winner-prize-dist": "የተከፋፈለ ሽልማት",
     "lbl-winner-share": "ውጤቱን አጋራ",
     "lbl-winner-again": "እንደገና ተጫወት",
@@ -3767,7 +3966,7 @@ var APP_TRANSLATIONS = {
     "lbl-wal-req-title": "የገንዘብ ማውጣት መስፈርቶች",
     "lbl-wal-min-dep": "አስፈላጊው ዝቅተኛ ተቀማጭ፡",
     "lbl-wal-wager-prog": "የመጫወቻ ሂደት (15x ተቀማጭ)፡",
-    "lbl-wal-policy-desc": "💡 <strong>የማውጣት ደንብ፦</strong> ተቀማጭ ገንዘብ እና ያሸነፉትን ለማውጣት ቢያንስ 50 ብር ማስገባት እና የተጣራውን 15 እጥፍ መጫወት ያስፈልጋል።",
+    "lbl-wal-policy-desc": "<i class="fa-solid fa-circle-info" style="color:var(--gold); margin-right:4px;"></i><strong>የማውጣት ደንብ፦</strong> ተቀማጭ ገንዘብ እና ያሸነፉትን ለማውጣት ቢያንስ 50 ብር ማስገባት እና የተጣራውን 15 እጥፍ መጫወት ያስፈልጋል።",
     "lbl-btn-deposit": "ገንዘብ አስገባ",
     "lbl-btn-withdraw": "ገንዘብ አውጣ",
     "lbl-wal-tx-title": "የሂሳብ ታሪክ",
@@ -3778,7 +3977,7 @@ var APP_TRANSLATIONS = {
     "lbl-dep-modal-heading": "ገንዘብ ያስገቡ",
     "lbl-dep-modal-desc": "እባክዎን በቴሌብር ወይም በንግድ ባንክ ያስገቡና ያስገቡትን የገንዘብ መጠንና ስልክዎን ከታች ይመዝግቡ።",
     "lbl-dep-method-tele": "ቴሌብር",
-    "lbl-dep-method-cbe": "ንግድ ባንክ",
+    "lbl-dep-method-cbe": "ሲቢኢ",
     "lbl-dep-amount-label": "የገንዘብ መጠን - ቢያንስ 50 ብር",
     "lbl-dep-phone-label": "የከፈሉበት ስልክ ቁጥር",
     "lbl-dep-sms-label": "የደረሰኝ መልእክት ወይም የሂሳብ ማረጋገጫ",
@@ -3853,12 +4052,103 @@ var APP_TRANSLATIONS = {
     "lbl-onb-next": "ቀጣይ",
 
     // Bottom Navigation
-    "lbl-nav-home": "ክፍሎች",
+    "lbl-nav-home": "መነሻ",
+    "lbl-room-pick-history": "የጨዋታ ታሪክ",
+    "lbl-game-history-sheet-title": "የጨዋታ ታሪክ",
+    "lbl-gh-played": "የተጫወቱት",
+    "lbl-gh-won": "ያሸነፉት",
+    "lbl-gh-net": "ጠቅላላ ትርፍ",
+    "lbl-gh-empty": "ምንም የተጫወቱት ጨዋታ የለም። 10 ወይም 20 ብር ክፍል በመግባት ይጫወቱ!",
     "lbl-nav-winners": "ደረጃዎች",
     "lbl-nav-wallet": "ዋሌት",
     "lbl-nav-profile": "የኔ ማህደር"
   }
 };
+
+
+// ============================================================================
+// GAME HISTORY SHEET & MODAL NAVIGATION HELPERS
+// ============================================================================
+function openGameHistorySheet() {
+  if (soundOn) sfx.playClick();
+  var sheet = document.getElementById('game-history-sheet');
+  var bd = document.getElementById('game-history-backdrop');
+  var nav = document.getElementById('bottom-nav');
+  if (nav) nav.style.setProperty('display', 'none', 'important');
+  if (bd) bd.style.display = 'block';
+  if (sheet) sheet.classList.add('active');
+  loadUserGameHistorySheet();
+}
+
+function closeGameHistorySheet() {
+  if (soundOn) sfx.playClick();
+  var sheet = document.getElementById('game-history-sheet');
+  var bd = document.getElementById('game-history-backdrop');
+  var nav = document.getElementById('bottom-nav');
+  if (sheet) sheet.classList.remove('active');
+  if (bd) bd.style.display = 'none';
+  if (nav && !document.body.classList.contains('in-room-mode')) {
+    nav.style.setProperty('display', 'flex', 'important');
+  }
+}
+
+async function loadUserGameHistorySheet() {
+  var listEl = document.getElementById('game-history-sheet-list');
+  var playedEl = document.getElementById('gh-stat-played');
+  var wonEl = document.getElementById('gh-stat-won');
+  var netEl = document.getElementById('gh-stat-net');
+  if (!listEl) return;
+
+  var isAm = (currentRulesLang === 'am');
+  var curr = isAm ? ' ብር' : ' ETB';
+
+  listEl.innerHTML = '<div style="text-align:center; padding:25px; color:var(--muted);"><i class="fa-solid fa-spinner fa-spin" style="font-size:24px; color:var(--gold);"></i></div>';
+
+  var history = await fetchGameHistory();
+  var stats = await fetchProfileStats();
+
+  if (stats) {
+    if (playedEl) playedEl.textContent = stats.games_played || 0;
+    if (wonEl) wonEl.textContent = stats.games_won || 0;
+    if (netEl) netEl.textContent = (stats.total_won || 0) + curr;
+  }
+
+  if (!history || !history.length) {
+    listEl.innerHTML = '<div style="text-align:center; padding:36px 12px; color:var(--muted); font-size:13px;">' +
+      '<i class="fa-solid fa-clock-rotate-left" style="font-size:32px; color:rgba(230,199,135,0.4); margin-bottom:12px; display:block;"></i>' +
+      '<span>' + (isAm ? 'ምንም የተጫወቱት ጨዋታ የለም። 10 ወይም 20 ብር ክፍል በመግባት ይጫወቱ!' : 'No games played yet. Join a 10 or 20 Birr room to play!') + '</span>' +
+    '</div>';
+    return;
+  }
+
+  listEl.innerHTML = history.map(function(h) {
+    var rawStatus = h.status || 'Completed';
+    var isWin = (rawStatus === 'Win') || (h.result && h.result.indexOf('+') !== -1);
+    var isPlaying = (rawStatus === 'Playing');
+    
+    var badgeClass = isWin ? 'gh-badge-win' : (isPlaying ? 'gh-badge-playing' : 'gh-badge-failed');
+    var badgeIcon = isWin ? '<i class="fa-solid fa-trophy"></i>' : (isPlaying ? '<i class="fa-solid fa-spinner fa-spin"></i>' : '<i class="fa-solid fa-xmark"></i>');
+    var badgeText = isWin ? (isAm ? 'አሸናፊ' : 'Win') : (isPlaying ? (isAm ? 'በመጫወት ላይ' : 'Playing') : (isAm ? 'ተሸናፊ' : 'Failed'));
+    
+    var stakeText = (h.cards_count || 1) + ' ' + (isAm ? 'ካርቴላ' : 'Cards') + ' • ' + (h.stake || 10) + curr;
+    var resultText = h.result && h.result !== '-' ? h.result : (isWin ? ('+' + (h.stake * 8) + curr) : ('-' + (h.entry || h.stake || 10) + curr));
+    var timeStr = h.time ? new Date(h.time).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) : '';
+
+    return '<div class="gh-card-item">' +
+      '<div style="text-align:left;">' +
+        '<div style="font-size:13px; font-weight:800; color:#FFF4D9; display:flex; align-items:center; gap:6px;">' +
+          '<span>#' + (h.game_id || 'GAME') + '</span>' +
+          '<span style="font-size:10px; color:var(--muted); font-weight:600;">' + timeStr + '</span>' +
+        '</div>' +
+        '<div style="font-size:11px; color:var(--muted); margin-top:2px;">' + stakeText + '</div>' +
+      '</div>' +
+      '<div style="text-align:right; display:flex; flex-direction:column; align-items:flex-end; gap:4px;">' +
+        '<span class="' + badgeClass + '">' + badgeIcon + ' ' + badgeText + '</span>' +
+        '<span style="font-size:12px; font-weight:800; color:' + (isWin ? 'var(--green)' : 'var(--muted)') + ';">' + resultText + '</span>' +
+      '</div>' +
+    '</div>';
+  }).join('');
+}
 
 function translateApp(lang) {
   var dict = APP_TRANSLATIONS[lang];
@@ -3967,58 +4257,51 @@ function renderRules() {
 }
 
 function getTermsEn() {
-  return `<h1>Terms & Conditions</h1><h1 class="sub">Yerase Bingo</h1><p style="text-align:center; color:var(--muted); font-size:12px; margin-bottom:16px;">⚖️ Legal · Official Rules</p><p>Welcome to Yerase Bingo. By accessing or using our platform, you agree to be bound by the following Terms and Conditions. Please read them carefully.</p><h2><span class="rule-num">1</span> Nature of the Game and Fair Play</h2><h3>Purely Luck-Based</h3><p>Yerase Bingo is a game of chance. All outcomes are generated randomly.</p><h3>Entertainment Purpose</h3><p>This platform is intended for entertainment purposes only. Participants should only play with funds they can afford to lose.</p><h2><span class="rule-num">2</span> Financial Transactions</h2><h3>No-Refund Policy</h3><p>Once funds are deposited into the Yerase Bingo digital wallet, they are considered final. We do not offer refunds on deposits under any circumstances.</p><h3>Withdrawal Security</h3><p>To ensure financial security and prevent fraud, withdrawals can only be processed to the original registered phone account number associated with the player's profile. No third-party transfers are permitted.</p><h2><span class="rule-num">3</span> Account Management and Platform Integrity</h2><h3>Administrative Discretion</h3><p>To maintain a secure and fair environment for all users, Yerase Bingo reserves the right to manage the platform's operations at its sole discretion. This includes, but is not limited to, the right to:</p><ul><li>Modify or adjust platform features to ensure game balance.</li><li>Restrict or suspend accounts suspected of violating fair play.</li><li>Limit withdrawal or deposit functionalities during audits or system maintenance.</li></ul><h3>Finality of Decisions</h3><p>The company reserves these rights to protect the integrity of the game and may exercise them without prior notice when deemed necessary for platform security.</p><h2><span class="rule-num">4</span> General Betting (Bingo) Rules</h2><h3>Age Requirement</h3><p>Players must be 21 years of age or older (or the legal gambling age in their jurisdiction).</p><h3>Prohibited Conduct</h3><p>Any use of "bots," external software, or exploitation of system glitches to gain an advantage is strictly prohibited and will lead to an immediate permanent ban.</p><h3>Responsible Gaming</h3><p>We encourage all players to play responsibly. If you feel your gaming habits are becoming problematic, please seek professional assistance.</p>`;
+  return `<h1>Terms & Conditions</h1><h1 class="sub">Yerase Bingo</h1><p style="text-align:center; color:var(--muted); font-size:12px; margin-bottom:16px;"><i class="fa-solid fa-scale-balanced" style="color:var(--gold); margin-right:4px;"></i>Legal · Official Rules</p><p>Welcome to Yerase Bingo. By accessing or using our platform, you agree to be bound by the following Terms and Conditions. Please read them carefully.</p><h2><span class="rule-num">1</span> Nature of the Game and Fair Play</h2><h3>Purely Luck-Based</h3><p>Yerase Bingo is a game of chance. All outcomes are generated randomly.</p><h3>Entertainment Purpose</h3><p>This platform is intended for entertainment purposes only. Participants should only play with funds they can afford to lose.</p><h2><span class="rule-num">2</span> Financial Transactions</h2><h3>No-Refund Policy</h3><p>Once funds are deposited into the Yerase Bingo digital wallet, they are considered final. We do not offer refunds on deposits under any circumstances.</p><h3>Withdrawal Security</h3><p>To ensure financial security and prevent fraud, withdrawals can only be processed to the original registered phone account number associated with the player's profile. No third-party transfers are permitted.</p><h2><span class="rule-num">3</span> Account Management and Platform Integrity</h2><h3>Administrative Discretion</h3><p>To maintain a secure and fair environment for all users, Yerase Bingo reserves the right to manage the platform's operations at its sole discretion. This includes, but is not limited to, the right to:</p><ul><li>Modify or adjust platform features to ensure game balance.</li><li>Restrict or suspend accounts suspected of violating fair play.</li><li>Limit withdrawal or deposit functionalities during audits or system maintenance.</li></ul><h3>Finality of Decisions</h3><p>The company reserves these rights to protect the integrity of the game and may exercise them without prior notice when deemed necessary for platform security.</p><h2><span class="rule-num">4</span> General Betting (Bingo) Rules</h2><h3>Age Requirement</h3><p>Players must be 21 years of age or older (or the legal gambling age in their jurisdiction).</p><h3>Prohibited Conduct</h3><p>Any use of "bots," external software, or exploitation of system glitches to gain an advantage is strictly prohibited and will lead to an immediate permanent ban.</p><h3>Responsible Gaming</h3><p>We encourage all players to play responsibly. If you feel your gaming habits are becoming problematic, please seek professional assistance.</p>`;
 }
 
 function getTermsAm() {
-  return `<h1>ደንቦች እና ግዴታዎች</h1><h1 class="sub">የራሴ ቢንጎ</h1><p style="text-align:center; color:var(--muted); font-size:12px; margin-bottom:16px;">⚖️ ሕጋዊ · ኦፊሴላዊ ደንቦች</p><p>እንኳን ወደ የራሴ ቢንጎ በደህና መጡ። የእኛን የመጫወቻ መድረክ ሲጠቀሙ የሚከተሉትን ደንቦች እና ግዴታዎች ለማክበር ተስማምተዋል። እባክዎን በጥንቃቄ ያንብቡ።</p><h2><span class="rule-num">1</span> የጨዋታው ባህሪ</h2><h3>በዕድል ላይ የተመሰረተ</h3><p>የራሴ ቢንጎ ሙሉ በሙሉ በዕድል ላይ የተመሰረተ ጨዋታ ነው።</p><h3>ለመዝናኛ ብቻ</h3><p>ይህ መድረክ የተዘጋጀው ለመዝናኛ ብቻ ነው። ተጫዋቾች ሊያጡት የሚችሉትን ገንዘብ ብቻ በመጠቀም እንዲጫወቱ ይመከራል።</p><h2><span class="rule-num">2</span> የገንዘብ ዝውውር</h2><h3>ተመላሽ የማይደረግ ክፍያ</h3><p>አንዴ ወደ የራሴ ቢንጎ የኪስ ቦርሳ ገቢ የተደረገ ገንዘብ በማንኛውም ሁኔታ ተመላሽ አይደረግም።</p><h3>የገንዘብ ወጪ</h3><p>ለደህንነት ሲባል፣ ተጫዋቾች ገንዘብ ወጪ ማድረግ የሚችሉት በተመዘገቡበት የስልክ ቁጥር ብቻ ነው። ወደ ሌላ ሰው ወይም ያልተመዘገበ ቁጥር ገንዘብ ማስተላለፍ አይቻልም።</p><h2><span class="rule-num">3</span> የመድረኩ መብቶች እና ደህንነት</h2><h3>የአስተዳደር ውሳኔዎች</h3><p>የራሴ ቢንጎ ለመድረኩ ደህንነት እና ለተጫዋቾች እኩልነት ሲባል በማንኛውም ጊዜ አስፈላጊ የሆኑ የአስተዳደር እርምጃዎችን የመውሰድ ሙሉ መብቱ የተጠበቀ ነው። ይህም የሚከተሉትን ሊያካትት ይችላል፦</p><ul><li>የጨዋታውን ሚዛን ለመጠበቅ አስፈላጊ የሆኑ ማሻሻያዎችን ማድረግ。</li><li>ከደንብ ውጭ የሚንቀሳቀሱ ተጫዋቾችን ማገድ ወይም መገደብ።</li><li>ለጥገና ወይም ለደህንነት ፍተሻ ሲባል የገንዘብ ዝውውሮችን ለጊዜው ማቆም ወይም መገደብ።</li></ul><h3>ማሳሰቢያ</h3><p>ኩባንያው እነዚህን እርምጃዎች የሚወስደው የመድረኩን ትክክለኛነት ለመጠበቅ ሲሆን፣ እንደ አስፈላጊነቱ ያለ ቅድመ ማስታወቂያ ሊተገበሩ ይችላሉ።</p><h2><span class="rule-num">4</span> ጠቅላላ ደንቦች</h2><h3>የዕድሜ ገደብ</h3><p>ተጫዋቾች ዕድሜያቸው 21 ዓመት እና ከዚያ በላይ መሆን አለበት።</p><h3>የተከለከሉ ተግባራት</h3><p>በአውቶማቲክ ሶፍትዌር መጠቀም ወይም የመድረኩን የቴክኒክ ክፍተቶች ለራስ ጥቅም ለማዋል መሞከር በጥብቅ የተከለከለ ነው፤ ይህን የሚያደርጉ ተጫዋቾችም ወዲያውኑ ይታገዳሉ።</p><h3>ኃላፊነት የተሞላበት ጨዋታ</h3><p>ተጫዋቾች በኃላፊነት ስሜት እንዲጫወቱ እናበረታታለን።</p>`;
+  return `<h1>ደንቦች እና ግዴታዎች</h1><h1 class="sub">የራሴ ቢንጎ</h1><p style="text-align:center; color:var(--muted); font-size:12px; margin-bottom:16px;"><i class="fa-solid fa-scale-balanced" style="color:var(--gold); margin-right:4px;"></i>ሕጋዊ · ኦፊሴላዊ ደንቦች</p><p>እንኳን ወደ የራሴ ቢንጎ በደህና መጡ። የእኛን የመጫወቻ መድረክ ሲጠቀሙ የሚከተሉትን ደንቦች እና ግዴታዎች ለማክበር ተስማምተዋል። እባክዎን በጥንቃቄ ያንብቡ።</p><h2><span class="rule-num">1</span> የጨዋታው ባህሪ</h2><h3>በዕድል ላይ የተመሰረተ</h3><p>የራሴ ቢንጎ ሙሉ በሙሉ በዕድል ላይ የተመሰረተ ጨዋታ ነው።</p><h3>ለመዝናኛ ብቻ</h3><p>ይህ መድረክ የተዘጋጀው ለመዝናኛ ብቻ ነው። ተጫዋቾች ሊያጡት የሚችሉትን ገንዘብ ብቻ በመጠቀም እንዲጫወቱ ይመከራል።</p><h2><span class="rule-num">2</span> የገንዘብ ዝውውር</h2><h3>ተመላሽ የማይደረግ ክፍያ</h3><p>አንዴ ወደ የራሴ ቢንጎ የኪስ ቦርሳ ገቢ የተደረገ ገንዘብ በማንኛውም ሁኔታ ተመላሽ አይደረግም።</p><h3>የገንዘብ ወጪ</h3><p>ለደህንነት ሲባል፣ ተጫዋቾች ገንዘብ ወጪ ማድረግ የሚችሉት በተመዘገቡበት የስልክ ቁጥር ብቻ ነው። ወደ ሌላ ሰው ወይም ያልተመዘገበ ቁጥር ገንዘብ ማስተላለፍ አይቻልም።</p><h2><span class="rule-num">3</span> የመድረኩ መብቶች እና ደህንነት</h2><h3>የአስተዳደር ውሳኔዎች</h3><p>የራሴ ቢንጎ ለመድረኩ ደህንነት እና ለተጫዋቾች እኩልነት ሲባል በማንኛውም ጊዜ አስፈላጊ የሆኑ የአስተዳደር እርምጃዎችን የመውሰድ ሙሉ መብቱ የተጠበቀ ነው። ይህም የሚከተሉትን ሊያካትት ይችላል፦</p><ul><li>የጨዋታውን ሚዛን ለመጠበቅ አስፈላጊ የሆኑ ማሻሻያዎችን ማድረግ。</li><li>ከደንብ ውጭ የሚንቀሳቀሱ ተጫዋቾችን ማገድ ወይም መገደብ።</li><li>ለጥገና ወይም ለደህንነት ፍተሻ ሲባል የገንዘብ ዝውውሮችን ለጊዜው ማቆም ወይም መገደብ።</li></ul><h3>ማሳሰቢያ</h3><p>ኩባንያው እነዚህን እርምጃዎች የሚወስደው የመድረኩን ትክክለኛነት ለመጠበቅ ሲሆን፣ እንደ አስፈላጊነቱ ያለ ቅድመ ማስታወቂያ ሊተገበሩ ይችላሉ።</p><h2><span class="rule-num">4</span> ጠቅላላ ደንቦች</h2><h3>የዕድሜ ገደብ</h3><p>ተጫዋቾች ዕድሜያቸው 21 ዓመት እና ከዚያ በላይ መሆን አለበት።</p><h3>የተከለከሉ ተግባራት</h3><p>በአውቶማቲክ ሶፍትዌር መጠቀም ወይም የመድረኩን የቴክኒክ ክፍተቶች ለራስ ጥቅም ለማዋል መሞከር በጥብቅ የተከለከለ ነው፤ ይህን የሚያደርጉ ተጫዋቾችም ወዲያውኑ ይታገዳሉ።</p><h3>ኃላፊነት የተሞላበት ጨዋታ</h3><p>ተጫዋቾች በኃላፊነት ስሜት እንዲጫወቱ እናበረታታለን።</p>`;
+}
+
+
+function renderPatternCard(activeCells) {
+  var letters = ['B', 'I', 'N', 'G', 'O'];
+  var h = '<div class="pattern-mini-card">';
+  h += '<div class="pmc-head">' + letters.map(function(l){ return '<span class="pmc-h">' + l + '</span>'; }).join('') + '</div>';
+  h += '<div class="pmc-grid">';
+  for (var i = 0; i < 25; i++) {
+    var isCenter = (i === 12);
+    var isHit = activeCells.includes(i);
+    var cls = isCenter ? 'pmc-cell pmc-center' : (isHit ? 'pmc-cell pmc-hit' : 'pmc-cell');
+    var txt = isCenter ? '<i class="fa-solid fa-star" style="font-size:7px;"></i>' : (isHit ? '<i class="fa-solid fa-check" style="font-size:8px;"></i>' : '');
+    h += '<span class="' + cls + '">' + txt + '</span>';
+  }
+  h += '</div></div>';
+  return h;
 }
 
 function getInfoEn() {
   return `
-<div class="rules-support">☎️ <strong>Support</strong><br>If you have any problems, contact <a href="https://t.me/one_day_82" target="_blank">@one_day_82</a></div>
-<h2>🎮 How to Play</h2>
+<div class="rules-support"><i class="fa-solid fa-headset" style="color:var(--gold); margin-right:4px;"></i> <strong>Support</strong><br>If you have any questions, contact <a href="https://t.me/one_day_82" target="_blank">@one_day_82</a></div>
+<h2><i class="fa-solid fa-gamepad" style="color:var(--gold); margin-right:6px;"></i> How to Play</h2>
 <p><span class="rule-num">1</span> Choose your stake (10 or 20 Birr)</p>
 <p><span class="rule-num">2</span> Select up to 2 Bingo cards before countdown ends</p>
 <p><span class="rule-num">3</span> Follow called numbers and mark matching squares on your card</p>
 <p><span class="rule-num">4</span> Complete any line or 4 corners to claim BINGO</p>
 <p style="color:var(--green); margin-top:8px;">With Automatic Daub on, matching numbers are marked for you automatically!</p>
-<h2>🏆 Winning Patterns</h2>
-<span class="pattern-label">Any row ⥨</span>
-<div class="pattern-box">🟢 🟡 🟠 🔴 🟣
-🟩 🟩 🟩 🟩 🟩
-⬜ ⬜ ⬜ ⬜ ⬜
-⬜ ⬜ ❎ ⬜ ⬜
-⬜ ⬜ ⬜ ⬜ ⬜
-⬜ ⬜ ⬜ ⬜ ⬜</div>
-<span class="pattern-label">Any column ⥯</span>
-<div class="pattern-box">🟢 🟡 🟠 🔴 🟣
-🟩 ⬜ ⬜ ⬜ ⬜
-🟩 ⬜ ⬜ ⬜ ⬜
-🟩 ⬜ ❎ ⬜ ⬜
-🟩 ⬜ ⬜ ⬜ ⬜
-🟩 ⬜ ⬜ ⬜ ⬜</div>
-<span class="pattern-label">Any diagonal ⤢⤡</span>
-<div class="pattern-box">🟢 🟡 🟠 🔴 🟣
-🟩 ⬜ ⬜ ⬜ ⬜
-⬜ 🟩 ⬜ ⬜ ⬜
-⬜ ⬜ ❎ ⬜ ⬜
-⬜ ⬜ ⬜ 🟩 ⬜
-⬜ ⬜ ⬜ ⬜ 🟩</div>
-<div class="pattern-box">🟢 🟡 🟠 🔴 🟣
-⬜ ⬜ ⬜ ⬜ 🟩
-⬜ ⬜ ⬜ 🟩 ⬜
-⬜ ⬜ ❎ ⬜ ⬜
-⬜ 🟩 ⬜ ⬜ ⬜
-🟩 ⬜ ⬜ ⬜ ⬜</div>
-<span class="pattern-label">Four corners ⸬</span>
-<div class="pattern-box">🟢 🟡 🟠 🔴 🟣
-🟩 ⬜ ⬜ ⬜ 🟩
-⬜ ⬜ ⬜ ⬜ ⬜
-⬜ ⬜ ❎ ⬜ ⬜
-⬜ ⬜ ⬜ ⬜ ⬜
-🟩 ⬜ ⬜ ⬜ 🟩</div>
-<h2>💰 Bot Commands</h2>
+<h2><i class="fa-solid fa-trophy" style="color:var(--gold); margin-right:6px;"></i> Winning Patterns</h2>
+<span class="pattern-label">Any row</span>
+${renderPatternCard([0,1,2,3,4])}
+<span class="pattern-label">Any column</span>
+${renderPatternCard([0,5,10,15,20])}
+<span class="pattern-label">Diagonal 1</span>
+${renderPatternCard([0,6,12,18,24])}
+<span class="pattern-label">Diagonal 2</span>
+${renderPatternCard([4,8,12,16,20])}
+<span class="pattern-label">Four corners</span>
+${renderPatternCard([0,4,20,24])}
+<h2><i class="fa-solid fa-terminal" style="color:var(--gold); margin-right:6px;"></i> Bot Commands</h2>
 <div class="rules-cmd"><code>/start</code> <span>Main menu</span></div>
 <div class="rules-cmd"><code>/lang</code> <span>Change language</span></div>
 <div class="rules-cmd"><code>/play</code> <span>Open Game</span></div>
@@ -4029,58 +4312,32 @@ function getInfoEn() {
 <div class="rules-cmd"><code>/profile</code> <span>Player profile</span></div>
 <div class="rules-cmd"><code>/support</code> <span>Support representative</span></div>
 <div class="rules-cmd"><code>/invite</code> <span>Invite friends</span></div>
-<div class="rules-cmd"><code>/agent</code> <span>Agent panel</span></div>
-<div class="rules-cmd"><code>/transfer</code> <span>Transfer balance</span></div>
 <div class="rules-cmd"><code>/info</code> <span>Rules and guide</span></div>
-<p style="text-align:center; margin-top:20px; font-size:14px; color:var(--yellow); font-weight:700;">Good luck! 🍀</p>
+<p style="text-align:center; margin-top:20px; font-size:14px; color:var(--yellow); font-weight:700;">Good luck!</p>
   `;
 }
 
 function getInfoAm() {
   return `
-<div class="rules-support">☎️ <strong>የደንበኞች ድጋፍ</strong><br>ችግር ካጋጠመዎት <a href="https://t.me/one_day_82" target="_blank">@one_day_82</a> ን ያግኙ</div>
-<h2>🎮 እንዴት እንደሚጫወቱ</h2>
+<div class="rules-support"><i class="fa-solid fa-headset" style="color:var(--gold); margin-right:4px;"></i> <strong>የደንበኞች ድጋፍ</strong><br>ችግር ካጋጠመዎት <a href="https://t.me/one_day_82" target="_blank">@one_day_82</a> ን ያግኙ</div>
+<h2><i class="fa-solid fa-gamepad" style="color:var(--gold); margin-right:6px;"></i> እንዴት እንደሚጫወቱ</h2>
 <p><span class="rule-num">1</span> የመደብ ክፍል ይምረጡ (የ10 ወይም 20 ብር)</p>
 <p><span class="rule-num">2</span> ቆጣሪው ከማለቁ በፊት እስከ 2 የቢንጎ ካርቴላዎችን ይቁረጡ</p>
 <p><span class="rule-num">3</span> ቁጥሮች ሲጠሩ እየተከታተሉ ካርቴላዎ ውስጥ ካሉ ያድምቁ</p>
 <p><span class="rule-num">4</span> ማንኛውንም መስመር ወይም 4 ማዕዘን ሲሞሉ "ቢንጎ" ይበሉ</p>
 <p style="color:var(--green); margin-top:8px;">አውቶማቲክ ካበሩ 3 እና 4ን ማድረግ አይጠበቅብዎትም፤ በራሱ ያደምቅልዎታል!</p>
-<h2>🏆 የማሸነፊያ ንድፎች</h2>
-<span class="pattern-label">ማንኛውንም ረድፍ ⥨</span>
-<div class="pattern-box">🟢 🟡 🟠 🔴 🟣
-🟩 🟩 🟩 🟩 🟩
-⬜ ⬜ ⬜ ⬜ ⬜
-⬜ ⬜ ❎ ⬜ ⬜
-⬜ ⬜ ⬜ ⬜ ⬜
-⬜ ⬜ ⬜ ⬜ ⬜</div>
-<span class="pattern-label">ማንኛውንም አምድ ⥯</span>
-<div class="pattern-box">🟢 🟡 🟠 🔴 🟣
-🟩 ⬜ ⬜ ⬜ ⬜
-🟩 ⬜ ⬜ ⬜ ⬜
-🟩 ⬜ ❎ ⬜ ⬜
-🟩 ⬜ ⬜ ⬜ ⬜
-🟩 ⬜ ⬜ ⬜ ⬜</div>
-<span class="pattern-label">ማንኛውንም ሰያፍ ⤢⤡</span>
-<div class="pattern-box">🟢 🟡 🟠 🔴 🟣
-🟩 ⬜ ⬜ ⬜ ⬜
-⬜ 🟩 ⬜ ⬜ ⬜
-⬜ ⬜ ❎ ⬜ ⬜
-⬜ ⬜ ⬜ 🟩 ⬜
-⬜ ⬜ ⬜ ⬜ 🟩</div>
-<div class="pattern-box">🟢 🟡 🟠 🔴 🟣
-⬜ ⬜ ⬜ ⬜ 🟩
-⬜ ⬜ ⬜ 🟩 ⬜
-⬜ ⬜ ❎ ⬜ ⬜
-⬜ 🟩 ⬜ ⬜ ⬜
-🟩 ⬜ ⬜ ⬜ ⬜</div>
-<span class="pattern-label">አራቱንም ማዕዘናት ⸬</span>
-<div class="pattern-box">🟢 🟡 🟠 🔴 🟣
-🟩 ⬜ ⬜ ⬜ 🟩
-⬜ ⬜ ⬜ ⬜ ⬜
-⬜ ⬜ ❎ ⬜ ⬜
-⬜ ⬜ ⬜ ⬜ ⬜
-🟩 ⬜ ⬜ ⬜ 🟩</div>
-<h2>💰 የቦት ትእዛዞች</h2>
+<h2><i class="fa-solid fa-trophy" style="color:var(--gold); margin-right:6px;"></i> የማሸነፊያ ንድፎች</h2>
+<span class="pattern-label">ማንኛውንም ረድፍ</span>
+${renderPatternCard([0,1,2,3,4])}
+<span class="pattern-label">ማንኛውንም አምድ</span>
+${renderPatternCard([0,5,10,15,20])}
+<span class="pattern-label">ሰያፍ መስመር 1</span>
+${renderPatternCard([0,6,12,18,24])}
+<span class="pattern-label">ሰያፍ መስመር 2</span>
+${renderPatternCard([4,8,12,16,20])}
+<span class="pattern-label">አራቱንም ማዕዘናት</span>
+${renderPatternCard([0,4,20,24])}
+<h2><i class="fa-solid fa-terminal" style="color:var(--gold); margin-right:6px;"></i> የቦት ትእዛዞች</h2>
 <div class="rules-cmd"><code>/start</code> <span>ዋና ማውጫ</span></div>
 <div class="rules-cmd"><code>/lang</code> <span>ቋንቋ ይቀይሩ</span></div>
 <div class="rules-cmd"><code>/play</code> <span>ይጫወቱ</span></div>
@@ -4091,10 +4348,8 @@ function getInfoAm() {
 <div class="rules-cmd"><code>/profile</code> <span>የተጫዋች መገለጫ</span></div>
 <div class="rules-cmd"><code>/support</code> <span>የድጋፍ አገልግሎት</span></div>
 <div class="rules-cmd"><code>/invite</code> <span>ጓደኛ ይጋብዙ</span></div>
-<div class="rules-cmd"><code>/agent</code> <span>የወኪል ገጽ</span></div>
-<div class="rules-cmd"><code>/transfer</code> <span>ብር ያስተላልፉ</span></div>
-<div class="rules-cmd"><code>/info</code> <span>ህጎች እና መመሪያ</span></div>
-<p style="text-align:center; margin-top:20px; font-size:14px; color:var(--yellow); font-weight:700;">መልካም ዕድል ይገጥምዎ! 🍀</p>
+<div class="rules-cmd"><code>/info</code> <span>ደንቦችና መመሪያዎች</span></div>
+<p style="text-align:center; margin-top:20px; font-size:14px; color:var(--yellow); font-weight:700;">መልካም ዕድል ይገጥምዎ!</p>
   `;
 }
 
@@ -4581,7 +4836,7 @@ function fallbackCopyText(text) {
 function copyReferralLink() {
   if (soundOn) sfx.playClick();
   if (!tgUserId) {
-    var refLoginAlert = (currentRulesLang === 'am') ? '⚠️ የሪፈራል ሊንክዎን ለማግኘት እባክዎ መጀመሪያ ይግቡ።' : '⚠️ Please login first to copy your referral link.';
+    var refLoginAlert = (currentRulesLang === 'am') ? 'የሪፈራል ሊንክዎን ለማግኘት እባክዎ መጀመሪያ ይግቡ።' : 'Please login first to copy your referral link.';
     if (apiAvailable) Telegram.WebApp.showAlert(refLoginAlert); else alert(refLoginAlert); return;
 
     return;
@@ -4589,14 +4844,14 @@ function copyReferralLink() {
   var link = 'https://t.me/YeraseBingoBot?start=' + tgUserId;
   if (navigator.clipboard && navigator.clipboard.writeText) {
     navigator.clipboard.writeText(link).then(function() {
-      showToast(currentRulesLang === 'am' ? 'የሪፈራል ሊንኩ ተገልብጧል! ኮሚሽን ለማግኘት ለጓደኞችዎ ያጋሩ! 🎉' : 'Referral link copied! Share with friends to earn commission. 🎉');
+      showToast(currentRulesLang === 'am' ? 'የሪፈራል ሊንኩ ተገልብጧል! ኮሚሽን ለማግኘት ለጓደኞችዎ ያጋሩ! ' : 'Referral link copied! Share with friends to earn commission. ');
     }).catch(function() {
       fallbackCopyReferralLink(link);
-      showToast(currentRulesLang === 'am' ? 'የሪፈራል ሊንኩ ተገልብጧል! ኮሚሽን ለማግኘት ለጓደኞችዎ ያጋሩ! 🎉' : 'Referral link copied! Share with friends to earn commission. 🎉');
+      showToast(currentRulesLang === 'am' ? 'የሪፈራል ሊንኩ ተገልብጧል! ኮሚሽን ለማግኘት ለጓደኞችዎ ያጋሩ! ' : 'Referral link copied! Share with friends to earn commission. ');
     });
   } else {
     fallbackCopyReferralLink(link);
-    showToast(currentRulesLang === 'am' ? 'የሪፈራል ሊንኩ ተገልብጧል! ኮሚሽን ለማግኘት ለጓደኞችዎ ያጋሩ! 🎉' : 'Referral link copied! Share with friends to earn commission. 🎉');
+    showToast(currentRulesLang === 'am' ? 'የሪፈራል ሊንኩ ተገልብጧል! ኮሚሽን ለማግኘት ለጓደኞችዎ ያጋሩ! ' : 'Referral link copied! Share with friends to earn commission. ');
   }
 }
 
@@ -4638,63 +4893,70 @@ function closeChangePasswordModal() {
 }
 
 // Client Wallet Request Controls
+function clearDepositErrors() {
+  var amtInput = document.getElementById('dep-req-amount');
+  var smsInput = document.getElementById('dep-req-sms');
+  var amtErr = document.getElementById('dep-amount-error');
+  var smsErr = document.getElementById('dep-sms-error');
+  if (amtInput) amtInput.style.borderColor = 'rgba(255,255,255,0.15)';
+  if (smsInput) smsInput.style.borderColor = 'rgba(255,255,255,0.15)';
+  if (amtErr) { amtErr.textContent = ''; amtErr.style.display = 'none'; }
+  if (smsErr) { smsErr.textContent = ''; smsErr.style.display = 'none'; }
+}
+
 function openClientDepositModal() {
   if (soundOn) sfx.playClick();
-  document.getElementById('dep-req-amount').value = "50";
-  document.getElementById('dep-req-ref').value = "";
-  document.getElementById('client-deposit-modal').classList.add('active');
+  clearDepositErrors();
+  var nav = document.getElementById('bottom-nav');
+  if (nav) nav.style.setProperty('display', 'none', 'important');
+  var amtEl = document.getElementById('dep-req-amount');
+  if (amtEl) amtEl.value = "50";
+  var smsEl = document.getElementById('dep-req-sms');
+  if (smsEl) smsEl.value = "";
+  var modal = document.getElementById('client-deposit-modal');
+  if (modal) modal.classList.add('active');
 }
 
 function closeClientDepositModal() {
   if (soundOn) sfx.playClick();
-  document.getElementById('client-deposit-modal').classList.remove('active');
-}
-
-async function submitClientDeposit() {
-  if (soundOn) sfx.playClick();
-  var amount = parseFloat(document.getElementById('dep-req-amount').value);
-  var ref = document.getElementById('dep-req-ref').value.trim();
-  
-  if (isNaN(amount) || amount < 50) {
-    alert(currentRulesLang === 'am' ? 'ዝቅተኛው የማስገቢያ መጠን 50 ብር ነው።' : 'Minimum deposit request is 50 ETB.');
-    return;
-  }
-  if (!ref) {
-    alert(currentRulesLang === 'am' ? 'እባክዎ የከፈሉበትን ስልክ ቁጥር ያስገቡ።' : 'Please enter your payment reference phone number.');
-    return;
-  }
-  
-  try {
-    var res = await fetch(API_BASE + '/api/client/deposit', {
-      method: 'POST',
-      headers: apiHeaders,
-      body: JSON.stringify({ user_id: tgUserId, amount: amount, ref_phone: ref })
-    });
-    var data = await res.json();
-    if (data.success) {
-      alert(currentRulesLang === 'am' ? 'የማስገቢያ ጥያቄዎ በተሳካ ሁኔታ ተልኳል! በቅርቡ ይረጋገጣል።' : 'Deposit request submitted successfully! Pending approval.');
-      closeClientDepositModal();
-      fetchTransactions().then(renderTransactions);
-    } else {
-      alert(data.error || 'Failed to submit deposit request.');
-    }
-  } catch (err) {
-    alert('Server connection error. Please try again.');
+  clearDepositErrors();
+  var modal = document.getElementById('client-deposit-modal');
+  if (modal) modal.classList.remove('active');
+  var nav = document.getElementById('bottom-nav');
+  if (nav && !document.body.classList.contains('in-room-mode')) {
+    nav.style.setProperty('display', 'flex', 'important');
   }
 }
 
 function openClientWithdrawModal() {
   if (soundOn) sfx.playClick();
-  document.getElementById('with-req-amount').value = "150";
-  document.getElementById('with-req-phone').value = "";
+  var nav = document.getElementById('bottom-nav');
+  if (nav) nav.style.setProperty('display', 'none', 'important');
+  var amtEl = document.getElementById('with-req-amount');
+  if (amtEl) amtEl.value = "150";
+  var phoneEl = document.getElementById('with-req-phone');
+  if (phoneEl) phoneEl.value = "";
   updateWageringUI();
-  document.getElementById('client-withdraw-modal').classList.add('active');
+  var modal = document.getElementById('client-withdraw-modal');
+  if (modal) modal.classList.add('active');
 }
 
 function closeClientWithdrawModal() {
   if (soundOn) sfx.playClick();
-  document.getElementById('client-withdraw-modal').classList.remove('active');
+  var modal = document.getElementById('client-withdraw-modal');
+  if (modal) modal.classList.remove('active');
+  var nav = document.getElementById('bottom-nav');
+  if (nav && !document.body.classList.contains('in-room-mode')) {
+    nav.style.setProperty('display', 'flex', 'important');
+  }
 }
+
+ catch (err) {
+    alert('Server connection error. Please try again.');
+  }
+}
+
+
 
 // Client Configuration Receiver
 async function fetchSystemConfig() {
@@ -4826,7 +5088,7 @@ localStorage.setItem('bingio_onboarding_shown', 'true');
 }
 
 function showVipBenefits() {
-  alert('🏆 YERASE BINGO VIP MEMBER CLUB\n\nVIP players receive:\n1. 2x Win multipliers on random game rounds.\n2. No deposit/withdrawal limits.\n3. Dedicated 24/7 VIP chat support channel.\n\nTo apply, message support @one_day_82 with your User ID.');
+  alert('YERASE BINGO VIP MEMBER CLUB\n\nVIP players receive:\n1. 2x Win multipliers on random game rounds.\n2. No deposit/withdrawal limits.\n3. Dedicated 24/7 VIP chat support channel.\n\nTo apply, message support @one_day_82 with your User ID.');
 }
 
 async function updateUserName(firstName){if(!tgUserId||!firstName||!apiAvailable)return;try{await fetch(API_BASE+'/api/update_name',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({user_id:tgUserId,first_name:firstName,username:tgUser?tgUser.username:''})});}catch(e){}}
@@ -4845,8 +5107,21 @@ var selectedDepositMethod = 'Telebirr';
 function showToast(message, isSuccess) {
   var toast = document.getElementById('yerase-toast');
   var msgEl = document.getElementById('yerase-toast-msg');
+  var iconEl = document.getElementById('yerase-toast-icon');
   if (!toast || !msgEl) return;
-  msgEl.textContent = message;
+
+  // Clean out any unicode emojis
+  var clean = (message || '').replace(/[\u{1F300}-\u{1F9FF}\u{2600}-\u{26FF}\u{2700}-\u{27BF}\u{1F1E0}-\u{1F1FF}\u{1F600}-\u{1F64F}\u{1F680}-\u{1F6FF}]/gu, '').trim();
+  msgEl.textContent = clean;
+
+  if (iconEl) {
+    if (isSuccess) {
+      iconEl.innerHTML = '<i class="fa-solid fa-circle-check" style="color:var(--green); font-size:14px;"></i>';
+    } else {
+      iconEl.innerHTML = '<i class="fa-solid fa-circle-info" style="color:var(--gold); font-size:14px;"></i>';
+    }
+  }
+
   toast.classList.add('show');
   clearTimeout(toast._timeout);
   toast._timeout = setTimeout(function() {
@@ -4938,7 +5213,7 @@ function autoClaimBingo() {
       room: currentRoom
     });
   }
-  showToast('🏆 BINGO! YOU COMPLETED A WINNING LINE!');
+  showToast('BINGO! YOU COMPLETED A WINNING LINE!', true);
 }
 
 function checkWin(ci) {
@@ -4995,7 +5270,7 @@ function claimBingoAction() {
     var winnerName = getUserDisplayName();
     var winCard = (game.cardNums && game.cardNums[0]) ? game.cardNums[0] : 1;
     localRoomManager.declareWinner(winnerName, winCard, 'Line Bingo Claim');
-    showToast(currentRulesLang === 'am' ? '🏆 ቢንጎ! እንኳን ደስ አለዎት!' : '🏆 BINGO CLAIMED! CONGRATULATIONS!');
+    showToast(currentRulesLang === 'am' ? 'ቢንጎ! እንኳን ደስ አለዎት!' : 'BINGO CLAIMED! CONGRATULATIONS!', true);
   } else {
     // Check how close
     showToast(currentRulesLang === 'am' ? 'ገና አልሞላም! ቁጥሮችን ማድመቅዎን ይቀጥሉ።' : 'Keep daubing numbers! Bingo line not completed yet.');
@@ -5079,7 +5354,7 @@ async function submitClientDeposit() {
   var sms = document.getElementById('dep-req-sms') ? document.getElementById('dep-req-sms').value.trim() : '';
   
   if (isNaN(amount) || amount < 50) {
-    showToast('⚠️ Minimum deposit request is 50 ETB.');
+    showToast('Minimum deposit request is 50 ETB.');
     return;
   }
   
@@ -5101,16 +5376,16 @@ async function submitClientDeposit() {
       updateBalanceDisplay();
       if (soundOn) sfx.playWin();
       closeClientDepositModal();
-      showToast(currentRulesLang === 'am' ? ('🎉 የ ' + amount + ' ብር ተቀማጭዎ ገቢ ሆኗል!') : ('🎉 Deposit of ' + amount + ' ETB credited successfully!'), true);
+      showToast(currentRulesLang === 'am' ? ('የ ' + amount + ' ብር ተቀማጭዎ ገቢ ሆኗል!') : ('Deposit of ' + amount + ' ETB credited successfully!'), true);
       if (typeof Telegram !== 'undefined' && Telegram.WebApp && Telegram.WebApp.showAlert) {
         var depApprovedMsg = (currentRulesLang === 'am') 
-      ? ('✅ ተቀማጭዎ ጸድቋል! ' + amount + ' ብር ወደ ሂሳብዎ ገቢ ሆኗል።') 
-      : ('✅ Deposit Approved! ' + amount + ' ETB has been credited to your wallet.');
+      ? ('ተቀማጭዎ ጸድቋል! ' + amount + ' ብር ወደ ሂሳብዎ ገቢ ሆኗል።') 
+      : ('Deposit Approved! ' + amount + ' ETB has been credited to your wallet.');
     Telegram.WebApp.showAlert(depApprovedMsg);
       }
       loadWallet();
     } else {
-      showToast('⚠️ ' + (data.error || 'Deposit failed'));
+      showToast('' + (data.error || 'Deposit failed'));
     }
   } catch (e) {
     console.error('Deposit error:', e);
@@ -5118,7 +5393,7 @@ async function submitClientDeposit() {
     updateBalanceDisplay();
     if (soundOn) sfx.playWin();
     closeClientDepositModal();
-    showToast(currentRulesLang === 'am' ? ('🎉 የ ' + amount + ' ብር ተቀማጭዎ ገቢ ሆኗል!') : ('🎉 Deposit of ' + amount + ' ETB credited!'), true);
+    showToast(currentRulesLang === 'am' ? ('የ ' + amount + ' ብር ተቀማጭዎ ገቢ ሆኗል!') : ('Deposit of ' + amount + ' ETB credited!'), true);
     loadWallet();
   }
 }
@@ -5130,15 +5405,15 @@ async function submitClientWithdraw() {
   var phone = document.getElementById('with-req-phone').value.trim();
   
   if (isNaN(amount) || amount < 150) {
-    showToast('⚠️ Minimum withdrawal request is 150 ETB.');
+    showToast('Minimum withdrawal request is 150 ETB.');
     return;
   }
   if (!phone) {
-    showToast('⚠️ Please enter receiver phone number.');
+    showToast('Please enter receiver phone number.');
     return;
   }
   if (amount > userMainBalance) {
-    showToast('⚠️ Insufficient withdrawable main balance. (Balance: ' + userMainBalance.toFixed(2) + ' Br)');
+    showToast('Insufficient withdrawable main balance. (Balance: ' + userMainBalance.toFixed(2) + ' Br)');
     return;
   }
   
@@ -5157,23 +5432,23 @@ async function submitClientWithdraw() {
       }
       updateBalanceDisplay();
       closeClientWithdrawModal();
-      showToast(currentRulesLang === 'am' ? ('✅ የ ' + amount + ' ብር የማውጣት ጥያቄዎ ተፈጽሟል!') : ('✅ Withdrawal of ' + amount + ' ETB approved to ' + phone + '!'), true);
+      showToast(currentRulesLang === 'am' ? ('የ ' + amount + ' ብር የማውጣት ጥያቄዎ ተፈጽሟል!') : ('Withdrawal of ' + amount + ' ETB approved to ' + phone + '!'), true);
       if (typeof Telegram !== 'undefined' && Telegram.WebApp && Telegram.WebApp.showAlert) {
         var withApprovedMsg = (currentRulesLang === 'am')
-      ? ('✅ የማውጣት ጥያቄዎ ጸድቋል! ' + amount + ' ብር ወደ ' + phone + ' ተልኳል።')
-      : ('✅ Withdrawal request approved! ' + amount + ' ETB has been sent to ' + phone + '.');
+      ? ('የማውጣት ጥያቄዎ ጸድቋል! ' + amount + ' ብር ወደ ' + phone + ' ተልኳል።')
+      : ('Withdrawal request approved! ' + amount + ' ETB has been sent to ' + phone + '.');
     Telegram.WebApp.showAlert(withApprovedMsg);
       }
       loadWallet();
     } else {
-      showToast('⚠️ ' + (data.error || 'Withdrawal failed'));
+      showToast('' + (data.error || 'Withdrawal failed'));
     }
   } catch (e) {
     console.error('Withdraw error:', e);
     userMainBalance = Math.max(0, userMainBalance - amount);
     updateBalanceDisplay();
     closeClientWithdrawModal();
-    showToast(currentRulesLang === 'am' ? ('✅ የ ' + amount + ' ብር የማውጣት ጥያቄዎ ተልኳል!') : ('✅ Withdrawal of ' + amount + ' ETB submitted!'), true);
+    showToast(currentRulesLang === 'am' ? ('የ ' + amount + ' ብር የማውጣት ጥያቄዎ ተልኳል!') : ('Withdrawal of ' + amount + ' ETB submitted!'), true);
     loadWallet();
   }
 }
@@ -5541,7 +5816,7 @@ function updateWageringUI() {
   }
 
   if (depValEl) {
-    depValEl.textContent = userTotalDeposited.toFixed(0) + ' / 50 Br ' + (userMinDepositMet ? '✅' : '⚠️');
+    depValEl.textContent = userTotalDeposited.toFixed(0) + ' / 50 Br ' + (userMinDepositMet ? '' : '');
     depValEl.style.color = userMinDepositMet ? '#10b981' : '#f59e0b';
   }
 
@@ -5563,7 +5838,7 @@ function updateWageringUI() {
   var modalInfoEl = document.getElementById('modal-wager-info');
   if (modalInfoEl) {
     if (userCanWithdraw) {
-      modalInfoEl.innerHTML = '✅ <strong>All requirements met!</strong> You are eligible to withdraw up to ' + userMainBalance.toFixed(2) + ' ETB.';
+      modalInfoEl.innerHTML = '<strong>All requirements met!</strong> You are eligible to withdraw up to ' + userMainBalance.toFixed(2) + ' ETB.';
       modalInfoEl.style.color = '#10b981';
     } else {
       var msgs = [];
@@ -5909,7 +6184,7 @@ async function loadLeaderboard() {
   rankRows.innerHTML = winners.slice(0, 25).map(function(w, i) {
     var rankNum = i + 1;
     var nc = i === 0 ? 'rank-num gold' : i === 1 ? 'rank-num silver' : i === 2 ? 'rank-num bronze' : 'rank-num';
-    var medal = i === 0 ? '👑 ' : i === 1 ? '🥈 ' : i === 2 ? '🥉 ' : '';
+    var medal = i === 0 ? '<i class="fa-solid fa-crown" style="color:#FCD34D; margin-right:4px;"></i>' : i === 1 ? '<i class="fa-solid fa-medal" style="color:#CBD5E1; margin-right:4px;"></i>' : i === 2 ? '<i class="fa-solid fa-medal" style="color:#D97706; margin-right:4px;"></i>' : '';
     var valAmt = parseFloat(w.amount || w.value || 0);
     var valDisplay = valAmt.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + ' Br';
     var isMe = Boolean(tgUserId && (String(w.userId || w.user_id) === String(tgUserId)));
@@ -6351,7 +6626,7 @@ function renderSelectedCardsPreview() {
 function toggleCard(n) {
   triggerHaptic('selection');
   if (takenCartelas[n] && takenCartelas[n] !== tgUserId) {
-    var takenMsg = (currentRulesLang === 'am') ? '⚠️ ይህ ካርቴላ በሌላ ተጫዋች ቀድሞ ተወስዷል!' : '⚠️ This cartela is already taken by another player!';
+    var takenMsg = (currentRulesLang === 'am') ? 'ይህ ካርቴላ በሌላ ተጫዋች ቀድሞ ተወስዷል!' : 'This cartela is already taken by another player!';
     if (apiAvailable) Telegram.WebApp.showAlert(takenMsg); else alert(takenMsg);
 
     return;
@@ -6397,14 +6672,14 @@ function toggleCard(n) {
   } else {
     // SELECT / INSTANT BUY TICKET
     if (selCards.size >= 2) {
-      var maxMsg = (currentRulesLang === 'am') ? '⚠️ በአንድ ጊዜ እስከ 2 ካርቴላ ብቻ መምረጥ ይቻላል!' : '⚠️ Maximum 2 cards allowed per player!';
+      var maxMsg = (currentRulesLang === 'am') ? 'በአንድ ጊዜ እስከ 2 ካርቴላ ብቻ መምረጥ ይቻላል!' : 'Maximum 2 cards allowed per player!';
       if (apiAvailable) Telegram.WebApp.showAlert(maxMsg); else alert(maxMsg);
 
       return;
     }
     var totalAvail = userPlayBalance + userMainBalance;
     if (totalAvail < currentStake) {
-      var noBalMsg = (currentRulesLang === 'am') ? '⚠️ በቂ ሂሳብ የለም! እባክዎ ብር ያስገቡ።' : '⚠️ Insufficient balance! Please deposit to buy cartelas.';
+      var noBalMsg = (currentRulesLang === 'am') ? 'በቂ ሂሳብ የለም! እባክዎ ብር ያስገቡ።' : 'Insufficient balance! Please deposit to buy cartelas.';
       if (apiAvailable) Telegram.WebApp.showAlert(noBalMsg); else alert(noBalMsg);
 
       return;
@@ -6602,7 +6877,7 @@ async function startGame(){
     socket.emit('player_ready',{user_id:tgUserId,name:getUserDisplayName(),cards:cardNums,game_id:currentGameId,room:currentRoom});
   }
   showScreen('screen-game');
-  sendBrowserNotification('YERASE BINGO 🎮', 'Your game has started! Good luck! 🍀');
+  sendBrowserNotification('YERASE BINGO <i class="fa-solid fa-gamepad" style="color:var(--gold); margin-right:4px;"></i>', 'Your game has started! Good luck! ');
   renderNumGrid();
   renderRecentBalls();
   renderAllCards();
@@ -6791,7 +7066,7 @@ function finalizeWinner(){
   if(iAmWinner&&game.betDeducted){
     reportWin(prizeEach,game.gameId);
     bingoAudio.playBingo();
-    sendBrowserNotification('YERASE BINGO 🏆', 'CONGRATULATIONS! You won ' + prizeEach + ' Br! 🎉');
+    sendBrowserNotification('YERASE BINGO', 'CONGRATULATIONS! You won ' + prizeEach + ' Br! ');
   } else {
     if (soundOn) sfx.playLoss();
   }
@@ -6804,13 +7079,13 @@ function buildWinnerScreen(totalPrize,prizeEach,winnerCount,realPlayers){
   if(winnerCount>1){
     titleEl.textContent=isAm ? (winnerCount+' ተጫዋቾች አሸንፈዋል') : (winnerCount+' PLAYERS WON');
   }else{
-    titleEl.textContent=isAm ? '🎉 ቢንጎ አሸናፊ! 🎉' : 'BINGO! WINNER!';
+    titleEl.textContent=isAm ? 'ቢንጎ አሸናፊ! ' : 'BINGO! WINNER!';
   }
   var namesHtml='';
   if(winnersThisRound.length===0){
-    namesHtml='<div class="winner-name-chip" style="animation-delay: 0s;"><span class="wn-crown">👑</span><span>—</span></div>';
+    namesHtml='<div class="winner-name-chip" style="animation-delay: 0s;"><span class="wn-crown"></span><span>—</span></div>';
   }else{
-    namesHtml=winnersThisRound.map(function(w, idx){return '<div class="winner-name-chip" style="animation-delay: ' + (idx * 0.15) + 's;"><span class="wn-crown">👑</span><span>'+w.name+'</span><span class="wn-card">#'+w.cardNum+'</span></div>';}).join('');
+    namesHtml=winnersThisRound.map(function(w, idx){return '<div class="winner-name-chip" style="animation-delay: ' + (idx * 0.15) + 's;"><span class="wn-crown"></span><span>'+w.name+'</span><span class="wn-card">#'+w.cardNum+'</span></div>';}).join('');
   }
   document.getElementById('winners-names-row').innerHTML=namesHtml;
   setTxt('w-prize',totalPrize);
@@ -6862,9 +7137,9 @@ function showObserverWinner(data){
   if(wc>1){
     titleEl.textContent=isAm ? (wc+' ተጫዋቾች አሸንፈዋል') : (wc+' PLAYERS WON');
   }else{
-    titleEl.textContent=isAm ? '🎉 ቢንጎ አሸናፊ! 🎉' : 'BINGO! WINNER!';
+    titleEl.textContent=isAm ? 'ቢንጎ አሸናፊ! ' : 'BINGO! WINNER!';
   }
-  var namesHtml=winnersThisRound.map(function(w, idx){return '<div class="winner-name-chip" style="animation-delay: ' + (idx * 0.15) + 's;"><span class="wn-crown">👑</span><span>'+w.name+'</span><span class="wn-card">#'+w.cardNum+'</span></div>';}).join('');
+  var namesHtml=winnersThisRound.map(function(w, idx){return '<div class="winner-name-chip" style="animation-delay: ' + (idx * 0.15) + 's;"><span class="wn-crown"></span><span>'+w.name+'</span><span class="wn-card">#'+w.cardNum+'</span></div>';}).join('');
   document.getElementById('winners-names-row').innerHTML=namesHtml;
   
   var totalPrize = data.total_prize || data.prize || game.totalPrize || 0;
@@ -6880,7 +7155,7 @@ function showObserverWinner(data){
   if (iAmWinner) {
     startConfetti();
     var prizeEach = Math.floor(totalPrize/Math.max(wc, 1));
-    sendBrowserNotification('YERASE BINGO 🏆', 'CONGRATULATIONS! You won ' + prizeEach + ' Br! 🎉');
+    sendBrowserNotification('YERASE BINGO', 'CONGRATULATIONS! You won ' + prizeEach + ' Br! ');
   }
   document.querySelectorAll('.nav-btn').forEach(function(b){b.classList.remove('active');});
   document.getElementById('nav-home').classList.add('active');
@@ -6902,7 +7177,7 @@ function shareWinnerResult() {
   triggerShareExplosion();
   
   var prizeText = document.getElementById('w-prize').textContent || '0';
-  var shareText = "🏆 BINGO! I just won a match on Yerase Bingo! 🎉\n💰 Card Prize Pool: " + prizeText + " ETB!\n🇪🇹 Come play the ultimate Ethiopian Bingo game right inside Telegram! Quick deposits, instant payouts, and huge jackpots!\n👉 Start playing now: https://t.me/YeraseBingoBot";
+  var shareText = "BINGO! I just won a match on Yerase Bingo!\nCard Prize Pool: " + prizeText + " ETB!\nCome play the ultimate Ethiopian Bingo game right inside Telegram! Quick deposits, instant payouts, and huge jackpots!\nStart playing now: https://t.me/Yerasegame"; margin-right:4px;"></i>Card Prize Pool: " + prizeText + " ETB!\nCome play the ultimate Ethiopian Bingo game right inside Telegram! Quick deposits, instant payouts, and huge jackpots!\nStart playing now: https://t.me/YeraseBingoBot";
   
   if (navigator.share) {
     navigator.share({
@@ -6922,8 +7197,8 @@ function copyTextToClipboard(text) {
   if (navigator.clipboard && navigator.clipboard.writeText) {
     navigator.clipboard.writeText(text).then(function() {
       showToast((currentRulesLang === 'am')
-      ? 'የአሸናፊነት መረጃው ተገልብጧል! ለጓደኞችዎ ያጋሩ! 🎉'
-      : 'Winner status and invitation link copied to clipboard! Share it with your friends! 🎉');
+      ? 'የአሸናፊነት መረጃው ተገልብጧል! ለጓደኞችዎ ያጋሩ! '
+      : 'Winner status and invitation link copied to clipboard! Share it with your friends! ');
     }).catch(function() {
       fallbackCopyShareText(text);
     });
@@ -6944,8 +7219,8 @@ function fallbackCopyShareText(text) {
   try {
     document.execCommand('copy');
     showToast((currentRulesLang === 'am')
-      ? 'የአሸናፊነት መረጃው ተገልብጧል! ለጓደኞችዎ ያጋሩ! 🎉'
-      : 'Winner status and invitation link copied to clipboard! Share it with your friends! 🎉');
+      ? 'የአሸናፊነት መረጃው ተገልብጧል! ለጓደኞችዎ ያጋሩ! '
+      : 'Winner status and invitation link copied to clipboard! Share it with your friends! ');
   } catch (err) {
     alert('Share text: ' + text);
   }
@@ -6988,10 +7263,10 @@ function startWinnerCountdown(){
   fill.style.transition='none';
   fill.style.width='100%';
   setTimeout(function(){
-    fill.style.transition='width 7s linear';
+    fill.style.transition='width 5s linear';
     fill.style.width='0%';
   },50);
-  var nc=7;
+  var nc=5;
   countEl.textContent=nc;
   var wIv=setInterval(function(){
     nc--;
@@ -7211,7 +7486,7 @@ async function toggleBrowserNotifications() {
         notificationsEnabled = true;
         localStorage.setItem('notificationsEnabled', 'true');
         updateNotifyToggleUI();
-        sendBrowserNotification((currentRulesLang === 'am') ? 'የራሴ ቢንጎ 🔔' : 'YERASE BINGO 🔔', (currentRulesLang === 'am') ? 'የቢንጎ ማሳወቂያዎች በርተዋል!' : 'Notifications enabled successfully!');
+        sendBrowserNotification((currentRulesLang === 'am') ? 'የራሴ ቢንጎ ' : 'YERASE BINGO ', (currentRulesLang === 'am') ? 'የቢንጎ ማሳወቂያዎች በርተዋል!' : 'Notifications enabled successfully!');
       } else {
         alert((currentRulesLang === 'am') ? 'እባክዎ ማሳወቂያ እንዲደርስዎ በአሳሽዎ ወይም ስልክዎ ላይ ይፍቀዱ።' : 'Please enable notifications in your browser/device settings to receive alerts.');
       }
@@ -7416,7 +7691,7 @@ function updateOnboardingStep() {
           <span style="font-size:9px; font-weight:800; opacity:0.8;">B</span>
           <span style="font-size:16px; font-weight:900;">12</span>
         </div>
-        <div class="onboarding-visual-trophy">🏆</div>
+        <div class="onboarding-visual-trophy"><i class="fa-solid fa-trophy" style="font-size:48px; color:var(--gold);"></i></div>
         <div class="onboarding-visual-ball" style="background:var(--yellow); color:#000; box-shadow:0 0 15px var(--yellow);">
           <span style="font-size:9px; font-weight:800; opacity:0.8; color:#000;">O</span>
           <span style="font-size:16px; font-weight:900; color:#000;">75</span>
@@ -7729,8 +8004,8 @@ function handleAutoLogout() {
   doLogout();
   
   var msg = (currentRulesLang === 'am')
-    ? "⚠️ የኪስ ቦርሳዎን እና የጨዋታ ሁኔታዎን ለመጠበቅ ከ10 ደቂቃ በላይ እንቅስቃሴ ባለማድረግዎ ከአካውንት ወጥተዋል።"
-    : "⚠️ You have been logged out due to inactivity for more than 10 minutes to protect your wallet and game state.";
+    ? "የኪስ ቦርሳዎን እና የጨዋታ ሁኔታዎን ለመጠበቅ ከ10 ደቂቃ በላይ እንቅስቃሴ ባለማድረግዎ ከአካውንት ወጥተዋል።"
+    : "You have been logged out due to inactivity for more than 10 minutes to protect your wallet and game state.";
   if (window.Telegram && window.Telegram.WebApp && typeof window.Telegram.WebApp.showAlert === 'function') {
     window.Telegram.WebApp.showAlert(msg);
   } else {

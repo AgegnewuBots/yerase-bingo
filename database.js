@@ -233,15 +233,38 @@ module.exports = {
     user.games_played = (parseInt(user.games_played) || 0) + (parseInt(cardsCount) || 1);
 
     const histId = generateId('hist');
+    const entryAmt = (parseInt(cardsCount) || 1) * (parseFloat(stake) || 10);
     db.game_history[histId] = {
       id: histId,
       user_id: userId,
       game_id: gameId,
       cards_count: cardsCount || 1,
       stake: stake || 10,
+      entry: entryAmt,
+      status: 'Playing',
+      result: '-',
       time: new Date().toISOString()
     };
 
+    saveDB();
+    return histId;
+  },
+
+  // 8b. Complete Game History Record (Win or Failed)
+  async completeGameHistory(gameId, winnerIds = [], prizeEach = 0) {
+    const db = loadDB();
+    const winnersSet = new Set((winnerIds || []).map(String));
+    Object.values(db.game_history || {}).forEach(h => {
+      if (h.game_id === gameId) {
+        if (winnersSet.has(String(h.user_id))) {
+          h.status = 'Win';
+          h.result = '+' + (prizeEach > 0 ? prizeEach : (h.entry * 8)) + ' ETB';
+        } else {
+          h.status = 'Failed';
+          h.result = '-' + h.entry + ' ETB';
+        }
+      }
+    });
     saveDB();
     return true;
   },
@@ -449,6 +472,58 @@ module.exports = {
   async getPendingWithdrawals() {
     const db = loadDB();
     return Object.values(db.transactions).filter(tx => tx.type === 'withdraw' && tx.status === 'Pending');
+  },
+
+  // 20b. Approve Deposit
+  async approveDeposit(txId) {
+    const db = loadDB();
+    const tx = db.transactions[txId] || Object.values(db.transactions).find(t => t.id === txId || t.tx_id === txId);
+    if (!tx) return { success: false, error: 'Transaction not found' };
+    if (tx.status !== 'Completed') {
+      tx.status = 'Completed';
+      const user = await this.getUser(tx.user_id);
+      user.main_balance = Math.round(((parseFloat(user.main_balance) || 0) + (parseFloat(tx.amount) || 0)) * 100) / 100;
+      saveDB();
+      return { success: true, new_balance: user.main_balance };
+    }
+    return { success: true };
+  },
+
+  // 20c. Reject Deposit
+  async rejectDeposit(txId, reason) {
+    const db = loadDB();
+    const tx = db.transactions[txId] || Object.values(db.transactions).find(t => t.id === txId || t.tx_id === txId);
+    if (!tx) return { success: false, error: 'Transaction not found' };
+    tx.status = 'Rejected';
+    tx.reject_reason = reason || 'Declined by admin';
+    saveDB();
+    return { success: true };
+  },
+
+  // 20d. Approve Withdrawal
+  async approveWithdrawal(txId) {
+    const db = loadDB();
+    const tx = db.transactions[txId] || Object.values(db.transactions).find(t => t.id === txId || t.tx_id === txId);
+    if (!tx) return { success: false, error: 'Transaction not found' };
+    tx.status = 'Completed';
+    saveDB();
+    return { success: true };
+  },
+
+  // 20e. Reject Withdrawal (Refunds main balance)
+  async rejectWithdrawal(txId, reason) {
+    const db = loadDB();
+    const tx = db.transactions[txId] || Object.values(db.transactions).find(t => t.id === txId || t.tx_id === txId);
+    if (!tx) return { success: false, error: 'Transaction not found' };
+    if (tx.status !== 'Rejected') {
+      tx.status = 'Rejected';
+      tx.reject_reason = reason || 'Declined by admin';
+      const user = await this.getUser(tx.user_id);
+      user.main_balance = Math.round(((parseFloat(user.main_balance) || 0) + (parseFloat(tx.amount) || 0)) * 100) / 100;
+      saveDB();
+      return { success: true, refunded: tx.amount, new_balance: user.main_balance };
+    }
+    return { success: true };
   },
 
   // 21. System Settings

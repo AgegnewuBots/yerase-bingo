@@ -23,8 +23,8 @@ except ImportError:
     print("  pip install python-telegram-bot")
     sys.exit(0)
 
-# Replace with your Telegram Bot Token from @BotFather
-BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN", "YOUR_TELEGRAM_BOT_TOKEN_HERE")
+# Bot Token from @BotFather for @Yerasegame
+BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN", "9104440496:AAF8C_Q5ohrC-KW7zbKXixVjJiQsMDVr0vs")
 
 # Replace with your deployed WebApp URL
 WEBAPP_URL = os.getenv("BINGO_WEBAPP_URL", "https://yerase-bingo.onrender.com/")
@@ -33,26 +33,26 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     user_name = update.effective_user.first_name if update.effective_user else "ተጫዋች"
     
     welcome_text = (
-        f"🇪🇹 ሰላም {user_name}! እንኳን ወደ **የራሴ ቢንጎ (Yerase Bingo)** በደህና መጡ!\n\n"
-        f"🏆 **የኢትዮጵያ ቀዳሚው ዘመናዊ የቀጥታ ቢንጎ:**\n"
-        f"• የ10 እና 20 ብር ክፍሎች (10 & 20 ETB Cartela Rooms)\n"
-        f"• እስከ 400 ተጫዋቾች በአንድ ዙር (Up to 400 live players)\n"
-        f"• እስከ 8,000 ብር የጃክፖት ሽልማት (Big Pot Prizes)\n"
-        f"• በቴሌብር እና በሲቢኢ ብር ፈጣን ክፍያ (Telebirr & CBE Birr)\n\n"
-        f"ለመጫወት ከታች ያለውን **'Play Yerase Bingo'** ቁልፍ ይጫኑ! 👇"
+        f"ሰላም {user_name}! እንኳን ወደ **የራሴ ቢንጎ (Yerase Bingo)** በደህና መጡ!\n\n"
+        f"**የኢትዮጵያ ቀዳሚው ዘመናዊ የቀጥታ ቢንጎ:**\n"
+        f"• የ10 እና 20 ብር ክፍሎች (10 & 20 ETB Rooms)\n"
+        f"• እስከ 200 ተጫዋቾች በአንድ ዙር\n"
+        f"• በቴሌብር እና በሲቢኢ ፈጣን ክፍያ (Telebirr & CBE)\n"
+        f"• 200 ብር የነፃ መጫወቻ ቦነስ (200 ETB Bonus)\n\n"
+        f"ለመጫወት ከታች ያለውን **'Play Yerase Bingo'** ቁልፍ ይጫኑ! "
     )
 
     keyboard = [
         [
             InlineKeyboardButton(
-                text="🎮 የራሴ ቢንጎ ተጫወት • Play Bingo",
+                text="የራሴ ቢንጎ ተጫወት • Play Bingo",
                 web_app=WebAppInfo(url=WEBAPP_URL)
             )
         ],
         [
             InlineKeyboardButton(
-                text="💬 የቡድን ውይይት (Community Group)",
-                url="https://t.me/"
+                text="የደንበኞች ድጋፍ • Support",
+                url="https://t.me/one_day_82"
             )
         ]
     ]
@@ -61,9 +61,7 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.message.reply_markdown(welcome_text, reply_markup=reply_markup)
 
 def main():
-    if BOT_TOKEN == "YOUR_TELEGRAM_BOT_TOKEN_HERE":
-        print("[!] Note: Set your TELEGRAM_BOT_TOKEN from @BotFather in telegram_bot.py or via environment variable.")
-    print("Starting Yerase Bingo Telegram Bot...")
+    print(f"Starting Yerase Bingo Telegram Bot (@Yerasegame)...")
     app = ApplicationBuilder().token(BOT_TOKEN).build()
     app.add_handler(CommandHandler("start", start))
     app.run_polling()

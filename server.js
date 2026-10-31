@@ -235,6 +235,38 @@ app.get('/api/admin/withdrawals', requireAdmin, async (req, res) => {
   }
 });
 
+app.post('/api/admin/deposits/approve', requireAdmin, async (req, res) => {
+  const { txId, tx_id } = req.body;
+  const targetId = txId || tx_id;
+  if (!targetId) return res.status(400).json({ error: 'Transaction ID is required' });
+  const result = await db.approveDeposit(targetId);
+  res.json(result);
+});
+
+app.post('/api/admin/deposits/reject', requireAdmin, async (req, res) => {
+  const { txId, tx_id, reason } = req.body;
+  const targetId = txId || tx_id;
+  if (!targetId) return res.status(400).json({ error: 'Transaction ID is required' });
+  const result = await db.rejectDeposit(targetId, reason);
+  res.json(result);
+});
+
+app.post('/api/admin/withdrawals/approve', requireAdmin, async (req, res) => {
+  const { txId, tx_id } = req.body;
+  const targetId = txId || tx_id;
+  if (!targetId) return res.status(400).json({ error: 'Transaction ID is required' });
+  const result = await db.approveWithdrawal(targetId);
+  res.json(result);
+});
+
+app.post('/api/admin/withdrawals/reject', requireAdmin, async (req, res) => {
+  const { txId, tx_id, reason } = req.body;
+  const targetId = txId || tx_id;
+  if (!targetId) return res.status(400).json({ error: 'Transaction ID is required' });
+  const result = await db.rejectWithdrawal(targetId, reason);
+  res.json(result);
+});
+
 app.get('/api/admin/transactions', requireAdmin, async (req, res) => {
   try {
     const transactions = await db.getAllTransactions();
@@ -692,9 +724,13 @@ function startBallDrawing(game) {
         game.streaksUpdated = true;
       }
 
+      const winnerIds = (game.winners || []).map(w => w.userId);
+      const prizeEach = winnerIds.length > 0 ? Math.round(totalPrize / winnerIds.length) : totalPrize;
+      db.completeGameHistory(game.gameId, winnerIds, prizeEach);
+
       setTimeout(() => {
         endGame(game);
-      }, 7000);
+      }, 5000);
       return;
     }
   }
@@ -992,6 +1028,10 @@ io.on('connection', (socket) => {
         game.streaksUpdated = true;
       }
 
+      const winnerIds = (game.winners || []).map(w => w.userId);
+      const prizeEach = winnerIds.length > 0 ? Math.round(totalPrize / winnerIds.length) : totalPrize;
+      db.completeGameHistory(game.gameId, winnerIds, prizeEach);
+
       setTimeout(() => {
         endGame(game);
       }, 5000);
@@ -1028,10 +1068,19 @@ io.on('connection', (socket) => {
   });
 });
 
+const telegramBot = require('./telegram_bot');
+
 server.listen(PORT, '0.0.0.0', () => {
   console.log(`====================================================`);
-  console.log(` 🇪🇹 YERASE BINGO SERVER RUNNING ON PORT ${PORT}`);
+  console.log(` YERASE BINGO SERVER RUNNING ON PORT ${PORT}`);
   console.log(` Multi-Room Live Multiplayer & REST API Active`);
   console.log(` http://localhost:${PORT}/`);
   console.log(`====================================================`);
+
+  // Start Telegram Bot listener
+  try {
+    telegramBot.startBot();
+  } catch (err) {
+    console.error('Failed to start Telegram Bot:', err.message);
+  }
 });
