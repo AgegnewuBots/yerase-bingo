@@ -71,9 +71,7 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     inline_markup = InlineKeyboardMarkup(inline_keyboard)
 
     await update.message.reply_markdown(welcome_text, reply_markup=get_main_menu_keyboard())
-    await update.message.reply_text("🎮 ጨዋታውን ለመጀመር ከታች ያለውን ይጫኑ:", reply_markup=inline_markup)
-
-async def handle_contact(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    async def handle_contact(update: Update, context: ContextTypes.DEFAULT_TYPE):
     contact = update.message.contact
     phone = contact.phone_number if contact else ""
     user_name = update.effective_user.first_name if update.effective_user else "ተጫዋች"
@@ -132,7 +130,7 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
             f"ገንዘቡን ካስተላለፉ በኋላ በMini App ውስጥ 'Deposit' ገጽ ላይ የSMS ማረጋገጫ ቁጥር ያስገቡ።"
         )
         markup = InlineKeyboardMarkup([
-            [InlineKeyboardButton("📥 Open Deposit in App", web_app=WebAppInfo(url=WEBAPP_URL))]
+            [InlineKeyboardButton("📥 Open Deposit in App", web_app=WebAppInfo(url=WEBAPP_URL + ("&" if "?" in WEBAPP_URL else "?") + "action=deposit"))]
         ])
         await update.message.reply_markdown(msg, reply_markup=markup)
         return
@@ -149,7 +147,7 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
             f"ያስገቡትን ተቀማጭ 15x አጫውተው ሲያጠናቅቁ ያሸነፉትን ገንዘብ በቀጥታ ወደ ቴሌብር ወይም ንግድ ባንክ ማውጣት ይችላሉ።"
         )
         markup = InlineKeyboardMarkup([
-            [InlineKeyboardButton("📤 Open Withdrawal in App", web_app=WebAppInfo(url=WEBAPP_URL))]
+            [InlineKeyboardButton("📤 Open Withdrawal in App", web_app=WebAppInfo(url=WEBAPP_URL + ("&" if "?" in WEBAPP_URL else "?") + "action=withdraw"))]
         ])
         await update.message.reply_markdown(msg, reply_markup=markup)
         return

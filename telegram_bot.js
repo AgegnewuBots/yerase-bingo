@@ -137,15 +137,7 @@ async function handleUpdate(update) {
       reply_markup: getMainMenuKeyboard()
     });
 
-    await sendApiRequest('sendMessage', {
-      chat_id: chatId,
-      text: `አሁኑኑ የራሴ ቢንጎን ለመጫወት "Play Bingo" ይጫኑ:`,
-      reply_markup: {
-        inline_keyboard: [
-          [{ text: '🎮 የራሴ ቢንጎ ተጫወት • Play Bingo', web_app: { url: WEBAPP_URL } }]
-        ]
-      }
-    });
+
     return;
   }
 
@@ -180,16 +172,6 @@ async function handleUpdate(update) {
       reply_markup: markup
     });
 
-    await sendApiRequest('sendMessage', {
-      chat_id: chatId,
-      text: `🎮 ጨዋታውን ለመጀመር ከታች ያለውን ይጫኑ:`,
-      reply_markup: {
-        inline_keyboard: [
-          [{ text: '🎮 የራሴ ቢንጎ ተጫወት • Play Bingo', web_app: { url: WEBAPP_URL } }],
-          [{ text: '💬 የደንበኞች ድጋፍ • Support', url: 'https://t.me/one_day_82' }]
-        ]
-      }
-    });
     return;
   }
 
@@ -260,7 +242,7 @@ async function handleUpdate(update) {
       parse_mode: 'Markdown',
       reply_markup: {
         inline_keyboard: [
-          [{ text: '📥 Open Deposit in App', web_app: { url: WEBAPP_URL } }]
+          [{ text: '📥 Open Deposit in App', web_app: { url: WEBAPP_URL + (WEBAPP_URL.includes('?') ? '&' : '?') + 'action=deposit' } }]
         ]
       }
     });
@@ -288,7 +270,7 @@ async function handleUpdate(update) {
       parse_mode: 'Markdown',
       reply_markup: {
         inline_keyboard: [
-          [{ text: '📤 Open Withdrawal in App', web_app: { url: WEBAPP_URL } }]
+          [{ text: '📤 Open Withdrawal in App', web_app: { url: WEBAPP_URL + (WEBAPP_URL.includes('?') ? '&' : '?') + 'action=withdraw' } }]
         ]
       }
     });
