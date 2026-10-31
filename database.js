@@ -24,8 +24,9 @@ const defaultData = {
     min_withdraw: 150,
     max_cards: 200,
     min_players: 1,
-    bot_link: 'https://t.me/yerase_bingo_bot',
-    support_link: 'https://t.me/one_day_82'
+    bot_link: 'https://t.me/YerasegameBot',
+    support_link: 'https://t.me/Agegnewu0102',
+    channel_link: 'https://t.me/yerasebingo'
   }
 };
 
@@ -536,7 +537,7 @@ module.exports = {
       if (!referrer.invited_users.includes(newUserId)) {
         referrer.invited_users.push(newUserId);
         referrer.invited = (referrer.invited || 0) + 1;
-        referrer.play_balance = Math.round(((parseFloat(referrer.play_balance) || 0) + 10) * 100) / 100;
+        referrer.play_balance = Math.round(((parseFloat(referrer.play_balance) || 0) + 5) * 100) / 100;
         saveDB();
         return true;
       }

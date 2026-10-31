@@ -1,254 +1,275 @@
 """
-Yerase Bingo (የራሴ ቢንጎ) - Telegram Bot Mini App Launcher & Interactive Service
-Bot Token: 9104440496:AAF8C_Q5ohrC-KW7zbKXixVjJiQsMDVr0vs (@Yerasegame)
-Full functional bot menu: Play, Balance, Deposit, Withdraw, Invite, Profile, Support, Rules
+YERASE BINGO - TELEGRAM BOT POLLING ENGINE (Python Implementation)
+Bot Username: @YerasegameBot
+Official Support: @Agegnewu0102
+Official Channel: @yerasebingo
 """
 
 import os
-import sys
+import logging
+from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup, ReplyKeyboardMarkup, KeyboardButton, WebAppInfo
+from telegram.ext import Application, CommandHandler, MessageHandler, CallbackQueryHandler, filters, ContextTypes
 
-try:
-    from telegram import (
-        Update,
-        InlineKeyboardButton,
-        InlineKeyboardMarkup,
-        KeyboardButton,
-        ReplyKeyboardMarkup,
-        WebAppInfo
-    )
-    from telegram.ext import (
-        ApplicationBuilder,
-        CommandHandler,
-        MessageHandler,
-        ContextTypes,
-        filters
-    )
-except ImportError:
-    print("To run the Telegram Bot, install python-telegram-bot:")
-    print("  pip install python-telegram-bot")
-    sys.exit(0)
+logging.basicConfig(
+    format="%(asctime)s - %(name)s - %(levelname)s - %(message)s", level=logging.INFO
+)
+logger = logging.getLogger(__name__)
 
-# Bot Token from @BotFather for @Yerasegame
 BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN", "9104440496:AAF8C_Q5ohrC-KW7zbKXixVjJiQsMDVr0vs")
-
-# Replace with your deployed WebApp URL
 WEBAPP_URL = os.getenv("BINGO_WEBAPP_URL", "https://yerase-bingo.onrender.com/")
 
 def get_main_menu_keyboard():
-    keyboard = [
-        [KeyboardButton("🎮 Play Bingo", web_app=WebAppInfo(url=WEBAPP_URL))],
-        [KeyboardButton("💰 Balance"), KeyboardButton("📥 Deposit")],
-        [KeyboardButton("📤 Withdraw"), KeyboardButton("👥 Invite")],
-        [KeyboardButton("👤 Profile"), KeyboardButton("📞 Support")],
-        [KeyboardButton("📖 Rules & Info")]
-    ]
-    return ReplyKeyboardMarkup(keyboard, resize_keyboard=True)
+    return ReplyKeyboardMarkup(
+        [
+            [KeyboardButton("🎮 Play Bingo", web_app=WebAppInfo(url=WEBAPP_URL))],
+            [KeyboardButton("💰 Balance"), KeyboardButton("📥 Deposit")],
+            [KeyboardButton("📤 Withdraw"), KeyboardButton("👥 Invite")],
+            [KeyboardButton("👤 Profile"), KeyboardButton("📞 Support")],
+            [KeyboardButton("📖 Rules & Info")]
+        ],
+        resize_keyboard=True,
+        is_persistent=True
+    )
 
 def get_contact_keyboard():
-    keyboard = [
-        [KeyboardButton("📱 ስልክ ቁጥር አጋራ • Share Phone Number", request_contact=True)],
-        [KeyboardButton("🎮 Play Bingo", web_app=WebAppInfo(url=WEBAPP_URL))]
-    ]
-    return ReplyKeyboardMarkup(keyboard, resize_keyboard=True, one_time_keyboard=True)
+    return ReplyKeyboardMarkup(
+        [
+            [KeyboardButton("📱 Share Phone Number", request_contact=True)],
+            [KeyboardButton("🎮 Play Bingo", web_app=WebAppInfo(url=WEBAPP_URL))]
+        ],
+        resize_keyboard=True,
+        one_time_keyboard=True
+    )
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     user = update.effective_user
-    user_name = user.first_name if user else "ተጫዋች"
-    
-    welcome_text = (
-        f"ሰላም {user_name}! እንኳን ወደ **የራሴ ቢንጎ (Yerase Bingo)** በደህና መጡ!\n\n"
-        f"**የኢትዮጵያ ቀዳሚው ዘመናዊ የቀጥታ ቢንጎ:**\n"
-        f"• የ10 እና 20 ብር ክፍሎች (10 & 20 ETB Rooms)\n"
-        f"• በቴሌብር እና በሲቢኢ ፈጣን ክፍያ (Telebirr & CBE)\n"
-        f"• 200 ብር የነፃ መጫወቻ ቦነስ (200 ETB Bonus)\n\n"
-        f"ለመጫወት ወይም አገልግሎቶችን ለማግኘት ከታች ያለውን ማውጫ ይጠቀሙ 👇"
-    )
+    first_name = user.first_name if user else "Player"
+    user_id = str(user.id) if user else "1001"
 
-    inline_keyboard = [
-        [InlineKeyboardButton("🎮 የራሴ ቢንጎ ተጫወት • Play Bingo", web_app=WebAppInfo(url=WEBAPP_URL))],
-        [InlineKeyboardButton("💬 የደንበኞች ድጋፍ • Support", url="https://t.me/one_day_82")]
-    ]
-    inline_markup = InlineKeyboardMarkup(inline_keyboard)
+    welcome_text = (
+        f"🎮 *Welcome to Yerase Bingo!*\n\n"
+        f"Ethiopia's premier live multiplayer Bingo gaming platform on Telegram.\n\n"
+        f"*Key Features:*\n"
+        f"• Synchronized 10 ETB & 20 ETB live rooms\n"
+        f"• Instant deposits & withdrawals via Telebirr & CBE\n"
+        f"• 200 ETB Free Welcome Bonus for every new player\n"
+        f"• 5 ETB Free Play Bonus for every friend you invite\n"
+        f"• Provably fair live ball drawing and instant cashouts\n\n"
+        f"Please share your phone number below or choose an option from the menu to start 👇"
+    )
 
     await update.message.reply_markdown(welcome_text, reply_markup=get_main_menu_keyboard())
-    async def handle_contact(update: Update, context: ContextTypes.DEFAULT_TYPE):
+
+async def handle_contact(update: Update, context: ContextTypes.DEFAULT_TYPE):
     contact = update.message.contact
     phone = contact.phone_number if contact else ""
-    user_name = update.effective_user.first_name if update.effective_user else "ተጫዋች"
+    user_name = update.effective_user.first_name if update.effective_user else "Player"
 
     msg = (
-        f"ሰላም {user_name}፣ ስልክ ቁጥርዎ ({phone}) በተሳካ ሁኔታ ተረጋግጧል!\n\n"
-        f"የ 200 ብር ነፃ መጫወቻ ቦነስ ወደ አካውንትዎ ገቢ ተደርጓል።\n\n"
-        f"ከታች ያሉትን ዋና ማውጫ አዝራሮች በመጠቀም መጫወት፣ ሂሳብዎን ማየት፣ ገንዘብ ማስገባትና ማውጣት ይችላሉ! 👇"
+        f"✅ *Phone Number Verified Successfully!*\n\n"
+        f"Welcome, {user_name}! Your phone number ({phone}) is now linked to your account.\n\n"
+        f"• 200 ETB Free Welcome Bonus is ready in your account!\n"
+        f"• Use the interactive menu below to play, view your balance, deposit, or withdraw funds 👇"
     )
-    inline_markup = InlineKeyboardMarkup([
-        [InlineKeyboardButton("🎮 የራሴ ቢንጎ ተጫወት • Play Bingo", web_app=WebAppInfo(url=WEBAPP_URL))]
-    ])
 
-    await update.message.reply_text(msg, reply_markup=get_main_menu_keyboard())
-    await update.message.reply_text("አሁኑኑ ለመጫወት Play Bingo ይጫኑ:", reply_markup=inline_markup)
+    await update.message.reply_markdown(msg, reply_markup=get_main_menu_keyboard())
 
 async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
     text = (update.message.text or "").strip()
     lower = text.lower()
     user_id = str(update.effective_user.id) if update.effective_user else "1001"
-    user_name = update.effective_user.first_name if update.effective_user else "ተጫዋች"
-    username = f"@{update.effective_user.username}" if update.effective_user and update.effective_user.username else f"@{user_name.lower().replace(' ', '_')}"
+    user_name = update.effective_user.first_name if update.effective_user else "Player"
+    username = f"@{update.effective_user.username}" if update.effective_user and update.effective_user.username else f"@player_{user_id[-4:]}"
 
-    # Balance
-    if "balance" in lower or "ሒሳብ" in lower or "ባላንስ" in lower:
-        msg = (
-            f"💰 **የሂሳብ መረጃዎ (Account Balance)**\n"
-            f"━━━━━━━━━━━━━━━━━━\n"
-            f"• ዋና ሂሳብ (Withdrawable): **250.00 ETB**\n"
-            f"• የቦነስ ሂሳብ (Play Bonus): **200.00 ETB**\n"
-            f"• ጠቅላላ ሂሳብ (Total): **450.00 ETB**\n"
-            f"━━━━━━━━━━━━━━━━━━\n"
-            f"💡 በቦነስ ሂሳብዎ ተጫውተው ያሸነፉትን ሙሉ በሙሉ ወጪ ማድረግ ይችላሉ!"
-        )
-        markup = InlineKeyboardMarkup([
-            [InlineKeyboardButton("📥 Deposit", web_app=WebAppInfo(url=WEBAPP_URL)),
-             InlineKeyboardButton("📤 Withdraw", web_app=WebAppInfo(url=WEBAPP_URL))],
-            [InlineKeyboardButton("🎮 Play Bingo", web_app=WebAppInfo(url=WEBAPP_URL))]
-        ])
-        await update.message.reply_markdown(msg, reply_markup=markup)
+    if lower in ["/menu", "menu"]:
+        await update.message.reply_markdown("📋 *Yerase Bingo Main Menu*\nChoose an option below:", reply_markup=get_main_menu_keyboard())
         return
 
-    # Deposit
-    if "deposit" in lower or "ተቀማጭ" in lower or "ብር አስገባ" in lower:
-        msg = (
-            f"📥 **ገንዘብ ማስገቢያ መመሪያ (Deposit Funds)**\n"
-            f"━━━━━━━━━━━━━━━━━━\n"
-            f"ዝቅተኛ የማስገቢያ መጠን: **50 ብር (Min: 50 ETB)**\n\n"
-            f"1. **በቴሌብር (Telebirr):**\n"
-            f"   • የስልክ ቁጥር: `09104440496`\n"
-            f"   • ስም: Yerase Bingo\n\n"
-            f"2. **በኢትዮጵያ ንግድ ባንክ (CBE):**\n"
-            f"   • የሂሳብ ቁጥር: `1000123456789`\n"
-            f"   • ስም: Yerase Bingo\n"
-            f"━━━━━━━━━━━━━━━━━━\n"
-            f"ገንዘቡን ካስተላለፉ በኋላ በMini App ውስጥ 'Deposit' ገጽ ላይ የSMS ማረጋገጫ ቁጥር ያስገቡ።"
+    if "balance" in lower or "/balance" in lower:
+        bal_msg = (
+            f"💰 *Your Account Balance Summary*\n"
+            f"━━━━━━━━━━━━━━━━━━━━\n"
+            f"• *Withdrawable Main Balance:* 0.00 ETB\n"
+            f"• *Free Play Bonus Balance:* 200.00 ETB\n"
+            f"• *Total Balance:* 200.00 ETB\n"
+            f"━━━━━━━━━━━━━━━━━━━━\n"
+            f"💡 *Winnings from your play bonus are 100% withdrawable once wagering requirements are met!*"
+        )
+        markup = InlineKeyboardMarkup([
+            [
+                InlineKeyboardButton("📥 Deposit Funds", web_app=WebAppInfo(url=WEBAPP_URL + ("&" if "?" in WEBAPP_URL else "?") + "action=deposit")),
+                InlineKeyboardButton("📤 Withdraw Funds", web_app=WebAppInfo(url=WEBAPP_URL + ("&" if "?" in WEBAPP_URL else "?") + "action=withdraw"))
+            ],
+            [InlineKeyboardButton("🎮 Play Bingo Now", web_app=WebAppInfo(url=WEBAPP_URL))]
+        ])
+        await update.message.reply_markdown(bal_msg, reply_markup=markup)
+        return
+
+    if "deposit" in lower or "/deposit" in lower:
+        dep_msg = (
+            f"📥 *Deposit Funds to Yerase Bingo*\n"
+            f"━━━━━━━━━━━━━━━━━━━━\n"
+            f"*Minimum Deposit Amount:* 50 ETB\n\n"
+            f"*1. Telebirr:*\n"
+            f"   • Phone Number: `09104440496`\n"
+            f"   • Account Name: Yerase Bingo\n\n"
+            f"*2. Commercial Bank of Ethiopia (CBE):*\n"
+            f"   • CBE Account: `1000123456789`\n"
+            f"   • Account Name: Yerase Bingo\n"
+            f"━━━━━━━━━━━━━━━━━━━━\n"
+            f"*How to Complete Deposit:*\n"
+            f"Transfer funds via Telebirr or CBE, then tap *\"Open Deposit in App\"* below to submit your transaction screenshot or SMS reference. Funds are credited instantly!"
         )
         markup = InlineKeyboardMarkup([
             [InlineKeyboardButton("📥 Open Deposit in App", web_app=WebAppInfo(url=WEBAPP_URL + ("&" if "?" in WEBAPP_URL else "?") + "action=deposit"))]
         ])
-        await update.message.reply_markdown(msg, reply_markup=markup)
+        await update.message.reply_markdown(dep_msg, reply_markup=markup)
         return
 
-    # Withdraw
-    if "withdraw" in lower or "ወጪ" in lower or "ብር አውጣ" in lower:
-        msg = (
-            f"📤 **ገንዘብ ማውጫ (Withdraw Funds)**\n"
-            f"━━━━━━━━━━━━━━━━━━\n"
-            f"• ወጪ ማድረግ የሚችሉት ሂሳብ: **250.00 ETB**\n"
-            f"• ዝቅተኛ የማውጣት መጠን: **150 ብር (Min: 150 ETB)**\n"
-            f"━━━━━━━━━━━━━━━━━━\n"
-            f"**የማውጫ ደንብ:**\n"
-            f"ያስገቡትን ተቀማጭ 15x አጫውተው ሲያጠናቅቁ ያሸነፉትን ገንዘብ በቀጥታ ወደ ቴሌብር ወይም ንግድ ባንክ ማውጣት ይችላሉ።"
+    if "withdraw" in lower or "/withdraw" in lower:
+        with_msg = (
+            f"📤 *Withdraw Funds*\n"
+            f"━━━━━━━━━━━━━━━━━━━━\n"
+            f"• *Minimum Withdrawal Amount:* 150 ETB\n"
+            f"• *Supported Payout Methods:* Commercial Bank of Ethiopia (CBE) & Telebirr\n"
+            f"*(Note: CBE Birr is not supported — use CBE Account or Telebirr)*\n"
+            f"━━━━━━━━━━━━━━━━━━━━\n"
+            f"*Withdrawal Policy:*\n"
+            f"Deposited funds and winnings become withdrawable once you deposit at least 50 ETB and wager 15x your total deposit amount.\n\n"
+            f"Tap *\"Open Withdrawal in App\"* below to select your payout method (CBE or Telebirr) and submit your request 👇"
         )
         markup = InlineKeyboardMarkup([
             [InlineKeyboardButton("📤 Open Withdrawal in App", web_app=WebAppInfo(url=WEBAPP_URL + ("&" if "?" in WEBAPP_URL else "?") + "action=withdraw"))]
         ])
-        await update.message.reply_markdown(msg, reply_markup=markup)
+        await update.message.reply_markdown(with_msg, reply_markup=markup)
         return
 
-    # Invite
-    if "invite" in lower or "ጓደኛ ጋብዝ" in lower or "ሪፈራል" in lower:
-        ref_link = f"https://t.me/Yerasegame?start={user_id}"
-        msg = (
-            f"👥 **ጓደኛ ይጋብዙና ተጨማሪ ቦነስ ያግኙ! (Invite & Earn)**\n"
-            f"━━━━━━━━━━━━━━━━━━\n"
-            f"የእርስዎ መጋበዣ ሊንክ:\n"
-            f"`{ref_link}`\n\n"
-            f"• ሽልማት: **ለእያንዳንዱ ለሚጋብዙት ጓደኛ 10 ብር የነፃ ቦነስ ያገኛሉ!**\n"
-            f"━━━━━━━━━━━━━━━━━━\n"
-            f"ሊንኩን ለጓደኞችዎ በማጋራት ተጠቃሚ ይሁኑ!"
+    if "invite" in lower or "/invite" in lower:
+        ref_link = f"https://t.me/YerasegameBot?start={user_id}"
+        invite_msg = (
+            f"👥 *Invite Friends & Earn Free Play Bonus*\n"
+            f"━━━━━━━━━━━━━━━━━━━━\n"
+            f"*Your Personal Referral Link:*\n"
+            f"{ref_link}\n\n"
+            f"• *Referral Reward:* Earn *5 ETB Free Play Bonus* for every friend who joins!\n"
+            f"• *Usage:* Bonus funds are added directly to your play balance to win real prizes!\n"
+            f"━━━━━━━━━━━━━━━━━━━━\n"
+            f"Share your invite link to Telegram groups and friends now 👇"
         )
-        share_url = f"https://t.me/share/url?url={ref_link}&text=ና%20የራሴ%20ቢንጎ%20እንጫወት!%20200%20ብር%20ቦነስ%20ተቀበል!"
         markup = InlineKeyboardMarkup([
-            [InlineKeyboardButton("🚀 Share Invite Link", url=share_url)],
+            [InlineKeyboardButton("🚀 Share Invite Link", url=f"https://t.me/share/url?url={ref_link}&text=Play%20Yerase%20Bingo%20on%20Telegram!%20Get%20200%20ETB%20welcome%20bonus!")],
             [InlineKeyboardButton("🎮 Play Bingo", web_app=WebAppInfo(url=WEBAPP_URL))]
         ])
-        await update.message.reply_markdown(msg, reply_markup=markup)
+        await update.message.reply_markdown(invite_msg, reply_markup=markup)
         return
 
-    # Profile
-    if "profile" in lower or "መገለጫ" in lower:
-        msg = (
-            f"👤 **የተጫዋች መገለጫ (Player Profile)**\n"
-            f"━━━━━━━━━━━━━━━━━━\n"
-            f"• ስም / መጠሪያ: **{user_name}**\n"
-            f"• ዩዘርኔም (Username): **{username}**\n"
-            f"• መለያ ቁጥር (Profile ID): `{user_id}`\n"
-            f"• ደረጃ: **Standard Member**\n"
-            f"━━━━━━━━━━━━━━━━━━"
+    if "profile" in lower or "/profile" in lower:
+        id_display = user_id[-10:] if len(user_id) > 10 else user_id
+        prof_msg = (
+            f"👤 *Player Profile Card*\n"
+            f"━━━━━━━━━━━━━━━━━━━━\n"
+            f"• *Player Name:* {user_name}\n"
+            f"• *Telegram Username:* {username}\n"
+            f"• *Profile ID:* {id_display}\n"
+            f"• *Games Played:* 0\n"
+            f"• *Games Won:* 0\n"
+            f"• *Total Won:* 0.00 ETB\n"
+            f"• *Member Tier:* Standard Member\n"
+            f"━━━━━━━━━━━━━━━━━━━━"
         )
         markup = InlineKeyboardMarkup([
             [InlineKeyboardButton("🎮 Open Profile in App", web_app=WebAppInfo(url=WEBAPP_URL))]
         ])
-        await update.message.reply_markdown(msg, reply_markup=markup)
+        await update.message.reply_markdown(prof_msg, reply_markup=markup)
         return
 
-    # Support
-    if "support" in lower or "እገዛ" in lower or "ድጋፍ" in lower:
-        msg = (
-            f"📞 **የደንበኞች ድጋፍ አገልግሎት (Customer Support)**\n"
-            f"━━━━━━━━━━━━━━━━━━\n"
-            f"ማንኛውም ጥያቄ ካለዎት የድጋፍ ሰጪ ቡድናችንን 24/7 ማነጋገር ይችላሉ፦\n"
-            f"Telegram: @one_day_82\n"
-            f"━━━━━━━━━━━━━━━━━━"
+    if "support" in lower or "/support" in lower:
+        supp_msg = (
+            f"📞 *Customer Support & Official Channel*\n"
+            f"━━━━━━━━━━━━━━━━━━━━\n"
+            f"Have questions, payment inquiries, or feedback? Contact our team 24/7:\n\n"
+            f"• *Telegram Support:* @Agegnewu0102\n"
+            f"• *Official Channel:* @yerasebingo\n"
+            f"• *Official Bot:* @YerasegameBot\n"
+            f"━━━━━━━━━━━━━━━━━━━━"
         )
         markup = InlineKeyboardMarkup([
-            [InlineKeyboardButton("💬 Contact Support (@one_day_82)", url="https://t.me/one_day_82")]
+            [InlineKeyboardButton("💬 Contact Support (@Agegnewu0102)", url="https://t.me/Agegnewu0102")],
+            [InlineKeyboardButton("📢 Join Channel (@yerasebingo)", url="https://t.me/yerasebingo")]
         ])
-        await update.message.reply_markdown(msg, reply_markup=markup)
+        await update.message.reply_markdown(supp_msg, reply_markup=markup)
         return
 
-    # Rules
-    if "rule" in lower or "help" in lower or "መመሪያ" in lower:
-        msg = (
-            f"📖 **የጨዋታ ደንብና መመሪያ (How to Play)**\n"
-            f"━━━━━━━━━━━━━━━━━━\n"
-            f"1. **ክፍል ይምረጡ:** የ10 ወይም የ20 ብር ክፍል ይምረጡ።\n"
-            f"2. **ካርቴላ ይቁረጡ:** ቆጣሪው ከማለቁ በፊት እስከ 2 ካርቴላዎችን ይምረጡ።\n"
-            f"3. **ቁጥሮች ሲጠሩ:** Auto Daub የነቁ ካርቴላዎችን በራስ-ሰር ያደምቃል!\n"
-            f"4. **BINGO:** ማንኛውንም አግድም፣ ቁመት፣ ሰያፍ ወይም 4 ማዕዘን ሲሞሉ BINGO ያሸንፋሉ!\n"
-            f"━━━━━━━━━━━━━━━━━━"
+    if "rule" in lower or "help" in lower or "/rules" in lower or "/help" in lower:
+        rules_msg = (
+            f"📖 *How to Play Yerase Bingo*\n"
+            f"━━━━━━━━━━━━━━━━━━━━\n"
+            f"1. *Select a Room:* Choose the 10 ETB or 20 ETB live room.\n"
+            f"2. *Pick Cartelas:* Select up to 2 lucky cartelas before the 60-second round countdown ends.\n"
+            f"3. *Live Ball Calls:* Numbers from 1 to 75 are drawn randomly by the server. Your cards auto-daub called numbers in real time!\n"
+            f"4. *Winning BINGO:* Complete any horizontal, vertical, diagonal line, or 4 corners to hit BINGO and claim the prize pot!\n"
+            f"━━━━━━━━━━━━━━━━━━━━"
         )
         markup = InlineKeyboardMarkup([
+            [InlineKeyboardButton("ℹ️ View Platform Info", callback_data="view_info")],
             [InlineKeyboardButton("🎮 Play Bingo Now", web_app=WebAppInfo(url=WEBAPP_URL))]
         ])
-        await update.message.reply_markdown(msg, reply_markup=markup)
+        await update.message.reply_markdown(rules_msg, reply_markup=markup)
         return
 
-    # Play
-    if "play" in lower or "ተጫወት" in lower:
+    if "play" in lower:
+        await update.message.reply_markdown("🎮 *Play Yerase Bingo Live Now!*\nTap below to launch the Mini App:", reply_markup=InlineKeyboardMarkup([
+            [InlineKeyboardButton("🎮 Launch Yerase Bingo", web_app=WebAppInfo(url=WEBAPP_URL))]
+        ]))
+        return
+
+    await update.message.reply_text(f"Hello {user_name}! Please choose an option from the menu below 👇", reply_markup=get_main_menu_keyboard())
+
+async def handle_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    query = update.callback_query
+    await query.answer()
+
+    if query.data == "view_info":
+        info_text = (
+            f"ℹ️ *Yerase Bingo Platform Info*\n"
+            f"━━━━━━━━━━━━━━━━━━━━\n"
+            f"• *Fair & Transparent:* Provably fair deterministic card numbers and server-side ball calling.\n"
+            f"• *Secure Banking:* Direct deposit and withdrawal verification via CBE & Telebirr.\n"
+            f"• *Bonus System:* 200 ETB free welcome bonus + 5 ETB free bonus for each friend invited.\n"
+            f"• *Official Bot:* @YerasegameBot\n"
+            f"• *Customer Support:* @Agegnewu0102\n"
+            f"• *Official Community Channel:* @yerasebingo\n"
+            f"━━━━━━━━━━━━━━━━━━━━"
+        )
         markup = InlineKeyboardMarkup([
-            [InlineKeyboardButton("🎮 የራሴ ቢንጎ ተጫወት • Play Bingo", web_app=WebAppInfo(url=WEBAPP_URL))]
+            [InlineKeyboardButton("📖 View Game Rules", callback_data="view_rules")],
+            [InlineKeyboardButton("🎮 Play Bingo Now", web_app=WebAppInfo(url=WEBAPP_URL))]
         ])
-        await update.message.reply_text("🎮 ለመጫወት ከታች ያለውን ይጫኑ:", reply_markup=markup)
-        return
-
-    # Default fallback
-    await update.message.reply_text(f"ሰላም {user_name}! ከታች ካሉት አዝራሮች የሚፈልጉትን ይምረጡ 👇", reply_markup=get_main_menu_keyboard())
+        await query.edit_message_text(info_text, parse_mode="Markdown", reply_markup=markup)
+    elif query.data == "view_rules":
+        rules_text = (
+            f"📖 *How to Play Yerase Bingo*\n"
+            f"━━━━━━━━━━━━━━━━━━━━\n"
+            f"1. *Select a Room:* Choose the 10 ETB or 20 ETB live room.\n"
+            f"2. *Pick Cartelas:* Select up to 2 lucky cartelas before the 60-second round countdown ends.\n"
+            f"3. *Live Ball Calls:* Numbers from 1 to 75 are drawn randomly by the server. Your cards auto-daub called numbers in real time!\n"
+            f"4. *Winning BINGO:* Complete any horizontal, vertical, diagonal line, or 4 corners to hit BINGO and claim the prize pot!\n"
+            f"━━━━━━━━━━━━━━━━━━━━"
+        )
+        markup = InlineKeyboardMarkup([
+            [InlineKeyboardButton("ℹ️ View Platform Info", callback_data="view_info")],
+            [InlineKeyboardButton("🎮 Play Bingo Now", web_app=WebAppInfo(url=WEBAPP_URL))]
+        ])
+        await query.edit_message_text(rules_text, parse_mode="Markdown", reply_markup=markup)
 
 def main():
-    print(f"Starting Yerase Bingo Telegram Bot (@Yerasegame)...")
-    app = ApplicationBuilder().token(BOT_TOKEN).build()
+    logger.info("Starting Yerase Bingo Telegram Bot...")
+    app = Application.builder().token(BOT_TOKEN).build()
     app.add_handler(CommandHandler("start", start))
-    app.add_handler(CommandHandler("menu", start))
-    app.add_handler(CommandHandler("play", handle_message))
-    app.add_handler(CommandHandler("balance", handle_message))
-    app.add_handler(CommandHandler("deposit", handle_message))
-    app.add_handler(CommandHandler("withdraw", handle_message))
-    app.add_handler(CommandHandler("invite", handle_message))
-    app.add_handler(CommandHandler("profile", handle_message))
-    app.add_handler(CommandHandler("support", handle_message))
-    app.add_handler(CommandHandler("help", handle_message))
-    app.add_handler(CommandHandler("rules", handle_message))
     app.add_handler(MessageHandler(filters.CONTACT, handle_contact))
-    app.add_handler(MessageHandler(filters.TEXT & (~filters.COMMAND), handle_message))
+    app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, handle_message))
+    app.add_handler(CallbackQueryHandler(handle_callback))
     app.run_polling()
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

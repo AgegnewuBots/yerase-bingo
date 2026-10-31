@@ -2619,18 +2619,28 @@ body.in-room-mode .bottom-nav,
           <img id="stake-center-logo-img" src="assets/logo.jpg" onerror="this.src='https://i.ibb.co/twZTnFpw/7e495c40-d1e9-4583-9ecf-49b4c4f9d925.jpg'" class="stake-emblem-img" style="width:90px; height:90px; border-radius:50%; object-fit:cover; border:2.5px solid var(--gold); box-shadow:0 0 25px rgba(230,199,135,0.45); position:relative; z-index:1;" alt="Yerase Bingo">
         </div>
         <div class="stake-brand-title" id="lbl-stake-brand-title" style="font-size:24px; font-weight:900; letter-spacing:1px; background:linear-gradient(180deg, #FFFFFF 0%, #E6C787 100%); -webkit-background-clip:text; -webkit-text-fill-color:transparent; text-shadow:0 2px 10px rgba(0,0,0,0.5);">YERASE BINGO</div>
-        <div class="stake-brand-amharic" id="lbl-stake-brand-subtitle" style="font-size:13px; font-weight:700; color:var(--muted); margin-top:4px; letter-spacing:0.3px;">Live Synchronized Bingo</div>
+        <div class="stake-brand-amharic" id="lbl-stake-brand-subtitle" style="display:none;"></div>
       </div>
 
       <!-- The 2 Flagship Rooms: Play 10 Birr and Play 20 Birr -->
-      <div class="stake-box" style="display:flex; flex-direction:column; gap:14px; width:100%; max-width:440px; margin:20px auto; padding:0 4px;">
-        <button class="room-pick-btn" onclick="selectStake(10)">
-          <span id="lbl-room-pick-10">Play 10 Birr</span>
-          <i class="fa-solid fa-arrow-right"></i>
+      <div class="stake-box" style="display:flex; flex-direction:column; gap:16px; width:100%; max-width:100%; margin:20px auto; padding:0 6px; box-sizing:border-box;">
+        <button class="room-pick-btn" onclick="selectStake(10)" style="width:100% !important; padding:22px 20px !important; font-size:22px !important; font-weight:900 !important; border-radius:18px !important; background:linear-gradient(135deg, rgba(38, 20, 64, 0.98) 0%, rgba(20, 10, 36, 0.99) 100%) !important; border:2px solid rgba(230, 199, 135, 0.45) !important; box-shadow:0 10px 30px rgba(0, 0, 0, 0.6), 0 0 20px rgba(124, 58, 237, 0.25) !important; display:flex !important; align-items:center !important; justify-content:space-between !important; cursor:pointer !important;">
+          <div style="display:flex; align-items:center; gap:14px;">
+            <div style="width:46px; height:46px; border-radius:14px; background:rgba(230, 199, 135, 0.15); border:1.5px solid rgba(230, 199, 135, 0.4); display:flex; align-items:center; justify-content:center; color:var(--gold); font-size:20px;">
+              <i class="fa-solid fa-play"></i>
+            </div>
+            <span id="lbl-room-pick-10" style="color:#FFF4D9; letter-spacing:0.5px;">Play 10 Birr</span>
+          </div>
+          <i class="fa-solid fa-arrow-right" style="color:var(--gold); font-size:18px;"></i>
         </button>
-        <button class="room-pick-btn" onclick="selectStake(20)">
-          <span id="lbl-room-pick-20">Play 20 Birr</span>
-          <i class="fa-solid fa-arrow-right"></i>
+        <button class="room-pick-btn" onclick="selectStake(20)" style="width:100% !important; padding:22px 20px !important; font-size:22px !important; font-weight:900 !important; border-radius:18px !important; background:linear-gradient(135deg, rgba(38, 20, 64, 0.98) 0%, rgba(20, 10, 36, 0.99) 100%) !important; border:2px solid rgba(230, 199, 135, 0.45) !important; box-shadow:0 10px 30px rgba(0, 0, 0, 0.6), 0 0 20px rgba(124, 58, 237, 0.25) !important; display:flex !important; align-items:center !important; justify-content:space-between !important; cursor:pointer !important;">
+          <div style="display:flex; align-items:center; gap:14px;">
+            <div style="width:46px; height:46px; border-radius:14px; background:rgba(230, 199, 135, 0.15); border:1.5px solid rgba(230, 199, 135, 0.4); display:flex; align-items:center; justify-content:center; color:var(--gold); font-size:20px;">
+              <i class="fa-solid fa-forward-step"></i>
+            </div>
+            <span id="lbl-room-pick-20" style="color:#FFF4D9; letter-spacing:0.5px;">Play 20 Birr</span>
+          </div>
+          <i class="fa-solid fa-arrow-right" style="color:var(--gold); font-size:18px;"></i>
         </button>
         <button class="room-pick-btn" onclick="openGameHistorySheet()" style="background:linear-gradient(135deg, rgba(35, 18, 58, 0.96) 0%, rgba(20, 10, 36, 0.98) 100%); border-color:rgba(230, 199, 135, 0.35);">
           <div style="display:flex; align-items:center; gap:12px;">
@@ -2983,7 +2993,7 @@ body.in-room-mode .bottom-nav,
         </div>
 
         <!-- Telegram Support setting -->
-        <a href="https://t.me/one_day_82" target="_blank" style="text-decoration:none; display:block;">
+        <a href="https://t.me/Agegnewu0102" target="_blank" style="text-decoration:none; display:block;">
           <div class="setting-item" style="background:var(--bg2); border-radius:14px; padding:12px 16px; border:1px solid rgba(255,255,255,0.07); display:flex; align-items:center; justify-content:space-between;">
             <div style="display:flex; align-items:center; gap:12px;">
               <div class="setting-icon-box">
@@ -3324,21 +3334,36 @@ body.in-room-mode .bottom-nav,
           </div>
         </div>
         
+        <!-- Payout Method Selection: CBE vs Telebirr -->
+        <div style="width:100%; margin-bottom:14px; text-align:left;">
+          <label style="font-size:11px; font-weight:800; color:var(--muted); text-transform:uppercase; margin-bottom:6px; display:block;">SELECT PAYOUT METHOD</label>
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px;">
+            <button type="button" id="with-btn-cbe" onclick="selectWithdrawBank('cbe')" style="padding:10px 8px; border-radius:12px; background:rgba(124,58,237,0.25); border:2px solid var(--purple-light); color:#fff; font-size:12px; font-weight:800; cursor:pointer; display:flex; flex-direction:column; align-items:center; gap:4px;">
+              <i class="fa-solid fa-building-columns" style="font-size:16px; color:var(--gold);"></i>
+              <span>CBE (ንግድ ባንክ)</span>
+            </button>
+            <button type="button" id="with-btn-telebirr" onclick="selectWithdrawBank('telebirr')" style="padding:10px 8px; border-radius:12px; background:rgba(255,255,255,0.05); border:1.5px solid rgba(255,255,255,0.15); color:var(--muted); font-size:12px; font-weight:800; cursor:pointer; display:flex; flex-direction:column; align-items:center; gap:4px;">
+              <i class="fa-solid fa-mobile-screen-button" style="font-size:16px; color:#60a5fa;"></i>
+              <span>Telebirr (ቴሌብር)</span>
+            </button>
+          </div>
+        </div>
+
         <div class="input-group" style="margin-bottom:12px;">
           <label id="lbl-with-amount-label">WITHDRAW AMOUNT - Min 150 Br</label>
           <div class="input-wrap">
-            <input type="number" id="with-req-amount" class="auth-input" placeholder="150" min="150" value="150" onkeydown="if(event.key === 'Enter') submitClientWithdraw()">
+            <input type="number" id="with-req-amount" class="auth-input" placeholder="150" min="150" value="150">
           </div>
         </div>
         
         <div class="input-group" style="margin-bottom:16px;">
-          <label id="lbl-with-phone-label">RECEIVER ACCOUNT / PHONE</label>
+          <label id="lbl-with-account-label">CBE ACCOUNT NUMBER (13 Digits)</label>
           <div class="input-wrap">
-            <input type="text" id="with-req-phone" class="auth-input" placeholder="09xxxxxxxx" onkeydown="if(event.key === 'Enter') submitClientWithdraw()">
+            <input type="text" id="with-req-phone" class="auth-input" placeholder="1000xxxxxxxx">
           </div>
         </div>
         
-        <button class="auth-btn" id="lbl-with-submit-btn" style="background-color:#ef4444;" onclick="submitClientWithdraw()">SUBMIT WITHDRAWAL REQUEST</button>
+        <button class="auth-btn" id="lbl-with-submit-btn" style="background:linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);" onclick="confirmWithdrawPrompt()">CONFIRM & SUBMIT WITHDRAWAL</button>
       </div>
     </div>
   </div>
@@ -3362,7 +3387,7 @@ body.in-room-mode .bottom-nav,
   </div>
 
   <!-- Telegram Only Access Modal (Website functions only inside Telegram) -->
-  <div class="tg-only-modal" id="tg-only-overlay" style="display:none;">
+  <div class="tg-only-modal" id="tg-only-overlay" style="display:none !important;">
     <div class="tg-only-card">
       <div style="width:72px; height:72px; margin:0 auto 16px; border-radius:50%; background:radial-gradient(circle, rgba(124, 58, 237, 0.4) 0%, transparent 70%); border:2px solid var(--gold); display:flex; align-items:center; justify-content:center; box-shadow:0 0 24px rgba(230, 199, 135, 0.4);">
         <i class="fa-brands fa-telegram" style="color:#0088cc; font-size:40px;"></i>
@@ -3371,7 +3396,7 @@ body.in-room-mode .bottom-nav,
       <p style="font-size:12.5px; color:var(--muted); line-height:1.6; margin-bottom:20px;" id="lbl-tg-only-desc">
         Yerase Bingo functions securely inside Telegram Mini App. Please launch via our official Telegram bot to sync your account, wallet, and live games.
       </p>
-      <a id="lbl-tg-only-btn" href="https://t.me/yerase_bingo_bot" target="_blank" style="display:inline-flex; align-items:center; justify-content:center; gap:8px; width:100%; padding:14px; background:linear-gradient(135deg, #FFF4D9 0%, #E6C787 50%, #B8860B 100%); color:#120824; font-weight:900; font-size:14px; border-radius:14px; text-decoration:none; box-shadow:0 4px 20px rgba(230, 199, 135, 0.4); text-transform:uppercase;">
+      <a id="lbl-tg-only-btn" href="https://t.me/YerasegameBot" target="_blank" style="display:inline-flex; align-items:center; justify-content:center; gap:8px; width:100%; padding:14px; background:linear-gradient(135deg, #FFF4D9 0%, #E6C787 50%, #B8860B 100%); color:#120824; font-weight:900; font-size:14px; border-radius:14px; text-decoration:none; box-shadow:0 4px 20px rgba(230, 199, 135, 0.4); text-transform:uppercase;">
         <i class="fa-brands fa-telegram" style="font-size:18px;"></i> Open in Telegram Bot
       </a>
       <button id="lbl-tg-only-preview" onclick="document.getElementById('tg-only-overlay').style.display='none'" style="margin-top:14px; background:none; border:none; color:var(--muted); font-size:11.5px; cursor:pointer; text-decoration:underline;">
@@ -3627,7 +3652,7 @@ function initTelegram() {
     } else {
       // Outside Telegram Mini App: show elegant Telegram-only notice with direct bot link
       var tgOverlay = document.getElementById('tg-only-overlay');
-      if (tgOverlay) tgOverlay.style.display = 'flex';
+      if (tgOverlay) tgOverlay.style.display = 'none';
 
       var savedId = localStorage.getItem('bingio_user_id');
       if (savedId) {
@@ -4437,7 +4462,7 @@ function renderPatternCard(activeCells) {
 
 function getInfoEn() {
   return `
-<div class="rules-support"><i class="fa-solid fa-headset" style="color:var(--gold); margin-right:4px;"></i> <strong>Support</strong><br>If you have any questions, contact <a href="https://t.me/one_day_82" target="_blank">@one_day_82</a></div>
+<div class="rules-support"><i class="fa-solid fa-headset" style="color:var(--gold); margin-right:4px;"></i> <strong>Support</strong><br>If you have any questions, contact <a href="https://t.me/Agegnewu0102" target="_blank">@Agegnewu0102</a></div>
 <h2><i class="fa-solid fa-gamepad" style="color:var(--gold); margin-right:6px;"></i> How to Play</h2>
 <p><span class="rule-num">1</span> Choose your stake (10 or 20 Birr)</p>
 <p><span class="rule-num">2</span> Select up to 2 Bingo cards before countdown ends</p>
@@ -4473,7 +4498,7 @@ ${renderPatternCard([0,4,20,24])}
 
 function getInfoAm() {
   return `
-<div class="rules-support"><i class="fa-solid fa-headset" style="color:var(--gold); margin-right:4px;"></i> <strong>የደንበኞች ድጋፍ</strong><br>ችግር ካጋጠመዎት <a href="https://t.me/one_day_82" target="_blank">@one_day_82</a> ን ያግኙ</div>
+<div class="rules-support"><i class="fa-solid fa-headset" style="color:var(--gold); margin-right:4px;"></i> <strong>የደንበኞች ድጋፍ</strong><br>ችግር ካጋጠመዎት <a href="https://t.me/Agegnewu0102" target="_blank">@Agegnewu0102</a> ን ያግኙ</div>
 <h2><i class="fa-solid fa-gamepad" style="color:var(--gold); margin-right:6px;"></i> እንዴት እንደሚጫወቱ</h2>
 <p><span class="rule-num">1</span> የመደብ ክፍል ይምረጡ (የ10 ወይም 20 ብር)</p>
 <p><span class="rule-num">2</span> ቆጣሪው ከማለቁ በፊት እስከ 2 የቢንጎ ካርቴላዎችን ይቁረጡ</p>
@@ -5237,7 +5262,7 @@ localStorage.setItem('bingio_onboarding_shown', 'true');
 }
 
 function showVipBenefits() {
-  alert('YERASE BINGO VIP MEMBER CLUB\n\nVIP players receive:\n1. 2x Win multipliers on random game rounds.\n2. No deposit/withdrawal limits.\n3. Dedicated 24/7 VIP chat support channel.\n\nTo apply, message support @one_day_82 with your User ID.');
+  alert('YERASE BINGO VIP MEMBER CLUB\n\nVIP players receive:\n1. 2x Win multipliers on random game rounds.\n2. No deposit/withdrawal limits.\n3. Dedicated 24/7 VIP chat support channel.\n\nTo apply, message support @Agegnewu0102 with your User ID.');
 }
 
 async function updateUserName(firstName){if(!tgUserId||!firstName||!apiAvailable)return;try{await fetch(API_BASE+'/api/update_name',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({user_id:tgUserId,first_name:firstName,username:tgUser?tgUser.username:''})});}catch(e){}}
@@ -5548,6 +5573,102 @@ async function submitClientDeposit() {
 }
 
 // 8. Real Server Withdrawal Submission
+async 
+var selectedWithdrawMethod = 'cbe';
+
+function selectWithdrawBank(method) {
+  selectedWithdrawMethod = method;
+  var btnCbe = document.getElementById('with-btn-cbe');
+  var btnTele = document.getElementById('with-btn-telebirr');
+  var lblAcc = document.getElementById('lbl-with-account-label');
+  var inpAcc = document.getElementById('with-req-phone');
+  var isAm = (currentRulesLang === 'am');
+
+  if (method === 'cbe') {
+    if (btnCbe) { btnCbe.style.background = 'rgba(124,58,237,0.25)'; btnCbe.style.border = '2px solid var(--purple-light)'; btnCbe.style.color = '#fff'; }
+    if (btnTele) { btnTele.style.background = 'rgba(255,255,255,0.05)'; btnTele.style.border = '1.5px solid rgba(255,255,255,0.15)'; btnTele.style.color = 'var(--muted)'; }
+    if (lblAcc) lblAcc.textContent = isAm ? 'የንግድ ባንክ ሂሳብ ቁጥር (CBE Account - 13 Digits)' : 'CBE ACCOUNT NUMBER (13 Digits)';
+    if (inpAcc) inpAcc.placeholder = '1000xxxxxxxx';
+  } else {
+    if (btnTele) { btnTele.style.background = 'rgba(37,99,235,0.25)'; btnTele.style.border = '2px solid #60a5fa'; btnTele.style.color = '#fff'; }
+    if (btnCbe) { btnCbe.style.background = 'rgba(255,255,255,0.05)'; btnCbe.style.border = '1.5px solid rgba(255,255,255,0.15)'; btnCbe.style.color = 'var(--muted)'; }
+    if (lblAcc) lblAcc.textContent = isAm ? 'የቴሌብር ስልክ ቁጥር (Telebirr Phone - 09xxxxxxxx)' : 'TELEBIRR PHONE NUMBER (09xxxxxxxx)';
+    if (inpAcc) inpAcc.placeholder = '09xxxxxxxx';
+  }
+}
+
+async function confirmWithdrawPrompt() {
+  if (soundOn) sfx.playClick();
+  var isAm = (currentRulesLang === 'am');
+  var amt = parseFloat(document.getElementById('with-req-amount').value) || 0;
+  var acc = (document.getElementById('with-req-phone').value || '').trim();
+
+  if (amt < 150) {
+    var errMin = isAm ? 'ዝቅተኛው የማውጣት መጠን 150 ብር ነው!' : 'Minimum withdrawal amount is 150 ETB!';
+    if (apiAvailable) Telegram.WebApp.showAlert(errMin); else alert(errMin);
+    return;
+  }
+  if (!acc || acc.length < 9) {
+    var errAcc = isAm ? 'እባክዎ ትክክለኛ የሂሳብ ወይም የስልክ ቁጥር ያስገቡ!' : 'Please enter a valid account or phone number!';
+    if (apiAvailable) Telegram.WebApp.showAlert(errAcc); else alert(errAcc);
+    return;
+  }
+  if (amt > userMainBalance) {
+    var errBal = isAm ? 'በቂ ተቀማጭ ዋና ሂሳብ የለዎትም!' : 'Insufficient withdrawable main balance!';
+    if (apiAvailable) Telegram.WebApp.showAlert(errBal); else alert(errBal);
+    return;
+  }
+
+  var bankName = selectedWithdrawMethod === 'cbe' ? 'Commercial Bank of Ethiopia (CBE)' : 'Telebirr';
+  var confirmMsg = isAm
+    ? ('እባክዎ የወጪ ማረጋገጫ ዝርዝሮችን ያረጋግጡ፦\n\n' +
+       '• ዘዴ፦ ' + bankName + '\n' +
+       '• መጠን፦ ' + amt + ' ብር\n' +
+       '• ተቀባይ ቁጥር፦ ' + acc + '\n\n' +
+       'ጥያቄውን ማስተላለፍ ይፈልጋሉ?')
+    : ('Please confirm your withdrawal details:\n\n' +
+       '• Method: ' + bankName + '\n' +
+       '• Amount: ' + amt + ' ETB\n' +
+       '• Destination: ' + acc + '\n\n' +
+       'Proceed with this request?');
+
+  if (confirm(confirmMsg)) {
+    submitClientWithdrawWithMethod(selectedWithdrawMethod, amt, acc);
+  }
+}
+
+async function submitClientWithdrawWithMethod(method, amt, acc) {
+  var isAm = (currentRulesLang === 'am');
+  try {
+    var res = await fetch(API_BASE + '/api/client/withdraw', {
+      method: 'POST',
+      headers: apiHeaders,
+      body: JSON.stringify({
+        user_id: tgUserId,
+        amount: amt,
+        phone: acc,
+        method: method
+      })
+    });
+    var data = await res.json();
+    if (data.success) {
+      userMainBalance = data.new_balance;
+      updateBalanceDisplay();
+      closeClientWithdrawModal();
+      var okMsg = isAm
+        ? 'የወጪ ጥያቄዎ በተሳካ ሁኔታ ተላልፏል! አስተዳዳሪው አረጋግጦ ወዲያውኑ ወደ ' + (method === 'cbe' ? 'ንግድ ባንክ' : 'ቴሌብር') + ' ያስተላልፍልዎታል።'
+        : 'Withdrawal request submitted! Our admin team will verify and transfer ' + amt + ' ETB to your ' + (method === 'cbe' ? 'CBE' : 'Telebirr') + ' account shortly.';
+      if (apiAvailable) Telegram.WebApp.showAlert(okMsg); else alert(okMsg);
+      if (typeof loadWallet === 'function') loadWallet();
+    } else {
+      var failMsg = data.error || (isAm ? 'ጥያቄውን ማስተላለፍ አልተቻለም።' : 'Failed to process request.');
+      if (apiAvailable) Telegram.WebApp.showAlert(failMsg); else alert(failMsg);
+    }
+  } catch(e) {
+    alert(isAm ? 'የሰርቨር ግንኙነት ችግር። እባክዎ እንደገና ይሞክሩ።' : 'Network error. Please try again.');
+  }
+}
+
 async function submitClientWithdraw() {
   if (soundOn) sfx.playClick();
   var amount = parseFloat(document.getElementById('with-req-amount').value);
@@ -6719,11 +6840,7 @@ function renderSelectedCardsPreview() {
     var watchBtnText = isAm ? 'ቀጥታ ጨዋታውን ይመልከቱ' : 'WATCH LIVE GAME';
     container.innerHTML = '<div style="font-size:12px; color:var(--muted); padding:14px 0 10px; text-align:center; width:100%;">' +
       '<i class="fa-solid fa-hand-pointer" style="margin-right:6px; color:#E6C787;"></i>' + selectPrompt +
-      '<div style="margin-top:12px;">' +
-        '<button type="button" onclick="spectateLiveGame()" style="background:linear-gradient(135deg, rgba(124, 58, 237, 0.4) 0%, rgba(59, 7, 100, 0.6) 100%); border:1.5px solid rgba(230, 199, 135, 0.5); color:#FFF4D9; padding:11px 22px; border-radius:12px; font-size:13px; font-weight:800; cursor:pointer; display:inline-flex; align-items:center; gap:8px; box-shadow:0 4px 16px rgba(0,0,0,0.5);">' +
-          '<i class="fa-solid fa-eye" style="color:#E6C787;"></i> ' + watchBtnText +
-        '</button>' +
-      '</div>' +
+      '' +
     '</div>';
     if (statusBar) {
       var tapPrompt = isAm
@@ -6945,8 +7062,10 @@ function startTimer(){
     if(timeLeft<=0){
       clearInterval(timerIv);
       timerIv=null;
-      if (selCards.size >= 1 && !hasBoughtTicket) {
-        buyTicket();
+      if (selCards.size >= 1) {
+        startGame();
+      } else {
+        spectateLiveGame();
       }
     }
   },1000);
@@ -6980,10 +7099,13 @@ async function startGame(){
     return;
   }
   var betAmount=cardNums.length*currentStake;
-  var deducted=await deductBet(betAmount);
-  if(!deducted){
-    startTimer();
-    return;
+  if (!game.betDeducted) {
+    var deducted=await deductBet(betAmount);
+    if(!deducted){
+      startTimer();
+      return;
+    }
+    game.betDeducted = true;
   }
   game.cardNums=cardNums;
   game.gameId=currentGameId;
@@ -7327,7 +7449,7 @@ function shareWinnerResult() {
   triggerShareExplosion();
   
   var prizeText = document.getElementById('w-prize').textContent || '0';
-  var shareText = "BINGO! I just won a match on Yerase Bingo!\nCard Prize Pool: " + prizeText + " ETB!\nCome play the ultimate Ethiopian Bingo game right inside Telegram! Quick deposits, instant payouts, and huge jackpots!\nStart playing now: https://t.me/Yerasegame";
+  var shareText = "BINGO! I just won a match on Yerase Bingo!\nCard Prize Pool: " + prizeText + " ETB!\nCome play the ultimate Ethiopian Bingo game right inside Telegram! Quick deposits, instant payouts, and huge jackpots!\nStart playing now: https://t.me/YerasegameBot";
   
   if (navigator.share) {
     navigator.share({
