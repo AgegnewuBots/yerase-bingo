@@ -526,6 +526,24 @@ module.exports = {
     return { success: true };
   },
 
+  // 20f. Add Referral
+  async addReferral(referrerId, newUserId) {
+    if (!referrerId || referrerId === newUserId) return false;
+    const db = loadDB();
+    const referrer = db.users[referrerId];
+    if (referrer) {
+      if (!referrer.invited_users) referrer.invited_users = [];
+      if (!referrer.invited_users.includes(newUserId)) {
+        referrer.invited_users.push(newUserId);
+        referrer.invited = (referrer.invited || 0) + 1;
+        referrer.play_balance = Math.round(((parseFloat(referrer.play_balance) || 0) + 10) * 100) / 100;
+        saveDB();
+        return true;
+      }
+    }
+    return false;
+  },
+
   // 21. System Settings
   async getSystemSettings() {
     const db = loadDB();
